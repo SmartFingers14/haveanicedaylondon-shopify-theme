@@ -1,0 +1,29 @@
+<aside class="mob-menu" id="mobMenu" aria-hidden="true">
+  <div class="mh">
+    <div class="logo" style="color:var(--bg);font-size:16px">
+      <span class="smiley"><i></i></span> {{ 'sections.header.menu' | t }}
+    </div>
+    <button class="x" data-close-mob aria-label="Close menu">âœ•</button>
+  </div>
+  <div class="mob-body">
+    <h6>Shop</h6>
+    {%- for link in linklists.main-menu.links -%}
+      <a href="{{ link.url }}" data-mob>{{ link.title }} <span>â†’</span></a>
+    {%- else -%}
+      <a href="{{ routes.all_products_collection_url }}" data-mob>All Products <span>â†’</span></a>
+    {%- endfor -%}
+
+    <h6>Account</h6>
+    {%- if customer -%}
+      <a href="{{ routes.account_url }}" data-mob>Account <span>â†’</span></a>
+      <a href="{{ routes.account_logout_url }}" data-mob>Log out <span>â†’</span></a>
+    {%- else -%}
+      <a href="{{ routes.account_login_url }}" data-mob>Log in <span>â†’</span></a>
+      <a href="{{ routes.account_register_url }}" data-mob>Create account <span>â†’</span></a>
+    {%- endif -%}
+  </div>
+  <div class="mob-foot">
+    <a href="#" data-open-search>Search</a>
+    <a href="#" data-open-cart>Cart</a>
+  </div>
+</aside>

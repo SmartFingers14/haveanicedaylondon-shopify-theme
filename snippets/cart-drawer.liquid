@@ -1,0 +1,70 @@
+<aside class="drawer" id="cartDrawer" aria-hidden="true">
+  <div class="drawer-head">
+    <h3>{{ 'cart.general.title' | t }}
+      <span id="cartItemsCount" style="font-family:'Bungee',sans-serif;font-size:13px;color:var(--mute);letter-spacing:.14em;margin-left:6px">({{ cart.item_count }})</span>
+    </h3>
+    <button class="x" data-close-cart aria-label="Close cart">âœ•</button>
+  </div>
+  <div class="drawer-body" id="cartBody">
+    {%- if cart.item_count == 0 -%}
+      <div class="empty-cart" id="emptyCart">
+        <div class="big-smy"></div>
+        <h4>{{ 'cart.general.empty' | t }}</h4>
+        <p>Time to start the comeback. The originals are waiting.</p>
+        <a href="{{ routes.all_products_collection_url }}" class="btn btn-primary">Shop The Originals â†’</a>
+      </div>
+    {%- else -%}
+      <div class="empty-cart" id="emptyCart" style="display:none">
+        <div class="big-smy"></div>
+        <h4>{{ 'cart.general.empty' | t }}</h4>
+        <p>Time to start the comeback. The originals are waiting.</p>
+      </div>
+      {%- for item in cart.items -%}
+        <div class="cart-item" data-key="{{ item.key }}">
+          <div class="thumb">
+            {%- if item.image -%}
+              <img src="{{ item.image | image_url: width: 160 }}" alt="{{ item.title | escape }}">
+            {%- else -%}
+              <span style="font-size:24px">â˜»</span>
+            {%- endif -%}
+          </div>
+          <div class="meta">
+            <div class="nm">{{ item.product.title }}</div>
+            <div class="sub">
+              {{ item.product.vendor }}
+              {%- if item.variant.title != 'Default Title' %} Â· {{ item.variant.title }}{% endif -%}
+            </div>
+            <div class="qty">
+              <button data-cart-dec="{{ item.key }}" aria-label="Decrease">âˆ’</button>
+              <span>{{ item.quantity }}</span>
+              <button data-cart-inc="{{ item.key }}" aria-label="Increase">+</button>
+            </div>
+          </div>
+          <div class="right">
+            <div class="price">{{ item.final_line_price | money }}</div>
+            <div class="rm" data-cart-rm="{{ item.key }}">{{ 'cart.general.remove' | t }}</div>
+          </div>
+        </div>
+      {%- endfor -%}
+    {%- endif -%}
+  </div>
+  <div class="drawer-foot" id="cartFoot" {% if cart.item_count == 0 %}style="display:none"{% endif %}>
+    <div class="ship-note" id="shipNote">
+      {%- assign threshold = 5000 -%}
+      {%- if cart.total_price >= threshold -%}
+        <b>â˜» Free UK shipping unlocked</b>
+      {%- else -%}
+        Add <b>{{ threshold | minus: cart.total_price | money }}</b> more for free UK shipping
+      {%- endif -%}
+    </div>
+    <div class="row"><span>{{ 'cart.general.subtotal' | t }}</span><span id="cartSub">{{ cart.total_price | money }}</span></div>
+    <div class="row"><span>Shipping</span><span id="cartShip">Calculated at checkout</span></div>
+    <div class="row total"><span>Total</span><b id="cartTotal">{{ cart.total_price | money }}</b></div>
+    <form action="{{ routes.cart_url }}" method="post" novalidate>
+      <button type="submit" name="checkout" class="check-btn">{{ 'cart.general.checkout' | t }}</button>
+    </form>
+    <p style="text-align:center;font-size:11px;color:var(--mute);margin-top:10px;letter-spacing:.06em">
+      Tax included. 30-day returns. Visa, Mastercard, Amex, PayPal, Klarna.
+    </p>
+  </div>
+</aside>

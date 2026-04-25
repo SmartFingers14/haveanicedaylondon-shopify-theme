@@ -1,0 +1,87 @@
+<section class="hero">
+  <div class="hero-grid">
+    <div>
+      <div class="eyebrow reveal">{{ section.settings.eyebrow }}</div>
+      <h1 class="display reveal">
+        {{ section.settings.heading_top }}<br>
+        {{ section.settings.heading_mid }} <span class="acid-bg">{{ section.settings.heading_highlight }}</span><br>
+        {{ section.settings.heading_bot }}
+      </h1>
+      {%- if section.settings.signed != blank -%}
+        <span class="signed reveal">{{ section.settings.signed }}</span>
+      {%- endif -%}
+      <p class="hero-sub reveal">{{ section.settings.subheading }}</p>
+      <div class="hero-cta reveal">
+        <a href="{{ section.settings.cta_link }}" class="btn btn-primary">{{ section.settings.cta_label }} <span class="arr">â†’</span></a>
+        <a href="{{ section.settings.cta_link_2 }}" class="btn btn-ghost">{{ section.settings.cta_label_2 }}</a>
+      </div>
+      <div class="hero-meta reveal">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'meta' -%}
+            <div class="m" {{ block.shopify_attributes }}><b>{{ block.settings.value }}</b>{{ block.settings.label }}</div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+
+    <div class="hero-art-real reveal">
+      {%- if section.settings.image != blank -%}
+        <img src="{{ section.settings.image | image_url: width: 1780 }}" alt="{{ section.settings.heading_mid | escape }}" width="1780" height="1335">
+      {%- else -%}
+        <div class="hero-smiley-big">
+          <div class="eye l"></div><div class="eye r"></div><div class="mouth"></div>
+        </div>
+      {%- endif -%}
+      <div class="spin-stamp" style="right:-22px;top:-22px">
+        <svg viewBox="0 0 200 200">
+          <defs><path id="circle" d="M100,100 m-80,0 a80,80 0 1,1 160,0 a80,80 0 1,1 -160,0"/></defs>
+          <text font-family="Bungee" font-size="20" fill="#0c0c0c" letter-spacing="5">
+            <textPath href="#circle">{{ section.settings.spin_text }}</textPath>
+          </text>
+        </svg>
+        <div class="core">â˜»</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Hero",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Established Camden 1990s Â· Back Again" },
+    { "type": "text", "id": "heading_top", "label": "Heading line 1", "default": "The urban" },
+    { "type": "text", "id": "heading_mid", "label": "Heading line 2", "default": "fashion" },
+    { "type": "text", "id": "heading_highlight", "label": "Highlighted word", "default": "legend" },
+    { "type": "text", "id": "heading_bot", "label": "Heading line 3", "default": "is back." },
+    { "type": "text", "id": "signed", "label": "Signed line", "default": "â€” after 17 years away. â˜»" },
+    { "type": "textarea", "id": "subheading", "label": "Subheading", "default": "Born in a Camden market corridor at the height of the 90s rave scene." },
+    { "type": "text", "id": "cta_label", "label": "Primary CTA label", "default": "Shop The Originals" },
+    { "type": "url",  "id": "cta_link",  "label": "Primary CTA link" },
+    { "type": "text", "id": "cta_label_2", "label": "Secondary CTA label", "default": "Read The Story" },
+    { "type": "url",  "id": "cta_link_2",  "label": "Secondary CTA link" },
+    { "type": "image_picker", "id": "image", "label": "Hero image" },
+    { "type": "text", "id": "spin_text", "label": "Spinning stamp text", "default": "SAM THE MAN Â· ORIGINAL Â· SINCE 1990 Â· " }
+  ],
+  "blocks": [
+    {
+      "type": "meta",
+      "name": "Hero stat",
+      "settings": [
+        { "type": "text", "id": "value", "label": "Value", "default": "9" },
+        { "type": "text", "id": "label", "label": "Label", "default": "Independent sub-brands" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero",
+      "blocks": [
+        { "type": "meta", "settings": { "value": "9",   "label": "Independent sub-brands under one roof" } },
+        { "type": "meta", "settings": { "value": "100%","label": "Organic cotton, unisex sizing" } },
+        { "type": "meta", "settings": { "value": "Â£14.99+","label": "Beanies Â· Tees from Â£29.99" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

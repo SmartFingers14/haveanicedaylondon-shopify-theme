@@ -1,0 +1,42 @@
+<section class="types" style="padding:24px 24px">
+  <div class="types-row">
+    {%- for block in section.blocks -%}
+      <a href="{{ block.settings.link }}" class="type-pill" {{ block.shopify_attributes }}>
+        {{ block.settings.label }} <span class="count">{{ block.settings.count }}</span>
+      </a>
+    {%- endfor -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Shop by type",
+  "max_blocks": 12,
+  "blocks": [
+    {
+      "type": "pill",
+      "name": "Pill",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Label", "default": "T-Shirts" },
+        { "type": "text", "id": "count", "label": "Right tag", "default": "Â£29.99" },
+        { "type": "url",  "id": "link",  "label": "Link" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Shop by type",
+      "blocks": [
+        { "type": "pill", "settings": { "label": "Sam The Man",  "count": "Icon" } },
+        { "type": "pill", "settings": { "label": "T-Shirts",     "count": "Â£29.99" } },
+        { "type": "pill", "settings": { "label": "Sweatshirts",  "count": "Â£42" } },
+        { "type": "pill", "settings": { "label": "Beanies",      "count": "Â£14.99 â€“ Â£25" } },
+        { "type": "pill", "settings": { "label": "Slip Mats",    "count": "From Â£15" } },
+        { "type": "pill", "settings": { "label": "Accessories",  "count": "" } },
+        { "type": "pill", "settings": { "label": "Unisex Fit",   "count": "" } },
+        { "type": "pill", "settings": { "label": "Organic Cotton","count": "" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

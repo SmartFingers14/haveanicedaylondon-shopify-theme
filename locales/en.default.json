@@ -1,0 +1,50 @@
+{
+  "general": {
+    "meta": {
+      "tags": "Tagged \"{{ tags }}\"",
+      "page": "Page {{ page }}"
+    },
+    "search": {
+      "placeholder": "Search Sam, Dready, Vortex...",
+      "no_results": "No results for \u201c{{ terms }}\u201d"
+    },
+    "social": {
+      "share_on_facebook": "Share on Facebook",
+      "share_on_twitter": "Tweet on X"
+    },
+    "newsletter_form": {
+      "newsletter_email": "Email",
+      "submit": "Subscribe \u2192",
+      "confirmation": "\u263b You\u0027re on the list. Check your inbox."
+    }
+  },
+  "accessibility": {
+    "skip_to_text": "Skip to content"
+  },
+  "products": {
+    "product": {
+      "add_to_cart": "Add to Bag",
+      "sold_out": "Sold out",
+      "unavailable": "Unavailable",
+      "from": "From"
+    }
+  },
+  "cart": {
+    "general": {
+      "title": "Your Bag",
+      "empty": "Your bag is empty",
+      "subtotal": "Subtotal",
+      "checkout": "Checkout \u2014 Secure \u263b",
+      "remove": "Remove"
+    }
+  },
+  "sections": {
+    "header": {
+      "menu": "Menu",
+      "cart_count": {
+        "one": "{{ count }} item",
+        "other": "{{ count }} items"
+      }
+    }
+  }
+}

@@ -1,0 +1,35 @@
+<section class="trust-strip" style="padding:14px 24px">
+  <div class="trow">
+    {%- for block in section.blocks -%}
+      <span {{ block.shopify_attributes }}><i class="dot"></i> {{ block.settings.text }}</span>
+    {%- endfor -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Trust strip",
+  "max_blocks": 8,
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Trust item",
+      "settings": [
+        { "type": "text", "id": "text", "label": "Text", "default": "100% Organic Cotton" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Trust strip",
+      "blocks": [
+        { "type": "item", "settings": { "text": "100% Organic Cotton" } },
+        { "type": "item", "settings": { "text": "Free UK Shipping Over Â£50" } },
+        { "type": "item", "settings": { "text": "Ships in 24 Hours" } },
+        { "type": "item", "settings": { "text": "30-Day Returns" } },
+        { "type": "item", "settings": { "text": "Independent Since 1990" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

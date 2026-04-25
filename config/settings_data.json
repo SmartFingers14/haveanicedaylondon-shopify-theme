@@ -1,0 +1,21 @@
+{
+  "current": {
+    "color_pink": "#FF69B4",
+    "color_pink_soft": "#FFC1CC",
+    "color_sky": "#87CEEB",
+    "color_yellow": "#FFD400",
+    "color_ink": "#000000",
+    "color_bg": "#FFFFFF",
+    "heading_uppercase": "true"
+  },
+  "presets": {
+    "Default": {
+      "color_pink": "#FF69B4",
+      "color_pink_soft": "#FFC1CC",
+      "color_sky": "#87CEEB",
+      "color_yellow": "#FFD400",
+      "color_ink": "#000000",
+      "color_bg": "#FFFFFF"
+    }
+  }
+}

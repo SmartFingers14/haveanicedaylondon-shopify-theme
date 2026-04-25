@@ -1,0 +1,67 @@
+<section id="about" class="heritage">
+  <div class="her-grid">
+    <div class="her-art reveal">
+      <span class="stamp">{{ section.settings.stamp }}</span>
+      <div class="text-art">{{ section.settings.text_art }}</div>
+      <div class="scribble">{{ section.settings.scribble }}</div>
+    </div>
+
+    <div class="her-text">
+      <span class="eyebrow">{{ section.settings.eyebrow }}</span>
+      <h2 class="h2 reveal">
+        {{ section.settings.heading_pre }}
+        <em>{{ section.settings.heading_em }}</em>
+        {{ section.settings.heading_post }}
+      </h2>
+      <div class="reveal">{{ section.settings.body }}</div>
+      <span class="signed-by reveal">{{ section.settings.signed_by }}</span>
+      <div class="her-stats reveal">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'stat' -%}
+            <div class="s" {{ block.shopify_attributes }}>
+              <b>{{ block.settings.value }}</b>
+              <span>{{ block.settings.label }}</span>
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Heritage",
+  "settings": [
+    { "type": "text", "id": "stamp", "label": "Stamp", "default": "Camden Â· 1990s" },
+    { "type": "text", "id": "text_art", "label": "Big text art", "default": "17 Years. Now Back." },
+    { "type": "text", "id": "scribble", "label": "Scribble", "default": "have a nice day â˜»" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Today's Story" },
+    { "type": "text", "id": "heading_pre", "label": "Heading start", "default": "Born in a Camden corridor." },
+    { "type": "text", "id": "heading_em", "label": "Highlight", "default": "Adopted by ravers." },
+    { "type": "text", "id": "heading_post", "label": "Heading end", "default": "" },
+    { "type": "richtext", "id": "body", "label": "Body", "default": "<p>It started in a dark corridor at the back of the American Rag Store in Camden Market.</p>" },
+    { "type": "text", "id": "signed_by", "label": "Signed by", "default": "â€” The Architects â˜»" }
+  ],
+  "blocks": [
+    {
+      "type": "stat",
+      "name": "Stat",
+      "settings": [
+        { "type": "text", "id": "value", "label": "Value", "default": "1990" },
+        { "type": "text", "id": "label", "label": "Label", "default": "Camden Origin" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Heritage",
+      "blocks": [
+        { "type": "stat", "settings": { "value": "1990", "label": "Camden Origin" } },
+        { "type": "stat", "settings": { "value": "9",    "label": "Sub-Brands" } },
+        { "type": "stat", "settings": { "value": "100%", "label": "Organic Cotton" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

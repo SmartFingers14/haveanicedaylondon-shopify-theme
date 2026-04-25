@@ -1,0 +1,37 @@
+<section style="padding:80px 24px">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">{{ collection.title }}</span>
+        <h2 class="h2 reveal">Shop <em>{{ collection.title }}</em></h2>
+      </div>
+      {%- if collection.description != blank -%}<p class="reveal">{{ collection.description }}</p>{%- endif -%}
+    </div>
+
+    <div class="products">
+      {%- paginate collection.products by 24 -%}
+        {%- for product in collection.products -%}
+          {%- include 'product-card', product: product, forloop: forloop -%}
+        {%- else -%}
+          <div style="grid-column:1/-1;text-align:center;padding:60px;color:var(--ink-soft)">
+            <p>No products yet â€” check back soon â˜»</p>
+          </div>
+        {%- endfor -%}
+
+        {%- if paginate.pages > 1 -%}
+          <div style="grid-column:1/-1;text-align:center;margin-top:30px">
+            {%- if paginate.previous -%}<a href="{{ paginate.previous.url }}" class="btn btn-ghost">â† Previous</a>{%- endif -%}
+            {%- if paginate.next -%}<a href="{{ paginate.next.url }}" class="btn btn-primary" style="margin-left:10px">Next â†’</a>{%- endif -%}
+          </div>
+        {%- endif -%}
+      {%- endpaginate -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Collection",
+  "settings": []
+}
+{% endschema %}

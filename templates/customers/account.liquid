@@ -1,0 +1,18 @@
+<section style="padding:80px 24px;min-height:60vh">
+  <div class="container">
+    <h2 class="h2">Hi <em>{{ customer.first_name | default: 'rebel' }}</em> â˜»</h2>
+    <p style="margin:14px 0 20px"><a href="{{ routes.account_logout_url }}">Log out</a></p>
+    <h3 style="margin-top:30px">Order history</h3>
+    {%- if customer.orders.size > 0 -%}
+      <ul style="list-style:none;padding:0">
+      {%- for order in customer.orders -%}
+        <li style="padding:14px;border:1.5px solid var(--ink);border-radius:14px;margin-top:10px">
+          <a href="{{ order.customer_url }}">{{ order.name }}</a> Â· {{ order.created_at | date: '%b %d, %Y' }} Â· {{ order.total_price | money }}
+        </li>
+      {%- endfor -%}
+      </ul>
+    {%- else -%}
+      <p>No orders yet. Time to fix that â˜»</p>
+    {%- endif -%}
+  </div>
+</section>

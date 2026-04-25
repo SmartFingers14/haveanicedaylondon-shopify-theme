@@ -1,0 +1,36 @@
+<section style="padding:80px 24px;min-height:60vh">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">Search</span>
+        <h2 class="h2 reveal">Results for <em>{{ search.terms }}</em></h2>
+      </div>
+      <p class="reveal">{{ search.results_count }} result{% if search.results_count != 1 %}s{% endif %}</p>
+    </div>
+
+    <form action="{{ routes.search_url }}" method="get" style="margin-bottom:30px">
+      <input type="search" name="q" value="{{ search.terms | escape }}" placeholder="Search..." style="width:100%;padding:18px 24px;border:2px solid var(--ink);border-radius:99px;font-family:'Fjalla One',sans-serif;font-size:18px;letter-spacing:.04em">
+    </form>
+
+    <div class="products">
+      {%- for item in search.results -%}
+        {%- if item.object_type == 'product' -%}
+          {%- include 'product-card', product: item, forloop: forloop -%}
+        {%- else -%}
+          <a href="{{ item.url }}" class="card bg-cream reveal" style="padding:22px;display:block">
+            <div class="card-cat">{{ item.object_type }}</div>
+            <div class="card-name" style="font-size:18px;margin-top:8px">{{ item.title }}</div>
+          </a>
+        {%- endif -%}
+      {%- else -%}
+        <div style="grid-column:1/-1;text-align:center;padding:60px">
+          <p>{{ 'general.search.no_results' | t: terms: search.terms }}</p>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{ "name": "Search", "settings": [] }
+{% endschema %}

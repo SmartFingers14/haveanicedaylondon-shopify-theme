@@ -1,0 +1,27 @@
+<section id="incubator" class="incu">
+  <div class="incu-inner">
+    <div>
+      <span class="eyebrow" style="color:var(--acid)"><span style="background:var(--acid)"></span> {{ section.settings.eyebrow }}</span>
+      <h2 class="h2 reveal" style="color:var(--bg)">{{ section.settings.heading_pre }} <em>{{ section.settings.heading_em }}</em></h2>
+      <div class="reveal">{{ section.settings.body }}</div>
+      <a href="{{ section.settings.cta_link }}" class="incu-note">{{ section.settings.cta_label }}</a>
+    </div>
+    <div class="incu-art reveal">{{ section.settings.art_text }}</div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Incubator",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "The Incubator" },
+    { "type": "text", "id": "heading_pre", "label": "Heading before", "default": "An" },
+    { "type": "text", "id": "heading_em", "label": "Highlight", "default": "invention of..." },
+    { "type": "richtext", "id": "body", "label": "Body", "default": "<p>The Incubator is our creative engine.</p>" },
+    { "type": "text", "id": "cta_label", "label": "CTA label", "default": "Licensing & Wholesale Â· Get In Touch â†’" },
+    { "type": "url",  "id": "cta_link",  "label": "CTA link" },
+    { "type": "text", "id": "art_text", "label": "Round badge text", "default": "Made By The Architects" }
+  ],
+  "presets": [ { "name": "Incubator" } ]
+}
+{% endschema %}

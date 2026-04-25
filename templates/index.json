@@ -1,0 +1,26 @@
+{
+  "sections": {
+    "hero": { "type": "hero" },
+    "trust": { "type": "trust-strip" },
+    "types": { "type": "types-strip" },
+    "featured": { "type": "featured-products" },
+    "brands": { "type": "brands" },
+    "heritage": { "type": "heritage" },
+    "why": { "type": "why" },
+    "incubator": { "type": "incubator" },
+    "newsletter": { "type": "newsletter" },
+    "gallery": { "type": "gallery" }
+  },
+  "order": [
+    "hero",
+    "trust",
+    "types",
+    "featured",
+    "brands",
+    "heritage",
+    "why",
+    "incubator",
+    "newsletter",
+    "gallery"
+  ]
+}

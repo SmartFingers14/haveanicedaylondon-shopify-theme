@@ -1,0 +1,63 @@
+<section class="signup" id="subscribe">
+  <div class="signup-inner reveal">
+    <span class="eyebrow">{{ section.settings.eyebrow }}</span>
+    <h2>{{ section.settings.heading_pre }} <em>{{ section.settings.heading_em }}</em> {{ section.settings.heading_post }}</h2>
+    <p>{{ section.settings.body }}</p>
+
+    {% form 'customer', class: 'signup-form', id: 'signupForm' %}
+      <input type="hidden" name="contact[tags]" value="newsletter">
+      <input type="email" name="contact[email]" id="NewsletterEmail" required placeholder="your@email.com" autocomplete="email">
+      <button type="submit" name="commit">{{ 'general.newsletter_form.submit' | t }}</button>
+
+      {%- if form.errors -%}
+        <p style="margin-top:14px;color:var(--ink)" class="form-status">
+          {{ form.errors | default_errors }}
+        </p>
+      {%- endif -%}
+      {%- if form.posted_successfully? -%}
+        <p style="margin-top:14px;color:var(--ink);font-family:'Bungee',sans-serif;font-size:13px;letter-spacing:.16em">
+          {{ 'general.newsletter_form.confirmation' | t }}
+        </p>
+      {%- endif -%}
+    {% endform %}
+
+    <div class="signup-foot">
+      {%- for block in section.blocks -%}
+        <span {{ block.shopify_attributes }}>{{ block.settings.text }}</span>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Newsletter",
+  "max_blocks": 6,
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Subscribe to our emails" },
+    { "type": "text", "id": "heading_pre", "label": "Heading before", "default": "Be the first to know about" },
+    { "type": "text", "id": "heading_em", "label": "Highlight", "default": "new collections" },
+    { "type": "text", "id": "heading_post", "label": "Heading after", "default": "& exclusive offers." },
+    { "type": "textarea", "id": "body", "label": "Body text", "default": "One email. Real news from the house." }
+  ],
+  "blocks": [
+    {
+      "type": "perk",
+      "name": "Perk",
+      "settings": [
+        { "type": "text", "id": "text", "label": "Text", "default": "No spam, ever" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Newsletter",
+      "blocks": [
+        { "type": "perk", "settings": { "text": "No spam, ever" } },
+        { "type": "perk", "settings": { "text": "Unsubscribe any time" } },
+        { "type": "perk", "settings": { "text": "UK-based" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

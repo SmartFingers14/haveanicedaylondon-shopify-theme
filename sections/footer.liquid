@@ -1,0 +1,68 @@
+<footer class="footer">
+  <div class="footer-grid">
+    <div>
+      <div class="logo" style="color:var(--bg);font-size:20px">
+        <span class="smiley"><i></i></span> {{ shop.name }}
+      </div>
+      <p class="blurb">{{ section.settings.about | default: 'The urban fashion legend. Born Camden 1990. The home of Sam The Man, Shurl The Girl & 9 independent sub-brands. London.' }}</p>
+      <div class="socials">
+        {%- if settings.social_facebook != blank -%}<a href="{{ settings.social_facebook }}" aria-label="Facebook" target="_blank" rel="noopener">FB</a>{%- endif -%}
+        {%- if settings.social_instagram != blank -%}<a href="{{ settings.social_instagram }}" aria-label="Instagram" target="_blank" rel="noopener">IG</a>{%- endif -%}
+      </div>
+    </div>
+
+    {%- for block in section.blocks -%}
+      {%- if block.type == 'menu' -%}
+        <div {{ block.shopify_attributes }}>
+          <h5>{{ block.settings.heading | escape }}</h5>
+          <ul>
+            {%- for link in linklists[block.settings.menu].links -%}
+              <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+            {%- endfor -%}
+          </ul>
+        </div>
+      {%- endif -%}
+    {%- endfor -%}
+  </div>
+
+  <div class="mega-logo">{{ shop.name | upcase }} â˜»</div>
+
+  <div class="footer-bottom">
+    <span>Â© {{ 'now' | date: '%Y' }} {{ shop.name }}. All rights reserved.</span>
+    <span>Powered by The Architects â˜»</span>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "settings": [
+    {
+      "type": "textarea",
+      "id": "about",
+      "label": "About blurb",
+      "default": "The urban fashion legend. Born Camden 1990."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "menu",
+      "name": "Menu",
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Heading", "default": "Shop" },
+        { "type": "link_list", "id": "menu", "label": "Menu", "default": "footer" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Footer",
+      "blocks": [
+        { "type": "menu", "settings": { "heading": "Shop", "menu": "footer" } },
+        { "type": "menu", "settings": { "heading": "The House", "menu": "footer" } },
+        { "type": "menu", "settings": { "heading": "Account", "menu": "footer" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,40 @@
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-track">
+    {%- for block in section.blocks -%}
+      <span><i class="smy"></i> {{ block.settings.text | escape | upcase }}</span>
+    {%- endfor -%}
+    {%- comment -%} duplicate for seamless loop {%- endcomment -%}
+    {%- for block in section.blocks -%}
+      <span><i class="smy"></i> {{ block.settings.text | escape | upcase }}</span>
+    {%- endfor -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Announcement bar",
+  "max_blocks": 10,
+  "settings": [],
+  "blocks": [
+    {
+      "type": "message",
+      "name": "Message",
+      "settings": [
+        { "type": "text", "id": "text", "label": "Text", "default": "Have A Nice Day Â· London" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Announcement bar",
+      "blocks": [
+        { "type": "message", "settings": { "text": "Have A Nice Day Â· London" } },
+        { "type": "message", "settings": { "text": "The urban fashion legend is back" } },
+        { "type": "message", "settings": { "text": "100% Organic Cotton" } },
+        { "type": "message", "settings": { "text": "Conscious consumption Â· since the 90s" } },
+        { "type": "message", "settings": { "text": "Shop unisex Sam The Man" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

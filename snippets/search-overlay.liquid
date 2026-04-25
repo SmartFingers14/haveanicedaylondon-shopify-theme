@@ -1,0 +1,34 @@
+<div class="search-ov" id="searchOv" aria-hidden="true">
+  <div class="search-head">
+    <span style="font-size:22px">âŒ•</span>
+    <form action="{{ routes.search_url }}" method="get" role="search" style="flex:1;display:flex">
+      <input type="search" name="q" id="searchInput"
+             placeholder="{{ 'general.search.placeholder' | t }}"
+             autocomplete="off" autocorrect="off" spellcheck="false">
+    </form>
+    <button class="x" data-close-search aria-label="Close search">âœ•</button>
+  </div>
+  <div class="search-body">
+    <div class="search-section" id="trendingBox">
+      <h6>Trending searches</h6>
+      <div class="search-tags">
+        <span data-q="sam the man">Sam The Man</span>
+        <span data-q="sweatshirt">Sweatshirt</span>
+        <span data-q="dready">Dready</span>
+        <span data-q="beanie">Beanie</span>
+        <span data-q="organic">Organic Cotton</span>
+        <span data-q="slip mat">Slip Mat</span>
+        <span data-q="vortex">Vortex</span>
+      </div>
+    </div>
+    <div class="search-section">
+      <h6 id="resultsLabel">Featured products</h6>
+      <div class="search-results" id="searchResults">
+        {%- assign feat = collections.frontpage.products | default: collections.all.products -%}
+        {%- for p in feat limit: 8 -%}
+          {%- include 'product-card', product: p, forloop: forloop -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+</div>

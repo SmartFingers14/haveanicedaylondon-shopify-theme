@@ -1,0 +1,57 @@
+<section class="why">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">{{ section.settings.eyebrow }}</span>
+        <h2 class="h2 reveal">{{ section.settings.heading_pre }} <em>{{ section.settings.heading_em }}</em>. {{ section.settings.heading_post }}</h2>
+      </div>
+      <p class="reveal">{{ section.settings.subhead }}</p>
+    </div>
+
+    <div class="why-grid">
+      {%- for block in section.blocks -%}
+        <div class="why-card reveal" {{ block.shopify_attributes }}>
+          <div class="ic">{{ block.settings.icon }}</div>
+          <h4>{{ block.settings.title }}</h4>
+          <p>{{ block.settings.text }}</p>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Why us",
+  "max_blocks": 8,
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Why Have A Nice Day" },
+    { "type": "text", "id": "heading_pre", "label": "Heading before", "default": "Tread" },
+    { "type": "text", "id": "heading_em", "label": "Highlight", "default": "lightly" },
+    { "type": "text", "id": "heading_post", "label": "Heading after", "default": "Wear loudly." },
+    { "type": "textarea", "id": "subhead", "label": "Sub-heading", "default": "Our integrity is as important as our products." }
+  ],
+  "blocks": [
+    {
+      "type": "card",
+      "name": "Card",
+      "settings": [
+        { "type": "text", "id": "icon", "label": "Icon (emoji)", "default": "ðŸŒ±" },
+        { "type": "text", "id": "title", "label": "Title", "default": "100% Organic Cotton" },
+        { "type": "textarea", "id": "text", "label": "Text", "default": "Heavier weight, softer hand-feel, naturally grown." }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Why us",
+      "blocks": [
+        { "type": "card", "settings": { "icon": "ðŸŒ±", "title": "100% Organic Cotton", "text": "Heavier weight, softer hand-feel, naturally grown." } },
+        { "type": "card", "settings": { "icon": "â˜»", "title": "The Original Smiley", "text": "Sam The Man â€” adopted by UK ravers in the 90s." } },
+        { "type": "card", "settings": { "icon": "U", "title": "Unisex By Design", "text": "Cut for everyone." } },
+        { "type": "card", "settings": { "icon": "9", "title": "One House Â· 9 Worlds", "text": "Have A Nice Day, Dready, Sista, Handspun Records, BTKA, Vortex, Funky Dog, Don\u0027t Do The Dodo & the Incubator." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

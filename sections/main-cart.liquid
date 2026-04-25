@@ -1,0 +1,50 @@
+<section style="padding:80px 24px;min-height:60vh">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">Bag</span>
+        <h2 class="h2 reveal">Your <em>bag</em>.</h2>
+      </div>
+    </div>
+
+    {%- if cart.item_count > 0 -%}
+      <form action="{{ routes.cart_url }}" method="post" novalidate>
+        {%- for item in cart.items -%}
+          <div class="cart-item" style="display:grid;grid-template-columns:120px 1fr auto;gap:18px;padding:18px 0;border-bottom:1px solid var(--line);align-items:center">
+            <a href="{{ item.url }}">
+              {%- if item.image -%}
+                <img src="{{ item.image | image_url: width: 240 }}" alt="{{ item.title | escape }}" style="width:120px;height:144px;object-fit:cover;border-radius:10px;border:1.5px solid var(--ink)">
+              {%- endif -%}
+            </a>
+            <div>
+              <a href="{{ item.url }}" style="font-weight:600;font-size:15px">{{ item.product.title }}</a>
+              <div class="sub">{{ item.variant.title }}</div>
+              <div class="qty" style="margin-top:8px">
+                <a href="{{ item.url_to_remove }}" style="font-size:11px;text-decoration:underline">Remove</a>
+                &nbsp;Â·&nbsp;
+                <input type="number" name="updates[]" value="{{ item.quantity }}" min="0" style="width:60px;border:1.5px solid var(--ink);border-radius:8px;padding:6px;text-align:center">
+              </div>
+            </div>
+            <div style="font-family:'Fjalla One',sans-serif;font-size:18px">{{ item.final_line_price | money }}</div>
+          </div>
+        {%- endfor -%}
+
+        <div style="margin-top:30px;display:flex;justify-content:flex-end;gap:14px;flex-wrap:wrap">
+          <button type="submit" name="update" class="btn btn-ghost">Update Bag</button>
+          <button type="submit" name="checkout" class="btn btn-primary">Checkout â€” {{ cart.total_price | money }} â†’</button>
+        </div>
+      </form>
+    {%- else -%}
+      <div style="text-align:center;padding:80px 20px">
+        <div class="big-smy" style="margin:0 auto 20px"></div>
+        <h4 style="font-family:'Fjalla One',sans-serif;font-size:28px">{{ 'cart.general.empty' | t }}</h4>
+        <p style="margin:14px 0 30px;color:var(--ink-soft)">Time to start the comeback.</p>
+        <a href="{{ routes.all_products_collection_url }}" class="btn btn-primary">Shop The Originals â†’</a>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{ "name": "Cart", "settings": [] }
+{% endschema %}

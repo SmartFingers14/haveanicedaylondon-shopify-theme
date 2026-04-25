@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="{{ request.locale.iso_code }}">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#FF69B4">
+  <link rel="canonical" href="{{ canonical_url }}">
+
+  {%- if settings.favicon != blank -%}
+    <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
+  {%- endif -%}
+
+  <title>
+    {{ page_title }}
+    {%- if current_tags %} &ndash; {{ 'general.meta.tags' | t: tags: current_tags | join: ', ' }}{% endif -%}
+    {%- if current_page != 1 %} &ndash; {{ 'general.meta.page' | t: page: current_page }}{% endif -%}
+    {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
+  </title>
+
+  {% if page_description %}
+    <meta name="description" content="{{ page_description | escape }}">
+  {% endif %}
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fjalla+One&family=Inter:wght@300;400;500;600;700;800&family=Bungee&family=Permanent+Marker&display=swap" rel="stylesheet">
+
+  {{ 'styles.css' | asset_url | stylesheet_tag }}
+
+  {%- render 'meta-tags' -%}
+
+  <style>
+    :root{
+      --pink: {{ settings.color_pink | default: '#FF69B4' }};
+      --pink-soft: {{ settings.color_pink_soft | default: '#FFC1CC' }};
+      --sky: {{ settings.color_sky | default: '#87CEEB' }};
+      --yellow: {{ settings.color_yellow | default: '#FFD400' }};
+      --ink: {{ settings.color_ink | default: '#000000' }};
+      --bg: {{ settings.color_bg | default: '#FFFFFF' }};
+      --acid: {{ settings.color_yellow | default: '#FFD400' }};
+      --acid-deep: {{ settings.color_yellow | default: '#FFD400' }};
+      --hot: {{ settings.color_pink | default: '#FF69B4' }};
+    }
+  </style>
+
+  {{ content_for_header }}
+</head>
+<body class="template-{{ template.name | handle }}">
+
+  <a class="skip-to-content-link visually-hidden" href="#MainContent">{{ 'accessibility.skip_to_text' | t }}</a>
+
+  {% sections 'header-group' %}
+
+  <main id="MainContent" role="main" tabindex="-1">
+    {{ content_for_layout }}
+  </main>
+
+  {% sections 'footer-group' %}
+
+  {%- render 'cart-drawer' -%}
+  {%- render 'search-overlay' -%}
+  {%- render 'mobile-menu' -%}
+  {%- render 'product-modal' -%}
+
+  <div class="backdrop" id="backdrop"></div>
+  <div class="toast-wrap" id="toastWrap"></div>
+  <div class="sticky-bar" id="stickyBar">
+    <div class="lab"><b id="stickyName"></b><br><span id="stickyPrice"></span> Â· added to cart</div>
+    <button id="stickyView">View Cart â†’</button>
+  </div>
+
+  <script src="{{ 'script.js' | asset_url }}" defer></script>
+</body>
+</html>

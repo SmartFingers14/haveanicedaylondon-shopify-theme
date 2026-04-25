@@ -1,0 +1,67 @@
+<section id="gallery">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">{{ section.settings.eyebrow }}</span>
+        <h2 class="h2 reveal">{{ section.settings.heading_pre }} <em>{{ section.settings.heading_em }}</em>.</h2>
+      </div>
+      <p class="reveal">{{ section.settings.subhead }}</p>
+    </div>
+
+    <div class="gallery-strip">
+      {%- for block in section.blocks -%}
+        <div class="gtile gt-{{ forloop.index | modulo: 8 | plus: 1 }} reveal" {{ block.shopify_attributes }}>
+          <span class="gtag">{{ block.settings.tag }}</span>
+          <div class="gart">{{ block.settings.text }}</div>
+        </div>
+      {%- endfor -%}
+    </div>
+
+    {%- if section.settings.show_cta -%}
+      <div style="text-align:center;margin-top:30px">
+        <a href="{{ section.settings.cta_link | default: '#' }}" class="btn btn-ghost">{{ section.settings.cta_label | default: 'Open Full Gallery' }} <span class="arr">â†’</span></a>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Gallery",
+  "max_blocks": 12,
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "From the Gallery" },
+    { "type": "text", "id": "heading_pre", "label": "Heading before", "default": "The" },
+    { "type": "text", "id": "heading_em", "label": "Highlight", "default": "archive" },
+    { "type": "textarea", "id": "subhead", "label": "Sub-heading", "default": "A peek into our visual world." },
+    { "type": "checkbox", "id": "show_cta", "label": "Show CTA", "default": true },
+    { "type": "text", "id": "cta_label", "label": "CTA label", "default": "Open Full Gallery" },
+    { "type": "url",  "id": "cta_link",  "label": "CTA link" }
+  ],
+  "blocks": [
+    {
+      "type": "tile",
+      "name": "Tile",
+      "settings": [
+        { "type": "text", "id": "tag",  "label": "Tag",  "default": "Vortex" },
+        { "type": "text", "id": "text", "label": "Text", "default": "VRTX SKIRT" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Gallery",
+      "blocks": [
+        { "type": "tile", "settings": { "tag": "Vortex",   "text": "VRTX SKIRT" } },
+        { "type": "tile", "settings": { "tag": "Dodo",     "text": "INFO THE ROBOT" } },
+        { "type": "tile", "settings": { "tag": "Sista",    "text": "SIS BEANIE" } },
+        { "type": "tile", "settings": { "tag": "Dready",   "text": "DJ DREADY" } },
+        { "type": "tile", "settings": { "tag": "HAND",     "text": "SAM THE MAN â˜»" } },
+        { "type": "tile", "settings": { "tag": "Handspun", "text": "RECORDS CLASSIC" } },
+        { "type": "tile", "settings": { "tag": "BTKA",     "text": "BTKA HOUSE" } },
+        { "type": "tile", "settings": { "tag": "Funky Dog","text": "MONGREL SOUP" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

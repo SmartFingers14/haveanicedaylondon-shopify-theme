@@ -1,0 +1,80 @@
+<header class="nav">
+  <div class="nav-inner">
+    <nav class="nav-left">
+      <span class="nav-link has-mega" id="shopTrigger">{{ section.settings.shop_label | default: 'Shop' }}</span>
+      {%- for link in linklists[section.settings.menu].links -%}
+        {%- unless forloop.first and section.settings.hide_first -%}
+          <a class="nav-link" href="{{ link.url }}">{{ link.title }}</a>
+        {%- endunless -%}
+      {%- endfor -%}
+    </nav>
+
+    <a class="logo" href="{{ routes.root_url }}">
+      {%- if settings.logo != blank -%}
+        <img class="logo-img" src="{{ settings.logo | image_url: width: 240 }}" alt="{{ shop.name | escape }}" width="120" height="38">
+      {%- else -%}
+        <span class="smiley"><i></i></span> {{ shop.name }}
+      {%- endif -%}
+    </a>
+
+    <div class="nav-right">
+      <a class="nav-link" href="#" data-open-search>Search</a>
+      {%- if shop.customer_accounts_enabled -%}
+        <a class="nav-link" href="{{ routes.account_url }}">{% if customer %}Account{% else %}Log in{% endif %}</a>
+      {%- endif -%}
+      <a class="cart-btn" href="{{ routes.cart_url }}" data-open-cart>
+        Cart <span class="count" id="cartCount">{{ cart.item_count }}</span>
+      </a>
+      <button class="burger" aria-label="Menu"><span></span></button>
+    </div>
+  </div>
+
+  <div class="mega" id="megaMenu">
+    <div class="mega-inner">
+      <div>
+        <h6>{{ section.settings.mega_title | default: 'The House Â· 9 brands' }}</h6>
+        <ul>
+          {%- for link in linklists[section.settings.mega_menu].links -%}
+            <li><a href="{{ link.url }}">{{ link.title }} <span class="arr">â†’</span></a></li>
+          {%- endfor -%}
+        </ul>
+        {%- if section.settings.mega_menu_2 != blank -%}
+          <h6 style="margin-top:24px">By Type</h6>
+          <ul style="gap:6px">
+            {%- for link in linklists[section.settings.mega_menu_2].links -%}
+              <li><a href="{{ link.url }}" style="font-size:14px">{{ link.title }} <span class="arr">â†’</span></a></li>
+            {%- endfor -%}
+          </ul>
+        {%- endif -%}
+      </div>
+      <div class="mega-feature">
+        <div>
+          <div class="bungee" style="font-size:11px;letter-spacing:.18em;margin-bottom:10px">{{ section.settings.feature_eyebrow | default: 'Featured Â· The Original' }}</div>
+          <h4>{{ section.settings.feature_heading | default: 'Sam The Man.' }}<br>{{ section.settings.feature_sub | default: 'The icon since 1990.' }}</h4>
+          <p>{{ section.settings.feature_text | default: 'The graphic that became part of UK rave history. Front-print tee & sweatshirt available now.' }}</p>
+        </div>
+        <a class="gobtn" href="{{ section.settings.feature_link | default: '/collections/all' }}">Shop Sam <span>â†’</span></a>
+      </div>
+    </div>
+  </div>
+</header>
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": [
+    { "type": "text", "id": "shop_label", "label": "Shop trigger label", "default": "Shop" },
+    { "type": "link_list", "id": "menu", "label": "Main menu", "default": "main-menu" },
+    { "type": "checkbox", "id": "hide_first", "label": "Hide first link (it's the Shop trigger)", "default": false },
+    { "type": "header", "content": "Mega menu" },
+    { "type": "text", "id": "mega_title", "label": "Mega title", "default": "The House Â· 9 brands" },
+    { "type": "link_list", "id": "mega_menu", "label": "Mega menu links", "default": "main-menu" },
+    { "type": "link_list", "id": "mega_menu_2", "label": "Secondary mega menu (By type)", "default": "footer" },
+    { "type": "text", "id": "feature_eyebrow", "label": "Feature eyebrow", "default": "Featured Â· The Original" },
+    { "type": "text", "id": "feature_heading", "label": "Feature heading", "default": "Sam The Man." },
+    { "type": "text", "id": "feature_sub", "label": "Feature subheading", "default": "The icon since 1990." },
+    { "type": "textarea", "id": "feature_text", "label": "Feature text", "default": "The graphic that became part of UK rave history." },
+    { "type": "url", "id": "feature_link", "label": "Feature link" }
+  ]
+}
+{% endschema %}

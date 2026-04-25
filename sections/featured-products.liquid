@@ -1,0 +1,79 @@
+<section id="{{ section.settings.section_id | default: 'featured' }}">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">{{ section.settings.eyebrow }}</span>
+        <h2 class="h2 reveal">
+          {{ section.settings.heading_pre }}
+          <em>{{ section.settings.heading_em }}</em>
+          {{ section.settings.heading_post }}
+        </h2>
+      </div>
+      {%- if section.settings.subhead != blank -%}
+        <p class="reveal">{{ section.settings.subhead }}</p>
+      {%- endif -%}
+    </div>
+
+    <div class="products">
+      {%- assign coll = collections[section.settings.collection] -%}
+      {%- assign limit = section.settings.product_count | default: 8 -%}
+      {%- if coll != empty and coll.products_count > 0 -%}
+        {%- for product in coll.products limit: limit -%}
+          {%- include 'product-card', product: product, forloop: forloop -%}
+        {%- endfor -%}
+      {%- else -%}
+        {%- for i in (1..limit) -%}
+          <article class="card bg-cream reveal">
+            <div class="card-media">
+              <span class="card-badge">Demo</span>
+              <div class="tee">
+                <div class="graphic"><span class="smy"><i></i></span>Sample {{ forloop.index }}</div>
+              </div>
+              <div class="card-quick">
+                <button class="qbtn" data-add>Quick Add</button>
+                <a class="iconbtn" href="#">â†—</a>
+              </div>
+            </div>
+            <div class="card-info">
+              <div class="card-cat">Have A Nice Day Â· Tee</div>
+              <div class="card-name">Demo product {{ forloop.index }}</div>
+              <div class="card-meta">
+                <span class="price">Â£29.99</span>
+                <span class="organic">Organic cotton</span>
+              </div>
+            </div>
+          </article>
+        {%- endfor -%}
+      {%- endif -%}
+    </div>
+
+    {%- if section.settings.show_view_all -%}
+      <div style="text-align:center;margin-top:36px">
+        <a href="{{ coll.url | default: routes.all_products_collection_url }}" class="btn btn-ghost">
+          {{ section.settings.view_all_label | default: 'View All Products' }} <span class="arr">â†’</span>
+        </a>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Featured products",
+  "settings": [
+    { "type": "text", "id": "section_id", "label": "HTML section id", "default": "bestsellers" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Featured Â· Have A Nice Day" },
+    { "type": "text", "id": "heading_pre", "label": "Heading before highlight", "default": "The" },
+    { "type": "text", "id": "heading_em",  "label": "Highlighted word", "default": "originals" },
+    { "type": "text", "id": "heading_post","label": "Heading after highlight", "default": "." },
+    { "type": "textarea", "id": "subhead", "label": "Sub-heading", "default": "The four pieces leading the comeback â€” Sam The Man and Shurl The Girl, on heavyweight unisex cotton." },
+    { "type": "collection", "id": "collection", "label": "Collection" },
+    { "type": "range", "id": "product_count", "label": "Number of products", "min": 2, "max": 16, "step": 1, "default": 8 },
+    { "type": "checkbox", "id": "show_view_all", "label": "Show \"View all\" button", "default": true },
+    { "type": "text", "id": "view_all_label", "label": "View all label", "default": "View All Products" }
+  ],
+  "presets": [
+    { "name": "Featured products" }
+  ]
+}
+{% endschema %}

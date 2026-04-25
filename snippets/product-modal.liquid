@@ -1,0 +1,42 @@
+<div class="modal" id="modal" aria-hidden="true">
+  <div class="modal-box">
+    <div class="modal-img">
+      <button class="x" data-close-modal aria-label="Close">âœ•</button>
+      <img id="modalImg" alt="">
+    </div>
+    <div class="modal-body">
+      <div class="cat" id="modalCat"></div>
+      <h2 id="modalTitle"></h2>
+      <div class="pr" id="modalPrice"></div>
+      <p class="desc" id="modalDesc">
+        Cut from 100% organic cotton. Heavyweight unisex fit. Hand-printed in our London studio.
+        Part of the comeback collection â€” wear loudly, tread lightly. â˜»
+      </p>
+      <div>
+        <div class="lbl" style="margin-bottom:10px">Select size</div>
+        <div class="sizes" id="modalSizes">
+          <button data-size="XS">XS</button>
+          <button data-size="S">S</button>
+          <button data-size="M" class="sel">M</button>
+          <button data-size="L">L</button>
+          <button data-size="XL">XL</button>
+          <button data-size="XXL" class="oos">XXL</button>
+        </div>
+      </div>
+      <div class="modal-cta">
+        <div class="qty">
+          <button id="modalMinus">âˆ’</button>
+          <span id="modalQty">1</span>
+          <button id="modalPlus">+</button>
+        </div>
+        <button class="add-big" id="modalAdd">{{ 'products.product.add_to_cart' | t }} Â· <span id="modalAddPrice"></span></button>
+      </div>
+      <div class="modal-perks">
+        <span>Free UK shipping over Â£50</span>
+        <span>30-day returns</span>
+        <span>Ships in 24h</span>
+        <span>Unisex Â· Organic cotton</span>
+      </div>
+    </div>
+  </div>
+</div>

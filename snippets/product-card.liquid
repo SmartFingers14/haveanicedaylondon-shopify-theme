@@ -1,0 +1,62 @@
+{%- comment -%} Single product card Â· brand-aligned {%- endcomment -%}
+{%- liquid
+  assign p = product
+  assign featured = p.featured_image
+  assign price = p.price | money
+  assign bg_classes = 'bg-cream,bg-pink,bg-acid,bg-blue,bg-mint,bg-blk'
+  assign bg_arr = bg_classes | split: ','
+  assign idx = forloop.index0 | default: 0
+  assign mod = idx | modulo: bg_arr.size
+  assign bg_class = bg_arr[mod]
+-%}
+
+<article class="card {{ bg_class }} has-image reveal"
+         data-product="{{ p.title | escape }}"
+         data-price="{{ p.price | money_without_currency }}"
+         data-handle="{{ p.handle }}"
+         data-id="{{ p.id }}">
+  <div class="card-media">
+    {%- if p.compare_at_price > p.price -%}
+      <span class="card-badge">Sale</span>
+    {%- elsif p.tags contains 'new' -%}
+      <span class="card-badge">New</span>
+    {%- elsif p.tags contains 'bestseller' -%}
+      <span class="card-badge">Bestseller</span>
+    {%- else -%}
+      <span class="card-badge">{{ p.type | default: 'Tee' }}</span>
+    {%- endif -%}
+
+    {%- if featured -%}
+      <img class="real-img"
+           src="{{ featured | image_url: width: 720 }}"
+           alt="{{ featured.alt | escape | default: p.title | escape }}"
+           loading="lazy"
+           width="720" height="900">
+    {%- else -%}
+      <div class="tee">
+        <div class="graphic">
+          <span class="smy"><i></i></span>
+          {{ p.title | truncate: 18 }}
+        </div>
+      </div>
+    {%- endif -%}
+
+    <div class="card-quick">
+      <button class="qbtn" data-add data-variant-id="{{ p.selected_or_first_available_variant.id }}">
+        {%- if p.available -%}Quick Add{%- else -%}Sold Out{%- endif -%}
+      </button>
+      <a class="iconbtn" href="{{ p.url }}" aria-label="View {{ p.title | escape }}">â†—</a>
+    </div>
+  </div>
+  <div class="card-info">
+    <div class="card-cat">{{ p.vendor | default: p.type }} Â· {{ p.type | default: 'Apparel' }}</div>
+    <div class="card-name">{{ p.title }}</div>
+    <div class="card-meta">
+      <span class="price">
+        {%- if p.price_varies -%}<span class="from">From</span>{%- endif -%}
+        {{ price }}
+      </span>
+      <span class="organic">Organic cotton</span>
+    </div>
+  </div>
+</article>

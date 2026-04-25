@@ -1,0 +1,110 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Have A Nice Day London",
+    "theme_version": "1.0.0",
+    "theme_author": "The Architects",
+    "theme_documentation_url": "https://www.haveanicedaylondonstore.com",
+    "theme_support_url": "https://www.haveanicedaylondonstore.com/pages/contact"
+  },
+  {
+    "name": "Colors â€” Brand Board",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Primary palette"
+      },
+      {
+        "type": "color",
+        "id": "color_pink",
+        "label": "Bubblegum Pink (CTA / primary)",
+        "default": "#FF69B4"
+      },
+      {
+        "type": "color",
+        "id": "color_pink_soft",
+        "label": "Soft Pink",
+        "default": "#FFC1CC"
+      },
+      {
+        "type": "color",
+        "id": "color_sky",
+        "label": "Sky Blue (balance)",
+        "default": "#87CEEB"
+      },
+      {
+        "type": "color",
+        "id": "color_yellow",
+        "label": "Vibrant Yellow (accent)",
+        "default": "#FFD400"
+      },
+      {
+        "type": "header",
+        "content": "Neutrals"
+      },
+      {
+        "type": "color",
+        "id": "color_ink",
+        "label": "Ink (black)",
+        "default": "#000000"
+      },
+      {
+        "type": "color",
+        "id": "color_bg",
+        "label": "Background (white)",
+        "default": "#FFFFFF"
+      }
+    ]
+  },
+  {
+    "name": "Typography",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Headings use Fjalla One (condensed, blocky). Body uses Inter. Both load from Google Fonts."
+      },
+      {
+        "type": "select",
+        "id": "heading_uppercase",
+        "label": "Uppercase headings",
+        "options": [
+          { "value": "true", "label": "Yes" },
+          { "value": "false", "label": "No" }
+        ],
+        "default": "true"
+      }
+    ]
+  },
+  {
+    "name": "Logo",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "logo",
+        "label": "Logo image"
+      },
+      {
+        "type": "image_picker",
+        "id": "favicon",
+        "label": "Favicon"
+      }
+    ]
+  },
+  {
+    "name": "Social",
+    "settings": [
+      {
+        "type": "text",
+        "id": "social_instagram",
+        "label": "Instagram URL",
+        "default": "https://www.instagram.com"
+      },
+      {
+        "type": "text",
+        "id": "social_facebook",
+        "label": "Facebook URL",
+        "default": "https://www.facebook.com"
+      }
+    ]
+  }
+]

@@ -1,0 +1,99 @@
+<section style="padding:90px 24px">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">{{ product.vendor | default: 'Have A Nice Day' }}</span>
+        <h2 class="h2 reveal">{{ product.title }}</h2>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start" class="product-grid-pdp">
+      <div>
+        {%- if product.featured_image -%}
+          <img src="{{ product.featured_image | image_url: width: 1200 }}" alt="{{ product.title | escape }}"
+               style="width:100%;border:3px solid var(--ink);border-radius:18px;box-shadow:14px 14px 0 var(--ink)" loading="eager">
+        {%- endif -%}
+        {%- if product.images.size > 1 -%}
+          <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:14px">
+            {%- for img in product.images limit: 8 -%}
+              <img src="{{ img | image_url: width: 200 }}" alt="{{ product.title | escape }}"
+                   style="aspect-ratio:1/1;object-fit:cover;border:1.5px solid var(--ink);border-radius:8px" loading="lazy">
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+      </div>
+
+      <div>
+        <div class="card-cat">{{ product.vendor }} Â· {{ product.type }}</div>
+        <h1 class="h2" style="margin-top:6px">{{ product.title }}</h1>
+        <p style="font-family:'Fjalla One',sans-serif;font-size:28px;margin-top:14px">
+          {%- if product.price_varies -%}<span style="font-size:13px;letter-spacing:.18em">From</span> {%- endif -%}
+          {{ product.price | money }}
+        </p>
+
+        <div class="desc" style="margin-top:18px;color:var(--ink-soft);line-height:1.7">{{ product.description }}</div>
+
+        {% form 'product', product, class: 'product-form', id: 'productForm' %}
+          {%- unless product.has_only_default_variant -%}
+            {%- for option in product.options_with_values -%}
+              <div style="margin-top:18px">
+                <div class="lbl" style="margin-bottom:8px">{{ option.name }}</div>
+                <div class="sizes">
+                  {%- for value in option.values -%}
+                    <button type="button"
+                            data-option-name="{{ option.name | escape }}"
+                            data-option-value="{{ value | escape }}"
+                            class="{% if option.selected_value == value %}sel{% endif %}">
+                      {{ value }}
+                    </button>
+                  {%- endfor -%}
+                </div>
+              </div>
+            {%- endfor -%}
+          {%- endunless -%}
+
+          <input type="hidden" name="id" id="ProductSelect-{{ section.id }}" value="{{ product.selected_or_first_available_variant.id }}">
+          <input type="hidden" name="quantity" value="1">
+
+          <div class="modal-cta" style="margin-top:24px;display:grid;grid-template-columns:auto 1fr;gap:10px">
+            <div class="qty">
+              <button type="button" id="pdpMinus">âˆ’</button>
+              <span id="pdpQty">1</span>
+              <button type="button" id="pdpPlus">+</button>
+            </div>
+            <button type="submit" class="add-big" {% unless product.available %}disabled{% endunless %}>
+              {%- if product.available -%}{{ 'products.product.add_to_cart' | t }} Â· {{ product.price | money }}
+              {%- else -%}{{ 'products.product.sold_out' | t }}
+              {%- endif -%}
+            </button>
+          </div>
+        {% endform %}
+
+        <div class="modal-perks" style="margin-top:18px">
+          <span>Free UK shipping over Â£50</span>
+          <span>30-day returns</span>
+          <span>Ships in 24h</span>
+          <span>Unisex Â· Organic cotton</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  (function(){
+    var minus=document.getElementById('pdpMinus'),plus=document.getElementById('pdpPlus'),q=document.getElementById('pdpQty');
+    var qInput=document.querySelector('#productForm input[name="quantity"]');
+    if(!minus||!plus||!q||!qInput) return;
+    var n=1;
+    plus.addEventListener('click',function(){n++;q.textContent=n;qInput.value=n;});
+    minus.addEventListener('click',function(){if(n>1){n--;q.textContent=n;qInput.value=n;}});
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Product details",
+  "settings": []
+}
+{% endschema %}
