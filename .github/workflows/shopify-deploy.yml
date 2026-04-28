@@ -1,10 +1,7 @@
 name: Deploy to Shopify
 
 on:
-  push:
-    branches:
-      - main
-      - v2-full-redesign
+  # Only runs when YOU manually trigger it — never auto-deploys
   workflow_dispatch:
 
 jobs:
@@ -22,7 +19,10 @@ jobs:
           SHOPIFY_TOKEN: ${{ secrets.SHOPIFY_TOKEN }}
           SHOPIFY_THEME_ID: ${{ secrets.SHOPIFY_THEME_ID }}
         run: |
-          echo "Deploying theme files to Shopify store: $SHOPIFY_STORE"
+          echo "Deploying theme files from hand-shopify-theme/ to Shopify store: $SHOPIFY_STORE"
+          
+          # All theme files live inside hand-shopify-theme/
+          cd hand-shopify-theme
           
           # Function to upload a file
           upload_file() {
@@ -45,7 +45,7 @@ jobs:
             fi
           }
           
-          # Upload all theme files
+          # Upload all theme files from hand-shopify-theme/
           echo "--- Uploading sections ---"
           for f in sections/*.liquid sections/*.json; do
             [ -f "$f" ] && upload_file "$f" "$f"
