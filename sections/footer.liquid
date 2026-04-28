@@ -1,36 +1,489 @@
-<footer class="footer">
-  <div class="footer-grid">
+<!-- HAVE A NICE DAY — Footer: Full Redesign -->
+<style>
+  /* ===== FOOTER ===== */
+  .hand-footer {
+    background: #111;
+    color: #fff;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* ===== NEWSLETTER BAND ===== */
+  .hand-foot-nl {
+    background: #e91e8c;
+    padding: 56px 32px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: center;
+    max-width: 100%;
+  }
+  .hand-foot-nl-left {}
+  .hand-foot-nl-tag {
+    font-family: var(--mono, 'Courier New', monospace);
+    font-size: 9px;
+    letter-spacing: .28em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,.7);
+    margin-bottom: 10px;
+  }
+  .hand-foot-nl-title {
+    font-family: 'Anton', Impact, sans-serif;
+    font-size: clamp(28px, 4vw, 52px);
+    text-transform: uppercase;
+    line-height: .95;
+    color: #fff;
+    margin: 0 0 10px;
+  }
+  .hand-foot-nl-sub {
+    font-family: var(--mono, 'Courier New', monospace);
+    font-size: 11px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,.65);
+    margin: 0;
+  }
+  .hand-foot-nl-form {
+    display: flex;
+    border: 1.5px solid rgba(255,255,255,.4);
+  }
+  .hand-foot-nl-form input {
+    flex: 1;
+    border: 0;
+    background: transparent;
+    padding: 18px 20px;
+    font-family: var(--mono, 'Courier New', monospace);
+    font-size: 11px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: #fff;
+    outline: none;
+  }
+  .hand-foot-nl-form input::placeholder {
+    color: rgba(255,255,255,.5);
+  }
+  .hand-foot-nl-form button {
+    padding: 0 28px;
+    background: #fff;
+    color: #e91e8c;
+    font-family: var(--mono, 'Courier New', monospace);
+    font-size: 11px;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    font-weight: 700;
+    border: 0;
+    cursor: pointer;
+    transition: background .2s, color .2s;
+    white-space: nowrap;
+  }
+  .hand-foot-nl-form button:hover {
+    background: #111;
+    color: #fff;
+  }
+  .hand-foot-nl-note {
+    font-family: var(--mono, 'Courier New', monospace);
+    font-size: 9px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,.45);
+    margin-top: 10px;
+  }
+
+  /* ===== MAIN FOOTER BODY ===== */
+  .hand-foot-body {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 72px 32px 56px;
+    display: grid;
+    grid-template-columns: 1.8fr 1fr 1fr 1fr;
+    gap: 56px;
+  }
+
+  /* Brand column */
+  .hand-foot-brand {}
+  .hand-foot-brand-logo {
+    font-family: 'Anton', Impact, sans-serif;
+    font-size: 26px;
+    text-transform: uppercase;
+    letter-spacing: .01em;
+    color: #fff;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .hand-foot-brand-sub {
+    font-family: var(--mono, 'Courier New', monospace);
+    font-size: 9px;
+    letter-spacing: .24em;
+    text-transform: uppercase;
+    color: #555;
+    margin-bottom: 20px;
+    display: block;
+  }
+  .hand-foot-brand-desc {
+    font-family: var(--body, sans-serif);
+    font-size: 14px;
+    line-height: 1.7;
+    color: #777;
+    margin: 0 0 28px;
+    max-width: 300px;
+  }
+
+  /* Social icons */
+  .hand-foot-socials {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 32px;
+  }
+  .hand-foot-social {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #2a2a2a;
+    color: #888;
+    text-decoration: none;
+    transition: background .2s, border-color .2s, color .2s;
+    font-size: 14px;
+  }
+  .hand-foot-social:hover {
+    background: #e91e8c;
+    border-color: #e91e8c;
+    color: #fff;
+  }
+
+  /* Trust badges */
+  .hand-foot-trust {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .hand-foot-trust-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--mono, 'Courier New', monospace);
+    font-size: 9px;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: #555;
+  }
+  .hand-foot-trust-item::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #e91e8c;
+    flex-shrink: 0;
+  }
+
+  /* Nav columns */
+  .hand-foot-col {}
+  .hand-foot-col-head {
+    font-family: var(--mono, 'Courier New', monospace);
+    font-size: 9px;
+    letter-spacing: .28em;
+    text-transform: uppercase;
+    color: #e91e8c;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .hand-foot-col-head::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: #222;
+  }
+  .hand-foot-col ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .hand-foot-col ul li a {
+    display: block;
+    padding: 9px 0;
+    font-family: var(--body, sans-serif);
+    font-size: 14px;
+    color: #888;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(255,255,255,.04);
+    transition: color .2s, padding-left .2s;
+  }
+  .hand-foot-col ul li a:hover {
+    color: #fff;
+    padding-left: 6px;
+  }
+
+  /* ===== MARQUEE BAND ===== */
+  .hand-foot-marquee-wrap {
+    border-top: 1px solid #1e1e1e;
+    border-bottom: 1px solid #1e1e1e;
+    overflow: hidden;
+    padding: 20px 0;
+    background: #0d0d0d;
+  }
+  .hand-foot-marquee {
+    display: flex;
+    gap: 0;
+    animation: hand-foot-scroll 22s linear infinite;
+    white-space: nowrap;
+    width: max-content;
+  }
+  .hand-foot-marquee-item {
+    font-family: 'Anton', Impact, sans-serif;
+    font-size: 13px;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: #333;
+    padding: 0 32px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .hand-foot-marquee-item .dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: #e91e8c;
+    flex-shrink: 0;
+  }
+  @keyframes hand-foot-scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  /* ===== BIG WORDMARK ===== */
+  .hand-foot-wordmark {
+    text-align: center;
+    padding: 48px 32px 32px;
+    overflow: hidden;
+  }
+  .hand-foot-wordmark-text {
+    font-family: 'Anton', Impact, sans-serif;
+    font-size: clamp(48px, 12vw, 180px);
+    text-transform: uppercase;
+    letter-spacing: -.02em;
+    line-height: .85;
+    color: transparent;
+    -webkit-text-stroke: 1px #222;
+    user-select: none;
+    transition: -webkit-text-stroke-color .4s;
+  }
+  .hand-foot-wordmark:hover .hand-foot-wordmark-text {
+    -webkit-text-stroke-color: #e91e8c;
+  }
+
+  /* ===== BOTTOM BAR ===== */
+  .hand-foot-bottom {
+    border-top: 1px solid #1a1a1a;
+    padding: 20px 32px 28px;
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .hand-foot-bottom-copy {
+    font-family: var(--mono, 'Courier New', monospace);
+    font-size: 10px;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: #444;
+  }
+  .hand-foot-bottom-links {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  .hand-foot-bottom-links a {
+    font-family: var(--mono, 'Courier New', monospace);
+    font-size: 10px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: #444;
+    text-decoration: none;
+    transition: color .2s;
+  }
+  .hand-foot-bottom-links a:hover { color: #fff; }
+  .hand-foot-bottom-made {
+    font-family: var(--mono, 'Courier New', monospace);
+    font-size: 10px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: #333;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .hand-foot-bottom-made .hnd {
+    color: #e91e8c;
+    font-size: 14px;
+  }
+
+  /* Responsive */
+  @media (max-width: 1100px) {
+    .hand-foot-body { grid-template-columns: 1.4fr 1fr 1fr; }
+    .hand-foot-brand { grid-column: span 3; }
+  }
+  @media (max-width: 820px) {
+    .hand-foot-nl { grid-template-columns: 1fr; gap: 28px; padding: 40px 20px; }
+    .hand-foot-body { grid-template-columns: 1fr 1fr; gap: 36px; padding: 48px 20px 40px; }
+    .hand-foot-brand { grid-column: span 2; }
+    .hand-foot-bottom { padding: 20px; }
+  }
+  @media (max-width: 520px) {
+    .hand-foot-body { grid-template-columns: 1fr; }
+    .hand-foot-brand { grid-column: span 1; }
+    .hand-foot-bottom { flex-direction: column; align-items: flex-start; }
+    .hand-foot-wordmark-text { font-size: 48px; }
+  }
+</style>
+
+<footer class="hand-footer" role="contentinfo">
+
+  <!-- Newsletter Band -->
+  <div class="hand-foot-nl">
+    <div class="hand-foot-nl-left">
+      <div class="hand-foot-nl-tag">Stay In The Loop</div>
+      <h2 class="hand-foot-nl-title">Be First<br>To Know.</h2>
+      <p class="hand-foot-nl-sub">Drops, archive reissues &amp; Camden-only releases</p>
+    </div>
     <div>
-      <div class="logo" style="color:var(--bg);font-size:20px">
-        <span class="smiley"><i></i></span> {{ shop.name }}
+      {%- form 'customer', id: 'footerNewsletterForm' -%}
+        <input type="hidden" name="contact[tags]" value="newsletter">
+        <div class="hand-foot-nl-form">
+          <input type="email" name="contact[email]" placeholder="Your email address" required aria-label="Email address">
+          <button type="submit">Subscribe &rarr;</button>
+        </div>
+        <p class="hand-foot-nl-note">No spam, ever. Unsubscribe anytime.</p>
+      {%- endform -%}
+    </div>
+  </div>
+
+  <!-- Main Footer Grid -->
+  <div class="hand-foot-body">
+
+    <!-- Brand Column -->
+    <div class="hand-foot-brand">
+      <div class="hand-foot-brand-logo">Have A Nice Day&reg;</div>
+      <span class="hand-foot-brand-sub">London &mdash; Est. Camden 1990</span>
+      <p class="hand-foot-brand-desc">{{ section.settings.about | default: 'The urban fashion legend. Born Camden 1990. Organic cotton. UK printed. Home of Sam The Man, Shurl The Girl &amp; 9 independent sub-brands.' }}</p>
+
+      <!-- Social Icons -->
+      <div class="hand-foot-socials">
+        <a class="hand-foot-social" href="https://instagram.com/haveanicedaylondon" target="_blank" rel="noopener" aria-label="Instagram">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+        </a>
+        <a class="hand-foot-social" href="https://tiktok.com/@haveanicedaylondon" target="_blank" rel="noopener" aria-label="TikTok">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.76a4.85 4.85 0 01-1.01-.07z"/></svg>
+        </a>
+        <a class="hand-foot-social" href="https://twitter.com/haveaniceday" target="_blank" rel="noopener" aria-label="Twitter/X">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        </a>
+        <a class="hand-foot-social" href="https://facebook.com/haveanicedaylondon" target="_blank" rel="noopener" aria-label="Facebook">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+        </a>
+        <a class="hand-foot-social" href="mailto:hello@haveanicedaylondon.com" aria-label="Email">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        </a>
       </div>
-      <p class="blurb">{{ section.settings.about | default: 'The urban fashion legend. Born Camden 1990. The home of Sam The Man, Shurl The Girl & 9 independent sub-brands. London.' }}</p>
-      <div class="socials">
-        {%- if settings.social_facebook != blank -%}<a href="{{ settings.social_facebook }}" aria-label="Facebook" target="_blank" rel="noopener">FB</a>{%- endif -%}
-        {%- if settings.social_instagram != blank -%}<a href="{{ settings.social_instagram }}" aria-label="Instagram" target="_blank" rel="noopener">IG</a>{%- endif -%}
+
+      <!-- Trust badges -->
+      <div class="hand-foot-trust">
+        <div class="hand-foot-trust-item">Organic Cotton — Certified</div>
+        <div class="hand-foot-trust-item">UK Printed — Every Piece</div>
+        <div class="hand-foot-trust-item">Free UK Shipping Over &pound;75</div>
+        <div class="hand-foot-trust-item">30-Day Returns</div>
       </div>
     </div>
 
-    {%- for block in section.blocks -%}
-      {%- if block.type == 'menu' -%}
-        <div {{ block.shopify_attributes }}>
-          <h5>{{ block.settings.heading | escape }}</h5>
-          <ul>
-            {%- for link in linklists[block.settings.menu].links -%}
-              <li><a href="{{ link.url }}">{{ link.title }}</a></li>
-            {%- endfor -%}
-          </ul>
-        </div>
-      {%- endif -%}
-    {%- endfor -%}
+    <!-- Shop Column -->
+    <div class="hand-foot-col">
+      <div class="hand-foot-col-head">Shop</div>
+      <ul>
+        <li><a href="/collections/all">All Merchandise</a></li>
+        <li><a href="/collections/t-shirts">T-Shirts</a></li>
+        <li><a href="/collections/sweatshirts">Sweatshirts</a></li>
+        <li><a href="/collections/hoodies">Hoodies</a></li>
+        <li><a href="/collections/accessories">Accessories</a></li>
+        <li><a href="/collections/new-arrivals">New Arrivals</a></li>
+      </ul>
+    </div>
+
+    <!-- The House Column -->
+    <div class="hand-foot-col">
+      <div class="hand-foot-col-head">The House</div>
+      <ul>
+        <li><a href="/pages/about-us">About Us</a></li>
+        <li><a href="/pages/contact">Contact</a></li>
+        <li><a href="/pages/wholesale">Wholesale</a></li>
+        <li><a href="/pages/press">Press</a></li>
+        <li><a href="/pages/licensing">Licensing</a></li>
+      </ul>
+    </div>
+
+    <!-- Help Column -->
+    <div class="hand-foot-col">
+      <div class="hand-foot-col-head">Help</div>
+      <ul>
+        <li><a href="/policies/shipping-policy">Shipping Info</a></li>
+        <li><a href="/policies/refund-policy">Returns &amp; Exchanges</a></li>
+        <li><a href="/policies/privacy-policy">Privacy Policy</a></li>
+        <li><a href="/policies/terms-of-service">Terms of Service</a></li>
+        {%- if customer -%}
+          <li><a href="{{ routes.account_url }}">My Account</a></li>
+          <li><a href="{{ routes.account_logout_url }}">Log Out</a></li>
+        {%- else -%}
+          <li><a href="{{ routes.account_login_url }}">Log In</a></li>
+          <li><a href="{{ routes.account_register_url }}">Create Account</a></li>
+        {%- endif -%}
+      </ul>
+    </div>
+
   </div>
 
-  <div class="mega-logo">{{ shop.name | upcase }} ☻</div>
-
-  <div class="footer-bottom">
-    <span>© {{ 'now' | date: '%Y' }} {{ shop.name }}. All rights reserved.</span>
-    <span>Powered by The Architects ☻</span>
+  <!-- Scrolling Marquee -->
+  <div class="hand-foot-marquee-wrap" aria-hidden="true">
+    <div class="hand-foot-marquee">
+      {%- for i in (1..8) -%}
+        <div class="hand-foot-marquee-item">Have A Nice Day&reg; <span class="dot"></span></div>
+        <div class="hand-foot-marquee-item">Camden 1990 <span class="dot"></span></div>
+        <div class="hand-foot-marquee-item">Organic Cotton <span class="dot"></span></div>
+        <div class="hand-foot-marquee-item">UK Printed <span class="dot"></span></div>
+        <div class="hand-foot-marquee-item">Sam The Man <span class="dot"></span></div>
+        <div class="hand-foot-marquee-item">Shurl The Girl <span class="dot"></span></div>
+      {%- endfor -%}
+    </div>
   </div>
+
+  <!-- Big Wordmark -->
+  <div class="hand-foot-wordmark" aria-hidden="true">
+    <div class="hand-foot-wordmark-text">Have A Nice Day ☻</div>
+  </div>
+
+  <!-- Bottom Bar -->
+  <div class="hand-foot-bottom">
+    <span class="hand-foot-bottom-copy">&copy; {{ 'now' | date: '%Y' }} {{ shop.name }}. All rights reserved.</span>
+    <div class="hand-foot-bottom-links">
+      <a href="/policies/privacy-policy">Privacy</a>
+      <a href="/policies/terms-of-service">Terms</a>
+      <a href="/policies/refund-policy">Returns</a>
+      <a href="/policies/shipping-policy">Shipping</a>
+      <a href="/pages/contact">Contact</a>
+    </div>
+    <div class="hand-foot-bottom-made">
+      Made with <span class="hnd">&#9829;</span> in Camden
+    </div>
+  </div>
+
 </footer>
 
 {% schema %}
@@ -40,28 +493,8 @@
     {
       "type": "textarea",
       "id": "about",
-      "label": "About blurb",
-      "default": "The urban fashion legend. Born Camden 1990."
-    }
-  ],
-  "blocks": [
-    {
-      "type": "menu",
-      "name": "Menu",
-      "settings": [
-        { "type": "text", "id": "heading", "label": "Heading", "default": "Shop" },
-        { "type": "link_list", "id": "menu", "label": "Menu", "default": "footer" }
-      ]
-    }
-  ],
-  "presets": [
-    {
-      "name": "Footer",
-      "blocks": [
-        { "type": "menu", "settings": { "heading": "Shop", "menu": "footer" } },
-        { "type": "menu", "settings": { "heading": "The House", "menu": "footer" } },
-        { "type": "menu", "settings": { "heading": "Account", "menu": "footer" } }
-      ]
+      "label": "Brand description",
+      "default": "The urban fashion legend. Born Camden 1990. Organic cotton. UK printed. Home of Sam The Man, Shurl The Girl & 9 independent sub-brands."
     }
   ]
 }
