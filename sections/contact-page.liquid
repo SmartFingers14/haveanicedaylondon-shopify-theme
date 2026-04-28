@@ -1,0 +1,478 @@
+<!-- HAVE A NICE DAY — Contact Page Section -->
+<style>
+  .hand-contact {
+    background: #f4f1ea;
+    min-height: 80vh;
+  }
+
+  /* ===== HERO STRIP ===== */
+  .hand-contact-hero {
+    background: var(--ink, #1a1a1a);
+    color: #fff;
+    padding: 80px 28px 72px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hand-contact-hero::before {
+    content: 'CONTACT';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'Anton', Impact, sans-serif;
+    font-size: clamp(80px, 18vw, 220px);
+    letter-spacing: -.02em;
+    color: rgba(255,255,255,.04);
+    white-space: nowrap;
+    pointer-events: none;
+    user-select: none;
+  }
+  .hand-contact-hero-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--mono, 'Courier New', monospace);
+    font-size: 10px;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    color: #e91e8c;
+    margin-bottom: 20px;
+  }
+  .hand-contact-hero-tag::before,
+  .hand-contact-hero-tag::after {
+    content: '';
+    display: block;
+    width: 32px;
+    height: 1px;
+    background: #e91e8c;
+  }
+  .hand-contact-hero h1 {
+    font-family: 'Anton', Impact, sans-serif;
+    font-size: clamp(36px, 6vw, 72px);
+    text-transform: uppercase;
+    letter-spacing: .01em;
+    line-height: 1;
+    margin: 0 0 16px;
+    color: #fff;
+  }
+  .hand-contact-hero p {
+    font-family: var(--mono, 'Courier New', monospace);
+    font-size: 12px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,.5);
+    margin: 0;
+  }
+
+  /* ===== MAIN GRID ===== */
+  .hand-contact-body {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 80px 28px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+
+  /* ===== LEFT: INFO ===== */
+  .hand-contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+  }
+  .hand-contact-info-block {}
+  .hand-contact-info-label {
+    font-family: var(--mono, 'Courier New', monospace);
+    font-size: 9px;
+    letter-spacing: .28em;
+    text-transform: uppercase;
+    color: #e91e8c;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .hand-contact-info-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: rgba(0,0,0,.1);
+  }
+  .hand-contact-info-title {
+    font-family: 'Anton', Impact, sans-serif;
+    font-size: 28px;
+    text-transform: uppercase;
+    letter-spacing: .01em;
+    color: var(--ink, #1a1a1a);
+    margin: 0 0 10px;
+    line-height: 1.1;
+  }
+  .hand-contact-info-text {
+    font-family: var(--body, sans-serif);
+    font-size: 15px;
+    line-height: 1.7;
+    color: #555;
+    margin: 0;
+  }
+  .hand-contact-info-text a {
+    color: var(--ink, #1a1a1a);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    transition: color .2s;
+  }
+  .hand-contact-info-text a:hover { color: #e91e8c; }
+
+  /* Info cards row */
+  .hand-contact-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .hand-contact-card {
+    background: var(--ink, #1a1a1a);
+    color: #fff;
+    padding: 24px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .hand-contact-card-icon {
+    font-size: 20px;
+    margin-bottom: 4px;
+  }
+  .hand-contact-card-label {
+    font-family: var(--mono, 'Courier New', monospace);
+    font-size: 9px;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    color: #e91e8c;
+  }
+  .hand-contact-card-value {
+    font-family: var(--mono, 'Courier New', monospace);
+    font-size: 11px;
+    letter-spacing: .1em;
+    color: #fff;
+    line-height: 1.5;
+  }
+
+  /* Social row */
+  .hand-contact-socials {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .hand-contact-social {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    border: 1px solid rgba(0,0,0,.15);
+    font-family: var(--mono, 'Courier New', monospace);
+    font-size: 10px;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: var(--ink, #1a1a1a);
+    text-decoration: none;
+    transition: background .2s, color .2s, border-color .2s;
+  }
+  .hand-contact-social:hover {
+    background: var(--ink, #1a1a1a);
+    color: #fff;
+    border-color: var(--ink, #1a1a1a);
+  }
+
+  /* ===== RIGHT: FORM ===== */
+  .hand-contact-form-wrap {}
+  .hand-contact-form-head {
+    margin-bottom: 32px;
+  }
+  .hand-contact-form-head h2 {
+    font-family: 'Anton', Impact, sans-serif;
+    font-size: 32px;
+    text-transform: uppercase;
+    letter-spacing: .01em;
+    color: var(--ink, #1a1a1a);
+    margin: 0 0 8px;
+    line-height: 1;
+  }
+  .hand-contact-form-head p {
+    font-family: var(--mono, 'Courier New', monospace);
+    font-size: 10px;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: #999;
+    margin: 0;
+  }
+
+  .hand-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .hand-form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .hand-form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .hand-form-label {
+    font-family: var(--mono, 'Courier New', monospace);
+    font-size: 9px;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    color: #888;
+  }
+  .hand-form-input,
+  .hand-form-select,
+  .hand-form-textarea {
+    width: 100%;
+    padding: 14px 16px;
+    background: #fff;
+    border: 1px solid rgba(0,0,0,.15);
+    font-family: var(--body, sans-serif);
+    font-size: 14px;
+    color: var(--ink, #1a1a1a);
+    outline: none;
+    transition: border-color .2s;
+    box-sizing: border-box;
+    -webkit-appearance: none;
+    border-radius: 0;
+  }
+  .hand-form-input:focus,
+  .hand-form-select:focus,
+  .hand-form-textarea:focus {
+    border-color: var(--ink, #1a1a1a);
+  }
+  .hand-form-input::placeholder,
+  .hand-form-textarea::placeholder {
+    color: #bbb;
+  }
+  .hand-form-textarea {
+    resize: vertical;
+    min-height: 140px;
+  }
+  .hand-form-select {
+    cursor: pointer;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%231a1a1a' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 16px center;
+    padding-right: 40px;
+  }
+  .hand-form-submit {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 16px 32px;
+    background: var(--ink, #1a1a1a);
+    color: #fff;
+    font-family: var(--mono, 'Courier New', monospace);
+    font-size: 11px;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
+    transition: background .2s;
+    width: 100%;
+  }
+  .hand-form-submit:hover { background: #e91e8c; }
+  .hand-form-submit svg { transition: transform .2s; }
+  .hand-form-submit:hover svg { transform: translateX(4px); }
+  .hand-form-note {
+    font-family: var(--mono, 'Courier New', monospace);
+    font-size: 9px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: #bbb;
+    text-align: center;
+    margin-top: -8px;
+  }
+
+  /* ===== BOTTOM STRIP ===== */
+  .hand-contact-strip {
+    background: var(--ink, #1a1a1a);
+    padding: 48px 28px;
+    text-align: center;
+  }
+  .hand-contact-strip p {
+    font-family: var(--mono, 'Courier New', monospace);
+    font-size: 11px;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,.4);
+    margin: 0;
+  }
+  .hand-contact-strip strong {
+    color: #fff;
+  }
+
+  /* Responsive */
+  @media (max-width: 860px) {
+    .hand-contact-body {
+      grid-template-columns: 1fr;
+      gap: 48px;
+      padding: 48px 20px;
+    }
+    .hand-contact-cards { grid-template-columns: 1fr 1fr; }
+    .hand-form-row { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 480px) {
+    .hand-contact-hero { padding: 56px 20px 48px; }
+    .hand-contact-cards { grid-template-columns: 1fr; }
+  }
+</style>
+
+<div class="hand-contact">
+
+  <!-- Hero -->
+  <div class="hand-contact-hero">
+    <div class="hand-contact-hero-tag">Get In Touch</div>
+    <h1>Say Hello.</h1>
+    <p>We're based in Camden, London &mdash; and we'd love to hear from you</p>
+  </div>
+
+  <!-- Body -->
+  <div class="hand-contact-body">
+
+    <!-- Left: Info -->
+    <div class="hand-contact-info">
+
+      <div class="hand-contact-info-block">
+        <div class="hand-contact-info-label">About Us</div>
+        <h2 class="hand-contact-info-title">Born in Camden.<br>Made for Everyone.</h2>
+        <p class="hand-contact-info-text">
+          Have A Nice Day® has been part of Camden's creative scene since 1990. We make organic cotton clothing, printed right here in the UK. Whether you've got a question about an order, a wholesale enquiry, or just want to say hi — we're here.
+        </p>
+      </div>
+
+      <!-- Info cards -->
+      <div>
+        <div class="hand-contact-info-label">Find Us</div>
+        <div class="hand-contact-cards">
+          <div class="hand-contact-card">
+            <div class="hand-contact-card-icon">📍</div>
+            <div class="hand-contact-card-label">Address</div>
+            <div class="hand-contact-card-value">Camden Market<br>London, NW1</div>
+          </div>
+          <div class="hand-contact-card">
+            <div class="hand-contact-card-icon">🕐</div>
+            <div class="hand-contact-card-label">Hours</div>
+            <div class="hand-contact-card-value">Mon–Sun<br>10am – 6pm</div>
+          </div>
+          <div class="hand-contact-card">
+            <div class="hand-contact-card-icon">✉️</div>
+            <div class="hand-contact-card-label">Email</div>
+            <div class="hand-contact-card-value"><a href="mailto:hello@haveaniceday.com" style="color:#e91e8c;text-decoration:none;">hello@haveaniceday.com</a></div>
+          </div>
+          <div class="hand-contact-card">
+            <div class="hand-contact-card-icon">⚡</div>
+            <div class="hand-contact-card-label">Response</div>
+            <div class="hand-contact-card-value">Within<br>24 hours</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Socials -->
+      <div>
+        <div class="hand-contact-info-label">Follow Us</div>
+        <div class="hand-contact-socials">
+          <a class="hand-contact-social" href="https://instagram.com/haveanicedaylondon" target="_blank" rel="noopener">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+            Instagram
+          </a>
+          <a class="hand-contact-social" href="https://tiktok.com/@haveanicedaylondon" target="_blank" rel="noopener">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.76a4.85 4.85 0 01-1.01-.07z"/></svg>
+            TikTok
+          </a>
+          <a class="hand-contact-social" href="https://twitter.com/haveaniceday" target="_blank" rel="noopener">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            Twitter / X
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Right: Form -->
+    <div class="hand-contact-form-wrap">
+      <div class="hand-contact-form-head">
+        <div class="hand-contact-info-label">Send A Message</div>
+        <h2>Drop Us A Line</h2>
+        <p>We reply within 24 hours, usually much faster</p>
+      </div>
+
+      {%- form 'contact', id: 'hand-contact-form' -%}
+        {%- if form.posted_successfully? -%}
+          <div style="background:var(--ink,#1a1a1a);color:#fff;padding:24px;text-align:center;margin-bottom:24px;">
+            <div style="font-family:var(--mono,'Courier New',monospace);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#e91e8c;margin-bottom:8px;">Message Sent</div>
+            <div style="font-family:'Anton',Impact,sans-serif;font-size:22px;text-transform:uppercase;">Thanks! We'll be in touch soon.</div>
+          </div>
+        {%- endif -%}
+
+        <div class="hand-form">
+          <div class="hand-form-row">
+            <div class="hand-form-group">
+              <label class="hand-form-label" for="ContactFormName">First Name *</label>
+              <input class="hand-form-input" type="text" id="ContactFormName" name="contact[first_name]" placeholder="Your first name" required>
+            </div>
+            <div class="hand-form-group">
+              <label class="hand-form-label" for="ContactFormLastName">Last Name</label>
+              <input class="hand-form-input" type="text" id="ContactFormLastName" name="contact[last_name]" placeholder="Your last name">
+            </div>
+          </div>
+
+          <div class="hand-form-group">
+            <label class="hand-form-label" for="ContactFormEmail">Email Address *</label>
+            <input class="hand-form-input" type="email" id="ContactFormEmail" name="contact[email]" placeholder="your@email.com" required value="{{ form.email }}">
+          </div>
+
+          <div class="hand-form-group">
+            <label class="hand-form-label" for="ContactFormSubject">Subject</label>
+            <select class="hand-form-select" id="ContactFormSubject" name="contact[subject]">
+              <option value="">Select a topic...</option>
+              <option value="Order Enquiry">Order Enquiry</option>
+              <option value="Returns & Exchanges">Returns &amp; Exchanges</option>
+              <option value="Wholesale">Wholesale</option>
+              <option value="Press & Collaborations">Press &amp; Collaborations</option>
+              <option value="General">General</option>
+            </select>
+          </div>
+
+          <div class="hand-form-group">
+            <label class="hand-form-label" for="ContactFormMessage">Message *</label>
+            <textarea class="hand-form-textarea" id="ContactFormMessage" name="contact[body]" placeholder="Tell us what's on your mind..." required>{{ form.body }}</textarea>
+          </div>
+
+          <button type="submit" class="hand-form-submit">
+            Send Message
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+            </svg>
+          </button>
+          <p class="hand-form-note">We respect your privacy &mdash; no spam, ever.</p>
+        </div>
+      {%- endform -%}
+    </div>
+
+  </div>
+
+  <!-- Bottom strip -->
+  <div class="hand-contact-strip">
+    <p><strong>Have A Nice Day&reg;</strong> &mdash; Camden, London &mdash; Est. 1990 &mdash; Organic Cotton &mdash; UK Printed</p>
+  </div>
+
+</div>
+
+{% schema %}
+{
+  "name": "Contact Page",
+  "settings": []
+}
+{% endschema %}
