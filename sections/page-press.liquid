@@ -1,0 +1,220 @@
+{% comment %}Press Page{% endcomment %}
+<style>
+.hand-press-hero {
+  background: var(--ink, #1a1a1a);
+  color: #fff;
+  padding: 80px 32px 60px;
+  text-align: center;
+}
+.hand-press-eyebrow {
+  font-family: var(--mono, monospace);
+  font-size: 10px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: #e91e8c;
+  margin-bottom: 16px;
+}
+.hand-press-hero h1 {
+  font-family: 'Anton', Impact, sans-serif;
+  font-size: clamp(48px, 8vw, 112px);
+  text-transform: uppercase;
+  letter-spacing: -.02em;
+  line-height: .9;
+  margin: 0 0 20px;
+}
+.hand-press-hero p {
+  font-family: var(--mono, monospace);
+  font-size: 13px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.5);
+  margin: 0;
+}
+.hand-press-body {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 72px 32px 80px;
+}
+.hand-press-intro {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  margin-bottom: 72px;
+  align-items: start;
+}
+@media (max-width: 768px) { .hand-press-intro { grid-template-columns: 1fr; gap: 32px; } }
+
+.hand-press-intro-eyebrow {
+  font-family: var(--mono, monospace);
+  font-size: 9px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: #e91e8c;
+  margin-bottom: 12px;
+}
+.hand-press-intro h2 {
+  font-family: 'Anton', Impact, sans-serif;
+  font-size: clamp(28px, 4vw, 48px);
+  text-transform: uppercase;
+  letter-spacing: -.02em;
+  line-height: 1;
+  margin: 0 0 20px;
+}
+.hand-press-intro p {
+  font-family: var(--body, sans-serif);
+  font-size: 15px;
+  line-height: 1.75;
+  color: #555;
+  margin: 0 0 16px;
+}
+.hand-press-contact-box {
+  background: #e91e8c;
+  padding: 36px;
+  color: #fff;
+}
+.hand-press-contact-box h3 {
+  font-family: 'Anton', Impact, sans-serif;
+  font-size: 24px;
+  text-transform: uppercase;
+  margin: 0 0 16px;
+}
+.hand-press-contact-box p {
+  font-family: var(--mono, monospace);
+  font-size: 10px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.75);
+  margin: 0 0 20px;
+}
+.hand-press-contact-box a {
+  display: block;
+  color: #fff;
+  font-family: var(--mono, monospace);
+  font-size: 13px;
+  letter-spacing: .1em;
+  text-decoration: none;
+  margin-bottom: 8px;
+  transition: opacity .2s;
+}
+.hand-press-contact-box a:hover { opacity: .7; }
+
+.hand-press-assets-head {
+  font-family: var(--mono, monospace);
+  font-size: 9px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: #e91e8c;
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.hand-press-assets-head::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: rgba(0,0,0,.1);
+}
+.hand-press-assets-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 48px;
+}
+@media (max-width: 600px) { .hand-press-assets-grid { grid-template-columns: 1fr 1fr; } }
+
+.hand-press-asset {
+  background: #fff;
+  border: 1px solid rgba(0,0,0,.08);
+  padding: 24px;
+  text-align: center;
+}
+.hand-press-asset-icon {
+  font-size: 32px;
+  margin-bottom: 12px;
+}
+.hand-press-asset h4 {
+  font-family: 'Anton', Impact, sans-serif;
+  font-size: 14px;
+  text-transform: uppercase;
+  margin: 0 0 6px;
+}
+.hand-press-asset p {
+  font-family: var(--mono, monospace);
+  font-size: 9px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: #888;
+  margin: 0 0 16px;
+}
+.hand-press-asset a {
+  font-family: var(--mono, monospace);
+  font-size: 9px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: #e91e8c;
+  text-decoration: none;
+  border-bottom: 1px solid #e91e8c;
+  padding-bottom: 2px;
+}
+</style>
+
+<!-- HERO -->
+<div class="hand-press-hero">
+  <div class="hand-press-eyebrow">Media / Press</div>
+  <h1>Press<br>Room.</h1>
+  <p>Media enquiries, press assets &amp; brand information</p>
+</div>
+
+<!-- BODY -->
+<div class="hand-press-body">
+
+  <!-- Intro + Contact -->
+  <div class="hand-press-intro">
+    <div>
+      <div class="hand-press-intro-eyebrow">The Story</div>
+      <h2>30+ Years of<br>Camden Culture.</h2>
+      <p>Have A Nice Day is one of London's most enduring streetwear brands. Founded in Camden in 1990, the label grew from a market stall into a cult institution — home to nine sub-brands, dozens of original characters, and a loyal community spanning generations.</p>
+      <p>After 17 years off the shelves, the original archive is back. Reissued on heavyweight organic cotton, printed in the UK, with the same hand-drawn energy that made it iconic.</p>
+      <p>For interviews, features, product loans, lookbook imagery or brand assets, contact our press team below.</p>
+    </div>
+    <div class="hand-press-contact-box">
+      <h3>Press Contact</h3>
+      <p>For all media enquiries</p>
+      <a href="mailto:press@haveanicedaylondon.com">press@haveanicedaylondon.com</a>
+      <a href="https://instagram.com/haveanicedaylondon" target="_blank" rel="noopener">@haveanicedaylondon</a>
+    </div>
+  </div>
+
+  <!-- Press Assets -->
+  <div class="hand-press-assets-head">Press Assets</div>
+  <div class="hand-press-assets-grid">
+    <div class="hand-press-asset">
+      <div class="hand-press-asset-icon">🖼️</div>
+      <h4>Logo Pack</h4>
+      <p>SVG, PNG, EPS formats</p>
+      <a href="mailto:press@haveanicedaylondon.com?subject=Logo Pack Request">Request →</a>
+    </div>
+    <div class="hand-press-asset">
+      <div class="hand-press-asset-icon">📸</div>
+      <h4>Product Images</h4>
+      <p>Hi-res product photography</p>
+      <a href="mailto:press@haveanicedaylondon.com?subject=Product Images Request">Request →</a>
+    </div>
+    <div class="hand-press-asset">
+      <div class="hand-press-asset-icon">📄</div>
+      <h4>Brand Story</h4>
+      <p>Full press kit &amp; history</p>
+      <a href="mailto:press@haveanicedaylondon.com?subject=Press Kit Request">Request →</a>
+    </div>
+  </div>
+
+</div>
+
+{% schema %}
+{
+  "name": "Press",
+  "settings": [],
+  "presets": [{ "name": "Press" }]
+}
+{% endschema %}

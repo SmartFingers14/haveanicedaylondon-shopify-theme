@@ -1,0 +1,213 @@
+{% comment %}Licensing Page{% endcomment %}
+<style>
+.hand-lic-hero {
+  background: var(--ink, #1a1a1a);
+  color: #fff;
+  padding: 80px 32px 60px;
+  text-align: center;
+}
+.hand-lic-eyebrow {
+  font-family: var(--mono, monospace);
+  font-size: 10px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: #e91e8c;
+  margin-bottom: 16px;
+}
+.hand-lic-hero h1 {
+  font-family: 'Anton', Impact, sans-serif;
+  font-size: clamp(48px, 8vw, 112px);
+  text-transform: uppercase;
+  letter-spacing: -.02em;
+  line-height: .9;
+  margin: 0 0 20px;
+}
+.hand-lic-hero p {
+  font-family: var(--mono, monospace);
+  font-size: 13px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.5);
+  margin: 0;
+}
+.hand-lic-body {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 72px 32px 80px;
+}
+.hand-lic-intro {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 60px;
+  margin-bottom: 72px;
+  align-items: start;
+}
+@media (max-width: 768px) { .hand-lic-intro { grid-template-columns: 1fr; gap: 32px; } }
+
+.hand-lic-intro-eyebrow {
+  font-family: var(--mono, monospace);
+  font-size: 9px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: #e91e8c;
+  margin-bottom: 12px;
+}
+.hand-lic-intro h2 {
+  font-family: 'Anton', Impact, sans-serif;
+  font-size: clamp(28px, 4vw, 48px);
+  text-transform: uppercase;
+  letter-spacing: -.02em;
+  line-height: 1;
+  margin: 0 0 20px;
+}
+.hand-lic-intro p {
+  font-family: var(--body, sans-serif);
+  font-size: 15px;
+  line-height: 1.75;
+  color: #555;
+  margin: 0 0 16px;
+}
+.hand-lic-contact-box {
+  background: var(--ink, #1a1a1a);
+  padding: 36px;
+  color: #fff;
+}
+.hand-lic-contact-box h3 {
+  font-family: 'Anton', Impact, sans-serif;
+  font-size: 24px;
+  text-transform: uppercase;
+  margin: 0 0 16px;
+  color: #e91e8c;
+}
+.hand-lic-contact-box p {
+  font-family: var(--mono, monospace);
+  font-size: 10px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.5);
+  margin: 0 0 20px;
+}
+.hand-lic-contact-box a {
+  display: block;
+  color: #fff;
+  font-family: var(--mono, monospace);
+  font-size: 13px;
+  letter-spacing: .1em;
+  text-decoration: none;
+  margin-bottom: 8px;
+  transition: color .2s;
+}
+.hand-lic-contact-box a:hover { color: #e91e8c; }
+
+.hand-lic-types-head {
+  font-family: var(--mono, monospace);
+  font-size: 9px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: #e91e8c;
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.hand-lic-types-head::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: rgba(0,0,0,.1);
+}
+.hand-lic-types-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+@media (max-width: 600px) { .hand-lic-types-grid { grid-template-columns: 1fr; } }
+
+.hand-lic-type {
+  background: #fff;
+  border: 1px solid rgba(0,0,0,.08);
+  padding: 28px;
+}
+.hand-lic-type-num {
+  font-family: var(--mono, monospace);
+  font-size: 9px;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: #e91e8c;
+  margin-bottom: 10px;
+}
+.hand-lic-type h4 {
+  font-family: 'Anton', Impact, sans-serif;
+  font-size: 20px;
+  text-transform: uppercase;
+  margin: 0 0 10px;
+}
+.hand-lic-type p {
+  font-family: var(--body, sans-serif);
+  font-size: 14px;
+  line-height: 1.65;
+  color: #666;
+  margin: 0;
+}
+</style>
+
+<!-- HERO -->
+<div class="hand-lic-hero">
+  <div class="hand-lic-eyebrow">IP / Licensing</div>
+  <h1>Licensing<br>Enquiries.</h1>
+  <p>Use our characters, artwork &amp; brand IP in your products</p>
+</div>
+
+<!-- BODY -->
+<div class="hand-lic-body">
+
+  <!-- Intro + Contact -->
+  <div class="hand-lic-intro">
+    <div>
+      <div class="hand-lic-intro-eyebrow">Our IP</div>
+      <h2>30 Years of<br>Original Artwork.</h2>
+      <p>Have A Nice Day owns an extensive archive of original hand-drawn characters and artwork — Sam The Man, Shurl The Girl, Dready, BTKA, Vortex, Funky Dog, Don't Do The Dodo and more.</p>
+      <p>We license our IP for use on apparel, accessories, homewares, print, digital media and more. All licensing is handled directly by our team.</p>
+      <p>We consider all enquiries — from small independent makers to large-scale commercial partnerships. Get in touch to discuss your project.</p>
+    </div>
+    <div class="hand-lic-contact-box">
+      <h3>Licensing Contact</h3>
+      <p>For all IP &amp; licensing enquiries</p>
+      <a href="mailto:licensing@haveanicedaylondon.com">licensing@haveanicedaylondon.com</a>
+    </div>
+  </div>
+
+  <!-- Licensing Types -->
+  <div class="hand-lic-types-head">Licensing Categories</div>
+  <div class="hand-lic-types-grid">
+    <div class="hand-lic-type">
+      <div class="hand-lic-type-num">01 / Apparel</div>
+      <h4>Clothing &amp; Accessories</h4>
+      <p>Use our characters on your own garments, bags, hats and accessories. Subject to territory and category exclusivity agreements.</p>
+    </div>
+    <div class="hand-lic-type">
+      <div class="hand-lic-type-num">02 / Print &amp; Publishing</div>
+      <h4>Books, Magazines &amp; Print</h4>
+      <p>Editorial use, book covers, magazine features and print media. Contact us for rates and usage terms.</p>
+    </div>
+    <div class="hand-lic-type">
+      <div class="hand-lic-type-num">03 / Digital &amp; NFT</div>
+      <h4>Digital Media &amp; Web3</h4>
+      <p>Digital artwork, animations, NFT collections and metaverse applications. We handle all digital licensing directly.</p>
+    </div>
+    <div class="hand-lic-type">
+      <div class="hand-lic-type-num">04 / Homewares &amp; Gifts</div>
+      <h4>Products &amp; Homewares</h4>
+      <p>Mugs, prints, posters, homeware and gift products. Minimum order quantities apply for physical product licensing.</p>
+    </div>
+  </div>
+
+</div>
+
+{% schema %}
+{
+  "name": "Licensing",
+  "settings": [],
+  "presets": [{ "name": "Licensing" }]
+}
+{% endschema %}
