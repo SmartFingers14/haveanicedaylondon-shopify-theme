@@ -13,7 +13,7 @@
         <div class="layer grid-bg"></div>
         <div class="layer img">
           {% if section.settings.image %}
-            <img src="{{ section.settings.image | img_url: '800x' }}" alt="{{ section.settings.image_alt | default: 'Sam The Man' }}" loading="lazy" />
+            <img src="{{ section.settings.image | image_url: width: 800 }}" alt="{{ section.settings.image_alt | default: 'Sam The Man' }}" loading="lazy" />
           {% else %}
             <img src="https://cdn.shopify.com/s/files/1/0737/7397/3795/files/Untitled_design_63.png?v=1761074463" alt="Sam The Man — original character" />
           {% endif %}

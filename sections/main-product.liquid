@@ -1,99 +1,850 @@
-<section style="padding:90px 24px">
-  <div class="container">
-    <div class="section-head">
-      <div>
-        <span class="eyebrow">{{ product.vendor | default: 'Have A Nice Day' }}</span>
-        <h2 class="h2 reveal">{{ product.title }}</h2>
+<style>
+  .hand-pdp {
+    max-width: var(--maxw);
+    margin: 0 auto;
+    padding: 48px 32px 80px;
+  }
+  .hand-pdp-breadcrumb {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: #888;
+    margin-bottom: 32px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .hand-pdp-breadcrumb a { color: #888; text-decoration: none; transition: color .2s; }
+  .hand-pdp-breadcrumb a:hover { color: var(--ink); }
+  .hand-pdp-breadcrumb span { opacity: .4; }
+
+  .hand-pdp-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: start;
+  }
+
+  /* Gallery */
+  .hand-pdp-gallery { position: sticky; top: 100px; }
+  .hand-pdp-main-img {
+    aspect-ratio: 3/4;
+    overflow: hidden;
+    background: var(--paper-2);
+    border: 1px solid rgba(0,0,0,.1);
+    position: relative;
+  }
+  .hand-pdp-main-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform .6s cubic-bezier(.2,.7,.2,1);
+    cursor: zoom-in;
+  }
+  .hand-pdp-main-img:hover img { transform: scale(1.04); }
+  .hand-pdp-thumbs {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 8px;
+    margin-top: 12px;
+  }
+  .hand-pdp-thumb {
+    aspect-ratio: 1/1;
+    overflow: hidden;
+    background: var(--paper-2);
+    border: 1.5px solid transparent;
+    cursor: pointer;
+    transition: border-color .2s;
+  }
+  .hand-pdp-thumb.active { border-color: var(--ink); }
+  .hand-pdp-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform .4s ease;
+  }
+  .hand-pdp-thumb:hover img { transform: scale(1.06); }
+
+  /* Info panel */
+  .hand-pdp-info { display: flex; flex-direction: column; gap: 0; }
+  .hand-pdp-vendor {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: #888;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .hand-pdp-vendor::before {
+    content: '';
+    width: 24px;
+    height: 1px;
+    background: #888;
+  }
+  .hand-pdp-title {
+    font-family: 'Anton', Impact, sans-serif;
+    font-size: clamp(32px, 4vw, 56px);
+    text-transform: uppercase;
+    line-height: .95;
+    letter-spacing: -.005em;
+    margin-bottom: 20px;
+  }
+  .hand-pdp-price-row {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    margin-bottom: 24px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid rgba(0,0,0,.1);
+  }
+  .hand-pdp-price {
+    font-family: var(--mono);
+    font-size: 26px;
+    letter-spacing: .02em;
+    color: var(--ink);
+  }
+  .hand-pdp-compare {
+    font-family: var(--mono);
+    font-size: 16px;
+    text-decoration: line-through;
+    color: #aaa;
+  }
+  .hand-pdp-save {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    background: var(--pink);
+    color: #fff;
+    padding: 4px 10px;
+  }
+
+  /* Options */
+  .hand-pdp-option { margin-bottom: 22px; }
+  .hand-pdp-option-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: #888;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .hand-pdp-option-label .selected-val {
+    color: var(--ink);
+    font-weight: 600;
+  }
+  .hand-pdp-sizes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .hand-size-btn {
+    min-width: 52px;
+    height: 44px;
+    padding: 0 14px;
+    border: 1.5px solid rgba(0,0,0,.2);
+    background: transparent;
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--ink);
+    cursor: pointer;
+    transition: border-color .2s, background .2s, color .2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .hand-size-btn:hover { border-color: var(--ink); }
+  .hand-size-btn.selected {
+    background: var(--ink);
+    border-color: var(--ink);
+    color: #fff;
+  }
+  .hand-size-btn.unavailable {
+    opacity: .35;
+    cursor: not-allowed;
+    text-decoration: line-through;
+  }
+
+  /* Size guide */
+  .hand-size-guide-link {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: #888;
+    text-decoration: underline;
+    cursor: pointer;
+    background: none;
+    border: 0;
+    padding: 0;
+    transition: color .2s;
+  }
+  .hand-size-guide-link:hover { color: var(--ink); }
+
+  /* Add to cart */
+  .hand-pdp-cta {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 10px;
+    margin-top: 24px;
+    margin-bottom: 20px;
+  }
+  .hand-pdp-qty {
+    display: flex;
+    align-items: center;
+    border: 1.5px solid rgba(0,0,0,.2);
+    height: 54px;
+  }
+  .hand-pdp-qty button {
+    width: 44px;
+    height: 100%;
+    font-size: 18px;
+    color: var(--ink);
+    background: none;
+    border: 0;
+    cursor: pointer;
+    transition: background .2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .hand-pdp-qty button:hover { background: rgba(0,0,0,.06); }
+  .hand-pdp-qty input {
+    width: 44px;
+    height: 100%;
+    text-align: center;
+    border: 0;
+    border-left: 1px solid rgba(0,0,0,.1);
+    border-right: 1px solid rgba(0,0,0,.1);
+    background: transparent;
+    font-family: var(--mono);
+    font-size: 14px;
+    color: var(--ink);
+    outline: none;
+  }
+  .hand-pdp-add-btn {
+    height: 54px;
+    background: var(--ink);
+    color: #fff;
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    font-weight: 600;
+    border: 0;
+    cursor: pointer;
+    transition: background .25s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+  }
+  .hand-pdp-add-btn:hover { background: var(--pink); }
+  .hand-pdp-add-btn:disabled { opacity: .5; cursor: not-allowed; }
+
+  /* Trust strip */
+  .hand-pdp-trust {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1px;
+    background: rgba(0,0,0,.1);
+    border: 1px solid rgba(0,0,0,.1);
+    margin-bottom: 24px;
+  }
+  .hand-pdp-trust-item {
+    background: var(--paper);
+    padding: 14px 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: #666;
+  }
+  .hand-pdp-trust-item .icon { font-size: 16px; }
+
+  /* Description */
+  .hand-pdp-desc-toggle {
+    border-top: 1px solid rgba(0,0,0,.1);
+    padding: 18px 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--ink);
+    background: none;
+    border-left: 0;
+    border-right: 0;
+    border-bottom: 0;
+    width: 100%;
+    text-align: left;
+    transition: color .2s;
+  }
+  .hand-pdp-desc-toggle:hover { color: var(--pink); }
+  .hand-pdp-desc-toggle .arr { transition: transform .3s; }
+  .hand-pdp-desc-toggle.open .arr { transform: rotate(180deg); }
+  .hand-pdp-desc-body {
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height .4s cubic-bezier(.22,1,.36,1);
+  }
+  .hand-pdp-desc-body.open { max-height: 600px; }
+  .hand-pdp-desc-body-inner {
+    padding: 0 0 20px;
+    font-size: 14.5px;
+    line-height: 1.7;
+    color: #444;
+  }
+  .hand-pdp-desc-body-inner p { margin-bottom: 12px; }
+
+  /* Related products */
+  .hand-pdp-related {
+    padding: 60px 32px 80px;
+    border-top: 1px solid rgba(0,0,0,.1);
+    background: var(--paper-2);
+  }
+  .hand-pdp-related-inner { max-width: var(--maxw); margin: 0 auto; }
+  .hand-pdp-related-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 32px;
+  }
+  .hand-pdp-related-head h2 {
+    font-family: 'Anton', Impact, sans-serif;
+    font-size: clamp(28px, 4vw, 48px);
+    text-transform: uppercase;
+    line-height: .95;
+  }
+  .hand-pdp-related-head a {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: #888;
+    text-decoration: none;
+    transition: color .2s;
+  }
+  .hand-pdp-related-head a:hover { color: var(--pink); }
+  .hand-pdp-related-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--ink);
+    border: 1px solid var(--ink);
+  }
+
+  @media (max-width: 1100px) {
+    .hand-pdp-related-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+  @media (max-width: 820px) {
+    .hand-pdp { padding: 32px 22px 60px; }
+    .hand-pdp-grid { grid-template-columns: 1fr; gap: 32px; }
+    .hand-pdp-gallery { position: static; }
+    .hand-pdp-related { padding: 40px 22px 60px; }
+    .hand-pdp-related-grid { grid-template-columns: repeat(2, 1fr); }
+    .hand-pdp-cta { grid-template-columns: auto 1fr; }
+  }
+  @media (max-width: 520px) {
+    .hand-pdp-related-grid { grid-template-columns: 1fr; }
+    .hand-pdp-thumbs { grid-template-columns: repeat(4, 1fr); }
+  }
+</style>
+
+<div class="hand-pdp">
+  <!-- Breadcrumb -->
+  <nav class="hand-pdp-breadcrumb" aria-label="Breadcrumb">
+    <a href="{{ routes.root_url }}">Home</a>
+    <span>/</span>
+    {%- if collection -%}
+      <a href="{{ collection.url }}">{{ collection.title }}</a>
+      <span>/</span>
+    {%- else -%}
+      <a href="{{ routes.all_products_collection_url }}">Shop</a>
+      <span>/</span>
+    {%- endif -%}
+    <span style="color:var(--ink)">{{ product.title | truncate: 40 }}</span>
+  </nav>
+
+  <div class="hand-pdp-grid">
+    <!-- Gallery -->
+    <div class="hand-pdp-gallery">
+      <div class="hand-pdp-main-img" id="pdpMainImg">
+        {%- if product.featured_image -%}
+          <img src="{{ product.featured_image | image_url: width: 1200 }}"
+               alt="{{ product.featured_image.alt | escape | default: product.title | escape }}"
+               id="pdpMainImgEl"
+               loading="eager"
+               width="1200" height="1600">
+        {%- else -%}
+          <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-family:'Anton',sans-serif;font-size:64px;color:rgba(0,0,0,.1)">☻</div>
+        {%- endif -%}
       </div>
+      {%- if product.images.size > 1 -%}
+        <div class="hand-pdp-thumbs">
+          {%- for img in product.images limit: 10 -%}
+            <div class="hand-pdp-thumb{% if forloop.first %} active{% endif %}"
+                 data-src="{{ img | image_url: width: 1200 }}"
+                 data-alt="{{ img.alt | escape | default: product.title | escape }}"
+                 onclick="pdpSetImg(this)">
+              <img src="{{ img | image_url: width: 200 }}"
+                   alt="{{ img.alt | escape | default: product.title | escape }}"
+                   loading="lazy">
+            </div>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
     </div>
 
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start" class="product-grid-pdp">
-      <div>
-        {%- if product.featured_image -%}
-          <img src="{{ product.featured_image | image_url: width: 1200 }}" alt="{{ product.title | escape }}"
-               style="width:100%;border:3px solid var(--ink);border-radius:18px;box-shadow:14px 14px 0 var(--ink)" loading="eager">
-        {%- endif -%}
-        {%- if product.images.size > 1 -%}
-          <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:14px">
-            {%- for img in product.images limit: 8 -%}
-              <img src="{{ img | image_url: width: 200 }}" alt="{{ product.title | escape }}"
-                   style="aspect-ratio:1/1;object-fit:cover;border:1.5px solid var(--ink);border-radius:8px" loading="lazy">
-            {%- endfor -%}
-          </div>
+    <!-- Info -->
+    <div class="hand-pdp-info">
+      <div class="hand-pdp-vendor">{{ product.vendor | default: 'Have A Nice Day' }} · {{ product.type | default: 'Apparel' }}</div>
+      <h1 class="hand-pdp-title">{{ product.title }}</h1>
+
+      <!-- Price -->
+      <div class="hand-pdp-price-row">
+        {%- if product.compare_at_price > product.price -%}
+          <span class="hand-pdp-compare">{{ product.compare_at_price | money }}</span>
+          <span class="hand-pdp-price" style="color:var(--pink)">{{ product.price | money }}</span>
+          {%- assign savings = product.compare_at_price | minus: product.price -%}
+          <span class="hand-pdp-save">Save {{ savings | money }}</span>
+        {%- else -%}
+          <span class="hand-pdp-price">
+            {%- if product.price_varies -%}<span style="font-size:14px;opacity:.6;margin-right:4px">From</span>{%- endif -%}
+            {{ product.price | money }}
+          </span>
         {%- endif -%}
       </div>
 
-      <div>
-        <div class="card-cat">{{ product.vendor }} · {{ product.type }}</div>
-        <h1 class="h2" style="margin-top:6px">{{ product.title }}</h1>
-        <p style="font-family:'Fjalla One',sans-serif;font-size:28px;margin-top:14px">
-          {%- if product.price_varies -%}<span style="font-size:13px;letter-spacing:.18em">From</span> {%- endif -%}
-          {{ product.price | money }}
-        </p>
-
-        <div class="desc" style="margin-top:18px;color:var(--ink-soft);line-height:1.7">{{ product.description }}</div>
-
-        {% form 'product', product, class: 'product-form', id: 'productForm' %}
-          {%- unless product.has_only_default_variant -%}
-            {%- for option in product.options_with_values -%}
-              <div style="margin-top:18px">
-                <div class="lbl" style="margin-bottom:8px">{{ option.name }}</div>
-                <div class="sizes">
+      <!-- Product form -->
+      {%- form 'product', product, id: 'pdpForm', class: 'pdp-form' -%}
+        {%- unless product.has_only_default_variant -%}
+          {%- for option in product.options_with_values -%}
+            <div class="hand-pdp-option">
+              <div class="hand-pdp-option-label">
+                {{ option.name }}
+                <span class="selected-val" id="optVal{{ forloop.index }}">{{ option.selected_value }}</span>
+              </div>
+              {%- if option.name == 'Size' or option.name == 'size' -%}
+                <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
+                  <div class="hand-pdp-sizes" id="sizeGrid{{ forloop.index }}">
+                    {%- for value in option.values -%}
+                      <button type="button"
+                              class="hand-size-btn{% if option.selected_value == value %} selected{% endif %}"
+                              data-option-index="{{ forloop.parentloop.index0 }}"
+                              data-option-value="{{ value | escape }}"
+                              data-option-label-id="optVal{{ forloop.parentloop.index }}"
+                              onclick="pdpSelectOption(this)">
+                        {{ value }}
+                      </button>
+                    {%- endfor -%}
+                  </div>
+                  <button type="button" class="hand-size-guide-link" onclick="document.getElementById('pdpSizeGuide').classList.toggle('open')">Size Guide</button>
+                </div>
+                <!-- Size guide accordion -->
+                <div id="pdpSizeGuide" style="overflow:hidden;max-height:0;transition:max-height .4s ease">
+                  <div style="background:var(--paper-2);padding:20px;margin-bottom:16px;font-family:var(--mono);font-size:11px;letter-spacing:.12em">
+                    <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:rgba(0,0,0,.1);border:1px solid rgba(0,0,0,.1)">
+                      {%- assign sizes = 'XS,S,M,L,XL,XXL' | split: ',' -%}
+                      {%- assign chests = '32-34,34-36,36-38,38-40,40-42,42-44' | split: ',' -%}
+                      <div style="background:var(--ink);color:#fff;padding:8px;text-align:center;font-weight:600">Size</div>
+                      <div style="background:var(--ink);color:#fff;padding:8px;text-align:center;font-weight:600">Chest</div>
+                      <div style="background:var(--ink);color:#fff;padding:8px;text-align:center;font-weight:600">Length</div>
+                      <div style="background:var(--ink);color:#fff;padding:8px;text-align:center;font-weight:600">Sleeve</div>
+                      <div style="background:var(--ink);color:#fff;padding:8px;text-align:center;font-weight:600">Fit</div>
+                      {%- for s in sizes -%}
+                        <div style="background:var(--paper);padding:8px;text-align:center">{{ s }}</div>
+                        <div style="background:var(--paper);padding:8px;text-align:center">{{ chests[forloop.index0] }}"</div>
+                        <div style="background:var(--paper);padding:8px;text-align:center">{{ 26 | plus: forloop.index0 }}"</div>
+                        <div style="background:var(--paper);padding:8px;text-align:center">{{ 31 | plus: forloop.index0 }}"</div>
+                        <div style="background:var(--paper);padding:8px;text-align:center">Unisex</div>
+                      {%- endfor -%}
+                    </div>
+                    <p style="margin-top:12px;color:#888;font-size:10px;letter-spacing:.14em">All measurements in inches. Unisex fit — size up for oversized look.</p>
+                  </div>
+                </div>
+              {%- else -%}
+                <div class="hand-pdp-sizes">
                   {%- for value in option.values -%}
                     <button type="button"
-                            data-option-name="{{ option.name | escape }}"
+                            class="hand-size-btn{% if option.selected_value == value %} selected{% endif %}"
+                            data-option-index="{{ forloop.parentloop.index0 }}"
                             data-option-value="{{ value | escape }}"
-                            class="{% if option.selected_value == value %}sel{% endif %}">
+                            data-option-label-id="optVal{{ forloop.parentloop.index }}"
+                            onclick="pdpSelectOption(this)">
                       {{ value }}
                     </button>
                   {%- endfor -%}
                 </div>
-              </div>
-            {%- endfor -%}
-          {%- endunless -%}
-
-          <input type="hidden" name="id" id="ProductSelect-{{ section.id }}" value="{{ product.selected_or_first_available_variant.id }}">
-          <input type="hidden" name="quantity" value="1">
-
-          <div class="modal-cta" style="margin-top:24px;display:grid;grid-template-columns:auto 1fr;gap:10px">
-            <div class="qty">
-              <button type="button" id="pdpMinus">−</button>
-              <span id="pdpQty">1</span>
-              <button type="button" id="pdpPlus">+</button>
-            </div>
-            <button type="submit" class="add-big" {% unless product.available %}disabled{% endunless %}>
-              {%- if product.available -%}{{ 'products.product.add_to_cart' | t }} · {{ product.price | money }}
-              {%- else -%}{{ 'products.product.sold_out' | t }}
               {%- endif -%}
-            </button>
-          </div>
-        {% endform %}
+            </div>
+          {%- endfor -%}
+        {%- endunless -%}
 
-        <div class="modal-perks" style="margin-top:18px">
-          <span>Free UK shipping over £50</span>
-          <span>30-day returns</span>
-          <span>Ships in 24h</span>
-          <span>Unisex · Organic cotton</span>
+        <input type="hidden" name="id" id="pdpVariantId" value="{{ product.selected_or_first_available_variant.id }}">
+
+        <!-- Trust strip -->
+        <div class="hand-pdp-trust">
+          <div class="hand-pdp-trust-item"><span class="icon">🌿</span>Organic Cotton</div>
+          <div class="hand-pdp-trust-item"><span class="icon">🇬🇧</span>UK Printed</div>
+          <div class="hand-pdp-trust-item"><span class="icon">📦</span>Ships in 24h</div>
+          <div class="hand-pdp-trust-item"><span class="icon">↩</span>30-Day Returns</div>
+        </div>
+
+        <!-- CTA -->
+        <div class="hand-pdp-cta">
+          <div class="hand-pdp-qty">
+            <button type="button" id="pdpMinus" aria-label="Decrease quantity">−</button>
+            <input type="number" name="quantity" id="pdpQty" value="1" min="1" max="99" aria-label="Quantity">
+            <button type="button" id="pdpPlus" aria-label="Increase quantity">+</button>
+          </div>
+          <button type="submit" class="hand-pdp-add-btn" id="pdpAddBtn"
+                  {%- unless product.available %} disabled{%- endunless -%}>
+            {%- if product.available -%}
+              Add to Bag <span>→</span>
+            {%- else -%}
+              Sold Out
+            {%- endif -%}
+          </button>
+        </div>
+
+        <p style="font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#aaa;text-align:center;margin-bottom:20px">
+          Tax included · Free UK shipping over £75 · Visa, Mastercard, Amex, PayPal, Klarna
+        </p>
+      {%- endform -%}
+
+      <!-- Description accordion -->
+      <button class="hand-pdp-desc-toggle open" id="pdpDescToggle" onclick="pdpToggleDesc()">
+        Description <span class="arr">↑</span>
+      </button>
+      <div class="hand-pdp-desc-body open" id="pdpDescBody">
+        <div class="hand-pdp-desc-body-inner">
+          {{ product.description }}
+        </div>
+      </div>
+
+      <button class="hand-pdp-desc-toggle" id="pdpDetailsToggle" onclick="pdpToggleDetails()">
+        Product Details <span class="arr">↓</span>
+      </button>
+      <div class="hand-pdp-desc-body" id="pdpDetailsBody">
+        <div class="hand-pdp-desc-body-inner">
+          <p>220gsm heavyweight organic cotton. Unisex fit. Hand-printed in our London studio using water-based inks.</p>
+          <p>Part of the original 1990 Camden archive — reissued for the first time in 17 years. Same characters, same energy, new era.</p>
+          <ul style="padding-left:18px;margin-top:8px;display:flex;flex-direction:column;gap:6px">
+            <li>100% GOTS certified organic cotton</li>
+            <li>220gsm heavyweight jersey</li>
+            <li>Unisex fit — true to size</li>
+            <li>Screen printed in London, UK</li>
+            <li>Machine wash 30°C, inside out</li>
+          </ul>
+        </div>
+      </div>
+
+      <button class="hand-pdp-desc-toggle" id="pdpShipToggle" onclick="pdpToggleShip()">
+        Shipping & Returns <span class="arr">↓</span>
+      </button>
+      <div class="hand-pdp-desc-body" id="pdpShipBody">
+        <div class="hand-pdp-desc-body-inner">
+          <p><strong>UK Standard:</strong> 2-4 working days · Free over £75</p>
+          <p><strong>UK Express:</strong> Next working day (order before 2pm)</p>
+          <p><strong>Europe:</strong> 5-10 working days</p>
+          <p><strong>Rest of World:</strong> 7-14 working days</p>
+          <p style="margin-top:12px">30-day returns on unworn, unwashed items. Free UK returns. <a href="/pages/contact" style="text-decoration:underline">Contact us</a> to start a return.</p>
         </div>
       </div>
     </div>
   </div>
-</section>
+</div>
+
+<!-- Related Products -->
+{%- if product.collections.first -%}
+  {%- assign related_coll = product.collections.first -%}
+  {%- if related_coll.products_count > 1 -%}
+    <div class="hand-pdp-related">
+      <div class="hand-pdp-related-inner">
+        <div class="hand-pdp-related-head">
+          <h2>You Might Also Like.</h2>
+          <a href="{{ related_coll.url }}">View All →</a>
+        </div>
+        <div class="hand-pdp-related-grid">
+          {%- for p in related_coll.products limit: 4 -%}
+            {%- unless p.id == product.id -%}
+              <article class="hand-coll-card">
+                <div class="hand-coll-card-media">
+                  <span class="hand-coll-badge">{{ p.type | default: 'Apparel' }}</span>
+                  {%- if p.featured_image -%}
+                    <img src="{{ p.featured_image | image_url: width: 720 }}"
+                         alt="{{ p.featured_image.alt | escape | default: p.title | escape }}"
+                         loading="lazy" width="720" height="960">
+                  {%- endif -%}
+                  <div class="hand-coll-quick">
+                    <button class="hand-coll-quick-btn"
+                            data-variant-id="{{ p.selected_or_first_available_variant.id }}"
+                            data-product-title="{{ p.title | escape }}"
+                            data-quick-add>
+                      {%- if p.available -%}Quick Add{%- else -%}Sold Out{%- endif -%}
+                    </button>
+                    <a class="hand-coll-quick-link" href="{{ p.url }}">↗</a>
+                  </div>
+                </div>
+                <div class="hand-coll-card-info">
+                  <div class="hand-coll-card-vendor">{{ p.vendor | default: 'Have A Nice Day' }}</div>
+                  <a class="hand-coll-card-name" href="{{ p.url }}">{{ p.title }}</a>
+                  <div class="hand-coll-card-price">{{ p.price | money }}</div>
+                </div>
+              </article>
+            {%- endunless -%}
+          {%- endfor -%}
+        </div>
+      </div>
+    </div>
+  {%- endif -%}
+{%- endif -%}
 
 <script>
-  (function(){
-    var minus=document.getElementById('pdpMinus'),plus=document.getElementById('pdpPlus'),q=document.getElementById('pdpQty');
-    var qInput=document.querySelector('#productForm input[name="quantity"]');
-    if(!minus||!plus||!q||!qInput) return;
-    var n=1;
-    plus.addEventListener('click',function(){n++;q.textContent=n;qInput.value=n;});
-    minus.addEventListener('click',function(){if(n>1){n--;q.textContent=n;qInput.value=n;}});
-  })();
+// Gallery thumbnail switcher
+function pdpSetImg(thumb) {
+  const mainImg = document.getElementById('pdpMainImgEl');
+  if (mainImg) {
+    mainImg.src = thumb.dataset.src;
+    mainImg.alt = thumb.dataset.alt;
+  }
+  document.querySelectorAll('.hand-pdp-thumb').forEach(function(t) { t.classList.remove('active'); });
+  thumb.classList.add('active');
+}
+
+// Option selector
+var pdpSelectedOptions = {};
+{%- for option in product.options_with_values -%}
+  pdpSelectedOptions[{{ forloop.index0 }}] = {{ option.selected_value | json }};
+{%- endfor -%}
+
+var pdpVariants = {{ product.variants | json }};
+
+function pdpSelectOption(btn) {
+  const idx = parseInt(btn.dataset.optionIndex);
+  const val = btn.dataset.optionValue;
+  const labelId = btn.dataset.optionLabelId;
+  pdpSelectedOptions[idx] = val;
+  // Update button states
+  document.querySelectorAll('[data-option-index="' + idx + '"]').forEach(function(b) {
+    b.classList.toggle('selected', b.dataset.optionValue === val);
+  });
+  // Update label
+  const label = document.getElementById(labelId);
+  if (label) label.textContent = val;
+  // Find matching variant
+  const variant = pdpVariants.find(function(v) {
+    return v.options.every(function(o, i) { return o === pdpSelectedOptions[i]; });
+  });
+  if (variant) {
+    document.getElementById('pdpVariantId').value = variant.id;
+    const addBtn = document.getElementById('pdpAddBtn');
+    if (addBtn) {
+      if (variant.available) {
+        addBtn.disabled = false;
+        addBtn.innerHTML = 'Add to Bag <span>→</span>';
+      } else {
+        addBtn.disabled = true;
+        addBtn.innerHTML = 'Sold Out';
+      }
+    }
+    // Update price
+    const priceEl = document.querySelector('.hand-pdp-price');
+    if (priceEl) priceEl.textContent = (variant.price / 100).toLocaleString('en-GB', { style: 'currency', currency: 'GBP' });
+  }
+}
+
+// Qty
+document.getElementById('pdpMinus')?.addEventListener('click', function() {
+  const q = document.getElementById('pdpQty');
+  if (q && parseInt(q.value) > 1) q.value = parseInt(q.value) - 1;
+});
+document.getElementById('pdpPlus')?.addEventListener('click', function() {
+  const q = document.getElementById('pdpQty');
+  if (q) q.value = parseInt(q.value) + 1;
+});
+
+// Description toggles
+function pdpToggleDesc() {
+  const body = document.getElementById('pdpDescBody');
+  const btn = document.getElementById('pdpDescToggle');
+  const open = body.classList.toggle('open');
+  btn.classList.toggle('open', open);
+  btn.querySelector('.arr').textContent = open ? '↑' : '↓';
+}
+function pdpToggleDetails() {
+  const body = document.getElementById('pdpDetailsBody');
+  const btn = document.getElementById('pdpDetailsToggle');
+  const open = body.classList.toggle('open');
+  btn.classList.toggle('open', open);
+  btn.querySelector('.arr').textContent = open ? '↑' : '↓';
+}
+function pdpToggleShip() {
+  const body = document.getElementById('pdpShipBody');
+  const btn = document.getElementById('pdpShipToggle');
+  const open = body.classList.toggle('open');
+  btn.classList.toggle('open', open);
+  btn.querySelector('.arr').textContent = open ? '↑' : '↓';
+}
+
+// Size guide toggle
+document.getElementById('pdpSizeGuide')?.addEventListener('click', function() {});
+
+// Add to cart form
+document.querySelector('.pdp-form')?.addEventListener('submit', function(e) {
+  e.preventDefault();
+  const btn = document.getElementById('pdpAddBtn');
+  const variantId = document.getElementById('pdpVariantId').value;
+  const qty = parseInt(document.getElementById('pdpQty').value) || 1;
+  if (!variantId || btn.disabled) return;
+  btn.innerHTML = 'Adding...';
+  btn.disabled = true;
+  fetch('/cart/add.js', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+    body: JSON.stringify({ id: variantId, quantity: qty })
+  })
+  .then(function(r) { return r.json(); })
+  .then(function() {
+    btn.innerHTML = 'Added ✓';
+    fetch('/cart.js').then(function(r) { return r.json(); }).then(function(cart) {
+      const el = document.getElementById('handCartCount');
+      if (el) el.textContent = cart.item_count;
+    });
+    const wrap = document.getElementById('hand-toast-wrap');
+    if (wrap) {
+      const t = document.createElement('div');
+      t.className = 'hand-toast ok';
+      t.innerHTML = '<span class="ic">☻</span><span>{{ product.title | escape }} added to bag</span>';
+      wrap.appendChild(t);
+      requestAnimationFrame(function() { t.classList.add('show'); });
+      setTimeout(function() { t.classList.remove('show'); setTimeout(function() { t.remove(); }, 400); }, 3000);
+    }
+    setTimeout(function() { btn.innerHTML = 'Add to Bag <span>→</span>'; btn.disabled = false; }, 2000);
+  })
+  .catch(function() {
+    btn.innerHTML = 'Error — Try Again';
+    btn.disabled = false;
+  });
+});
+
+// Quick add in related
+document.querySelectorAll('[data-quick-add]').forEach(function(btn) {
+  btn.addEventListener('click', function(e) {
+    e.preventDefault();
+    const variantId = btn.dataset.variantId;
+    const title = btn.dataset.productTitle;
+    if (!variantId || btn.textContent.trim() === 'Sold Out') return;
+    btn.textContent = 'Adding...';
+    btn.disabled = true;
+    fetch('/cart/add.js', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({ id: variantId, quantity: 1 })
+    })
+    .then(function(r) { return r.json(); })
+    .then(function() {
+      btn.textContent = 'Added ✓';
+      fetch('/cart.js').then(function(r) { return r.json(); }).then(function(cart) {
+        const el = document.getElementById('handCartCount');
+        if (el) el.textContent = cart.item_count;
+      });
+      setTimeout(function() { btn.textContent = 'Quick Add'; btn.disabled = false; }, 2000);
+    })
+    .catch(function() { btn.textContent = 'Error'; btn.disabled = false; });
+  });
+});
 </script>
 
 {% schema %}
 {
-  "name": "Product details",
-  "settings": []
+  "name": "Product",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Product Page Settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_vendor",
+      "label": "Show vendor / brand name",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_sku",
+      "label": "Show SKU",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "show_share",
+      "label": "Show share buttons",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Trust Badges"
+    },
+    {
+      "type": "text",
+      "id": "trust1",
+      "label": "Trust badge 1",
+      "default": "Free UK Shipping Over £75"
+    },
+    {
+      "type": "text",
+      "id": "trust2",
+      "label": "Trust badge 2",
+      "default": "30-Day Free Returns"
+    },
+    {
+      "type": "text",
+      "id": "trust3",
+      "label": "Trust badge 3",
+      "default": "220gsm Organic Cotton"
+    },
+    {
+      "type": "text",
+      "id": "trust4",
+      "label": "Trust badge 4",
+      "default": "UK Printed — Small Batch"
+    },
+    {
+      "type": "header",
+      "content": "Related Products"
+    },
+    {
+      "type": "text",
+      "id": "related_heading",
+      "label": "Related products heading",
+      "default": "You Might Also Like"
+    },
+    {
+      "type": "range",
+      "id": "related_count",
+      "min": 2,
+      "max": 6,
+      "step": 1,
+      "label": "Number of related products",
+      "default": 4
+    }
+  ]
 }
 {% endschema %}

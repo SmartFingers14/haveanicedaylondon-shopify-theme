@@ -47,7 +47,7 @@
         <div class="hand-hero-glow"></div>
         <div class="hand-hero-logo-wrap">
           {% if section.settings.hero_image %}
-            <img src="{{ section.settings.hero_image | img_url: '1100x' }}" alt="{{ section.settings.hero_image_alt | default: 'Have A Nice Day London' }}" />
+          <img src="{{ section.settings.hero_image | image_url: width: 1100 }}" alt="{{ section.settings.hero_image_alt | default: 'Have A Nice Day London' }}" />
           {% else %}
             <img src="https://www.haveanicedaylondonstore.com/cdn/shop/files/IMG_2861.jpg?v=1696499421&width=1100" alt="Have A Nice Day London" />
           {% endif %}

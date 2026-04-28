@@ -208,12 +208,12 @@
       {% if section.settings.product != blank %}
         {% assign fp = all_products[section.settings.product] %}
         {% if fp.featured_image %}
-          <img src="{{ fp.featured_image | img_url: '1200x' }}" alt="{{ fp.title }}" loading="lazy">
+        <img src="{{ fp.featured_image | image_url: width: 1200 }}" alt="{{ fp.title }}" loading="lazy">
         {% else %}
           <img src="https://cdn.shopify.com/s/files/1/0737/7397/3795/files/Untitled_design_63.png?v=1761074463" alt="Have A Nice Day London" loading="lazy">
         {% endif %}
       {% elsif section.settings.image %}
-        <img src="{{ section.settings.image | img_url: '1200x' }}" alt="{{ section.settings.title }}" loading="lazy">
+        <img src="{{ section.settings.image | image_url: width: 1200 }}" alt="{{ section.settings.title }}" loading="lazy">
       {% else %}
         <img src="https://cdn.shopify.com/s/files/1/0737/7397/3795/files/Untitled_design_63.png?v=1761074463" alt="Have A Nice Day London" loading="lazy">
       {% endif %}

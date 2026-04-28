@@ -316,7 +316,7 @@
   <div class="hand-topbar-inner">
     <div class="hand-topbar-left">
       <span class="hand-topbar-dot"></span>
-      EST. CAMDEN 1990
+      {{ section.settings.topbar_left | default: 'EST. CAMDEN 1990' }}
     </div>
     <div class="hand-topbar-center">
       {%- if section.settings.announce_text != blank -%}
@@ -326,9 +326,9 @@
       {%- endif -%}
     </div>
     <div class="hand-topbar-right">
-      <span>EN / &pound; GBP</span>
+      <span>{{ section.settings.topbar_right | default: 'EN / £ GBP' }}</span>
       <span class="hand-topbar-sep">|</span>
-      <a href="/pages/help">HELP</a>
+      <a href="{{ section.settings.help_link | default: '/pages/help' }}">{{ section.settings.help_label | default: 'HELP' }}</a>
     </div>
   </div>
 </div>
@@ -339,14 +339,30 @@
 
     <!-- Logo (left) -->
     <a class="hand-logo" href="{{ routes.root_url }}" aria-label="{{ shop.name }}">
-      <img src="https://cdn.shopify.com/s/files/1/0737/7397/3795/t/16/assets/logo-hand2.webp?v=1777399896" alt="{{ shop.name | escape }}" loading="eager" style="display:block;width:auto;height:60px;max-height:60px;object-fit:contain;padding:0;">
+      {%- if section.settings.logo != blank -%}
+        <img src="{{ section.settings.logo | image_url: width: 300 }}" alt="{{ shop.name | escape }}" loading="eager" style="display:block;width:auto;height:60px;max-height:60px;object-fit:contain;padding:0;">
+      {%- else -%}
+        <img src="https://cdn.shopify.com/s/files/1/0737/7397/3795/t/16/assets/logo-hand2.webp?v=1777399896" alt="{{ shop.name | escape }}" loading="eager" style="display:block;width:auto;height:60px;max-height:60px;object-fit:contain;padding:0;">
+      {%- endif -%}
     </a>
 
     <!-- Nav links (center) -->
     <div class="hand-nav-links">
-      <a class="hand-nav-link" href="/collections/all">Merchandise</a>
-      <a class="hand-nav-link" href="/pages/about-us">About Us</a>
-      <a class="hand-nav-link" href="/pages/contact">Contact</a>
+      {%- if section.settings.nav1_label != blank -%}
+        <a class="hand-nav-link" href="{{ section.settings.nav1_link | default: '/collections/all' }}">{{ section.settings.nav1_label }}</a>
+      {%- endif -%}
+      {%- if section.settings.nav2_label != blank -%}
+        <a class="hand-nav-link" href="{{ section.settings.nav2_link | default: '/pages/about-us' }}">{{ section.settings.nav2_label }}</a>
+      {%- endif -%}
+      {%- if section.settings.nav3_label != blank -%}
+        <a class="hand-nav-link" href="{{ section.settings.nav3_link | default: '/pages/contact' }}">{{ section.settings.nav3_label }}</a>
+      {%- endif -%}
+      {%- if section.settings.nav4_label != blank -%}
+        <a class="hand-nav-link" href="{{ section.settings.nav4_link }}">{{ section.settings.nav4_label }}</a>
+      {%- endif -%}
+      {%- if section.settings.nav5_label != blank -%}
+        <a class="hand-nav-link" href="{{ section.settings.nav5_link }}">{{ section.settings.nav5_label }}</a>
+      {%- endif -%}
     </div>
 
     <!-- Actions (right) -->
@@ -369,13 +385,25 @@
 <!-- Mobile Menu -->
 <div class="hand-mob-menu" id="handMobMenu" aria-hidden="true" role="dialog" aria-label="Mobile navigation">
   <div class="hand-mob-head">
-    <div class="hand-mob-logo">Have A Nice Day&reg;</div>
+    <div class="hand-mob-logo">{{ shop.name }}</div>
     <button class="hand-mob-close" id="handMobClose" aria-label="Close menu">&#x2715;</button>
   </div>
   <div class="hand-mob-body">
-    <a class="hand-mob-link" href="/collections/all">Merchandise <span class="arr">&#x2192;</span></a>
-    <a class="hand-mob-link" href="/pages/about-us">About Us <span class="arr">&#x2192;</span></a>
-    <a class="hand-mob-link" href="/pages/contact">Contact <span class="arr">&#x2192;</span></a>
+    {%- if section.settings.nav1_label != blank -%}
+      <a class="hand-mob-link" href="{{ section.settings.nav1_link | default: '/collections/all' }}">{{ section.settings.nav1_label }} <span class="arr">&#x2192;</span></a>
+    {%- endif -%}
+    {%- if section.settings.nav2_label != blank -%}
+      <a class="hand-mob-link" href="{{ section.settings.nav2_link | default: '/pages/about-us' }}">{{ section.settings.nav2_label }} <span class="arr">&#x2192;</span></a>
+    {%- endif -%}
+    {%- if section.settings.nav3_label != blank -%}
+      <a class="hand-mob-link" href="{{ section.settings.nav3_link | default: '/pages/contact' }}">{{ section.settings.nav3_label }} <span class="arr">&#x2192;</span></a>
+    {%- endif -%}
+    {%- if section.settings.nav4_label != blank -%}
+      <a class="hand-mob-link" href="{{ section.settings.nav4_link }}">{{ section.settings.nav4_label }} <span class="arr">&#x2192;</span></a>
+    {%- endif -%}
+    {%- if section.settings.nav5_label != blank -%}
+      <a class="hand-mob-link" href="{{ section.settings.nav5_link }}">{{ section.settings.nav5_label }} <span class="arr">&#x2192;</span></a>
+    {%- endif -%}
   </div>
   <div class="hand-mob-foot">
     <a href="#" data-open-search>Search</a>
@@ -422,10 +450,103 @@
   "name": "Header",
   "settings": [
     {
+      "type": "header",
+      "content": "Announcement Bar"
+    },
+    {
       "type": "text",
       "id": "announce_text",
       "label": "Announcement bar text",
       "default": "FREE UK SHIPPING OVER £75 — ORGANIC COTTON — UK PRINTED"
+    },
+    {
+      "type": "text",
+      "id": "topbar_left",
+      "label": "Top bar left text",
+      "default": "EST. CAMDEN 1990"
+    },
+    {
+      "type": "text",
+      "id": "topbar_right",
+      "label": "Top bar right text",
+      "default": "EN / £ GBP"
+    },
+    {
+      "type": "text",
+      "id": "help_label",
+      "label": "Help link label",
+      "default": "HELP"
+    },
+    {
+      "type": "url",
+      "id": "help_link",
+      "label": "Help link URL"
+    },
+    {
+      "type": "header",
+      "content": "Logo"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo image (leave blank to use default)"
+    },
+    {
+      "type": "header",
+      "content": "Navigation Links"
+    },
+    {
+      "type": "text",
+      "id": "nav1_label",
+      "label": "Nav link 1 label",
+      "default": "Merchandise"
+    },
+    {
+      "type": "url",
+      "id": "nav1_link",
+      "label": "Nav link 1 URL"
+    },
+    {
+      "type": "text",
+      "id": "nav2_label",
+      "label": "Nav link 2 label",
+      "default": "About Us"
+    },
+    {
+      "type": "url",
+      "id": "nav2_link",
+      "label": "Nav link 2 URL"
+    },
+    {
+      "type": "text",
+      "id": "nav3_label",
+      "label": "Nav link 3 label",
+      "default": "Contact"
+    },
+    {
+      "type": "url",
+      "id": "nav3_link",
+      "label": "Nav link 3 URL"
+    },
+    {
+      "type": "text",
+      "id": "nav4_label",
+      "label": "Nav link 4 label (optional)"
+    },
+    {
+      "type": "url",
+      "id": "nav4_link",
+      "label": "Nav link 4 URL"
+    },
+    {
+      "type": "text",
+      "id": "nav5_label",
+      "label": "Nav link 5 label (optional)"
+    },
+    {
+      "type": "url",
+      "id": "nav5_link",
+      "label": "Nav link 5 URL"
     }
   ]
 }

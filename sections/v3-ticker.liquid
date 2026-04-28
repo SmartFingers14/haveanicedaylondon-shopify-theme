@@ -1,27 +1,40 @@
 <div class="hand-ticker">
   <div class="track">
-    <span>Have A Nice Day</span>
-    <span>Sam The Man</span>
-    <span>Shurl The Girl</span>
-    <span>Handspun Records</span>
-    <span>Dready Original</span>
-    <span>BTKA</span>
-    <span>Vortex</span>
-    <span>Funky Dog</span>
-    <span>Don't Do The Dodo</span>
-    <span>Incubator</span>
-    <span>Sista</span>
-    <span>Have A Nice Day</span>
-    <span>Sam The Man</span>
-    <span>Shurl The Girl</span>
-    <span>Handspun Records</span>
-    <span>Dready Original</span>
-    <span>BTKA</span>
-    <span>Vortex</span>
-    <span>Funky Dog</span>
-    <span>Don't Do The Dodo</span>
-    <span>Incubator</span>
-    <span>Sista</span>
+    {% if section.blocks.size > 0 %}
+      {% for block in section.blocks %}
+        {% if block.type == 'item' %}
+          <span {{ block.shopify_attributes }}>{{ block.settings.text }}</span>
+        {% endif %}
+      {% endfor %}
+      {% for block in section.blocks %}
+        {% if block.type == 'item' %}
+          <span>{{ block.settings.text }}</span>
+        {% endif %}
+      {% endfor %}
+    {% else %}
+      <span>Have A Nice Day</span>
+      <span>Sam The Man</span>
+      <span>Shurl The Girl</span>
+      <span>Handspun Records</span>
+      <span>Dready Original</span>
+      <span>BTKA</span>
+      <span>Vortex</span>
+      <span>Funky Dog</span>
+      <span>Don't Do The Dodo</span>
+      <span>Incubator</span>
+      <span>Sista</span>
+      <span>Have A Nice Day</span>
+      <span>Sam The Man</span>
+      <span>Shurl The Girl</span>
+      <span>Handspun Records</span>
+      <span>Dready Original</span>
+      <span>BTKA</span>
+      <span>Vortex</span>
+      <span>Funky Dog</span>
+      <span>Don't Do The Dodo</span>
+      <span>Incubator</span>
+      <span>Sista</span>
+    {% endif %}
   </div>
 </div>
 
@@ -29,6 +42,32 @@
 {
   "name": "V3 Ticker",
   "settings": [],
-  "presets": [{ "name": "V3 Ticker" }]
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Ticker Item",
+      "settings": [
+        { "type": "text", "id": "text", "label": "Ticker text", "default": "Have A Nice Day" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "V3 Ticker",
+      "blocks": [
+        { "type": "item", "settings": { "text": "Have A Nice Day" } },
+        { "type": "item", "settings": { "text": "Sam The Man" } },
+        { "type": "item", "settings": { "text": "Shurl The Girl" } },
+        { "type": "item", "settings": { "text": "Handspun Records" } },
+        { "type": "item", "settings": { "text": "Dready Original" } },
+        { "type": "item", "settings": { "text": "BTKA" } },
+        { "type": "item", "settings": { "text": "Vortex" } },
+        { "type": "item", "settings": { "text": "Funky Dog" } },
+        { "type": "item", "settings": { "text": "Don't Do The Dodo" } },
+        { "type": "item", "settings": { "text": "Incubator" } },
+        { "type": "item", "settings": { "text": "Sista" } }
+      ]
+    }
+  ]
 }
 {% endschema %}

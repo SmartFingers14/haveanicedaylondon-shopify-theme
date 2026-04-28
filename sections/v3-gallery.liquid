@@ -7,36 +7,132 @@
       </div>
       <div class="rhs">
         <p>{{ section.settings.subtext }}</p>
-        <a class="more" href="{{ section.settings.link | default: 'https://www.instagram.com/haveanicedaylondon' }}" target="_blank">{{ section.settings.link_label }} &#8594;</a>
+        <a class="more" href="{{ section.settings.link | default: 'https://www.instagram.com/haveanicedaylondon' }}" target="_blank" rel="noopener">{{ section.settings.link_label | default: 'Follow Us On Instagram' }} &#8594;</a>
       </div>
     </div>
 
-    <div class="hand-gallery">
-      {% for block in section.blocks %}
-        {% if block.type == 'tile' %}
-          <div class="hand-g {{ block.settings.span_class }} hand-reveal" {{ block.shopify_attributes }}>
-            {% if block.settings.image %}
-              <img src="{{ block.settings.image | img_url: '600x' }}" alt="{{ block.settings.handle }}" loading="lazy" />
-            {% else %}
-              <img src="{{ block.settings.image_url }}" alt="{{ block.settings.handle }}" loading="lazy" />
-            {% endif %}
-            <span class="ig">{{ block.settings.handle }}</span>
-          </div>
-        {% endif %}
-      {% endfor %}
-    </div>
+    {%- if section.settings.access_token != blank -%}
+      <!-- Live Instagram Feed -->
+      <div class="hand-gallery" id="hand-ig-grid">
+        {%- for i in (1..10) -%}
+          <div class="hand-g hand-ig-placeholder"><div class="hand-ig-loading"></div></div>
+        {%- endfor -%}
+      </div>
+
+      <style>
+        .hand-ig-placeholder { background: var(--paper-2); aspect-ratio: 1/1; }
+        .hand-ig-loading {
+          width: 100%; height: 100%;
+          background: linear-gradient(90deg, var(--paper-2) 25%, var(--paper) 50%, var(--paper-2) 75%);
+          background-size: 200% 100%;
+          animation: hand-shimmer 1.5s infinite;
+        }
+        @keyframes hand-shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+        .hand-ig-item {
+          position: relative; overflow: hidden; display: block;
+          text-decoration: none; background: var(--paper-2);
+        }
+        .hand-ig-item img {
+          width: 100%; height: 100%; object-fit: cover; display: block;
+          transition: transform .6s cubic-bezier(.2,.7,.2,1);
+        }
+        .hand-ig-item:hover img { transform: scale(1.05); }
+        .hand-ig-item .ig {
+          position: absolute; bottom: 0; left: 0; right: 0;
+          padding: 8px 12px;
+          background: linear-gradient(transparent, rgba(0,0,0,.55));
+          color: #fff; font-family: var(--mono); font-size: 10px;
+          letter-spacing: .18em; text-transform: uppercase;
+          opacity: 0; transition: opacity .3s;
+        }
+        .hand-ig-item:hover .ig { opacity: 1; }
+        .hand-ig-item .ig-type {
+          position: absolute; top: 10px; right: 10px;
+          color: #fff; font-size: 14px; opacity: .8;
+          text-shadow: 0 1px 3px rgba(0,0,0,.5);
+        }
+        .hand-ig-error {
+          grid-column: 1 / -1; padding: 40px; text-align: center;
+          font-family: var(--mono); font-size: 11px; letter-spacing: .15em;
+          color: #888; text-transform: uppercase;
+        }
+      </style>
+
+      <script>
+        (function() {
+          var token = {{ section.settings.access_token | json }};
+          var grid = document.getElementById('hand-ig-grid');
+          var igUser = {{ section.settings.ig_username | default: '@haveanicedaylondon' | json }};
+          var postCount = {{ section.settings.post_count | default: 10 }};
+          if (!token || !grid) return;
+          var apiUrl = 'https://graph.instagram.com/me/media?fields=id,media_type,media_url,thumbnail_url,permalink,caption,timestamp&limit=' + postCount + '&access_token=' + token;
+          fetch(apiUrl)
+            .then(function(r) { return r.json(); })
+            .then(function(data) {
+              if (data.error) {
+                grid.innerHTML = '<div class="hand-ig-error">Instagram feed unavailable. <a href="https://www.instagram.com/haveanicedaylondon" target="_blank" style="color:var(--ink);text-decoration:underline;">View on Instagram</a></div>';
+                return;
+              }
+              var posts = data.data || [];
+              if (!posts.length) { grid.innerHTML = '<div class="hand-ig-error">No posts found.</div>'; return; }
+              var spanClasses = ['l', '', 't', '', 'w', '', '', '', '', ''];
+              var html = '';
+              posts.forEach(function(post, i) {
+                var imgSrc = post.media_type === 'VIDEO' ? (post.thumbnail_url || '') : (post.media_url || '');
+                if (!imgSrc) return;
+                var spanClass = spanClasses[i] || '';
+                var typeIcon = post.media_type === 'VIDEO' ? '&#9654;' : (post.media_type === 'CAROUSEL_ALBUM' ? '&#10697;' : '');
+                var caption = post.caption ? post.caption.substring(0, 60) : igUser;
+                html += '<a class="hand-g hand-ig-item ' + spanClass + '" href="' + post.permalink + '" target="_blank" rel="noopener">';
+                html += '<img src="' + imgSrc + '" alt="' + caption.replace(/"/g, '&quot;') + '" loading="lazy" />';
+                if (typeIcon) html += '<span class="ig-type">' + typeIcon + '</span>';
+                html += '<span class="ig">' + igUser + '</span>';
+                html += '</a>';
+              });
+              grid.innerHTML = html || '<div class="hand-ig-error">No images found.</div>';
+            })
+            .catch(function(err) {
+              console.warn('Instagram feed error:', err);
+              grid.innerHTML = '<div class="hand-ig-error">Could not load Instagram feed. <a href="https://www.instagram.com/haveanicedaylondon" target="_blank" style="color:var(--ink);text-decoration:underline;">View on Instagram</a></div>';
+            });
+        })();
+      </script>
+
+    {%- else -%}
+      <!-- Static fallback tiles (no access token set) -->
+      <div class="hand-gallery">
+        {% for block in section.blocks %}
+          {% if block.type == 'tile' %}
+            <a class="hand-g hand-ig-item {{ block.settings.span_class }}" href="{{ section.settings.link | default: 'https://www.instagram.com/haveanicedaylondon' }}" target="_blank" rel="noopener" {{ block.shopify_attributes }}>
+              {% if block.settings.image %}
+                <img src="{{ block.settings.image | image_url: width: 600 }}" alt="{{ block.settings.handle }}" loading="lazy" />
+              {% elsif block.settings.image_url != blank %}
+                <img src="{{ block.settings.image_url }}" alt="{{ block.settings.handle }}" loading="lazy" />
+              {% endif %}
+              <span class="ig">{{ block.settings.handle }}</span>
+            </a>
+          {% endif %}
+        {% endfor %}
+      </div>
+    {%- endif -%}
+
   </div>
 </section>
 
 {% schema %}
 {
-  "name": "V3 Gallery",
+  "name": "V3 Gallery / Instagram",
   "settings": [
     { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "@haveanicedaylondon" },
-    { "type": "text", "id": "heading", "label": "Heading", "default": "The Camden\nCommunity." },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "The Camden Community." },
     { "type": "textarea", "id": "subtext", "label": "Subtext", "default": "Tag #HaveANiceDayLondon for a feature. 30+ years of culture, same as it ever was." },
     { "type": "text", "id": "link_label", "label": "Link label", "default": "Follow Us On Instagram" },
-    { "type": "url", "id": "link", "label": "Instagram link" }
+    { "type": "url", "id": "link", "label": "Instagram profile link" },
+    { "type": "header", "content": "Live Instagram Feed" },
+    { "type": "paragraph", "content": "Paste your Instagram Long-Lived Access Token to show live posts. Get it from Meta for Developers > Your App > Instagram Basic Display > User Token Generator. Leave blank to use static tiles." },
+    { "type": "text", "id": "access_token", "label": "Instagram Access Token (long-lived)" },
+    { "type": "text", "id": "ig_username", "label": "Instagram username (shown on hover)", "default": "@haveanicedaylondon" },
+    { "type": "range", "id": "post_count", "min": 6, "max": 12, "step": 1, "label": "Number of posts to show", "default": 10 }
   ],
   "blocks": [
     {
@@ -44,8 +140,8 @@
       "name": "Gallery Tile",
       "settings": [
         { "type": "image_picker", "id": "image", "label": "Image (upload)" },
-        { "type": "text", "id": "image_url", "label": "Image URL (fallback)", "default": "https://cdn.shopify.com/s/files/1/0737/7397/3795/files/Untitled_design_63.png?v=1761074463" },
-        { "type": "text", "id": "handle", "label": "Instagram handle", "default": "@samtheman_og" },
+        { "type": "text", "id": "image_url", "label": "Image URL (fallback)" },
+        { "type": "text", "id": "handle", "label": "Instagram handle", "default": "@haveanicedaylondon" },
         { "type": "select", "id": "span_class", "label": "Tile size", "options": [
           { "value": "", "label": "Normal (1x1)" },
           { "value": "l", "label": "Large (2x2)" },
@@ -57,7 +153,7 @@
   ],
   "presets": [
     {
-      "name": "V3 Gallery",
+      "name": "V3 Gallery / Instagram",
       "blocks": [
         { "type": "tile", "settings": { "image_url": "https://cdn.shopify.com/s/files/1/0737/7397/3795/files/Untitled_design_63.png?v=1761074463", "handle": "@samtheman_og", "span_class": "l" } },
         { "type": "tile", "settings": { "image_url": "https://cdn.shopify.com/s/files/1/0737/7397/3795/files/SHURLTHEGIRL2-9_1.png?v=1761074728", "handle": "@shurl_", "span_class": "t" } },

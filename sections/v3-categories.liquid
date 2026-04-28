@@ -7,30 +7,70 @@
       </div>
       <div class="rhs">
         <p>{{ section.settings.subtext }}</p>
-        <a class="more" href="{{ section.settings.link | default: '/collections' }}">{{ section.settings.link_label }} &#8594;</a>
+        <a class="more" href="{{ section.settings.link | default: '/collections' }}">{{ section.settings.link_label | default: 'All Categories' }} &#8594;</a>
       </div>
     </div>
 
     <div class="hand-cats">
-      {% for block in section.blocks %}
-        {% if block.type == 'category' %}
-          <a class="hand-cat hand-reveal" href="{{ block.settings.link | default: '/collections/all' }}" {{ block.shopify_attributes }}>
-            <div class="img">
-              {% if block.settings.image %}
-                <img src="{{ block.settings.image | img_url: '600x' }}" alt="{{ block.settings.title }}" loading="lazy" />
-              {% endif %}
-            </div>
-            <div class="top">
-              <span>{{ block.settings.top_left }}</span>
-              <span>{{ block.settings.top_right }}</span>
-            </div>
-            <div class="bot">
-              <h3>{{ block.settings.title }}</h3>
-              <span class="arr">&#8599;</span>
-            </div>
-          </a>
-        {% endif %}
-      {% endfor %}
+      {% if section.blocks.size > 0 %}
+        {% for block in section.blocks %}
+          {% if block.type == 'category' %}
+            {%- assign cat_col = collections[block.settings.collection_handle] -%}
+            <a class="hand-cat hand-reveal" href="{% if block.settings.link != blank %}{{ block.settings.link }}{% elsif cat_col != blank %}/collections/{{ cat_col.handle }}{% else %}/collections/all{% endif %}" {{ block.shopify_attributes }}>
+              <div class="img">
+                {% if block.settings.image %}
+                  <img src="{{ block.settings.image | image_url: width: 600 }}" alt="{{ block.settings.title }}" loading="lazy" />
+                {% elsif cat_col != blank and cat_col.image %}
+                  <img src="{{ cat_col.image | img_url: '600x' }}" alt="{{ cat_col.title }}" loading="lazy" />
+                {% elsif cat_col != blank and cat_col.products.first.featured_image %}
+                  <img src="{{ cat_col.products.first.featured_image | img_url: '600x' }}" alt="{{ cat_col.title }}" loading="lazy" />
+                {% else %}
+                  <div style="width:100%;height:100%;min-height:300px;background:#111;display:flex;align-items:center;justify-content:center;">
+                    <span style="color:#333;font-family:monospace;font-size:11px;letter-spacing:.1em;">{{ block.settings.title | upcase }}</span>
+                  </div>
+                {% endif %}
+              </div>
+              <div class="top">
+                <span>{{ block.settings.top_left }}</span>
+                <span>{{ block.settings.top_right }}</span>
+              </div>
+              <div class="bot">
+                <h3>{{ block.settings.title }}</h3>
+                <span class="arr">&#8599;</span>
+              </div>
+            </a>
+          {% endif %}
+        {% endfor %}
+      {% else %}
+        {%- assign cat_limit = 4 -%}
+        {%- assign cat_count = 0 -%}
+        {% for col in collections %}
+          {% if col.handle != 'all' and cat_count < cat_limit %}
+            {%- assign cat_count = cat_count | plus: 1 -%}
+            <a class="hand-cat hand-reveal" href="/collections/{{ col.handle }}">
+              <div class="img">
+                {% if col.image %}
+                  <img src="{{ col.image | img_url: '600x' }}" alt="{{ col.title }}" loading="lazy" />
+                {% elsif col.products.first.featured_image %}
+                  <img src="{{ col.products.first.featured_image | img_url: '600x' }}" alt="{{ col.title }}" loading="lazy" />
+                {% else %}
+                  <div style="width:100%;height:100%;min-height:300px;background:#111;display:flex;align-items:center;justify-content:center;">
+                    <span style="color:#333;font-family:monospace;font-size:11px;letter-spacing:.1em;">{{ col.title | upcase }}</span>
+                  </div>
+                {% endif %}
+              </div>
+              <div class="top">
+                <span>0{{ cat_count }} / {{ col.products_count }} items</span>
+                <span>From {{ col.products.first.price | money }}</span>
+              </div>
+              <div class="bot">
+                <h3>{{ col.title }}</h3>
+                <span class="arr">&#8599;</span>
+              </div>
+            </a>
+          {% endif %}
+        {% endfor %}
+      {% endif %}
     </div>
   </div>
 </section>
@@ -40,7 +80,7 @@
   "name": "V3 Categories",
   "settings": [
     { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Shop By Category" },
-    { "type": "text", "id": "heading", "label": "Heading", "default": "Pick Your\nUniform." },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Pick Your Uniform." },
     { "type": "textarea", "id": "subtext", "label": "Subtext", "default": "From £15 slip mats to £105 embroidered Dready zips. Tees, sweats, hoods and the bits that finish the fit." },
     { "type": "text", "id": "link_label", "label": "Link label", "default": "All Categories" },
     { "type": "url", "id": "link", "label": "Link" }
@@ -50,11 +90,12 @@
       "type": "category",
       "name": "Category",
       "settings": [
-        { "type": "image_picker", "id": "image", "label": "Category image" },
+        { "type": "image_picker", "id": "image", "label": "Category image (overrides collection image)" },
+        { "type": "text", "id": "collection_handle", "label": "Collection handle (e.g. t-shirts)", "default": "all" },
         { "type": "text", "id": "top_left", "label": "Top-left label", "default": "01 / Cotton" },
         { "type": "text", "id": "top_right", "label": "Top-right label", "default": "From £29.99" },
         { "type": "text", "id": "title", "label": "Category title", "default": "T-Shirts" },
-        { "type": "url", "id": "link", "label": "Link" }
+        { "type": "url", "id": "link", "label": "Link (overrides collection handle)" }
       ]
     }
   ],
@@ -62,10 +103,10 @@
     {
       "name": "V3 Categories",
       "blocks": [
-        { "type": "category", "settings": { "top_left": "01 / Cotton", "top_right": "From £29.99", "title": "T-Shirts" } },
-        { "type": "category", "settings": { "top_left": "02 / Heavy", "top_right": "From £42.00", "title": "Sweatshirts" } },
-        { "type": "category", "settings": { "top_left": "03 / Hooded", "top_right": "From £65.00", "title": "Hoodies" } },
-        { "type": "category", "settings": { "top_left": "04 / Extras", "top_right": "From £5.00", "title": "Accessories" } }
+        { "type": "category", "settings": { "top_left": "01 / Cotton", "top_right": "From £29.99", "title": "T-Shirts", "collection_handle": "t-shirts" } },
+        { "type": "category", "settings": { "top_left": "02 / Heavy", "top_right": "From £42.00", "title": "Sweatshirts", "collection_handle": "sweatshirts" } },
+        { "type": "category", "settings": { "top_left": "03 / Hooded", "top_right": "From £65.00", "title": "Hoodies", "collection_handle": "hoodies" } },
+        { "type": "category", "settings": { "top_left": "04 / Extras", "top_right": "From £5.00", "title": "Accessories", "collection_handle": "accessories" } }
       ]
     }
   ]
