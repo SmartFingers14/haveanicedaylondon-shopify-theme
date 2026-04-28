@@ -1,27 +1,77 @@
-<!-- HAVE A NICE DAY — Header: Logo Left, Nav Right -->
+<!-- HAVE A NICE DAY — Header matching reference design -->
 <style>
-  /* ===== ANNOUNCE BAR ===== */
-  .hand-announce {
-    background: var(--ink);
+  /* ===== TOP BAR ===== */
+  .hand-topbar {
+    background: var(--ink, #1a1a1a);
     color: #fff;
-    padding: 10px 0;
-    text-align: center;
-    font-family: var(--mono);
-    font-size: 11px;
-    letter-spacing: .18em;
-    text-transform: uppercase;
+    height: 36px;
+    display: flex;
+    align-items: center;
     position: relative;
     z-index: 80;
   }
+  .hand-topbar-inner {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    width: 100%;
+    max-width: var(--maxw, 1400px);
+    margin: 0 auto;
+    padding: 0 28px;
+  }
+  .hand-topbar-left {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-family: var(--mono, 'Courier New', monospace);
+    font-size: 10px;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: #fff;
+  }
+  .hand-topbar-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #e91e8c;
+    flex-shrink: 0;
+  }
+  .hand-topbar-center {
+    font-family: var(--mono, 'Courier New', monospace);
+    font-size: 10px;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+  }
+  .hand-topbar-right {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    justify-content: flex-end;
+    font-family: var(--mono, 'Courier New', monospace);
+    font-size: 10px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: #fff;
+  }
+  .hand-topbar-right a {
+    color: #fff;
+    text-decoration: none;
+    transition: color .2s;
+  }
+  .hand-topbar-right a:hover { color: #e91e8c; }
+  .hand-topbar-sep {
+    opacity: .35;
+  }
 
-  /* ===== NAV ===== */
+  /* ===== MAIN NAV ===== */
   .hand-nav {
     position: sticky;
     top: 0;
     z-index: 70;
-    background: rgba(244, 241, 234, .97);
-    backdrop-filter: saturate(160%) blur(12px);
-    -webkit-backdrop-filter: saturate(160%) blur(12px);
+    background: #f4f1ea;
     border-bottom: 1px solid rgba(0,0,0,.1);
     transition: box-shadow .3s ease;
   }
@@ -29,118 +79,129 @@
     box-shadow: 0 2px 20px rgba(0,0,0,.08);
   }
   .hand-nav-inner {
-    display: flex;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
     align-items: center;
-    justify-content: space-between;
-    height: 68px;
-    max-width: var(--maxw);
+    height: 64px;
+    max-width: var(--maxw, 1400px);
     margin: 0 auto;
-    padding: 0 32px;
-    gap: 24px;
+    padding: 0 28px;
+    gap: 32px;
   }
 
-  /* Left: Logo */
+  /* Logo */
   .hand-logo {
     display: flex;
     flex-direction: column;
     text-decoration: none;
-    color: var(--ink);
+    color: var(--ink, #1a1a1a);
     line-height: 1;
     flex-shrink: 0;
   }
   .hand-logo .l1 {
     font-family: 'Anton', Impact, sans-serif;
-    font-size: 19px;
+    font-size: 18px;
     text-transform: uppercase;
-    letter-spacing: .02em;
+    letter-spacing: .01em;
+    font-weight: 900;
   }
   .hand-logo .l2 {
-    font-family: var(--mono);
+    font-family: var(--mono, 'Courier New', monospace);
     font-size: 9px;
-    letter-spacing: .22em;
+    letter-spacing: .2em;
     text-transform: uppercase;
-    color: #999;
+    color: #888;
     margin-top: 3px;
   }
 
-  /* Right: nav links + icons */
-  .hand-nav-right {
-    display: flex;
-    align-items: center;
-    gap: 4px;
-  }
-
-  /* Nav links */
-  .hand-nav-link {
-    font-family: var(--mono);
-    text-transform: uppercase;
-    font-size: 11px;
-    letter-spacing: .18em;
-    font-weight: 500;
-    color: var(--ink);
-    padding: 8px 14px;
-    text-decoration: none;
-    border-bottom: 1.5px solid transparent;
-    transition: border-color .2s, color .2s;
-    white-space: nowrap;
-  }
-  .hand-nav-link:hover {
-    border-bottom-color: var(--ink);
-  }
-
-  /* Divider between links and icons */
-  .hand-nav-divider {
-    width: 1px;
-    height: 20px;
-    background: rgba(0,0,0,.15);
-    margin: 0 8px;
-    flex-shrink: 0;
-  }
-
-  /* Icon buttons */
-  .hand-icon-btn {
-    width: 40px;
-    height: 40px;
+  /* Center nav links */
+  .hand-nav-links {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: none;
-    border: none;
-    cursor: pointer;
-    color: var(--ink);
-    transition: color .2s;
+    gap: 0;
+  }
+  .hand-nav-link {
+    font-family: var(--mono, 'Courier New', monospace);
+    text-transform: uppercase;
+    font-size: 11px;
+    letter-spacing: .16em;
+    font-weight: 600;
+    color: var(--ink, #1a1a1a);
+    padding: 8px 18px;
     text-decoration: none;
-    font-size: 18px;
+    position: relative;
+    transition: color .2s;
+    white-space: nowrap;
+  }
+  .hand-nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 4px;
+    left: 18px;
+    right: 18px;
+    height: 1.5px;
+    background: var(--ink, #1a1a1a);
+    transform: scaleX(0);
+    transition: transform .2s;
+  }
+  .hand-nav-link:hover::after { transform: scaleX(1); }
+  .hand-nav-link:hover { color: var(--ink, #1a1a1a); }
+
+  /* Right: search, account, bag */
+  .hand-nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 4px;
     flex-shrink: 0;
   }
-  .hand-icon-btn:hover { color: var(--pink); }
-
-  /* Bag button */
-  .hand-bag-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 7px;
-    padding: 9px 16px;
-    background: var(--ink);
-    color: #fff;
-    font-family: var(--mono);
+  .hand-action-btn {
+    font-family: var(--mono, 'Courier New', monospace);
     font-size: 11px;
     letter-spacing: .14em;
     text-transform: uppercase;
+    font-weight: 600;
+    color: var(--ink, #1a1a1a);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px 12px;
+    text-decoration: none;
+    transition: color .2s;
+    white-space: nowrap;
+  }
+  .hand-action-btn:hover { color: #e91e8c; }
+
+  /* Bag button — dark pill */
+  .hand-bag-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 18px;
+    background: var(--ink, #1a1a1a);
+    color: #fff;
+    font-family: var(--mono, 'Courier New', monospace);
+    font-size: 11px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    font-weight: 700;
     transition: background .2s;
     border: none;
     text-decoration: none;
     cursor: pointer;
+    margin-left: 8px;
+  }
+  .hand-bag-btn:hover { background: #e91e8c; }
+  .hand-bag-dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: #e91e8c;
     flex-shrink: 0;
   }
-  .hand-bag-btn:hover { background: var(--pink); }
-  .hand-bag-count {
-    font-weight: 700;
-    min-width: 14px;
-    text-align: center;
-  }
+  .hand-bag-btn:hover .hand-bag-dot { background: #fff; }
 
-  /* Burger (mobile only) */
+  /* Mobile burger */
   .hand-burger {
     display: none;
     width: 40px;
@@ -159,17 +220,15 @@
     display: block;
     width: 18px;
     height: 1.5px;
-    background: var(--ink);
+    background: var(--ink, #1a1a1a);
   }
 
   /* ===== MOBILE MENU ===== */
   .hand-mob-menu {
     position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
+    top: 0; right: 0; bottom: 0;
     width: min(340px, 88vw);
-    background: var(--ink);
+    background: var(--ink, #1a1a1a);
     color: #fff;
     z-index: 500;
     transform: translateX(100%);
@@ -192,133 +251,123 @@
     color: #fff;
   }
   .hand-mob-close {
-    width: 38px;
-    height: 38px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    width: 38px; height: 38px;
+    display: flex; align-items: center; justify-content: center;
     border: 1px solid rgba(255,255,255,.15);
-    background: none;
-    color: #fff;
-    font-size: 16px;
-    cursor: pointer;
+    background: none; color: #fff; font-size: 16px; cursor: pointer;
     transition: background .2s;
   }
-  .hand-mob-close:hover { background: var(--pink); border-color: var(--pink); }
+  .hand-mob-close:hover { background: #e91e8c; border-color: #e91e8c; }
   .hand-mob-body {
-    flex: 1;
-    padding: 28px 24px;
-    display: flex;
-    flex-direction: column;
-    overflow-y: auto;
+    flex: 1; padding: 28px 24px;
+    display: flex; flex-direction: column; overflow-y: auto;
   }
   .hand-mob-link {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    display: flex; align-items: center; justify-content: space-between;
     padding: 16px 0;
-    font-family: var(--body);
-    font-size: 18px;
-    font-weight: 500;
-    color: #fff;
+    font-family: var(--body, sans-serif);
+    font-size: 18px; font-weight: 500; color: #fff;
     border-bottom: 1px solid rgba(255,255,255,.07);
     text-decoration: none;
     transition: color .2s, padding-left .2s;
   }
-  .hand-mob-link:hover { color: var(--pink); padding-left: 6px; }
+  .hand-mob-link:hover { color: #e91e8c; padding-left: 6px; }
   .hand-mob-link .arr { opacity: .4; font-size: 14px; }
   .hand-mob-foot {
     padding: 20px 24px;
     border-top: 1px solid rgba(255,255,255,.08);
-    display: flex;
-    gap: 10px;
+    display: flex; gap: 10px;
   }
   .hand-mob-foot a {
-    flex: 1;
-    padding: 13px;
-    text-align: center;
-    font-family: var(--mono);
-    font-size: 10px;
-    letter-spacing: .18em;
-    text-transform: uppercase;
-    border: 1px solid rgba(255,255,255,.15);
-    color: #fff;
-    text-decoration: none;
-    transition: background .2s;
+    flex: 1; padding: 13px; text-align: center;
+    font-family: var(--mono, monospace); font-size: 10px;
+    letter-spacing: .18em; text-transform: uppercase;
+    border: 1px solid rgba(255,255,255,.15); color: #fff;
+    text-decoration: none; transition: background .2s;
   }
-  .hand-mob-foot a:hover { background: var(--pink); border-color: var(--pink); }
+  .hand-mob-foot a:hover { background: #e91e8c; border-color: #e91e8c; }
 
-  @media (max-width: 820px) {
-    .hand-nav-inner { padding: 0 20px; }
+  /* Responsive */
+  @media (max-width: 900px) {
+    .hand-nav-inner { grid-template-columns: auto 1fr; gap: 16px; padding: 0 20px; }
     .hand-nav-links { display: none; }
-    .hand-nav-divider { display: none; }
+    .hand-nav-actions .hand-action-btn { display: none; }
     .hand-burger { display: flex; }
-    .hand-bag-btn { padding: 9px 14px; }
+    .hand-bag-btn { margin-left: 0; }
   }
-  @media (max-width: 480px) {
+  @media (max-width: 600px) {
+    .hand-topbar-left { display: none; }
+    .hand-topbar-right { display: none; }
+    .hand-topbar-inner { grid-template-columns: 1fr; }
+    .hand-topbar-center { font-size: 9px; }
     .hand-logo .l2 { display: none; }
   }
 </style>
 
-<!-- Announcement Bar -->
-{%- if section.settings.announce_text != blank -%}
-  <div class="hand-announce">{{ section.settings.announce_text }}</div>
-{%- endif -%}
+<!-- TOP BAR -->
+<div class="hand-topbar">
+  <div class="hand-topbar-inner">
+    <div class="hand-topbar-left">
+      <span class="hand-topbar-dot"></span>
+      EST. CAMDEN 1990
+    </div>
+    <div class="hand-topbar-center">
+      {%- if section.settings.announce_text != blank -%}
+        {{ section.settings.announce_text }}
+      {%- else -%}
+        FREE UK SHIPPING OVER &pound;75 &mdash; ORGANIC COTTON &mdash; UK PRINTED
+      {%- endif -%}
+    </div>
+    <div class="hand-topbar-right">
+      <span>EN / &pound; GBP</span>
+      <span class="hand-topbar-sep">|</span>
+      <a href="/pages/help">HELP</a>
+    </div>
+  </div>
+</div>
 
-<!-- Navigation -->
+<!-- MAIN NAV -->
 <nav class="hand-nav" id="handNav" role="navigation" aria-label="Main navigation">
   <div class="hand-nav-inner">
 
-    <!-- Left: Logo -->
+    <!-- Logo (left) -->
     <a class="hand-logo" href="{{ routes.root_url }}" aria-label="{{ shop.name }}">
       {%- if settings.logo != blank -%}
         <img src="{{ settings.logo | image_url: width: 220 }}" alt="{{ shop.name | escape }}" width="110" height="36" loading="eager">
       {%- else -%}
-        <span class="l1">Have A Nice Day®</span>
-        <span class="l2">London · Since 1990</span>
+        <span class="l1">Have A Nice Day&reg;</span>
+        <span class="l2">London &mdash; Since 1990</span>
       {%- endif -%}
     </a>
 
-    <!-- Right: Nav links + Search + Bag + Burger -->
-    <div class="hand-nav-right">
+    <!-- Nav links (center) -->
+    <div class="hand-nav-links">
+      <a class="hand-nav-link" href="/collections/all">Merchandise</a>
+      <a class="hand-nav-link" href="/pages/about-us">About Us</a>
+      <a class="hand-nav-link" href="/pages/contact">Contact</a>
+    </div>
 
-      <!-- 3 Nav links -->
-      <div class="hand-nav-links" style="display:flex;align-items:center;gap:2px;">
-        <a class="hand-nav-link" href="/collections/all">Merchandise</a>
-        <a class="hand-nav-link" href="/pages/about-us">About Us</a>
-        <a class="hand-nav-link" href="/pages/contact">Contact</a>
-      </div>
-
-      <!-- Divider -->
-      <div class="hand-nav-divider"></div>
-
-      <!-- Search icon -->
-      <button class="hand-icon-btn" data-open-search aria-label="Search">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
-        </svg>
-      </button>
-
-      <!-- Bag button -->
+    <!-- Actions (right) -->
+    <div class="hand-nav-actions">
+      <button class="hand-action-btn" data-open-search aria-label="Search">SEARCH</button>
+      <a class="hand-action-btn" href="{{ routes.account_url }}">ACCOUNT</a>
       <a class="hand-bag-btn" href="{{ routes.cart_url }}" aria-label="Cart ({{ cart.item_count }} items)">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/>
-        </svg>
-        <b class="hand-bag-count" id="handCartCount">{{ cart.item_count }}</b>
+        BAG
+        <span class="hand-bag-dot"></span>
+        <span id="handCartCount">{{ cart.item_count }}</span>
       </a>
-
-      <!-- Mobile burger -->
       <button class="hand-burger" id="handBurger" aria-label="Open menu" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
     </div>
+
   </div>
 </nav>
 
 <!-- Mobile Menu -->
 <div class="hand-mob-menu" id="handMobMenu" aria-hidden="true" role="dialog" aria-label="Mobile navigation">
   <div class="hand-mob-head">
-    <div class="hand-mob-logo">Have A Nice Day®</div>
+    <div class="hand-mob-logo">Have A Nice Day&reg;</div>
     <button class="hand-mob-close" id="handMobClose" aria-label="Close menu">&#x2715;</button>
   </div>
   <div class="hand-mob-body">
