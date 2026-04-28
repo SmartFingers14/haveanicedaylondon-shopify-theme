@@ -1,0 +1,968 @@
+<!-- HAVE A NICE DAY — About Us / Our Story Page -->
+<style>
+  /* ===== ABOUT US PAGE ===== */
+  .hand-about {
+    background: #0a0a0a;
+    color: #fff;
+    font-family: 'Inter', system-ui, sans-serif;
+    overflow-x: hidden;
+  }
+
+  /* ===== HERO ===== */
+  .hand-about-hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 0 0 80px;
+    position: relative;
+    overflow: hidden;
+    background: #0a0a0a;
+  }
+  .hand-about-hero-bg {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 60% 40%, rgba(233,30,140,0.12) 0%, transparent 60%),
+                radial-gradient(ellipse at 20% 80%, rgba(79,194,247,0.06) 0%, transparent 50%);
+    pointer-events: none;
+  }
+  .hand-about-hero-year {
+    position: absolute;
+    top: 50%;
+    right: -2vw;
+    transform: translateY(-50%);
+    font-family: 'Anton', Impact, sans-serif;
+    font-size: clamp(120px, 22vw, 340px);
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(255,255,255,.04);
+    line-height: 1;
+    user-select: none;
+    pointer-events: none;
+    letter-spacing: -.02em;
+  }
+  .hand-about-hero-inner {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 48px;
+    position: relative;
+    z-index: 2;
+  }
+  .hand-about-hero-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: .3em;
+    text-transform: uppercase;
+    color: #e91e8c;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .hand-about-hero-tag::before {
+    content: '';
+    width: 40px;
+    height: 1px;
+    background: #e91e8c;
+  }
+  .hand-about-hero-h1 {
+    font-family: 'Anton', Impact, sans-serif;
+    font-size: clamp(52px, 10vw, 140px);
+    text-transform: uppercase;
+    line-height: .9;
+    letter-spacing: -.02em;
+    margin: 0 0 32px;
+    color: #fff;
+  }
+  .hand-about-hero-h1 .pink { color: #e91e8c; }
+  .hand-about-hero-h1 .outline {
+    color: transparent;
+    -webkit-text-stroke: 2px #fff;
+  }
+  .hand-about-hero-sub {
+    font-size: 18px;
+    line-height: 1.65;
+    color: #888;
+    max-width: 600px;
+    margin: 0 0 48px;
+  }
+  .hand-about-hero-stats {
+    display: flex;
+    gap: 48px;
+    flex-wrap: wrap;
+  }
+  .hand-about-hero-stat {}
+  .hand-about-hero-stat-num {
+    font-family: 'Anton', Impact, sans-serif;
+    font-size: 36px;
+    color: #e91e8c;
+    line-height: 1;
+    display: block;
+  }
+  .hand-about-hero-stat-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    color: #555;
+    margin-top: 4px;
+    display: block;
+  }
+  .hand-about-scroll-hint {
+    position: absolute;
+    bottom: 32px;
+    right: 48px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    color: #333;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    writing-mode: vertical-rl;
+  }
+
+  /* ===== TICKER ===== */
+  .hand-about-ticker {
+    background: #e91e8c;
+    overflow: hidden;
+    padding: 14px 0;
+    border-top: 1px solid rgba(255,255,255,.1);
+    border-bottom: 1px solid rgba(255,255,255,.1);
+  }
+  .hand-about-ticker-inner {
+    display: flex;
+    animation: about-ticker 40s linear infinite;
+    white-space: nowrap;
+    width: max-content;
+  }
+  .hand-about-ticker-item {
+    font-family: 'Anton', Impact, sans-serif;
+    font-size: 13px;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: #fff;
+    padding: 0 28px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .hand-about-ticker-item .sep {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: rgba(255,255,255,.5);
+    flex-shrink: 0;
+  }
+  @keyframes about-ticker {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  /* ===== CHAPTER SECTIONS ===== */
+  .hand-about-chapter {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 120px 48px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+  .hand-about-chapter.reverse { direction: rtl; }
+  .hand-about-chapter.reverse > * { direction: ltr; }
+  .hand-about-chapter-text {}
+  .hand-about-chapter-num {
+    font-family: 'Anton', Impact, sans-serif;
+    font-size: clamp(80px, 14vw, 200px);
+    color: transparent;
+    -webkit-text-stroke: 1px #1a1a1a;
+    line-height: .85;
+    margin-bottom: -20px;
+    display: block;
+    user-select: none;
+  }
+  .hand-about-chapter-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: .3em;
+    text-transform: uppercase;
+    color: #e91e8c;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .hand-about-chapter-tag::before {
+    content: '';
+    width: 28px;
+    height: 1px;
+    background: #e91e8c;
+  }
+  .hand-about-chapter-h2 {
+    font-family: 'Anton', Impact, sans-serif;
+    font-size: clamp(32px, 4vw, 56px);
+    text-transform: uppercase;
+    line-height: .95;
+    letter-spacing: -.01em;
+    color: #fff;
+    margin: 0 0 24px;
+  }
+  .hand-about-chapter-h2 .pink { color: #e91e8c; }
+  .hand-about-chapter-body {
+    font-size: 16px;
+    line-height: 1.8;
+    color: #888;
+    margin: 0 0 32px;
+  }
+  .hand-about-chapter-body strong { color: #ccc; font-weight: 600; }
+  .hand-about-chapter-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: #e91e8c;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(233,30,140,.3);
+    padding-bottom: 4px;
+    transition: border-color .2s, gap .2s;
+  }
+  .hand-about-chapter-cta:hover { border-color: #e91e8c; gap: 16px; }
+
+  /* Visual side */
+  .hand-about-chapter-visual {
+    position: relative;
+  }
+  .hand-about-chapter-img {
+    width: 100%;
+    aspect-ratio: 4/5;
+    object-fit: cover;
+    display: block;
+    filter: grayscale(20%);
+    transition: filter .4s;
+  }
+  .hand-about-chapter-img:hover { filter: grayscale(0%); }
+  .hand-about-chapter-badge {
+    position: absolute;
+    bottom: -20px;
+    left: -20px;
+    background: #e91e8c;
+    padding: 20px 24px;
+    font-family: 'Anton', Impact, sans-serif;
+    font-size: 13px;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: #fff;
+    line-height: 1.3;
+  }
+  .hand-about-chapter-badge span {
+    display: block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: .22em;
+    color: rgba(255,255,255,.7);
+    margin-bottom: 4px;
+  }
+
+  /* ===== DIVIDER ===== */
+  .hand-about-divider {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 48px;
+    border-top: 1px solid #1a1a1a;
+  }
+
+  /* ===== QUOTE BLOCK ===== */
+  .hand-about-quote {
+    background: #111;
+    padding: 100px 48px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hand-about-quote::before {
+    content: '"';
+    position: absolute;
+    top: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Anton', Impact, sans-serif;
+    font-size: 300px;
+    color: rgba(233,30,140,.04);
+    line-height: 1;
+    pointer-events: none;
+  }
+  .hand-about-quote-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+  .hand-about-quote-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: .3em;
+    text-transform: uppercase;
+    color: #e91e8c;
+    margin-bottom: 32px;
+    display: block;
+  }
+  .hand-about-quote-text {
+    font-family: 'Anton', Impact, sans-serif;
+    font-size: clamp(28px, 4vw, 52px);
+    text-transform: uppercase;
+    line-height: 1.1;
+    color: #fff;
+    margin: 0 0 24px;
+    letter-spacing: -.01em;
+  }
+  .hand-about-quote-text .pink { color: #e91e8c; }
+  .hand-about-quote-attr {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    color: #444;
+  }
+
+  /* ===== TIMELINE ===== */
+  .hand-about-timeline {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 120px 48px;
+  }
+  .hand-about-timeline-head {
+    margin-bottom: 80px;
+  }
+  .hand-about-timeline-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: .3em;
+    text-transform: uppercase;
+    color: #e91e8c;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .hand-about-timeline-tag::before {
+    content: '';
+    width: 28px;
+    height: 1px;
+    background: #e91e8c;
+  }
+  .hand-about-timeline-h2 {
+    font-family: 'Anton', Impact, sans-serif;
+    font-size: clamp(36px, 5vw, 72px);
+    text-transform: uppercase;
+    line-height: .9;
+    color: #fff;
+    margin: 0;
+    letter-spacing: -.02em;
+  }
+  .hand-about-timeline-h2 .pink { color: #e91e8c; }
+  .hand-about-timeline-items {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    position: relative;
+  }
+  .hand-about-timeline-items::before {
+    content: '';
+    position: absolute;
+    left: 80px;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: linear-gradient(to bottom, transparent, #e91e8c 10%, #e91e8c 90%, transparent);
+  }
+  .hand-about-timeline-item {
+    display: grid;
+    grid-template-columns: 160px 1fr;
+    gap: 48px;
+    padding: 48px 0;
+    border-bottom: 1px solid #111;
+    position: relative;
+  }
+  .hand-about-timeline-item::before {
+    content: '';
+    position: absolute;
+    left: 76px;
+    top: 56px;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: #e91e8c;
+    box-shadow: 0 0 0 3px rgba(233,30,140,.2);
+  }
+  .hand-about-timeline-year {
+    font-family: 'Anton', Impact, sans-serif;
+    font-size: 28px;
+    color: #333;
+    padding-top: 4px;
+    text-align: right;
+    padding-right: 40px;
+  }
+  .hand-about-timeline-content {}
+  .hand-about-timeline-title {
+    font-family: 'Anton', Impact, sans-serif;
+    font-size: 22px;
+    text-transform: uppercase;
+    color: #fff;
+    margin: 0 0 10px;
+    letter-spacing: .01em;
+  }
+  .hand-about-timeline-desc {
+    font-size: 15px;
+    line-height: 1.75;
+    color: #666;
+    margin: 0;
+  }
+  .hand-about-timeline-desc strong { color: #aaa; }
+
+  /* ===== CHARACTERS GRID ===== */
+  .hand-about-chars {
+    background: #0d0d0d;
+    padding: 120px 48px;
+  }
+  .hand-about-chars-inner {
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  .hand-about-chars-head {
+    margin-bottom: 64px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 24px;
+  }
+  .hand-about-chars-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: .3em;
+    text-transform: uppercase;
+    color: #e91e8c;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .hand-about-chars-tag::before {
+    content: '';
+    width: 28px;
+    height: 1px;
+    background: #e91e8c;
+  }
+  .hand-about-chars-h2 {
+    font-family: 'Anton', Impact, sans-serif;
+    font-size: clamp(32px, 4vw, 60px);
+    text-transform: uppercase;
+    line-height: .9;
+    color: #fff;
+    margin: 0;
+    letter-spacing: -.02em;
+  }
+  .hand-about-chars-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+  }
+  .hand-about-char-card {
+    background: #111;
+    padding: 40px 32px;
+    position: relative;
+    overflow: hidden;
+    transition: background .3s;
+    cursor: default;
+  }
+  .hand-about-char-card:hover { background: #161616; }
+  .hand-about-char-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: #e91e8c;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform .4s cubic-bezier(.22,1,.36,1);
+  }
+  .hand-about-char-card:hover::before { transform: scaleX(1); }
+  .hand-about-char-num {
+    font-family: 'Anton', Impact, sans-serif;
+    font-size: 64px;
+    color: transparent;
+    -webkit-text-stroke: 1px #1e1e1e;
+    line-height: 1;
+    margin-bottom: -8px;
+    display: block;
+    transition: -webkit-text-stroke-color .3s;
+  }
+  .hand-about-char-card:hover .hand-about-char-num {
+    -webkit-text-stroke-color: rgba(233,30,140,.2);
+  }
+  .hand-about-char-name {
+    font-family: 'Anton', Impact, sans-serif;
+    font-size: 24px;
+    text-transform: uppercase;
+    color: #fff;
+    margin: 0 0 10px;
+    letter-spacing: .01em;
+  }
+  .hand-about-char-desc {
+    font-size: 14px;
+    line-height: 1.7;
+    color: #555;
+    margin: 0;
+  }
+
+  /* ===== MISSION BLOCK ===== */
+  .hand-about-mission {
+    padding: 120px 48px;
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+  .hand-about-mission-left {}
+  .hand-about-mission-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: .3em;
+    text-transform: uppercase;
+    color: #e91e8c;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .hand-about-mission-tag::before {
+    content: '';
+    width: 28px;
+    height: 1px;
+    background: #e91e8c;
+  }
+  .hand-about-mission-h2 {
+    font-family: 'Anton', Impact, sans-serif;
+    font-size: clamp(36px, 5vw, 72px);
+    text-transform: uppercase;
+    line-height: .9;
+    color: #fff;
+    margin: 0 0 32px;
+    letter-spacing: -.02em;
+  }
+  .hand-about-mission-h2 .pink { color: #e91e8c; }
+  .hand-about-mission-body {
+    font-size: 16px;
+    line-height: 1.8;
+    color: #777;
+    margin: 0 0 40px;
+  }
+  .hand-about-mission-body strong { color: #ccc; }
+  .hand-about-mission-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: #e91e8c;
+    color: #fff;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    padding: 18px 32px;
+    text-decoration: none;
+    transition: background .2s, gap .2s;
+  }
+  .hand-about-mission-cta:hover { background: #c4186e; gap: 18px; }
+  .hand-about-mission-right {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .hand-about-mission-fact {
+    background: #111;
+    padding: 28px 24px;
+    border-left: 2px solid #e91e8c;
+  }
+  .hand-about-mission-fact-num {
+    font-family: 'Anton', Impact, sans-serif;
+    font-size: 36px;
+    color: #e91e8c;
+    line-height: 1;
+    display: block;
+    margin-bottom: 6px;
+  }
+  .hand-about-mission-fact-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: #555;
+  }
+
+  /* ===== BIG WORDMARK ===== */
+  .hand-about-wordmark {
+    text-align: center;
+    padding: 80px 48px 60px;
+    overflow: hidden;
+    border-top: 1px solid #111;
+  }
+  .hand-about-wordmark-text {
+    font-family: 'Anton', Impact, sans-serif;
+    font-size: clamp(48px, 12vw, 180px);
+    text-transform: uppercase;
+    letter-spacing: -.02em;
+    line-height: .85;
+    color: transparent;
+    -webkit-text-stroke: 1px #1a1a1a;
+    user-select: none;
+    transition: -webkit-text-stroke-color .4s;
+  }
+  .hand-about-wordmark:hover .hand-about-wordmark-text {
+    -webkit-text-stroke-color: #e91e8c;
+  }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 1024px) {
+    .hand-about-chapter,
+    .hand-about-mission { grid-template-columns: 1fr; gap: 48px; padding: 80px 32px; }
+    .hand-about-chapter.reverse { direction: ltr; }
+    .hand-about-timeline { padding: 80px 32px; }
+    .hand-about-chars { padding: 80px 32px; }
+    .hand-about-chars-grid { grid-template-columns: 1fr 1fr; }
+    .hand-about-timeline-items::before { left: 60px; }
+    .hand-about-timeline-item { grid-template-columns: 120px 1fr; gap: 32px; }
+    .hand-about-timeline-item::before { left: 56px; }
+  }
+  @media (max-width: 640px) {
+    .hand-about-hero-inner { padding: 0 20px; }
+    .hand-about-hero-stats { gap: 28px; }
+    .hand-about-chapter,
+    .hand-about-mission { padding: 60px 20px; }
+    .hand-about-timeline { padding: 60px 20px; }
+    .hand-about-chars { padding: 60px 20px; }
+    .hand-about-chars-grid { grid-template-columns: 1fr; }
+    .hand-about-timeline-items::before { display: none; }
+    .hand-about-timeline-item { grid-template-columns: 1fr; gap: 8px; }
+    .hand-about-timeline-item::before { display: none; }
+    .hand-about-timeline-year { text-align: left; padding-right: 0; }
+    .hand-about-quote { padding: 60px 20px; }
+    .hand-about-wordmark { padding: 48px 20px; }
+    .hand-about-mission-right { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+
+<div class="hand-about">
+
+  <!-- ===== HERO ===== -->
+  <section class="hand-about-hero">
+    <div class="hand-about-hero-bg"></div>
+    <div class="hand-about-hero-year" aria-hidden="true">1990</div>
+    <div class="hand-about-hero-inner">
+      <div class="hand-about-hero-tag">The Urban Fashion Legend</div>
+      <h1 class="hand-about-hero-h1">
+        Born In<br>
+        <span class="pink">Camden.</span><br>
+        <span class="outline">Raised By Rave.</span>
+      </h1>
+      <p class="hand-about-hero-sub">
+        In 1990, in the back rooms of Camden's underground rave scene, a hand-drawn character named Sam The Man became the face of a movement. This is that story.
+      </p>
+      <div class="hand-about-hero-stats">
+        <div class="hand-about-hero-stat">
+          <span class="hand-about-hero-stat-num">1990</span>
+          <span class="hand-about-hero-stat-label">Founded — Camden</span>
+        </div>
+        <div class="hand-about-hero-stat">
+          <span class="hand-about-hero-stat-num">09</span>
+          <span class="hand-about-hero-stat-label">Cult Sub-Brands</span>
+        </div>
+        <div class="hand-about-hero-stat">
+          <span class="hand-about-hero-stat-num">17</span>
+          <span class="hand-about-hero-stat-label">Years Away</span>
+        </div>
+        <div class="hand-about-hero-stat">
+          <span class="hand-about-hero-stat-num">Back.</span>
+          <span class="hand-about-hero-stat-label">For Real</span>
+        </div>
+      </div>
+    </div>
+    <div class="hand-about-scroll-hint" aria-hidden="true">Scroll to explore</div>
+  </section>
+
+  <!-- ===== TICKER ===== -->
+  <div class="hand-about-ticker" aria-hidden="true">
+    <div class="hand-about-ticker-inner">
+      {%- for i in (1..10) -%}
+        <div class="hand-about-ticker-item">Camden 1990 <span class="sep"></span></div>
+        <div class="hand-about-ticker-item">Sam The Man <span class="sep"></span></div>
+        <div class="hand-about-ticker-item">Shurl The Girl <span class="sep"></span></div>
+        <div class="hand-about-ticker-item">Organic Cotton <span class="sep"></span></div>
+        <div class="hand-about-ticker-item">UK Printed <span class="sep"></span></div>
+        <div class="hand-about-ticker-item">Have A Nice Day® <span class="sep"></span></div>
+      {%- endfor -%}
+    </div>
+  </div>
+
+  <!-- ===== CHAPTER 1: THE BEGINNING ===== -->
+  <section class="hand-about-chapter">
+    <div class="hand-about-chapter-text">
+      <span class="hand-about-chapter-num" aria-hidden="true">01</span>
+      <div class="hand-about-chapter-tag">Today's Story</div>
+      <h2 class="hand-about-chapter-h2">The <span class="pink">Return</span> Of A Legend</h2>
+      <p class="hand-about-chapter-body">
+        In August 2005, the Have A Nice Day store in Notting Hill had a 4-week half-price closing down sale. Customers initially thought it was a relocation — the inevitable move to much-needed larger premises. When questioned by tearful teenagers, all we could say was: <strong>this was not the end of the story.</strong>
+      </p>
+      <p class="hand-about-chapter-body">
+        True to our word — Have A Nice Day, the urban fashion legend, after <strong>17 years away</strong>... is now finally back.
+      </p>
+      <a href="/collections/all" class="hand-about-chapter-cta">Shop The Return →</a>
+    </div>
+    <div class="hand-about-chapter-visual">
+      <img
+        src="{{ 'IMG_2861.jpg' | file_img_url: '800x' | default: 'https://www.haveanicedaylondonstore.com/cdn/shop/files/IMG_2861.jpg?v=1696499421&width=800' }}"
+        alt="Have A Nice Day London — Camden 1990"
+        class="hand-about-chapter-img"
+        loading="lazy"
+        onerror="this.src='https://www.haveanicedaylondonstore.com/cdn/shop/files/IMG_2861.jpg?v=1696499421&width=800'"
+      >
+      <div class="hand-about-chapter-badge">
+        <span>Est.</span>
+        Camden 1990
+      </div>
+    </div>
+  </section>
+
+  <div class="hand-about-divider"></div>
+
+  <!-- ===== CHAPTER 2: THE FOUNDER ===== -->
+  <section class="hand-about-chapter reverse">
+    <div class="hand-about-chapter-text">
+      <span class="hand-about-chapter-num" aria-hidden="true">02</span>
+      <div class="hand-about-chapter-tag">The History Of...</div>
+      <h2 class="hand-about-chapter-h2">Anthony <span class="pink">Cooper</span></h2>
+      <p class="hand-about-chapter-body">
+        Anthony Cooper admits to a checked career whilst learning his trade. Starting with Dizzy Skates in the 1980s, he took over <strong>Slick Willies</strong> — the American Sports store on Kensington High Street. It was this move that sparked his love for Americana.
+      </p>
+      <p class="hand-about-chapter-body">
+        Running one of London's key American stores led to being one of the first NFL licensees. A stint as an independent agent for Fruit of the Loom led to his first t-shirt brand, <strong>Shark Shirts, London–Los Angeles</strong>. Then came a pop song, a Mac recording studio called "Drink Me Studios", and a record label called 100 2 One.
+      </p>
+      <p class="hand-about-chapter-body">
+        Struggling to make ends meet, he accepted a proposition to revive a large second-hand clothing store in Camden — the American Rag Store. It was here, in a dark corridor leading to the toilets, that <strong>Have A Nice Day was born</strong> — as a Hanes American t-shirt concession selling plain American sportswear in all sizes and colours. Searching for an American-sounding trading name, Ant came up with the iconic... <strong>Have A Nice Day!</strong>
+      </p>
+    </div>
+    <div class="hand-about-chapter-visual">
+      <img
+        src="https://www.haveanicedaylondonstore.com/cdn/shop/files/IMG_2861.jpg?v=1696499421&width=800"
+        alt="Anthony Cooper — Founder of Have A Nice Day"
+        class="hand-about-chapter-img"
+        loading="lazy"
+      >
+      <div class="hand-about-chapter-badge">
+        <span>Founder</span>
+        Anthony Cooper
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== QUOTE ===== -->
+  <div class="hand-about-quote">
+    <div class="hand-about-quote-inner">
+      <span class="hand-about-quote-tag">The Moment It All Started</span>
+      <p class="hand-about-quote-text">
+        By chance, Ant had again found himself in the right place... at the <span class="pink">right time.</span> The Summer of Love in Camden Market — one of the go-to destinations for the exploding rave scene.
+      </p>
+      <span class="hand-about-quote-attr">— Camden Market, 1990</span>
+    </div>
+  </div>
+
+  <!-- ===== TIMELINE ===== -->
+  <section class="hand-about-timeline">
+    <div class="hand-about-timeline-head">
+      <div class="hand-about-timeline-tag">The Journey</div>
+      <h2 class="hand-about-timeline-h2">From Camden<br><span class="pink">To The World.</span></h2>
+    </div>
+    <div class="hand-about-timeline-items">
+      <div class="hand-about-timeline-item">
+        <div class="hand-about-timeline-year">1980s</div>
+        <div class="hand-about-timeline-content">
+          <h3 class="hand-about-timeline-title">Dizzy Skates → Slick Willies</h3>
+          <p class="hand-about-timeline-desc">Anthony Cooper begins his retail career, eventually taking over <strong>Slick Willies</strong> on Kensington High Street — one of London's key American sports stores. His love for Americana is ignited.</p>
+        </div>
+      </div>
+      <div class="hand-about-timeline-item">
+        <div class="hand-about-timeline-year">1990</div>
+        <div class="hand-about-timeline-content">
+          <h3 class="hand-about-timeline-title">Have A Nice Day Is Born</h3>
+          <p class="hand-about-timeline-desc">In a dark corridor of Camden's American Rag Store, a Hanes t-shirt concession becomes <strong>Have A Nice Day</strong>. The Summer of Love is in full swing. The rave scene's uniform? Brightly coloured XL American sportswear. Ant is in exactly the right place.</p>
+        </div>
+      </div>
+      <div class="hand-about-timeline-item">
+        <div class="hand-about-timeline-year">1991</div>
+        <div class="hand-about-timeline-content">
+          <h3 class="hand-about-timeline-title">Sam The Man Is Born</h3>
+          <p class="hand-about-timeline-desc">After several redraws, Ant finalises the first Have A Nice Day logo — <strong>Sam The Man</strong>. The trademark is registered. A Have A Nice Day rave track is recorded and, after a mountain of free merchandise, BMG is persuaded to release it.</p>
+        </div>
+      </div>
+      <div class="hand-about-timeline-item">
+        <div class="hand-about-timeline-year">1992</div>
+        <div class="hand-about-timeline-content">
+          <h3 class="hand-about-timeline-title">Into The High Street</h3>
+          <p class="hand-about-timeline-desc">The brand explodes. Have A Nice Day appears in <strong>Selfridges, Boots, C&A, British Home Stores, P&O Ferries</strong>. The myth of the brand grows. Who were we and where did we come from?</p>
+        </div>
+      </div>
+      <div class="hand-about-timeline-item">
+        <div class="hand-about-timeline-year">1993</div>
+        <div class="hand-about-timeline-content">
+          <h3 class="hand-about-timeline-title">Shurl The Girl Arrives</h3>
+          <p class="hand-about-timeline-desc">Following the same 50s retro theme as Sam, <strong>Shurl The Girl</strong> is born. Inspired by Marilyn Monroe, the iconic image is completed when Ant solves the lip problem by placing a big pink bubble over them — creating one of the most recognisable graphics of the decade.</p>
+        </div>
+      </div>
+      <div class="hand-about-timeline-item">
+        <div class="hand-about-timeline-year">1990s</div>
+        <div class="hand-about-timeline-content">
+          <h3 class="hand-about-timeline-title">The Heyday — Notting Hill</h3>
+          <p class="hand-about-timeline-desc">Anthony & Sheilah Cooper reign supreme from a boutique in <strong>Notting Hill Gate</strong> — "a crossroads of the world". Within 18 months of starting with £10 graphic tees at Camden Market, turnover nudges the million mark. <strong>3 pieces in the V&A Street Style exhibition</strong>. Breaking the record for sales per linear foot in the Topshop flagship store.</p>
+        </div>
+      </div>
+      <div class="hand-about-timeline-item">
+        <div class="hand-about-timeline-year">2005</div>
+        <div class="hand-about-timeline-content">
+          <h3 class="hand-about-timeline-title">The Closing Down Sale</h3>
+          <p class="hand-about-timeline-desc">The Notting Hill store closes. Tearful teenagers ask if it's the end. The answer: <strong>"This is not the end of the story."</strong></p>
+        </div>
+      </div>
+      <div class="hand-about-timeline-item">
+        <div class="hand-about-timeline-year">2022+</div>
+        <div class="hand-about-timeline-content">
+          <h3 class="hand-about-timeline-title">The Return</h3>
+          <p class="hand-about-timeline-desc">After 17 years, Have A Nice Day is back. Not as nostalgia — as continuation. Same characters. Same family of cult sub-brands. Now printed on <strong>heavyweight organic cotton, in the UK</strong>, by the people who started it.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CHARACTERS ===== -->
+  <section class="hand-about-chars">
+    <div class="hand-about-chars-inner">
+      <div class="hand-about-chars-head">
+        <div>
+          <div class="hand-about-chars-tag">The Family</div>
+          <h2 class="hand-about-chars-h2">Nine Identities.<br>One Camden HQ.</h2>
+        </div>
+        <a href="/collections" style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#e91e8c;text-decoration:none;">Browse All Brands →</a>
+      </div>
+      <div class="hand-about-chars-grid">
+        <div class="hand-about-char-card">
+          <span class="hand-about-char-num" aria-hidden="true">01</span>
+          <h3 class="hand-about-char-name">Have A Nice Day®</h3>
+          <p class="hand-about-char-desc">The original. The legend. Born Camden 1990 from a Hanes t-shirt concession in a dark corridor. The brand that started it all.</p>
+        </div>
+        <div class="hand-about-char-card">
+          <span class="hand-about-char-num" aria-hidden="true">02</span>
+          <h3 class="hand-about-char-name">Sam The Man</h3>
+          <p class="hand-about-char-desc">The first character. Hand-drawn, trademarked, and adopted by ravers across the UK. The face of a movement. The icon of the 90s rave scene.</p>
+        </div>
+        <div class="hand-about-char-card">
+          <span class="hand-about-char-num" aria-hidden="true">03</span>
+          <h3 class="hand-about-char-name">Shurl The Girl</h3>
+          <p class="hand-about-char-desc">Inspired by Marilyn Monroe. The iconic pink bubble over the lips — born from a creative problem, became the most recognisable graphic of the decade.</p>
+        </div>
+        <div class="hand-about-char-card">
+          <span class="hand-about-char-num" aria-hidden="true">04</span>
+          <h3 class="hand-about-char-name">BTKA</h3>
+          <p class="hand-about-char-desc">Bold. Unapologetic. Raw energy from the underground. BTKA carries the spirit of the rave scene into every print.</p>
+        </div>
+        <div class="hand-about-char-card">
+          <span class="hand-about-char-num" aria-hidden="true">05</span>
+          <h3 class="hand-about-char-name">Handspun Records</h3>
+          <p class="hand-about-char-desc">Where fashion meets music. The label that bridges the gap between the dancefloor and the wardrobe. Vinyl culture, wearable.</p>
+        </div>
+        <div class="hand-about-char-card">
+          <span class="hand-about-char-num" aria-hidden="true">06</span>
+          <h3 class="hand-about-char-name">Dready Original</h3>
+          <p class="hand-about-char-desc">Roots, culture, and colour. Dready brings the warmth and spirit of reggae culture to the Have A Nice Day family.</p>
+        </div>
+        <div class="hand-about-char-card">
+          <span class="hand-about-char-num" aria-hidden="true">07</span>
+          <h3 class="hand-about-char-name">Vortex</h3>
+          <p class="hand-about-char-desc">The psychedelic arm of the family. Swirling energy, cosmic graphics, and the spirit of the underground rave scene.</p>
+        </div>
+        <div class="hand-about-char-card">
+          <span class="hand-about-char-num" aria-hidden="true">08</span>
+          <h3 class="hand-about-char-name">Funky Dog</h3>
+          <p class="hand-about-char-desc">Playful, irreverent, and full of character. Funky Dog is the lighter side of the Have A Nice Day universe.</p>
+        </div>
+        <div class="hand-about-char-card">
+          <span class="hand-about-char-num" aria-hidden="true">09</span>
+          <h3 class="hand-about-char-name">Don't Do The Dodo</h3>
+          <p class="hand-about-char-desc">The conscience of the brand. A call to action. Don't let the things that matter disappear — like the Dodo. Like the rave scene. Like Have A Nice Day itself.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== MISSION ===== -->
+  <section class="hand-about-mission">
+    <div class="hand-about-mission-left">
+      <div class="hand-about-mission-tag">The Shape Of Things To Come</div>
+      <h2 class="hand-about-mission-h2">Fashion Is A<br><span class="pink">Zeitgeist.</span></h2>
+      <p class="hand-about-mission-body">
+        Triumph, tunes and t-shirts are the shape of things to come. Fashion is not restricted to just clothing — it's a multi-faceted snapshot, stretching from tee shirts to toothbrushes, an ever-changing vibration that manifests through a rotating colour palette with corresponding musical rhythms.
+      </p>
+      <p class="hand-about-mission-body">
+        Have A Nice Day plans to use its brands to help manage social change — in what we buy and how we buy it. <strong>Working towards restoring some sort of sense and balance to the madness of our current way of living.</strong>
+      </p>
+      <p class="hand-about-mission-body">
+        Using our multi-denominational beliefs as a benchmark and code of doing business — working as multimedia partners with anyone interested in working with us. Our integrity is as important as our products, which are now being designed to gently guide you into a more conscious consumption, to tread as lightly as possible, with the final goal of <strong>"A sustainable and harmonious coexistence with planet Earth."</strong>
+      </p>
+      <a href="/collections/all" class="hand-about-mission-cta">Shop The Collection →</a>
+    </div>
+    <div class="hand-about-mission-right">
+      <div class="hand-about-mission-fact">
+        <span class="hand-about-mission-fact-num">100%</span>
+        <span class="hand-about-mission-fact-label">Organic Cotton</span>
+      </div>
+      <div class="hand-about-mission-fact">
+        <span class="hand-about-mission-fact-num">UK</span>
+        <span class="hand-about-mission-fact-label">Printed Every Piece</span>
+      </div>
+      <div class="hand-about-mission-fact">
+        <span class="hand-about-mission-fact-num">3</span>
+        <span class="hand-about-mission-fact-label">V&A Street Style Pieces</span>
+      </div>
+      <div class="hand-about-mission-fact">
+        <span class="hand-about-mission-fact-num">£1M</span>
+        <span class="hand-about-mission-fact-label">Turnover In 18 Months</span>
+      </div>
+      <div class="hand-about-mission-fact">
+        <span class="hand-about-mission-fact-num">09</span>
+        <span class="hand-about-mission-fact-label">Cult Sub-Brands</span>
+      </div>
+      <div class="hand-about-mission-fact">
+        <span class="hand-about-mission-fact-num">30+</span>
+        <span class="hand-about-mission-fact-label">Years Of Culture</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== BIG WORDMARK ===== -->
+  <div class="hand-about-wordmark" aria-hidden="true">
+    <div class="hand-about-wordmark-text">Have A Nice Day ☻</div>
+  </div>
+
+</div>
+
+{% schema %}
+{
+  "name": "About Us",
+  "settings": []
+}
+{% endschema %}
