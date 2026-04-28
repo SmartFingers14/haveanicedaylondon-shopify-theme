@@ -1,144 +1,196 @@
 {
     "sections": {
         "hero": {
-            "type": "home-hero-simple",
+            "type": "v3-hero",
             "settings": {
-                "eyebrow": "Established Camden 1990s - Back Again",
-                "heading_top": "The urban",
-                "heading_mid": "fashion",
-                "heading_highlight": "legend",
-                "heading_bot": "is back.",
-                "signed": "- after 17 years away.",
-                "subheading": "Born in a Camden market corridor at the height of the 90s rave scene. Have A Nice Day London is back - organic cotton, original graphics, nine sub-brands under one roof.",
-                "cta_label": "Shop The Originals",
-                "cta_label_2": "Read The Story"
-            }
-        },
-        "trust": {
-            "type": "home-trust-strip",
+                "meta_left": "Est. 1990 — Vol. 04",
+                "meta_right": "Camden ↗ London NW1",
+                "h1_line1": "From The",
+                "h1_strike": "Underground",
+                "h1_line3_pre": "To The",
+                "h1_accent": "Streets",
+                "h1_line3_post": ".",
+                "subtext": "Original Camden 90s rave streetwear. The label behind Sam The Man, Shurl The Girl, Dready, BTKA, Vortex, Funky Dog & more — reissued on heavyweight organic cotton, printed in the UK.",
+                "cta1_label": "Shop The Drop",
+                "cta2_label": "Our Story",
+                "topbar_left": "LIVE — DROP 04",
+                "topbar_right": "Vol. 04 / 2026",
+                "stamp_left_label": "Now Reissued",
+                "stamp_left_value": "Sam The Man™",
+                "stamp_right_label": "Original Brand",
+                "stamp_right_value": "Camden 1990"
+            },
             "blocks": {
-                "t1": {
-                    "type": "item",
+                "s1": {
+                    "type": "stat",
                     "settings": {
-                        "text": "100% Organic Cotton"
+                        "number": "1990",
+                        "label": "Founded — Camden"
                     }
                 },
-                "t2": {
-                    "type": "item",
+                "s2": {
+                    "type": "stat",
                     "settings": {
-                        "text": "Free UK Shipping Over GBP 50"
+                        "number": "09",
+                        "label": "Cult Sub-Brands"
                     }
                 },
-                "t3": {
-                    "type": "item",
+                "s3": {
+                    "type": "stat",
                     "settings": {
-                        "text": "Ships in 24 Hours"
+                        "number": "100%",
+                        "label": "Organic Cotton"
                     }
                 },
-                "t4": {
-                    "type": "item",
+                "s4": {
+                    "type": "stat",
                     "settings": {
-                        "text": "30-Day Returns"
-                    }
-                },
-                "t5": {
-                    "type": "item",
-                    "settings": {
-                        "text": "Independent Since 1990"
+                        "number": "UK",
+                        "label": "Designed & Printed"
                     }
                 }
             },
             "block_order": [
-                "t1",
-                "t2",
-                "t3",
-                "t4",
-                "t5"
+                "s1",
+                "s2",
+                "s3",
+                "s4"
+            ]
+        },
+        "ticker": {
+            "type": "v3-ticker",
+            "settings": {}
+        },
+        "feature_strip": {
+            "type": "v3-feature-strip",
+            "settings": {},
+            "blocks": {
+                "f1": {
+                    "type": "item",
+                    "settings": {
+                        "heading": "Heavyweight",
+                        "subtext": "220 GSM Organic Cotton"
+                    }
+                },
+                "f2": {
+                    "type": "item",
+                    "settings": {
+                        "heading": "UK Printed",
+                        "subtext": "Small-Batch Camden Production"
+                    }
+                },
+                "f3": {
+                    "type": "item",
+                    "settings": {
+                        "heading": "Original Archive",
+                        "subtext": "90s Hand-Drawn Graphics"
+                    }
+                },
+                "f4": {
+                    "type": "item",
+                    "settings": {
+                        "heading": "Free Returns",
+                        "subtext": "30 Days, No Questions"
+                    }
+                }
+            },
+            "block_order": [
+                "f1",
+                "f2",
+                "f3",
+                "f4"
             ]
         },
         "products": {
-            "type": "home-products-grid",
+            "type": "v3-products",
             "settings": {
-                "eyebrow": "Featured - Have A Nice Day",
-                "heading_pre": "The",
-                "heading_em": "originals",
-                "heading_post": ".",
-                "subhead": "The pieces leading the comeback. Heavyweight unisex organic cotton, hand-printed in London.",
-                "product_count": 8,
-                "show_view_all": true,
-                "view_all_label": "View All Products"
+                "eyebrow": "Drop 04 / Featured Reissues",
+                "heading": "Heritage Hits.",
+                "subtext": "Eight pieces from across the family — pulled from the original 1990 archive, printed in small UK batches on 220gsm organic cotton.",
+                "view_all_label": "Shop All Products →",
+                "product_count": 8
             },
             "blocks": {
                 "p1": {
-                    "type": "demo",
+                    "type": "product_card",
                     "settings": {
-                        "title": "Sam The Man Tee",
-                        "tag": "HAND - Tee",
-                        "price": "GBP 29.99",
-                        "bg": "F5F1E8"
+                        "tag": "Reissue",
+                        "vendor": "Have A Nice Day",
+                        "title": "Sam The Man Front Print T-Shirt",
+                        "price": "£29.99",
+                        "link": "/collections/all"
                     }
                 },
                 "p2": {
-                    "type": "demo",
+                    "type": "product_card",
                     "settings": {
-                        "title": "Shurl Sweat",
-                        "tag": "HAND - Sweatshirt",
-                        "price": "GBP 49",
-                        "bg": "FFC1CC"
+                        "tag": "New",
+                        "tag_pink": true,
+                        "vendor": "Have A Nice Day",
+                        "title": "Shurl The Girl Front & Back Print Tee",
+                        "price": "£34.99",
+                        "link": "/collections/all"
                     }
                 },
                 "p3": {
-                    "type": "demo",
+                    "type": "product_card",
                     "settings": {
-                        "title": "DJ Dready Tee",
-                        "tag": "Dready - Tee",
-                        "price": "GBP 32",
-                        "bg": "FFD400"
+                        "tag": "Hoodie",
+                        "vendor": "Vortex",
+                        "title": "Close Encounter F&B Print Organic Hoodie",
+                        "price": "£75.00",
+                        "link": "/collections/all"
                     }
                 },
                 "p4": {
-                    "type": "demo",
+                    "type": "product_card",
                     "settings": {
-                        "title": "Vortex Skirt",
-                        "tag": "Vortex - Bottom",
-                        "price": "GBP 59",
-                        "bg": "87CEEB"
+                        "tag": "Heavy",
+                        "vendor": "BTKA",
+                        "title": "Punk Rocks 90s Classic F&B Hoodie",
+                        "price": "£75.00",
+                        "link": "/collections/all"
                     }
                 },
                 "p5": {
-                    "type": "demo",
+                    "type": "product_card",
                     "settings": {
-                        "title": "Sis Beanie",
-                        "tag": "Sista - Headwear",
-                        "price": "GBP 14.99",
-                        "bg": "FFFFFF"
+                        "tag": "Funk",
+                        "vendor": "Funky Dog",
+                        "title": "Atomic Dog Hoodie",
+                        "price": "£69.99",
+                        "link": "/collections/all"
                     }
                 },
                 "p6": {
-                    "type": "demo",
+                    "type": "product_card",
                     "settings": {
-                        "title": "Records Slip",
-                        "tag": "Handspun - Slip mat",
-                        "price": "GBP 15",
-                        "bg": "000000"
+                        "tag": "Sweat",
+                        "vendor": "Don't Do The Dodo",
+                        "title": "Professor Watercooler F&B Sweatshirt",
+                        "price": "£50.00",
+                        "link": "/collections/all"
                     }
                 },
                 "p7": {
-                    "type": "demo",
+                    "type": "product_card",
                     "settings": {
-                        "title": "BTKA House Tee",
-                        "tag": "BTKA - Tee",
-                        "price": "GBP 32",
-                        "bg": "F5F1E8"
+                        "tag": "Records",
+                        "vendor": "Handspun Records",
+                        "title": "Classic Front & Back Print Logo Tee",
+                        "price": "£35.00",
+                        "link": "/collections/all"
                     }
                 },
                 "p8": {
-                    "type": "demo",
+                    "type": "product_card",
                     "settings": {
-                        "title": "Funky Dog Sweat",
-                        "tag": "Funky Dog - Sweat",
-                        "price": "GBP 49",
-                        "bg": "FFC1CC"
+                        "tag": "Roots",
+                        "tag_pink": true,
+                        "vendor": "Dready Original",
+                        "title": "Free De Herb Front Print Tee",
+                        "price": "£29.99",
+                        "link": "/collections/all"
                     }
                 }
             },
@@ -153,113 +205,108 @@
                 "p8"
             ]
         },
-        "brands": {
-            "type": "home-brands-rail",
+        "featured_product": {
+            "type": "v3-featured-product",
             "settings": {
-                "eyebrow": "The House",
-                "heading_pre": "One house.",
-                "heading_em": "Nine independent",
-                "heading_post": "brands.",
-                "subhead": "Each one a different mood, a different memory of the rave. Pick yours - or wear them all."
+                "eyebrow": "Spotlight / This Drop",
+                "badge": "Drop 04 — Featured",
+                "title_pre": "Sam The Man",
+                "title_accent": "Front Print Tee",
+                "description": "The original character. Hand-drawn in Camden 1990, now reissued on 220gsm organic cotton. Front print, relaxed fit, UK printed in small batches. The one that started it all.",
+                "price": "£29.99",
+                "vendor": "Have A Nice Day",
+                "cta_label": "Shop Now",
+                "cta_link": "/collections/all"
+            }
+        },
+        "brands": {
+            "type": "v3-brands",
+            "settings": {
+                "eyebrow": "The Family — 09 Sub-Brands",
+                "heading": "One Camden HQ. Nine Identities.",
+                "subtext": "Have A Nice Day was always more than one logo. Each sub-brand is its own world — born out of music, scene, and 30+ years of underground London.",
+                "view_all_label": "Browse All Brands →"
             },
             "blocks": {
                 "b1": {
                     "type": "brand",
                     "settings": {
-                        "number": "01",
-                        "tag": "Iconic",
+                        "number": "01 / Flagship",
                         "name": "Have A Nice Day",
-                        "desc": "The original smiley. The mother brand.",
-                        "glyph": "HAND",
-                        "bg": "FFD400"
+                        "desc": "Sam The Man · Shurl The Girl",
+                        "style": "featured"
                     }
                 },
                 "b2": {
                     "type": "brand",
                     "settings": {
                         "number": "02",
-                        "tag": "Heavy",
-                        "name": "Dready",
-                        "desc": "Dub-plate prints, heavyweight cotton.",
-                        "glyph": "DREADY",
-                        "bg": "FF69B4"
+                        "name": "Dready Original",
+                        "desc": "Roots · Reggae · Camden",
+                        "style": ""
                     }
                 },
                 "b3": {
                     "type": "brand",
                     "settings": {
                         "number": "03",
-                        "tag": "Feminine",
-                        "name": "Sista",
-                        "desc": "Cropped silhouettes, baby tees, glittered nostalgia.",
-                        "glyph": "SIS",
-                        "bg": "FFC1CC"
+                        "name": "Handspun Records",
+                        "desc": "Vinyl · Sound · Wax",
+                        "style": "accent"
                     }
                 },
                 "b4": {
                     "type": "brand",
                     "settings": {
                         "number": "04",
-                        "tag": "Sound",
-                        "name": "Handspun Records",
-                        "desc": "Slip mats, sleeves, vinyl tees.",
-                        "glyph": "RECORDS",
-                        "bg": "87CEEB"
+                        "name": "BTKA",
+                        "desc": "Punk Rocks · Sleazy Rider",
+                        "style": ""
                     }
                 },
                 "b5": {
                     "type": "brand",
                     "settings": {
                         "number": "05",
-                        "tag": "House",
-                        "name": "BTKA",
-                        "desc": "Back To Kennington Acid. House music capsule.",
-                        "glyph": "BTKA",
-                        "bg": "000000"
+                        "name": "Vortex",
+                        "desc": "Info The Robot · Close Encounter",
+                        "style": ""
                     }
                 },
                 "b6": {
                     "type": "brand",
                     "settings": {
                         "number": "06",
-                        "tag": "Sport",
-                        "name": "Vortex",
-                        "desc": "Track sets, rave pants, technical streetwear.",
-                        "glyph": "VRTX",
-                        "bg": "FFFFFF"
+                        "name": "Funky Dog",
+                        "desc": "Atomic Dog · Mongrel Soup",
+                        "style": ""
                     }
                 },
                 "b7": {
                     "type": "brand",
                     "settings": {
                         "number": "07",
-                        "tag": "Playful",
-                        "name": "Funky Dog",
-                        "desc": "Beanies, badges, accessories. Wear the joy.",
-                        "glyph": "FUNKY",
-                        "bg": "F5F1E8"
+                        "name": "Don't Do The Dodo",
+                        "desc": "Professor Watercooler · Crest",
+                        "style": ""
                     }
                 },
                 "b8": {
                     "type": "brand",
                     "settings": {
                         "number": "08",
-                        "tag": "Wild",
-                        "name": "Don't Do The Dodo",
-                        "desc": "Save the species. Limited graphic capsule.",
-                        "glyph": "DODO",
-                        "bg": "FFD400"
+                        "name": "Incubator",
+                        "desc": "Divergent · Outside The Box",
+                        "style": ""
                     }
                 },
                 "b9": {
                     "type": "brand",
                     "settings": {
                         "number": "09",
-                        "tag": "New",
-                        "name": "The Incubator",
-                        "desc": "Licensing & wholesale arm. Build with us.",
-                        "glyph": "NEW",
-                        "bg": "FF69B4"
+                        "name": "Sista",
+                        "desc": "Script · Silhouette · Slip Mats",
+                        "style": "accent"
                     }
                 }
             },
@@ -275,174 +322,164 @@
                 "b9"
             ]
         },
-        "heritage": {
-            "type": "home-heritage",
+        "categories": {
+            "type": "v3-categories",
             "settings": {
-                "scribble": "back, baby",
-                "big_top": "17 Years.",
-                "big_mid": "Now Back.",
-                "big_bot": "",
-                "eyebrow": "Today's Story",
-                "heading": "Born in a Camden corridor. Adopted by ravers.",
-                "body": "We started at the back of American Rag Store, Camden Market - a corridor smelling of incense and 12-inch records. The smiley was a sticker before it was a t-shirt. The t-shirt became a culture. After 17 years away, the architects are bringing it back - same studio, same ethos, organic cotton this time.",
-                "signed": "- The Architects"
+                "eyebrow": "Shop By Category",
+                "heading": "Pick Your Uniform.",
+                "subtext": "From £15 slip mats to £105 embroidered Dready zips. Tees, sweats, hoods and the bits that finish the fit.",
+                "view_all_label": "All Categories →"
             },
             "blocks": {
-                "s1": {
-                    "type": "stat",
+                "c1": {
+                    "type": "category",
                     "settings": {
-                        "num": "1990",
-                        "label": "Camden Origin"
+                        "top_left": "01 / Cotton",
+                        "top_right": "From £29.99",
+                        "title": "T-Shirts",
+                        "link": "/collections/t-shirts"
                     }
                 },
-                "s2": {
-                    "type": "stat",
+                "c2": {
+                    "type": "category",
                     "settings": {
-                        "num": "9",
-                        "label": "Sub-Brands"
+                        "top_left": "02 / Heavy",
+                        "top_right": "From £42.00",
+                        "title": "Sweatshirts",
+                        "link": "/collections/sweatshirts"
                     }
                 },
-                "s3": {
-                    "type": "stat",
+                "c3": {
+                    "type": "category",
                     "settings": {
-                        "num": "100%",
-                        "label": "Organic Cotton"
+                        "top_left": "03 / Hooded",
+                        "top_right": "From £65.00",
+                        "title": "Hoodies",
+                        "link": "/collections/hoodies"
+                    }
+                },
+                "c4": {
+                    "type": "category",
+                    "settings": {
+                        "top_left": "04 / Extras",
+                        "top_right": "From £5.00",
+                        "title": "Accessories",
+                        "link": "/collections/accessories"
                     }
                 }
             },
             "block_order": [
-                "s1",
-                "s2",
-                "s3"
+                "c1",
+                "c2",
+                "c3",
+                "c4"
             ]
         },
-        "why": {
-            "type": "home-why",
+        "story": {
+            "type": "v3-story",
             "settings": {
-                "eyebrow": "Why HAND",
-                "heading_pre": "Not just clothes.",
-                "heading_em": "A culture."
-            },
-            "blocks": {
-                "w1": {
-                    "type": "perk",
-                    "settings": {
-                        "icon": "+",
-                        "title": "100% Organic Cotton",
-                        "body": "GOTS-certified, never chemically treated. Heavyweight, butter-soft, ages well."
-                    }
-                },
-                "w2": {
-                    "type": "perk",
-                    "settings": {
-                        "icon": "*",
-                        "title": "The Original Smiley",
-                        "body": "Worn by Camden ravers since 1990. The same hand-drawn icon, the same energy."
-                    }
-                },
-                "w3": {
-                    "type": "perk",
-                    "settings": {
-                        "icon": "U",
-                        "title": "Unisex By Design",
-                        "body": "Cut to fit anyone. Worn loud by everyone. No gendered nonsense."
-                    }
-                },
-                "w4": {
-                    "type": "perk",
-                    "settings": {
-                        "icon": "9",
-                        "title": "One House. 9 Worlds.",
-                        "body": "From Sam to Sista to Funky Dog - nine sub-brands, infinite combinations."
-                    }
-                }
-            },
-            "block_order": [
-                "w1",
-                "w2",
-                "w3",
-                "w4"
-            ]
+                "eyebrow": "Camden / 1990 → Now",
+                "h2_line1": "Born In",
+                "h2_pink": "Camden.",
+                "h2_line2": "Raised By",
+                "h2_yellow": "Rave.",
+                "h2_line3": "Back For Real.",
+                "body1": "Have A Nice Day started in 1990, in the back rooms of Camden's underground rave scene. The flyers, the flags, the dancefloors — and one hand-drawn character, Sam The Man, who became the face of a movement.",
+                "body2": "After 17 years off the shelves, the original archive is back — not as nostalgia, as continuation. Same characters. Same family of cult sub-brands. Now printed on heavyweight organic cotton, in the UK, by the people who started it.",
+                "cta_label": "Read The Full Story →",
+                "stamp_left_label": "Character — 001",
+                "stamp_left_value": "Sam The Man",
+                "stamp_right_label": "Est. 1990",
+                "stamp_right_value": "Camden NW1"
+            }
         },
         "gallery": {
-            "type": "home-gallery",
+            "type": "v3-gallery",
             "settings": {
-                "eyebrow": "Lookbook - Archive",
-                "heading_pre": "From the",
-                "heading_em": "archive.",
-                "subhead": "Pieces from across the house. Pulled from old lookbooks and re-issued in 2026."
+                "eyebrow": "@haveanicedaylondon",
+                "heading": "The Camden Community.",
+                "subtext": "Tag #HaveANiceDayLondon for a feature. 30+ years of culture, same as it ever was.",
+                "ig_label": "Follow Us On Instagram →"
             },
             "blocks": {
                 "g1": {
                     "type": "tile",
                     "settings": {
-                        "tag": "Vortex - 2002",
-                        "title": "VRTX Skirt",
-                        "cta": "View",
-                        "bg": "FFD400"
+                        "image_url": "https://cdn.shopify.com/s/files/1/0737/7397/3795/files/Untitled_design_63.png?v=1761074463",
+                        "handle": "@samtheman_og",
+                        "span_class": "l"
                     }
                 },
                 "g2": {
                     "type": "tile",
                     "settings": {
-                        "tag": "HAND - 1998",
-                        "title": "Info The Robot",
-                        "cta": "View",
-                        "bg": "FF69B4"
+                        "image_url": "https://cdn.shopify.com/s/files/1/0737/7397/3795/files/SHURLTHEGIRL2-9_1.png?v=1761074728",
+                        "handle": "@shurl_",
+                        "span_class": "t"
                     }
                 },
                 "g3": {
                     "type": "tile",
                     "settings": {
-                        "tag": "Sista - 1996",
-                        "title": "Sis Beanie",
-                        "cta": "View",
-                        "bg": "FFC1CC"
+                        "image_url": "https://cdn.shopify.com/s/files/1/0737/7397/3795/files/BTKA-24_88699f5f-e9cb-4fea-833e-734567cc5ea6.png?v=1760942116",
+                        "handle": "@btka.uk",
+                        "span_class": ""
                     }
                 },
                 "g4": {
                     "type": "tile",
                     "settings": {
-                        "tag": "Dready - 2001",
-                        "title": "DJ Dready",
-                        "cta": "View",
-                        "bg": "87CEEB"
+                        "image_url": "https://cdn.shopify.com/s/files/1/0737/7397/3795/files/9CB8DAFE-1B4F-4F56-BF62-DCFCE7C0D5F6.jpg?v=1764249401",
+                        "handle": "@vinyl.dept",
+                        "span_class": ""
                     }
                 },
                 "g5": {
                     "type": "tile",
                     "settings": {
-                        "tag": "HAND - 1990",
-                        "title": "Sam The Man",
-                        "cta": "View",
-                        "bg": "F5F1E8"
+                        "image_url": "https://cdn.shopify.com/s/files/1/0737/7397/3795/files/VORTEX-25_3.png?v=1761075301",
+                        "handle": "@vortexcrew",
+                        "span_class": "w"
                     }
                 },
                 "g6": {
                     "type": "tile",
                     "settings": {
-                        "tag": "Records - 2003",
-                        "title": "Records Classic",
-                        "cta": "View",
-                        "bg": "000000"
+                        "image_url": "https://cdn.shopify.com/s/files/1/0737/7397/3795/files/FUNKYDOG-33_1_ddf1f9c1-a7a1-4420-a20b-4ca3c02790f1.png?v=1757241619",
+                        "handle": "@funky.dog",
+                        "span_class": ""
                     }
                 },
                 "g7": {
                     "type": "tile",
                     "settings": {
-                        "tag": "BTKA - 2004",
-                        "title": "BTKA House",
-                        "cta": "View",
-                        "bg": "FFFFFF"
+                        "image_url": "https://cdn.shopify.com/s/files/1/0737/7397/3795/files/PROFESSORWATERCOOLER-23.png?v=1757240719",
+                        "handle": "@dontdothedodo",
+                        "span_class": ""
                     }
                 },
                 "g8": {
                     "type": "tile",
                     "settings": {
-                        "tag": "Funky Dog - 99",
-                        "title": "Mongrel Soup",
-                        "cta": "View",
-                        "bg": "FFD400"
+                        "image_url": "https://cdn.shopify.com/s/files/1/0737/7397/3795/files/40B5E71D-0009-419D-881E-19D0004F31FC.png?v=1776873776",
+                        "handle": "@handspun",
+                        "span_class": ""
+                    }
+                },
+                "g9": {
+                    "type": "tile",
+                    "settings": {
+                        "image_url": "https://cdn.shopify.com/s/files/1/0737/7397/3795/products/Untitleddesign-2022-11-25T133036.474_089524f5-ab17-434d-a64e-6b0daa0dd409.png?v=1761072539",
+                        "handle": "@dready",
+                        "span_class": ""
+                    }
+                },
+                "g10": {
+                    "type": "tile",
+                    "settings": {
+                        "image_url": "https://cdn.shopify.com/s/files/1/0737/7397/3795/files/DIVERGENT-4_bd3821be-f537-4c2e-8fa1-3f02985d4ffd.png?v=1765997248",
+                        "handle": "@incubator",
+                        "span_class": ""
                     }
                 }
             },
@@ -454,28 +491,32 @@
                 "g5",
                 "g6",
                 "g7",
-                "g8"
+                "g8",
+                "g9",
+                "g10"
             ]
         },
         "newsletter": {
-            "type": "home-newsletter",
+            "type": "v3-newsletter",
             "settings": {
-                "eyebrow": "Join the family",
-                "heading_pre": "Don't miss the next",
-                "heading_em": "drop",
-                "body": "Early access to drops, secret colourways, and a hand-drawn smiley sticker with your first order.",
-                "cta": "Get 10% Off",
-                "signoff": "have a nice day"
+                "eyebrow": "Join The List",
+                "heading_pre": "Be First To",
+                "heading_pink": "Know.",
+                "body": "Be the first to know about new collections and exclusive offers. Drops, archive reissues and Camden-only releases — straight to your inbox.",
+                "cta": "Subscribe",
+                "disclaimer": "By subscribing you agree to our privacy policy. Unsubscribe anytime."
             }
         }
     },
     "order": [
         "hero",
-        "trust",
+        "ticker",
+        "feature_strip",
         "products",
+        "featured_product",
         "brands",
-        "heritage",
-        "why",
+        "categories",
+        "story",
         "gallery",
         "newsletter"
     ]

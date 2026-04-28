@@ -1,0 +1,293 @@
+<!-- HAVE A NICE DAY — Featured Product Spotlight -->
+<style>
+  .hand-fp {
+    background: var(--ink, #0a0a0a);
+    color: #fff;
+    padding: 0;
+    overflow: hidden;
+  }
+  .hand-fp-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 600px;
+    max-width: var(--maxw, 1440px);
+    margin: 0 auto;
+  }
+  /* Image side */
+  .hand-fp-img {
+    position: relative;
+    overflow: hidden;
+    background: #111;
+  }
+  .hand-fp-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform .6s ease;
+  }
+  .hand-fp:hover .hand-fp-img img {
+    transform: scale(1.03);
+  }
+  .hand-fp-img-badge {
+    position: absolute;
+    top: 24px;
+    left: 24px;
+    background: var(--pink, #FF2E88);
+    color: #fff;
+    font-family: var(--mono, monospace);
+    font-size: 9px;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    font-weight: 700;
+  }
+  /* Content side */
+  .hand-fp-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 64px 72px;
+    position: relative;
+  }
+  .hand-fp-content::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: radial-gradient(ellipse at 80% 20%, rgba(255,46,136,.08) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .hand-fp-eyebrow {
+    font-family: var(--mono, monospace);
+    font-size: 10px;
+    letter-spacing: .28em;
+    text-transform: uppercase;
+    color: var(--pink, #FF2E88);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .hand-fp-eyebrow::before {
+    content: '';
+    width: 32px;
+    height: 1px;
+    background: var(--pink, #FF2E88);
+    flex-shrink: 0;
+  }
+  .hand-fp-title {
+    font-family: var(--display, 'Anton', Impact, sans-serif);
+    font-size: clamp(36px, 4vw, 64px);
+    text-transform: uppercase;
+    line-height: .92;
+    letter-spacing: -.01em;
+    color: #fff;
+    margin: 0 0 24px;
+  }
+  .hand-fp-title .accent {
+    color: var(--pink, #FF2E88);
+  }
+  .hand-fp-desc {
+    font-family: var(--body, sans-serif);
+    font-size: 15px;
+    line-height: 1.7;
+    color: #888;
+    margin: 0 0 32px;
+    max-width: 380px;
+  }
+  .hand-fp-meta {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    margin-bottom: 36px;
+    flex-wrap: wrap;
+  }
+  .hand-fp-price {
+    font-family: var(--display, 'Anton', Impact, sans-serif);
+    font-size: 36px;
+    color: #fff;
+    letter-spacing: -.01em;
+  }
+  .hand-fp-vendor {
+    font-family: var(--mono, monospace);
+    font-size: 10px;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: #555;
+    border: 1px solid #2a2a2a;
+    padding: 6px 14px;
+  }
+  .hand-fp-actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .hand-fp-btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 16px 32px;
+    background: var(--pink, #FF2E88);
+    color: #fff;
+    font-family: var(--mono, monospace);
+    font-size: 11px;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    font-weight: 700;
+    text-decoration: none;
+    transition: background .2s, transform .2s;
+    border: none;
+    cursor: pointer;
+  }
+  .hand-fp-btn-primary:hover {
+    background: #fff;
+    color: var(--ink, #0a0a0a);
+    transform: translateY(-1px);
+  }
+  .hand-fp-btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 16px 32px;
+    background: transparent;
+    color: #fff;
+    font-family: var(--mono, monospace);
+    font-size: 11px;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    font-weight: 700;
+    text-decoration: none;
+    border: 1px solid #333;
+    transition: border-color .2s, color .2s;
+  }
+  .hand-fp-btn-ghost:hover {
+    border-color: #fff;
+    color: #fff;
+  }
+  .hand-fp-features {
+    margin-top: 40px;
+    padding-top: 32px;
+    border-top: 1px solid #1e1e1e;
+    display: flex;
+    gap: 32px;
+    flex-wrap: wrap;
+  }
+  .hand-fp-feat {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .hand-fp-feat-label {
+    font-family: var(--mono, monospace);
+    font-size: 9px;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: #444;
+  }
+  .hand-fp-feat-value {
+    font-family: var(--mono, monospace);
+    font-size: 11px;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: #ccc;
+    font-weight: 600;
+  }
+
+  @media (max-width: 900px) {
+    .hand-fp-inner { grid-template-columns: 1fr; }
+    .hand-fp-img { min-height: 380px; }
+    .hand-fp-content { padding: 48px 28px; }
+  }
+</style>
+
+<div class="hand-fp">
+  <div class="hand-fp-inner">
+
+    <!-- Image -->
+    <div class="hand-fp-img">
+      {% if section.settings.product != blank %}
+        {% assign fp = all_products[section.settings.product] %}
+        {% if fp.featured_image %}
+          <img src="{{ fp.featured_image | img_url: '1200x' }}" alt="{{ fp.title }}" loading="lazy">
+        {% else %}
+          <img src="https://cdn.shopify.com/s/files/1/0737/7397/3795/files/Untitled_design_63.png?v=1761074463" alt="Have A Nice Day London" loading="lazy">
+        {% endif %}
+      {% elsif section.settings.image %}
+        <img src="{{ section.settings.image | img_url: '1200x' }}" alt="{{ section.settings.title }}" loading="lazy">
+      {% else %}
+        <img src="https://cdn.shopify.com/s/files/1/0737/7397/3795/files/Untitled_design_63.png?v=1761074463" alt="Have A Nice Day London" loading="lazy">
+      {% endif %}
+      <div class="hand-fp-img-badge">{{ section.settings.badge | default: 'Drop 04 — Featured' }}</div>
+    </div>
+
+    <!-- Content -->
+    <div class="hand-fp-content">
+      <div class="hand-fp-eyebrow">{{ section.settings.eyebrow | default: 'Spotlight / This Week' }}</div>
+
+      {% if section.settings.product != blank %}
+        {% assign fp = all_products[section.settings.product] %}
+        <h2 class="hand-fp-title">{{ fp.title | split: ' ' | first }} <span class="accent">{{ fp.title | split: ' ' | slice: 1, 10 | join: ' ' }}</span></h2>
+        <p class="hand-fp-desc">{{ fp.description | strip_html | truncate: 200 }}</p>
+        <div class="hand-fp-meta">
+          <div class="hand-fp-price">{{ fp.price | money }}</div>
+          <div class="hand-fp-vendor">{{ fp.vendor }}</div>
+        </div>
+        <div class="hand-fp-actions">
+          <a class="hand-fp-btn-primary" href="{{ fp.url }}">Shop Now &rarr;</a>
+          <a class="hand-fp-btn-ghost" href="/collections/all">View All</a>
+        </div>
+      {% else %}
+        <h2 class="hand-fp-title">{{ section.settings.title_pre }} <span class="accent">{{ section.settings.title_accent }}</span></h2>
+        <p class="hand-fp-desc">{{ section.settings.description }}</p>
+        <div class="hand-fp-meta">
+          <div class="hand-fp-price">{{ section.settings.price | default: '£29.99' }}</div>
+          <div class="hand-fp-vendor">{{ section.settings.vendor | default: 'Have A Nice Day' }}</div>
+        </div>
+        <div class="hand-fp-actions">
+          <a class="hand-fp-btn-primary" href="{{ section.settings.cta_link | default: '/collections/all' }}">{{ section.settings.cta_label | default: 'Shop Now' }} &rarr;</a>
+          <a class="hand-fp-btn-ghost" href="/collections/all">View All</a>
+        </div>
+      {% endif %}
+
+      <div class="hand-fp-features">
+        <div class="hand-fp-feat">
+          <div class="hand-fp-feat-label">Material</div>
+          <div class="hand-fp-feat-value">220gsm Organic Cotton</div>
+        </div>
+        <div class="hand-fp-feat">
+          <div class="hand-fp-feat-label">Printed</div>
+          <div class="hand-fp-feat-value">UK — Small Batch</div>
+        </div>
+        <div class="hand-fp-feat">
+          <div class="hand-fp-feat-label">Origin</div>
+          <div class="hand-fp-feat-value">Camden 1990</div>
+        </div>
+        <div class="hand-fp-feat">
+          <div class="hand-fp-feat-label">Returns</div>
+          <div class="hand-fp-feat-value">30 Days Free</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "V3 Featured Product",
+  "settings": [
+    { "type": "product", "id": "product", "label": "Product (auto-fills content)" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow label", "default": "Spotlight / This Week" },
+    { "type": "text", "id": "badge", "label": "Image badge", "default": "Drop 04 — Featured" },
+    { "type": "image_picker", "id": "image", "label": "Image (if no product selected)" },
+    { "type": "text", "id": "title_pre", "label": "Title (first part)", "default": "Sam The Man" },
+    { "type": "text", "id": "title_accent", "label": "Title accent (pink)", "default": "Front Print Tee" },
+    { "type": "textarea", "id": "description", "label": "Description", "default": "The original character. Hand-drawn in Camden 1990, now reissued on 220gsm organic cotton. Front print, relaxed fit, UK printed in small batches." },
+    { "type": "text", "id": "price", "label": "Price", "default": "£29.99" },
+    { "type": "text", "id": "vendor", "label": "Vendor", "default": "Have A Nice Day" },
+    { "type": "text", "id": "cta_label", "label": "CTA label", "default": "Shop Now" },
+    { "type": "url", "id": "cta_link", "label": "CTA link" }
+  ],
+  "presets": [{ "name": "V3 Featured Product" }]
+}
+{% endschema %}
