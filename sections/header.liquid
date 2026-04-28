@@ -338,12 +338,7 @@
 
     <!-- Logo (left) -->
     <a class="hand-logo" href="{{ routes.root_url }}" aria-label="{{ shop.name }}">
-      {%- if settings.logo != blank -%}
-        <img src="{{ settings.logo | image_url: width: 220 }}" alt="{{ shop.name | escape }}" width="110" height="36" loading="eager">
-      {%- else -%}
-        <span class="l1">Have A Nice Day&reg;</span>
-        <span class="l2">London &mdash; Since 1990</span>
-      {%- endif -%}
+      <img src="https://cdn.shopify.com/s/files/1/0737/7397/3795/t/16/assets/logo-transparent.png?v=1777380441" alt="{{ shop.name | escape }}" width="120" height="64" loading="eager" style="object-fit:contain;max-height:52px;width:auto;">
     </a>
 
     <!-- Nav links (center) -->
