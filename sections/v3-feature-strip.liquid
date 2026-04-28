@@ -1,0 +1,37 @@
+<div class="hand-feature-strip hand-reveal">
+  {% for block in section.blocks %}
+    {% if block.type == 'item' %}
+      <div {{ block.shopify_attributes }}>
+        <div class="h">{{ block.settings.heading }}</div>
+        <div class="s">{{ block.settings.subtext }}</div>
+      </div>
+    {% endif %}
+  {% endfor %}
+</div>
+
+{% schema %}
+{
+  "name": "V3 Feature Strip",
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Feature",
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Heading", "default": "Heavyweight" },
+        { "type": "text", "id": "subtext", "label": "Subtext", "default": "220 GSM Organic Cotton" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "V3 Feature Strip",
+      "blocks": [
+        { "type": "item", "settings": { "heading": "Heavyweight", "subtext": "220 GSM Organic Cotton" } },
+        { "type": "item", "settings": { "heading": "UK Printed", "subtext": "Small-Batch Camden Production" } },
+        { "type": "item", "settings": { "heading": "Original Archive", "subtext": "90s Hand-Drawn Graphics" } },
+        { "type": "item", "settings": { "heading": "Free Returns", "subtext": "14 Days, No Questions" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

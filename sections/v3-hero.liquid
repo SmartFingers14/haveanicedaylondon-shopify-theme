@@ -1,0 +1,116 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+{{ 'hand-v3.css' | asset_url | stylesheet_tag }}
+
+<section class="hand-hero">
+  <div class="hand-hero-grid">
+
+    <div class="hand-hero-left">
+      <div class="hand-hero-meta">
+        <div class="est">{{ section.settings.meta_left }}</div>
+        <div class="loc">{{ section.settings.meta_right }}</div>
+      </div>
+
+      <h1 class="hand-hero-h1">
+        <span class="l">{{ section.settings.h1_line1 }}</span>
+        <span class="l"><span class="strike">{{ section.settings.h1_strike }}</span></span>
+        <span class="l">{{ section.settings.h1_line3_pre }} <span class="accent">{{ section.settings.h1_accent }}</span>{{ section.settings.h1_line3_post }}</span>
+      </h1>
+
+      <div class="hand-hero-sub">
+        <p>{{ section.settings.subtext }}</p>
+        <div class="hand-hero-cta">
+          <a class="hand-btn-primary" href="{{ section.settings.cta1_link | default: '/collections/all' }}">{{ section.settings.cta1_label }} <span class="a">&#8594;</span></a>
+          <a class="hand-btn-ghost" href="{{ section.settings.cta2_link | default: '/pages/our-story' }}">{{ section.settings.cta2_label }}</a>
+        </div>
+      </div>
+
+      <div class="hand-trust">
+        {% for block in section.blocks %}
+          {% if block.type == 'stat' %}
+            <div {{ block.shopify_attributes }}>
+              <div class="n">{{ block.settings.number }}</div>
+              <div class="l">{{ block.settings.label }}</div>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+
+    <div class="hand-hero-right">
+      <div class="topbar">
+        <span class="live">{{ section.settings.topbar_left }}</span>
+        <span>{{ section.settings.topbar_right }}</span>
+      </div>
+      <div class="hand-hero-stage">
+        <div class="hand-hero-glow"></div>
+        <div class="hand-hero-logo-wrap">
+          {% if section.settings.hero_image %}
+            <img src="{{ section.settings.hero_image | img_url: '1100x' }}" alt="{{ section.settings.hero_image_alt | default: 'Have A Nice Day London' }}" />
+          {% else %}
+            <img src="https://www.haveanicedaylondonstore.com/cdn/shop/files/IMG_2861.jpg?v=1696499421&width=1100" alt="Have A Nice Day London" />
+          {% endif %}
+        </div>
+        <div class="hand-hero-rotate">
+          {{ section.settings.stamp_left_label }}
+          <b>{{ section.settings.stamp_left_value }}</b>
+        </div>
+        <div class="hand-hero-vstamp">
+          {{ section.settings.stamp_right_label }}
+          <b>{{ section.settings.stamp_right_value }}</b>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "V3 Hero",
+  "settings": [
+    { "type": "text", "id": "meta_left", "label": "Meta left", "default": "Est. 1990 — Vol. 04" },
+    { "type": "text", "id": "meta_right", "label": "Meta right", "default": "Camden ↗ London NW1" },
+    { "type": "text", "id": "h1_line1", "label": "Headline line 1", "default": "From The" },
+    { "type": "text", "id": "h1_strike", "label": "Strikethrough word", "default": "Underground" },
+    { "type": "text", "id": "h1_line3_pre", "label": "Line 3 before accent", "default": "To The" },
+    { "type": "text", "id": "h1_accent", "label": "Accent word (pink)", "default": "Streets" },
+    { "type": "text", "id": "h1_line3_post", "label": "Line 3 after accent", "default": "." },
+    { "type": "textarea", "id": "subtext", "label": "Subtext", "default": "Original Camden 90s rave streetwear. The label behind Sam The Man, Shurl The Girl, Dready, BTKA, Vortex, Funky Dog & more — reissued on heavyweight organic cotton, printed in the UK." },
+    { "type": "text", "id": "cta1_label", "label": "Primary CTA label", "default": "Shop The Drop" },
+    { "type": "url", "id": "cta1_link", "label": "Primary CTA link" },
+    { "type": "text", "id": "cta2_label", "label": "Secondary CTA label", "default": "Our Story" },
+    { "type": "url", "id": "cta2_link", "label": "Secondary CTA link" },
+    { "type": "text", "id": "topbar_left", "label": "Topbar left text", "default": "LIVE — DROP 04" },
+    { "type": "text", "id": "topbar_right", "label": "Topbar right text", "default": "Vol. 04 / 2026" },
+    { "type": "image_picker", "id": "hero_image", "label": "Hero image (right panel)" },
+    { "type": "text", "id": "hero_image_alt", "label": "Hero image alt text", "default": "Have A Nice Day London" },
+    { "type": "text", "id": "stamp_left_label", "label": "Bottom-left stamp label", "default": "Now Reissued" },
+    { "type": "text", "id": "stamp_left_value", "label": "Bottom-left stamp value", "default": "Sam The Man™" },
+    { "type": "text", "id": "stamp_right_label", "label": "Bottom-right stamp label", "default": "Original Brand" },
+    { "type": "text", "id": "stamp_right_value", "label": "Bottom-right stamp value", "default": "Camden 1990" }
+  ],
+  "blocks": [
+    {
+      "type": "stat",
+      "name": "Stat",
+      "settings": [
+        { "type": "text", "id": "number", "label": "Number", "default": "1990" },
+        { "type": "text", "id": "label", "label": "Label", "default": "Founded — Camden" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "V3 Hero",
+      "blocks": [
+        { "type": "stat", "settings": { "number": "1990", "label": "Founded — Camden" } },
+        { "type": "stat", "settings": { "number": "09", "label": "Cult Sub-Brands" } },
+        { "type": "stat", "settings": { "number": "100%", "label": "Organic Cotton" } },
+        { "type": "stat", "settings": { "number": "UK", "label": "Designed & Printed" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,37 @@
+<section class="hand-news">
+  <div class="hand-container">
+    <div class="lhs">
+      <div class="hand-story-eye" style="color:#FF2E88">{{ section.settings.eyebrow }}</div>
+      <h2>{{ section.settings.heading_pre }} <span class="pink">{{ section.settings.heading_pink }}</span></h2>
+      <p>{{ section.settings.body }}</p>
+    </div>
+    <div class="rhs">
+      {% form 'customer' %}
+        <input type="hidden" name="contact[tags]" value="newsletter" />
+        <div class="form">
+          <input type="email" name="contact[email]" required placeholder="ENTER YOUR EMAIL" aria-label="Email" />
+          <button type="submit">{{ section.settings.cta }} &#8594;</button>
+        </div>
+        {% if form.posted_successfully? %}
+          <small style="color:#7CFFA9">&#10003; You're in. Welcome to the family.</small>
+        {% endif %}
+      {% endform %}
+      <small>{{ section.settings.disclaimer }}</small>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "V3 Newsletter",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Join The List" },
+    { "type": "text", "id": "heading_pre", "label": "Heading (before pink)", "default": "Be First To" },
+    { "type": "text", "id": "heading_pink", "label": "Pink word", "default": "Know." },
+    { "type": "textarea", "id": "body", "label": "Body text", "default": "Be the first to know about new collections and exclusive offers. Drops, archive reissues and Camden-only releases — straight to your inbox." },
+    { "type": "text", "id": "cta", "label": "Button label", "default": "Subscribe" },
+    { "type": "text", "id": "disclaimer", "label": "Disclaimer", "default": "By subscribing you agree to our privacy policy. Unsubscribe anytime." }
+  ],
+  "presets": [{ "name": "V3 Newsletter" }]
+}
+{% endschema %}

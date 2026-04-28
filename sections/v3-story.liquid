@@ -1,0 +1,53 @@
+<section class="hand-story" id="story">
+  <div class="hand-story-bg"></div>
+  <div class="hand-container">
+    <div class="hand-story-grid">
+      <div>
+        <div class="hand-story-eye">{{ section.settings.eyebrow }}</div>
+        <h2>{{ section.settings.h2_line1 }} <span class="pink">{{ section.settings.h2_pink }}</span><br>{{ section.settings.h2_line2 }} <span class="yellow">{{ section.settings.h2_yellow }}</span><br>{{ section.settings.h2_line3 }}</h2>
+        <p>{{ section.settings.body1 }}</p>
+        <p>{{ section.settings.body2 }}</p>
+        <a class="hand-story-cta" href="{{ section.settings.cta_link | default: '/pages/our-story' }}">{{ section.settings.cta_label }} &#8594;</a>
+      </div>
+      <div class="hand-story-art hand-reveal">
+        <div class="layer grid-bg"></div>
+        <div class="layer img">
+          {% if section.settings.image %}
+            <img src="{{ section.settings.image | img_url: '800x' }}" alt="{{ section.settings.image_alt | default: 'Sam The Man' }}" loading="lazy" />
+          {% else %}
+            <img src="https://cdn.shopify.com/s/files/1/0737/7397/3795/files/Untitled_design_63.png?v=1761074463" alt="Sam The Man — original character" />
+          {% endif %}
+        </div>
+        <div class="stamp">
+          <div>{{ section.settings.stamp_left_label }}<b>{{ section.settings.stamp_left_value }}</b></div>
+          <div style="text-align:right">{{ section.settings.stamp_right_label }}<b>{{ section.settings.stamp_right_value }}</b></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "V3 Story",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Camden / 1990 to Now" },
+    { "type": "text", "id": "h2_line1", "label": "Headline line 1 (before pink)", "default": "Born In" },
+    { "type": "text", "id": "h2_pink", "label": "Pink word", "default": "Camden." },
+    { "type": "text", "id": "h2_line2", "label": "Headline line 2 (before yellow)", "default": "Raised By" },
+    { "type": "text", "id": "h2_yellow", "label": "Yellow word", "default": "Rave." },
+    { "type": "text", "id": "h2_line3", "label": "Headline line 3", "default": "Back For Real." },
+    { "type": "textarea", "id": "body1", "label": "Body paragraph 1", "default": "Have A Nice Day started in 1990, in the back rooms of Camden's underground rave scene. The flyers, the flags, the dancefloors — and one hand-drawn character, Sam The Man, who became the face of a movement." },
+    { "type": "textarea", "id": "body2", "label": "Body paragraph 2", "default": "After 17 years off the shelves, the original archive is back — not as nostalgia, as continuation. Same characters. Same family of cult sub-brands. Now printed on heavyweight organic cotton, in the UK, by the people who started it." },
+    { "type": "text", "id": "cta_label", "label": "CTA label", "default": "Read The Full Story" },
+    { "type": "url", "id": "cta_link", "label": "CTA link" },
+    { "type": "image_picker", "id": "image", "label": "Art image" },
+    { "type": "text", "id": "image_alt", "label": "Image alt text", "default": "Sam The Man original character" },
+    { "type": "text", "id": "stamp_left_label", "label": "Stamp left label", "default": "Character — 001" },
+    { "type": "text", "id": "stamp_left_value", "label": "Stamp left value", "default": "Sam The Man" },
+    { "type": "text", "id": "stamp_right_label", "label": "Stamp right label", "default": "Est. 1990" },
+    { "type": "text", "id": "stamp_right_value", "label": "Stamp right value", "default": "Camden NW1" }
+  ],
+  "presets": [{ "name": "V3 Story" }]
+}
+{% endschema %}

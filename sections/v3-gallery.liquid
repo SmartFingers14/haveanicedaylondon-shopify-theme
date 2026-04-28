@@ -1,0 +1,76 @@
+<section class="hand-sec tight" id="gallery">
+  <div class="hand-container">
+    <div class="hand-sec-head">
+      <div class="lhs">
+        <div class="eyebrow">{{ section.settings.eyebrow }}</div>
+        <h2>{{ section.settings.heading }}</h2>
+      </div>
+      <div class="rhs">
+        <p>{{ section.settings.subtext }}</p>
+        <a class="more" href="{{ section.settings.link | default: 'https://www.instagram.com/haveanicedaylondon' }}" target="_blank">{{ section.settings.link_label }} &#8594;</a>
+      </div>
+    </div>
+
+    <div class="hand-gallery">
+      {% for block in section.blocks %}
+        {% if block.type == 'tile' %}
+          <div class="hand-g {{ block.settings.span_class }} hand-reveal" {{ block.shopify_attributes }}>
+            {% if block.settings.image %}
+              <img src="{{ block.settings.image | img_url: '600x' }}" alt="{{ block.settings.handle }}" loading="lazy" />
+            {% else %}
+              <img src="{{ block.settings.image_url }}" alt="{{ block.settings.handle }}" loading="lazy" />
+            {% endif %}
+            <span class="ig">{{ block.settings.handle }}</span>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "V3 Gallery",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "@haveanicedaylondon" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "The Camden\nCommunity." },
+    { "type": "textarea", "id": "subtext", "label": "Subtext", "default": "Tag #HaveANiceDayLondon for a feature. 30+ years of culture, same as it ever was." },
+    { "type": "text", "id": "link_label", "label": "Link label", "default": "Follow Us On Instagram" },
+    { "type": "url", "id": "link", "label": "Instagram link" }
+  ],
+  "blocks": [
+    {
+      "type": "tile",
+      "name": "Gallery Tile",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image (upload)" },
+        { "type": "text", "id": "image_url", "label": "Image URL (fallback)", "default": "https://cdn.shopify.com/s/files/1/0737/7397/3795/files/Untitled_design_63.png?v=1761074463" },
+        { "type": "text", "id": "handle", "label": "Instagram handle", "default": "@samtheman_og" },
+        { "type": "select", "id": "span_class", "label": "Tile size", "options": [
+          { "value": "", "label": "Normal (1x1)" },
+          { "value": "l", "label": "Large (2x2)" },
+          { "value": "t", "label": "Tall (1x2)" },
+          { "value": "w", "label": "Wide (2x1)" }
+        ], "default": "" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "V3 Gallery",
+      "blocks": [
+        { "type": "tile", "settings": { "image_url": "https://cdn.shopify.com/s/files/1/0737/7397/3795/files/Untitled_design_63.png?v=1761074463", "handle": "@samtheman_og", "span_class": "l" } },
+        { "type": "tile", "settings": { "image_url": "https://cdn.shopify.com/s/files/1/0737/7397/3795/files/SHURLTHEGIRL2-9_1.png?v=1761074728", "handle": "@shurl_", "span_class": "t" } },
+        { "type": "tile", "settings": { "image_url": "https://cdn.shopify.com/s/files/1/0737/7397/3795/files/BTKA-24_88699f5f-e9cb-4fea-833e-734567cc5ea6.png?v=1760942116", "handle": "@btka.uk", "span_class": "" } },
+        { "type": "tile", "settings": { "image_url": "https://cdn.shopify.com/s/files/1/0737/7397/3795/files/9CB8DAFE-1B4F-4F56-BF62-DCFCE7C0D5F6.jpg?v=1764249401", "handle": "@vinyl.dept", "span_class": "" } },
+        { "type": "tile", "settings": { "image_url": "https://cdn.shopify.com/s/files/1/0737/7397/3795/files/VORTEX-25_3.png?v=1761075301", "handle": "@vortexcrew", "span_class": "w" } },
+        { "type": "tile", "settings": { "image_url": "https://cdn.shopify.com/s/files/1/0737/7397/3795/files/FUNKYDOG-33_1_ddf1f9c1-a7a1-4420-a20b-4ca3c02790f1.png?v=1757241619", "handle": "@funky.dog", "span_class": "" } },
+        { "type": "tile", "settings": { "image_url": "https://cdn.shopify.com/s/files/1/0737/7397/3795/files/PROFESSORWATERCOOLER-23.png?v=1757240719", "handle": "@dontdothedodo", "span_class": "" } },
+        { "type": "tile", "settings": { "image_url": "https://cdn.shopify.com/s/files/1/0737/7397/3795/files/40B5E71D-0009-419D-881E-19D0004F31FC.png?v=1776873776", "handle": "@handspun", "span_class": "" } },
+        { "type": "tile", "settings": { "image_url": "https://cdn.shopify.com/s/files/1/0737/7397/3795/products/Untitleddesign-2022-11-25T133036.474_089524f5-ab17-434d-a64e-6b0daa0dd409.png?v=1761072539", "handle": "@dready", "span_class": "" } },
+        { "type": "tile", "settings": { "image_url": "https://cdn.shopify.com/s/files/1/0737/7397/3795/files/DIVERGENT-4_bd3821be-f537-4c2e-8fa1-3f02985d4ffd.png?v=1765997248", "handle": "@incubator", "span_class": "" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

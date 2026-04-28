@@ -1,0 +1,73 @@
+<section class="hand-sec">
+  <div class="hand-container">
+    <div class="hand-sec-head">
+      <div class="lhs">
+        <div class="eyebrow">{{ section.settings.eyebrow }}</div>
+        <h2>{{ section.settings.heading }}</h2>
+      </div>
+      <div class="rhs">
+        <p>{{ section.settings.subtext }}</p>
+        <a class="more" href="{{ section.settings.link | default: '/collections' }}">{{ section.settings.link_label }} &#8594;</a>
+      </div>
+    </div>
+
+    <div class="hand-cats">
+      {% for block in section.blocks %}
+        {% if block.type == 'category' %}
+          <a class="hand-cat hand-reveal" href="{{ block.settings.link | default: '/collections/all' }}" {{ block.shopify_attributes }}>
+            <div class="img">
+              {% if block.settings.image %}
+                <img src="{{ block.settings.image | img_url: '600x' }}" alt="{{ block.settings.title }}" loading="lazy" />
+              {% endif %}
+            </div>
+            <div class="top">
+              <span>{{ block.settings.top_left }}</span>
+              <span>{{ block.settings.top_right }}</span>
+            </div>
+            <div class="bot">
+              <h3>{{ block.settings.title }}</h3>
+              <span class="arr">&#8599;</span>
+            </div>
+          </a>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "V3 Categories",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Shop By Category" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Pick Your\nUniform." },
+    { "type": "textarea", "id": "subtext", "label": "Subtext", "default": "From £15 slip mats to £105 embroidered Dready zips. Tees, sweats, hoods and the bits that finish the fit." },
+    { "type": "text", "id": "link_label", "label": "Link label", "default": "All Categories" },
+    { "type": "url", "id": "link", "label": "Link" }
+  ],
+  "blocks": [
+    {
+      "type": "category",
+      "name": "Category",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Category image" },
+        { "type": "text", "id": "top_left", "label": "Top-left label", "default": "01 / Cotton" },
+        { "type": "text", "id": "top_right", "label": "Top-right label", "default": "From £29.99" },
+        { "type": "text", "id": "title", "label": "Category title", "default": "T-Shirts" },
+        { "type": "url", "id": "link", "label": "Link" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "V3 Categories",
+      "blocks": [
+        { "type": "category", "settings": { "top_left": "01 / Cotton", "top_right": "From £29.99", "title": "T-Shirts" } },
+        { "type": "category", "settings": { "top_left": "02 / Heavy", "top_right": "From £42.00", "title": "Sweatshirts" } },
+        { "type": "category", "settings": { "top_left": "03 / Hooded", "top_right": "From £65.00", "title": "Hoodies" } },
+        { "type": "category", "settings": { "top_left": "04 / Extras", "top_right": "From £5.00", "title": "Accessories" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

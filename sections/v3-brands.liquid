@@ -1,0 +1,75 @@
+<section class="hand-sec" id="brands">
+  <div class="hand-container">
+    <div class="hand-sec-head">
+      <div class="lhs">
+        <div class="eyebrow">{{ section.settings.eyebrow }}</div>
+        <h2>{{ section.settings.heading }}</h2>
+      </div>
+      <div class="rhs">
+        <p>{{ section.settings.subtext }}</p>
+        <a class="more" href="{{ section.settings.link | default: '/collections' }}">{{ section.settings.link_label }} &#8594;</a>
+      </div>
+    </div>
+
+    <div class="hand-roster">
+      {% for block in section.blocks %}
+        {% if block.type == 'brand' %}
+          <a href="{{ block.settings.link | default: '/collections/all' }}" class="{{ block.settings.style }}" {{ block.shopify_attributes }}>
+            <span class="num">{{ block.settings.number }}</span>
+            <span class="arrow">&#8599;</span>
+            <div>
+              <div class="name">{{ block.settings.name }}</div>
+              <div class="desc">{{ block.settings.desc }}</div>
+            </div>
+          </a>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "V3 Brands",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "The Family — 09 Sub-Brands" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "One Camden HQ.\nNine Identities." },
+    { "type": "textarea", "id": "subtext", "label": "Subtext", "default": "Have A Nice Day was always more than one logo. Each sub-brand is its own world — born out of music, scene, and 30+ years of underground London." },
+    { "type": "text", "id": "link_label", "label": "Link label", "default": "Browse All Brands" },
+    { "type": "url", "id": "link", "label": "Link" }
+  ],
+  "blocks": [
+    {
+      "type": "brand",
+      "name": "Brand",
+      "settings": [
+        { "type": "text", "id": "number", "label": "Number", "default": "01 / Flagship" },
+        { "type": "text", "id": "name", "label": "Brand name", "default": "Have A Nice Day" },
+        { "type": "text", "id": "desc", "label": "Description", "default": "Sam The Man · Shurl The Girl" },
+        { "type": "url", "id": "link", "label": "Link" },
+        { "type": "select", "id": "style", "label": "Style", "options": [
+          { "value": "", "label": "Default" },
+          { "value": "featured", "label": "Featured (dark)" },
+          { "value": "accent", "label": "Accent (pink)" }
+        ], "default": "" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "V3 Brands",
+      "blocks": [
+        { "type": "brand", "settings": { "number": "01 / Flagship", "name": "Have A Nice Day", "desc": "Sam The Man · Shurl The Girl", "style": "featured" } },
+        { "type": "brand", "settings": { "number": "02", "name": "Dready Original", "desc": "Roots · Reggae · Camden", "style": "" } },
+        { "type": "brand", "settings": { "number": "03", "name": "Handspun Records", "desc": "Vinyl · Sound · Wax", "style": "accent" } },
+        { "type": "brand", "settings": { "number": "04", "name": "BTKA", "desc": "Punk Rocks · Sleazy Rider", "style": "" } },
+        { "type": "brand", "settings": { "number": "05", "name": "Vortex", "desc": "Info The Robot · Close Encounter", "style": "" } },
+        { "type": "brand", "settings": { "number": "06", "name": "Funky Dog", "desc": "Atomic Dog · Mongrel Soup", "style": "" } },
+        { "type": "brand", "settings": { "number": "07", "name": "Don't Do The Dodo", "desc": "Professor Watercooler · Crest", "style": "" } },
+        { "type": "brand", "settings": { "number": "08", "name": "Incubator", "desc": "Divergent · Outside The Box", "style": "" } },
+        { "type": "brand", "settings": { "number": "09", "name": "Sista", "desc": "Script · Silhouette · Slip Mats", "style": "accent" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
