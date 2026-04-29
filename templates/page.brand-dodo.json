@@ -1,0 +1,11 @@
+{
+    "sections": {
+        "brand-dodo": {
+            "type": "brand-dodo",
+            "settings": {}
+        }
+    },
+    "order": [
+        "brand-dodo"
+    ]
+}

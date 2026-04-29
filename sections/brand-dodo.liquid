@@ -1,0 +1,1387 @@
+{% comment %} Don't Do The Dodo — Unique Brand Page with Motion.dev animations {% endcomment %}
+
+<!-- Motion.dev CDN -->
+<script src="https://cdn.jsdelivr.net/npm/motion@11.11.13/dist/motion.js"></script>
+
+<style>
+  /* ===================================================
+     DON'T DO THE DODO — UNIQUE BRAND IDENTITY
+     Palette: Cream / Forest Green / Bone / Charcoal
+     Vibe: Natural History Museum meets Camden Rave
+     =================================================== */
+
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap');
+
+  :root {
+    --dodo-cream: #F5F0E8;
+    --dodo-bone: #EDE8DC;
+    --dodo-forest: #1C3A2A;
+    --dodo-sage: #4A7C59;
+    --dodo-moss: #2D5A3D;
+    --dodo-gold: #C8A84B;
+    --dodo-amber: #D4A843;
+    --dodo-charcoal: #1A1A18;
+    --dodo-ink: #0F1A14;
+    --dodo-warm-white: #FAF7F2;
+    --dodo-serif: 'Playfair Display', Georgia, serif;
+    --dodo-sans: 'Space Grotesk', system-ui, sans-serif;
+    --dodo-mono: 'Space Mono', monospace;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  .dodo-wrap {
+    background: var(--dodo-cream);
+    color: var(--dodo-charcoal);
+    font-family: var(--dodo-sans);
+    overflow-x: hidden;
+  }
+
+  /* ===== CURSOR ===== */
+  .dodo-cursor {
+    position: fixed;
+    width: 12px;
+    height: 12px;
+    background: var(--dodo-forest);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: width 0.2s, height 0.2s, background 0.2s;
+    mix-blend-mode: multiply;
+  }
+  .dodo-cursor.expanded {
+    width: 40px;
+    height: 40px;
+    background: var(--dodo-gold);
+  }
+
+  /* ===== HERO ===== */
+  .dodo-hero {
+    min-height: 100vh;
+    background: var(--dodo-ink);
+    position: relative;
+    display: grid;
+    grid-template-rows: 1fr auto;
+    overflow: hidden;
+  }
+
+  /* Grain texture overlay */
+  .dodo-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    opacity: 0.4;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  /* Botanical illustration background */
+  .dodo-hero-botanical {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+  }
+
+  .dodo-hero-botanical svg {
+    position: absolute;
+    opacity: 0.06;
+  }
+
+  .dodo-hero-botanical .leaf-1 {
+    top: -10%;
+    right: -5%;
+    width: 60vw;
+    transform-origin: center;
+  }
+
+  .dodo-hero-botanical .leaf-2 {
+    bottom: -15%;
+    left: -8%;
+    width: 50vw;
+    transform: scaleX(-1);
+  }
+
+  .dodo-hero-main {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 120px 40px 60px;
+    text-align: center;
+  }
+
+  /* Specimen label */
+  .dodo-specimen-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    border: 1px solid rgba(200, 168, 75, 0.4);
+    padding: 8px 20px;
+    margin-bottom: 48px;
+    opacity: 0;
+  }
+
+  .dodo-specimen-label span {
+    font-family: var(--dodo-mono);
+    font-size: 10px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--dodo-gold);
+  }
+
+  .dodo-specimen-dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--dodo-gold);
+    animation: dodo-blink 2s ease-in-out infinite;
+  }
+
+  @keyframes dodo-blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.2; }
+  }
+
+  /* Main title */
+  .dodo-hero-title {
+    font-family: var(--dodo-serif);
+    font-size: clamp(64px, 12vw, 160px);
+    font-weight: 900;
+    line-height: 0.85;
+    color: var(--dodo-cream);
+    margin-bottom: 32px;
+    opacity: 0;
+    overflow: hidden;
+  }
+
+  .dodo-hero-title .word-dont {
+    display: block;
+    font-style: italic;
+    color: var(--dodo-cream);
+  }
+
+  .dodo-hero-title .word-do {
+    display: block;
+    color: var(--dodo-gold);
+    -webkit-text-stroke: 2px var(--dodo-gold);
+    color: transparent;
+    font-style: normal;
+  }
+
+  .dodo-hero-title .word-the-dodo {
+    display: block;
+    color: var(--dodo-cream);
+    font-style: italic;
+  }
+
+  /* Latin name */
+  .dodo-latin {
+    font-family: var(--dodo-mono);
+    font-size: 13px;
+    letter-spacing: 3px;
+    color: rgba(245, 240, 232, 0.35);
+    text-transform: uppercase;
+    margin-bottom: 60px;
+    opacity: 0;
+  }
+
+  /* Scroll indicator */
+  .dodo-scroll-hint {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    opacity: 0;
+  }
+
+  .dodo-scroll-hint span {
+    font-family: var(--dodo-mono);
+    font-size: 9px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: rgba(245, 240, 232, 0.3);
+  }
+
+  .dodo-scroll-line {
+    width: 1px;
+    height: 60px;
+    background: linear-gradient(to bottom, var(--dodo-gold), transparent);
+    animation: dodo-scroll-drop 2s ease-in-out infinite;
+  }
+
+  @keyframes dodo-scroll-drop {
+    0% { transform: scaleY(0); transform-origin: top; opacity: 1; }
+    50% { transform: scaleY(1); transform-origin: top; opacity: 1; }
+    51% { transform: scaleY(1); transform-origin: bottom; opacity: 1; }
+    100% { transform: scaleY(0); transform-origin: bottom; opacity: 0; }
+  }
+
+  /* Hero bottom bar */
+  .dodo-hero-bar {
+    position: relative;
+    z-index: 2;
+    border-top: 1px solid rgba(200, 168, 75, 0.2);
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    opacity: 0;
+  }
+
+  .dodo-hero-bar-item {
+    padding: 24px 32px;
+    border-right: 1px solid rgba(200, 168, 75, 0.2);
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .dodo-hero-bar-item:last-child { border-right: none; }
+
+  .dodo-hero-bar-label {
+    font-family: var(--dodo-mono);
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(245, 240, 232, 0.3);
+  }
+
+  .dodo-hero-bar-value {
+    font-family: var(--dodo-serif);
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--dodo-cream);
+  }
+
+  /* ===== MARQUEE ===== */
+  .dodo-marquee {
+    background: var(--dodo-forest);
+    padding: 18px 0;
+    overflow: hidden;
+    border-top: 1px solid var(--dodo-moss);
+    border-bottom: 1px solid var(--dodo-moss);
+  }
+
+  .dodo-marquee-track {
+    display: flex;
+    gap: 0;
+    animation: dodo-marquee-scroll 40s linear infinite;
+    white-space: nowrap;
+  }
+
+  @keyframes dodo-marquee-scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  .dodo-marquee-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 24px;
+    padding: 0 40px;
+    font-family: var(--dodo-serif);
+    font-size: 15px;
+    font-style: italic;
+    color: var(--dodo-cream);
+    opacity: 0.7;
+  }
+
+  .dodo-marquee-sep {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--dodo-gold);
+    flex-shrink: 0;
+    opacity: 1;
+  }
+
+  /* ===== MANIFESTO SECTION ===== */
+  .dodo-manifesto {
+    background: var(--dodo-cream);
+    padding: 140px 40px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .dodo-manifesto-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 80px;
+    align-items: start;
+  }
+
+  @media (max-width: 768px) {
+    .dodo-manifesto-inner { grid-template-columns: 1fr; gap: 40px; }
+  }
+
+  .dodo-manifesto-sidebar {
+    position: sticky;
+    top: 100px;
+  }
+
+  .dodo-manifesto-num {
+    font-family: var(--dodo-serif);
+    font-size: 120px;
+    font-weight: 900;
+    color: var(--dodo-bone);
+    line-height: 1;
+    margin-bottom: -20px;
+  }
+
+  .dodo-manifesto-tag {
+    font-family: var(--dodo-mono);
+    font-size: 10px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--dodo-sage);
+    border-left: 2px solid var(--dodo-sage);
+    padding-left: 12px;
+  }
+
+  .dodo-manifesto-body {}
+
+  .dodo-manifesto-eyebrow {
+    font-family: var(--dodo-mono);
+    font-size: 10px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--dodo-sage);
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .dodo-manifesto-eyebrow::before {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 1px;
+    background: var(--dodo-sage);
+  }
+
+  .dodo-manifesto-headline {
+    font-family: var(--dodo-serif);
+    font-size: clamp(36px, 5vw, 64px);
+    font-weight: 900;
+    line-height: 1.05;
+    color: var(--dodo-charcoal);
+    margin-bottom: 32px;
+  }
+
+  .dodo-manifesto-headline em {
+    font-style: italic;
+    color: var(--dodo-forest);
+  }
+
+  .dodo-manifesto-text {
+    font-size: 18px;
+    line-height: 1.8;
+    color: #4a4a42;
+    margin-bottom: 20px;
+    font-weight: 400;
+  }
+
+  .dodo-manifesto-text strong {
+    color: var(--dodo-charcoal);
+    font-weight: 600;
+  }
+
+  .dodo-manifesto-quote {
+    margin: 48px 0;
+    padding: 32px 40px;
+    border-left: 3px solid var(--dodo-gold);
+    background: var(--dodo-bone);
+  }
+
+  .dodo-manifesto-quote p {
+    font-family: var(--dodo-serif);
+    font-size: 22px;
+    font-style: italic;
+    line-height: 1.5;
+    color: var(--dodo-charcoal);
+  }
+
+  .dodo-manifesto-quote cite {
+    display: block;
+    margin-top: 12px;
+    font-family: var(--dodo-mono);
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--dodo-sage);
+    font-style: normal;
+  }
+
+  /* ===== TIMELINE / EXTINCTION SECTION ===== */
+  .dodo-extinction {
+    background: var(--dodo-forest);
+    padding: 120px 40px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .dodo-extinction::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 80% 50%, rgba(200, 168, 75, 0.06) 0%, transparent 60%);
+  }
+
+  .dodo-extinction-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+
+  .dodo-extinction-header {
+    margin-bottom: 80px;
+  }
+
+  .dodo-extinction-eyebrow {
+    font-family: var(--dodo-mono);
+    font-size: 10px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--dodo-gold);
+    margin-bottom: 16px;
+  }
+
+  .dodo-extinction-title {
+    font-family: var(--dodo-serif);
+    font-size: clamp(40px, 6vw, 72px);
+    font-weight: 900;
+    color: var(--dodo-cream);
+    line-height: 1;
+  }
+
+  .dodo-extinction-title em {
+    font-style: italic;
+    color: var(--dodo-gold);
+  }
+
+  /* Timeline */
+  .dodo-timeline {
+    position: relative;
+    padding-left: 60px;
+  }
+
+  .dodo-timeline::before {
+    content: '';
+    position: absolute;
+    left: 20px;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: linear-gradient(to bottom, var(--dodo-gold), transparent);
+  }
+
+  .dodo-timeline-item {
+    position: relative;
+    margin-bottom: 60px;
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+
+  .dodo-timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -48px;
+    top: 8px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--dodo-gold);
+    box-shadow: 0 0 0 4px rgba(200, 168, 75, 0.2);
+  }
+
+  .dodo-timeline-year {
+    font-family: var(--dodo-mono);
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: var(--dodo-gold);
+    margin-bottom: 8px;
+  }
+
+  .dodo-timeline-event {
+    font-family: var(--dodo-serif);
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--dodo-cream);
+    margin-bottom: 8px;
+  }
+
+  .dodo-timeline-desc {
+    font-size: 15px;
+    line-height: 1.7;
+    color: rgba(245, 240, 232, 0.55);
+    max-width: 500px;
+  }
+
+  /* ===== PRODUCTS SECTION ===== */
+  .dodo-products {
+    background: var(--dodo-warm-white);
+    padding: 120px 40px;
+  }
+
+  .dodo-products-inner {
+    max-width: 1300px;
+    margin: 0 auto;
+  }
+
+  .dodo-products-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 64px;
+    flex-wrap: wrap;
+    gap: 24px;
+  }
+
+  .dodo-products-eyebrow {
+    font-family: var(--dodo-mono);
+    font-size: 10px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--dodo-sage);
+    margin-bottom: 12px;
+  }
+
+  .dodo-products-title {
+    font-family: var(--dodo-serif);
+    font-size: clamp(36px, 5vw, 60px);
+    font-weight: 900;
+    color: var(--dodo-charcoal);
+    line-height: 1;
+  }
+
+  .dodo-products-title em {
+    font-style: italic;
+    color: var(--dodo-forest);
+  }
+
+  .dodo-view-all {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--dodo-mono);
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--dodo-forest);
+    text-decoration: none;
+    border-bottom: 1px solid var(--dodo-forest);
+    padding-bottom: 4px;
+    transition: gap 0.2s;
+    white-space: nowrap;
+  }
+
+  .dodo-view-all:hover { gap: 16px; }
+
+  /* Product grid */
+  .dodo-products-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2px;
+  }
+
+  @media (max-width: 1024px) { .dodo-products-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 600px) { .dodo-products-grid { grid-template-columns: repeat(2, 1fr); gap: 1px; } }
+
+  .dodo-product {
+    background: var(--dodo-bone);
+    position: relative;
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  .dodo-product-img {
+    aspect-ratio: 3/4;
+    overflow: hidden;
+    position: relative;
+    background: var(--dodo-cream);
+  }
+
+  .dodo-product-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    display: block;
+  }
+
+  .dodo-product:hover .dodo-product-img img {
+    transform: scale(1.08);
+  }
+
+  /* Specimen tag on product */
+  .dodo-product-tag {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    background: var(--dodo-forest);
+    color: var(--dodo-cream);
+    font-family: var(--dodo-mono);
+    font-size: 8px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 5px 10px;
+  }
+
+  .dodo-product-info {
+    padding: 20px 20px 24px;
+    border-top: 1px solid rgba(0,0,0,0.06);
+  }
+
+  .dodo-product-vendor {
+    font-family: var(--dodo-mono);
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--dodo-sage);
+    margin-bottom: 6px;
+  }
+
+  .dodo-product-name {
+    font-family: var(--dodo-serif);
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--dodo-charcoal);
+    line-height: 1.3;
+    margin-bottom: 10px;
+  }
+
+  .dodo-product-price {
+    font-family: var(--dodo-sans);
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--dodo-forest);
+  }
+
+  /* Hover overlay */
+  .dodo-product-overlay {
+    position: absolute;
+    inset: 0;
+    background: var(--dodo-forest);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .dodo-product:hover .dodo-product-overlay {
+    opacity: 0.92;
+  }
+
+  .dodo-product-overlay-text {
+    font-family: var(--dodo-serif);
+    font-size: 18px;
+    font-style: italic;
+    color: var(--dodo-cream);
+    letter-spacing: 1px;
+  }
+
+  /* ===== SPECIMEN CABINET ===== */
+  .dodo-cabinet {
+    background: var(--dodo-charcoal);
+    padding: 120px 40px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .dodo-cabinet-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .dodo-cabinet-header {
+    text-align: center;
+    margin-bottom: 80px;
+  }
+
+  .dodo-cabinet-eyebrow {
+    font-family: var(--dodo-mono);
+    font-size: 10px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--dodo-gold);
+    margin-bottom: 16px;
+  }
+
+  .dodo-cabinet-title {
+    font-family: var(--dodo-serif);
+    font-size: clamp(36px, 5vw, 60px);
+    font-weight: 900;
+    color: var(--dodo-cream);
+    line-height: 1;
+  }
+
+  .dodo-cabinet-title em { font-style: italic; color: var(--dodo-gold); }
+
+  /* Cabinet grid */
+  .dodo-cabinet-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: rgba(200, 168, 75, 0.1);
+  }
+
+  @media (max-width: 768px) { .dodo-cabinet-grid { grid-template-columns: 1fr; } }
+
+  .dodo-cabinet-item {
+    background: var(--dodo-charcoal);
+    padding: 48px 40px;
+    position: relative;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(20px);
+    cursor: default;
+    transition: background 0.3s;
+  }
+
+  .dodo-cabinet-item:hover {
+    background: #222220;
+  }
+
+  .dodo-cabinet-item-num {
+    font-family: var(--dodo-serif);
+    font-size: 80px;
+    font-weight: 900;
+    color: rgba(200, 168, 75, 0.08);
+    position: absolute;
+    top: 16px;
+    right: 24px;
+    line-height: 1;
+    pointer-events: none;
+  }
+
+  .dodo-cabinet-item-icon {
+    font-size: 36px;
+    margin-bottom: 20px;
+    display: block;
+    filter: grayscale(0.3);
+  }
+
+  .dodo-cabinet-item-title {
+    font-family: var(--dodo-serif);
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--dodo-cream);
+    margin-bottom: 12px;
+    line-height: 1.2;
+  }
+
+  .dodo-cabinet-item-desc {
+    font-size: 14px;
+    line-height: 1.7;
+    color: rgba(245, 240, 232, 0.45);
+  }
+
+  .dodo-cabinet-item-tag {
+    display: inline-block;
+    margin-top: 20px;
+    font-family: var(--dodo-mono);
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--dodo-gold);
+    border: 1px solid rgba(200, 168, 75, 0.3);
+    padding: 4px 10px;
+  }
+
+  /* ===== CLOSING / CTA ===== */
+  .dodo-cta {
+    background: var(--dodo-cream);
+    padding: 160px 40px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Botanical border decoration */
+  .dodo-cta::before,
+  .dodo-cta::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--dodo-gold), transparent);
+  }
+  .dodo-cta::before { top: 0; }
+  .dodo-cta::after { bottom: 0; }
+
+  .dodo-cta-inner {
+    max-width: 700px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+
+  .dodo-cta-eyebrow {
+    font-family: var(--dodo-mono);
+    font-size: 10px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--dodo-sage);
+    margin-bottom: 24px;
+  }
+
+  .dodo-cta-title {
+    font-family: var(--dodo-serif);
+    font-size: clamp(44px, 7vw, 88px);
+    font-weight: 900;
+    line-height: 0.9;
+    color: var(--dodo-charcoal);
+    margin-bottom: 32px;
+  }
+
+  .dodo-cta-title em {
+    font-style: italic;
+    color: var(--dodo-forest);
+    display: block;
+  }
+
+  .dodo-cta-sub {
+    font-size: 17px;
+    line-height: 1.7;
+    color: #6a6a60;
+    margin-bottom: 56px;
+    font-weight: 400;
+  }
+
+  .dodo-cta-btns {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .dodo-btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--dodo-forest);
+    color: var(--dodo-cream);
+    text-decoration: none;
+    font-family: var(--dodo-mono);
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    padding: 18px 44px;
+    transition: all 0.25s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .dodo-btn-primary::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--dodo-gold);
+    transform: translateX(-100%);
+    transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .dodo-btn-primary:hover::before { transform: translateX(0); }
+  .dodo-btn-primary:hover { color: var(--dodo-charcoal); }
+
+  .dodo-btn-primary span { position: relative; z-index: 1; }
+
+  .dodo-btn-outline {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: transparent;
+    color: var(--dodo-charcoal);
+    text-decoration: none;
+    font-family: var(--dodo-mono);
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    padding: 18px 44px;
+    border: 1px solid var(--dodo-charcoal);
+    transition: all 0.25s;
+  }
+
+  .dodo-btn-outline:hover {
+    background: var(--dodo-charcoal);
+    color: var(--dodo-cream);
+  }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 768px) {
+    .dodo-hero-main { padding: 100px 24px 40px; }
+    .dodo-hero-bar { grid-template-columns: 1fr; }
+    .dodo-hero-bar-item { border-right: none; border-bottom: 1px solid rgba(200, 168, 75, 0.2); }
+    .dodo-manifesto { padding: 80px 24px; }
+    .dodo-extinction { padding: 80px 24px; }
+    .dodo-products { padding: 80px 24px; }
+    .dodo-cabinet { padding: 80px 24px; }
+    .dodo-cta { padding: 100px 24px; }
+    .dodo-products-header { flex-direction: column; align-items: flex-start; }
+  }
+</style>
+
+<!-- Custom cursor -->
+<div class="dodo-cursor" id="dodoCursor"></div>
+
+<div class="dodo-wrap">
+
+  <!-- ===== HERO ===== -->
+  <section class="dodo-hero">
+    <div class="dodo-hero-botanical">
+      <!-- Botanical leaf SVG left -->
+      <svg class="leaf-1" viewBox="0 0 600 800" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M300 800 C300 800 50 600 80 350 C110 100 300 0 300 0 C300 0 490 100 520 350 C550 600 300 800 300 800Z" fill="#4A7C59"/>
+        <path d="M300 800 L300 0" stroke="#2D5A3D" stroke-width="2"/>
+        <path d="M300 200 C250 180 200 200 180 250" stroke="#2D5A3D" stroke-width="1.5" fill="none"/>
+        <path d="M300 300 C350 280 400 300 420 350" stroke="#2D5A3D" stroke-width="1.5" fill="none"/>
+        <path d="M300 400 C240 380 190 400 170 460" stroke="#2D5A3D" stroke-width="1.5" fill="none"/>
+        <path d="M300 500 C360 480 410 500 430 560" stroke="#2D5A3D" stroke-width="1.5" fill="none"/>
+        <path d="M300 600 C240 580 200 600 185 650" stroke="#2D5A3D" stroke-width="1.5" fill="none"/>
+      </svg>
+      <!-- Botanical leaf SVG right -->
+      <svg class="leaf-2" viewBox="0 0 600 800" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M300 800 C300 800 50 600 80 350 C110 100 300 0 300 0 C300 0 490 100 520 350 C550 600 300 800 300 800Z" fill="#4A7C59"/>
+        <path d="M300 800 L300 0" stroke="#2D5A3D" stroke-width="2"/>
+        <path d="M300 200 C250 180 200 200 180 250" stroke="#2D5A3D" stroke-width="1.5" fill="none"/>
+        <path d="M300 300 C350 280 400 300 420 350" stroke="#2D5A3D" stroke-width="1.5" fill="none"/>
+        <path d="M300 400 C240 380 190 400 170 460" stroke="#2D5A3D" stroke-width="1.5" fill="none"/>
+        <path d="M300 500 C360 480 410 500 430 560" stroke="#2D5A3D" stroke-width="1.5" fill="none"/>
+        <path d="M300 600 C240 580 200 600 185 650" stroke="#2D5A3D" stroke-width="1.5" fill="none"/>
+      </svg>
+    </div>
+
+    <div class="dodo-hero-main">
+      <div class="dodo-specimen-label" id="dodoSpecimenLabel">
+        <span class="dodo-specimen-dot"></span>
+        <span>Specimen No. 07 — Camden Archive 1990</span>
+        <span class="dodo-specimen-dot"></span>
+      </div>
+
+      <h1 class="dodo-hero-title" id="dodoHeroTitle">
+        <span class="word-dont">Don't</span>
+        <span class="word-do">Do The</span>
+        <span class="word-the-dodo">Dodo.</span>
+      </h1>
+
+      <p class="dodo-latin" id="dodoLatin">Raphus cucullatus — Extinct 1681 — Never Forgotten</p>
+
+      <div class="dodo-scroll-hint" id="dodoScrollHint">
+        <span>Scroll</span>
+        <div class="dodo-scroll-line"></div>
+      </div>
+    </div>
+
+    <div class="dodo-hero-bar" id="dodoHeroBar">
+      <div class="dodo-hero-bar-item">
+        <span class="dodo-hero-bar-label">Founded</span>
+        <span class="dodo-hero-bar-value">Camden, 1990</span>
+      </div>
+      <div class="dodo-hero-bar-item">
+        <span class="dodo-hero-bar-label">Last Dodo</span>
+        <span class="dodo-hero-bar-value">1681 A.D.</span>
+      </div>
+      <div class="dodo-hero-bar-item">
+        <span class="dodo-hero-bar-label">Status</span>
+        <span class="dodo-hero-bar-value">Reissued</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== MARQUEE ===== -->
+  <div class="dodo-marquee">
+    <div class="dodo-marquee-track">
+      {% assign dodo_items = "Don't Do The Dodo,Professor Watercooler,Extinct But Iconic,Camden Underground,Organic Cotton,UK Printed,Natural History,Crest,Don't Do The Dodo,Professor Watercooler,Extinct But Iconic,Camden Underground,Organic Cotton,UK Printed,Natural History,Crest" | split: "," %}
+      {% for item in dodo_items %}
+        <span class="dodo-marquee-item">
+          {{ item }}
+          <span class="dodo-marquee-sep"></span>
+        </span>
+      {% endfor %}
+    </div>
+  </div>
+
+  <!-- ===== MANIFESTO ===== -->
+  <section class="dodo-manifesto">
+    <div class="dodo-manifesto-inner">
+      <div class="dodo-manifesto-sidebar">
+        <div class="dodo-manifesto-num" id="dodoManifestoNum">07</div>
+        <div class="dodo-manifesto-tag">Sub-Brand</div>
+      </div>
+      <div class="dodo-manifesto-body" id="dodoManifestoBody">
+        <p class="dodo-manifesto-eyebrow">The Manifesto</p>
+        <h2 class="dodo-manifesto-headline">
+          Some things, once gone,<br>
+          are <em>gone forever.</em>
+        </h2>
+        <p class="dodo-manifesto-text">
+          Don't Do The Dodo is a Camden-born brand with a message that cuts through the noise. Named after the most famous extinct bird in history — the Dodo, last seen in 1681 — the brand channels that irreversible loss into <strong>bold, graphic streetwear</strong> that demands you pay attention.
+        </p>
+        <p class="dodo-manifesto-text">
+          Born from the same underground rave scene that gave us Have A Nice Day, Dready, and BTKA, Don't Do The Dodo carries a different energy. It's quieter. More considered. But no less urgent.
+        </p>
+        <blockquote class="dodo-manifesto-quote">
+          <p>"The Dodo didn't know it was the last one. Don't be the Dodo."</p>
+          <cite>— Camden Archive, 1990</cite>
+        </blockquote>
+        <p class="dodo-manifesto-text">
+          Every piece is printed in the UK on <strong>220gsm organic cotton</strong>, in small batches. Professor Watercooler, the Crest, the archive graphics — all hand-drawn originals from the 1990 Camden collection, reissued exactly as they were.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== EXTINCTION TIMELINE ===== -->
+  <section class="dodo-extinction">
+    <div class="dodo-extinction-inner">
+      <div class="dodo-extinction-header">
+        <p class="dodo-extinction-eyebrow">The Timeline</p>
+        <h2 class="dodo-extinction-title">A History of <em>Not Forgetting</em></h2>
+      </div>
+      <div class="dodo-timeline">
+        <div class="dodo-timeline-item" data-timeline>
+          <p class="dodo-timeline-year">1598</p>
+          <p class="dodo-timeline-event">First Contact</p>
+          <p class="dodo-timeline-desc">Dutch sailors encounter the Dodo on Mauritius. Fearless, flightless, and utterly unaware of what was coming.</p>
+        </div>
+        <div class="dodo-timeline-item" data-timeline>
+          <p class="dodo-timeline-year">1681</p>
+          <p class="dodo-timeline-event">Last Sighting</p>
+          <p class="dodo-timeline-desc">The last confirmed Dodo is seen. Within a century, it becomes the defining symbol of human-caused extinction.</p>
+        </div>
+        <div class="dodo-timeline-item" data-timeline>
+          <p class="dodo-timeline-year">1990</p>
+          <p class="dodo-timeline-event">Camden Responds</p>
+          <p class="dodo-timeline-desc">Don't Do The Dodo is born in Camden's underground scene. A brand with a message: protect what matters before it's gone.</p>
+        </div>
+        <div class="dodo-timeline-item" data-timeline>
+          <p class="dodo-timeline-year">2026</p>
+          <p class="dodo-timeline-event">The Reissue</p>
+          <p class="dodo-timeline-desc">The original archive returns. Same graphics. Same message. Printed on organic cotton, in the UK, in small batches. Still urgent.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PRODUCTS ===== -->
+  <section class="dodo-products" id="dodo-products">
+    <div class="dodo-products-inner">
+      <div class="dodo-products-header">
+        <div>
+          <p class="dodo-products-eyebrow">The Collection</p>
+          <h2 class="dodo-products-title">Shop <em>Don't Do The Dodo</em></h2>
+        </div>
+        <a href="/collections/dont-do-the-dodo" class="dodo-view-all">
+          View All &rarr;
+        </a>
+      </div>
+
+      <div class="dodo-products-grid" id="dodoProductsGrid">
+        {% assign dodo_collection = collections['dont-do-the-dodo'] %}
+        {% if dodo_collection and dodo_collection.products.size > 0 %}
+          {% for product in dodo_collection.products limit: 8 %}
+            <a href="{{ product.url }}" class="dodo-product" data-product>
+              <div class="dodo-product-img">
+                {% if product.featured_image %}
+                  <img
+                    src="{{ product.featured_image | image_url: width: 600 }}"
+                    alt="{{ product.title | escape }}"
+                    loading="lazy"
+                    width="600"
+                    height="800"
+                  >
+                {% else %}
+                  <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:var(--dodo-bone);font-size:60px;">🦤</div>
+                {% endif %}
+                <span class="dodo-product-tag">Specimen</span>
+                <div class="dodo-product-overlay">
+                  <span class="dodo-product-overlay-text">View Piece →</span>
+                </div>
+              </div>
+              <div class="dodo-product-info">
+                <p class="dodo-product-vendor">Don't Do The Dodo</p>
+                <p class="dodo-product-name">{{ product.title | remove: "DON'T DO THE DODO - " | remove: "Don't Do The Dodo - " }}</p>
+                <p class="dodo-product-price">£{{ product.price | money_without_currency }}</p>
+              </div>
+            </a>
+          {% endfor %}
+        {% else %}
+          <!-- Fallback products -->
+          {% assign dodo_fallback = "Professor Watercooler F&B Sweatshirt,Professor Watercooler Tee,Crest Hoodie,Crest Tee,Professor Watercooler Hoodie,Dodo Logo Tee,Professor Watercooler Sweatshirt,Crest Sweatshirt" | split: "," %}
+          {% assign dodo_prices_fb = "50.00,29.99,69.99,29.99,69.99,29.99,50.00,50.00" | split: "," %}
+          {% for title in dodo_fallback %}
+            {% assign idx = forloop.index0 %}
+            <a href="/collections/dont-do-the-dodo" class="dodo-product" data-product>
+              <div class="dodo-product-img">
+                <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:var(--dodo-bone);font-size:60px;">🦤</div>
+                <span class="dodo-product-tag">Specimen</span>
+                <div class="dodo-product-overlay">
+                  <span class="dodo-product-overlay-text">View Piece →</span>
+                </div>
+              </div>
+              <div class="dodo-product-info">
+                <p class="dodo-product-vendor">Don't Do The Dodo</p>
+                <p class="dodo-product-name">{{ title }}</p>
+                <p class="dodo-product-price">£{{ dodo_prices_fb[idx] }}</p>
+              </div>
+            </a>
+          {% endfor %}
+        {% endif %}
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SPECIMEN CABINET ===== -->
+  <section class="dodo-cabinet">
+    <div class="dodo-cabinet-inner">
+      <div class="dodo-cabinet-header">
+        <p class="dodo-cabinet-eyebrow">The Archive</p>
+        <h2 class="dodo-cabinet-title">What Makes <em>Dodo, Dodo</em></h2>
+      </div>
+      <div class="dodo-cabinet-grid">
+        <div class="dodo-cabinet-item" data-cabinet>
+          <span class="dodo-cabinet-item-num">01</span>
+          <span class="dodo-cabinet-item-icon">🌿</span>
+          <h3 class="dodo-cabinet-item-title">Organic Cotton</h3>
+          <p class="dodo-cabinet-item-desc">220gsm heavyweight organic cotton. Soft enough to wear every day. Heavy enough to last a decade. The Dodo would approve.</p>
+          <span class="dodo-cabinet-item-tag">Material</span>
+        </div>
+        <div class="dodo-cabinet-item" data-cabinet>
+          <span class="dodo-cabinet-item-num">02</span>
+          <span class="dodo-cabinet-item-icon">✏️</span>
+          <h3 class="dodo-cabinet-item-title">Hand-Drawn Archive</h3>
+          <p class="dodo-cabinet-item-desc">Every graphic is an original from the 1990 Camden archive. Hand-drawn. Never digitally redrawn. The imperfections are the point.</p>
+          <span class="dodo-cabinet-item-tag">Graphics</span>
+        </div>
+        <div class="dodo-cabinet-item" data-cabinet>
+          <span class="dodo-cabinet-item-num">03</span>
+          <span class="dodo-cabinet-item-icon">🇬🇧</span>
+          <h3 class="dodo-cabinet-item-title">UK Printed</h3>
+          <p class="dodo-cabinet-item-desc">Small-batch production. Printed in the UK. Not in a factory. By people who care about what they're making.</p>
+          <span class="dodo-cabinet-item-tag">Production</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CLOSING CTA ===== -->
+  <section class="dodo-cta">
+    <div class="dodo-cta-inner" id="dodoCtaInner">
+      <p class="dodo-cta-eyebrow">Don't Do The Dodo — Camden 1990</p>
+      <h2 class="dodo-cta-title">
+        Don't be<br>
+        <em>the last one.</em>
+      </h2>
+      <p class="dodo-cta-sub">
+        The archive is back. In small batches. On organic cotton. Once it's gone — it's gone. Don't do the Dodo.
+      </p>
+      <div class="dodo-cta-btns">
+        <a href="/collections/dont-do-the-dodo" class="dodo-btn-primary">
+          <span>Shop The Collection</span>
+          <span>→</span>
+        </a>
+        <a href="/collections/all" class="dodo-btn-outline">
+          All Brands
+        </a>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<script>
+(function() {
+  // ===== MOTION.DEV ANIMATIONS =====
+  const { animate, scroll, inView, stagger } = Motion;
+
+  // Custom cursor
+  const cursor = document.getElementById('dodoCursor');
+  if (cursor) {
+    document.addEventListener('mousemove', (e) => {
+      animate(cursor, { x: e.clientX, y: e.clientY }, { duration: 0, easing: 'linear' });
+    });
+    document.querySelectorAll('a, button, .dodo-product, .dodo-cabinet-item').forEach(el => {
+      el.addEventListener('mouseenter', () => cursor.classList.add('expanded'));
+      el.addEventListener('mouseleave', () => cursor.classList.remove('expanded'));
+    });
+  }
+
+  // ===== HERO ENTRANCE =====
+  // Specimen label
+  const specimenLabel = document.getElementById('dodoSpecimenLabel');
+  if (specimenLabel) {
+    animate(specimenLabel,
+      { opacity: [0, 1], y: [20, 0] },
+      { duration: 0.8, delay: 0.3, easing: [0.25, 0.46, 0.45, 0.94] }
+    );
+  }
+
+  // Hero title — each word staggers in
+  const heroTitle = document.getElementById('dodoHeroTitle');
+  if (heroTitle) {
+    const words = heroTitle.querySelectorAll('span');
+    animate(heroTitle, { opacity: 1 }, { duration: 0 });
+    animate(words,
+      { opacity: [0, 1], y: [60, 0], skewY: [4, 0] },
+      { duration: 0.9, delay: stagger(0.15, { start: 0.5 }), easing: [0.25, 0.46, 0.45, 0.94] }
+    );
+  }
+
+  // Latin name
+  const latin = document.getElementById('dodoLatin');
+  if (latin) {
+    animate(latin,
+      { opacity: [0, 1], y: [10, 0] },
+      { duration: 0.7, delay: 1.2, easing: 'ease-out' }
+    );
+  }
+
+  // Scroll hint
+  const scrollHint = document.getElementById('dodoScrollHint');
+  if (scrollHint) {
+    animate(scrollHint,
+      { opacity: [0, 1] },
+      { duration: 0.6, delay: 1.6 }
+    );
+  }
+
+  // Hero bar
+  const heroBar = document.getElementById('dodoHeroBar');
+  if (heroBar) {
+    animate(heroBar,
+      { opacity: [0, 1], y: [20, 0] },
+      { duration: 0.7, delay: 1.0, easing: 'ease-out' }
+    );
+  }
+
+  // ===== BOTANICAL LEAVES PARALLAX =====
+  const leaf1 = document.querySelector('.dodo-hero-botanical .leaf-1');
+  const leaf2 = document.querySelector('.dodo-hero-botanical .leaf-2');
+  if (leaf1 && leaf2) {
+    scroll(({ y }) => {
+      const progress = y.progress;
+      animate(leaf1, { y: progress * 80, rotate: progress * 5 }, { duration: 0 });
+      animate(leaf2, { y: progress * 60, rotate: progress * -3 }, { duration: 0 });
+    }, { target: document.querySelector('.dodo-hero') });
+  }
+
+  // ===== MANIFESTO NUMBER COUNT UP =====
+  const manifestoNum = document.getElementById('dodoManifestoNum');
+  if (manifestoNum) {
+    inView(manifestoNum, () => {
+      animate(manifestoNum,
+        { opacity: [0, 1], x: [-30, 0] },
+        { duration: 0.8, easing: [0.25, 0.46, 0.45, 0.94] }
+      );
+    });
+  }
+
+  // Manifesto body
+  const manifestoBody = document.getElementById('dodoManifestoBody');
+  if (manifestoBody) {
+    inView(manifestoBody, () => {
+      const children = manifestoBody.children;
+      animate(children,
+        { opacity: [0, 1], y: [30, 0] },
+        { duration: 0.7, delay: stagger(0.1), easing: 'ease-out' }
+      );
+    }, { margin: '-10% 0px' });
+  }
+
+  // ===== TIMELINE ITEMS =====
+  document.querySelectorAll('[data-timeline]').forEach((item, i) => {
+    inView(item, () => {
+      animate(item,
+        { opacity: [0, 1], x: [-30, 0] },
+        { duration: 0.7, delay: i * 0.12, easing: [0.25, 0.46, 0.45, 0.94] }
+      );
+    }, { margin: '-5% 0px' });
+  });
+
+  // ===== PRODUCTS GRID =====
+  document.querySelectorAll('[data-product]').forEach((card, i) => {
+    inView(card, () => {
+      animate(card,
+        { opacity: [0, 1], y: [40, 0] },
+        { duration: 0.6, delay: (i % 4) * 0.08, easing: [0.25, 0.46, 0.45, 0.94] }
+      );
+    }, { margin: '-5% 0px' });
+  });
+
+  // ===== CABINET ITEMS =====
+  document.querySelectorAll('[data-cabinet]').forEach((item, i) => {
+    inView(item, () => {
+      animate(item,
+        { opacity: [0, 1], y: [30, 0] },
+        { duration: 0.7, delay: i * 0.15, easing: [0.25, 0.46, 0.45, 0.94] }
+      );
+    }, { margin: '-10% 0px' });
+  });
+
+  // ===== CTA SECTION =====
+  const ctaInner = document.getElementById('dodoCtaInner');
+  if (ctaInner) {
+    inView(ctaInner, () => {
+      const children = ctaInner.children;
+      animate(children,
+        { opacity: [0, 1], y: [40, 0] },
+        { duration: 0.8, delay: stagger(0.12), easing: [0.25, 0.46, 0.45, 0.94] }
+      );
+    }, { margin: '-10% 0px' });
+  }
+
+  // ===== SCROLL-DRIVEN MARQUEE SPEED =====
+  const marqueeTrack = document.querySelector('.dodo-marquee-track');
+  if (marqueeTrack) {
+    let scrollSpeed = 1;
+    window.addEventListener('scroll', () => {
+      scrollSpeed = 2.5;
+      clearTimeout(window._dodoScrollTimer);
+      window._dodoScrollTimer = setTimeout(() => { scrollSpeed = 1; }, 200);
+    });
+  }
+
+  // ===== HOVER TILT ON PRODUCTS =====
+  document.querySelectorAll('[data-product]').forEach(card => {
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = (e.clientX - rect.left) / rect.width - 0.5;
+      const y = (e.clientY - rect.top) / rect.height - 0.5;
+      animate(card, {
+        rotateX: -y * 4,
+        rotateY: x * 4,
+        scale: 1.02
+      }, { duration: 0.15, easing: 'ease-out' });
+    });
+    card.addEventListener('mouseleave', () => {
+      animate(card, { rotateX: 0, rotateY: 0, scale: 1 }, { duration: 0.4, easing: [0.25, 0.46, 0.45, 0.94] });
+    });
+  });
+
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Dodo Brand Page",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Dodo Brand Page"
+    }
+  ]
+}
+{% endschema %}

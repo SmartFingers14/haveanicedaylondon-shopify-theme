@@ -280,6 +280,7 @@
                         "number": "06",
                         "name": "Funky Dog",
                         "desc": "Atomic Dog · Mongrel Soup",
+                        "link": "/pages/funky-dog",
                         "style": ""
                     }
                 },
@@ -289,6 +290,7 @@
                         "number": "07",
                         "name": "Don't Do The Dodo",
                         "desc": "Professor Watercooler · Crest",
+                        "link": "/pages/dont-do-the-dodo",
                         "style": ""
                     }
                 },
