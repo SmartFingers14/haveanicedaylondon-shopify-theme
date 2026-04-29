@@ -294,6 +294,103 @@
   }
   .hand-mob-foot a:hover { background: #e91e8c; border-color: #e91e8c; }
 
+  /* ===== SEARCH OVERLAY ===== */
+  .hand-search-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    z-index: 600;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding-top: 120px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease;
+  }
+  .hand-search-overlay.open {
+    opacity: 1;
+    pointer-events: all;
+  }
+  .hand-search-box {
+    background: #fff;
+    width: 100%;
+    max-width: 680px;
+    margin: 0 20px;
+    padding: 0;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    transform: translateY(-20px);
+    transition: transform 0.25s ease;
+  }
+  .hand-search-overlay.open .hand-search-box {
+    transform: translateY(0);
+  }
+  .hand-search-form {
+    display: flex;
+    align-items: center;
+    border-bottom: 2px solid var(--ink, #1a1a1a);
+  }
+  .hand-search-input {
+    flex: 1;
+    border: none;
+    outline: none;
+    padding: 20px 24px;
+    font-family: var(--mono, 'Courier New', monospace);
+    font-size: 16px;
+    letter-spacing: 0.05em;
+    background: transparent;
+    color: var(--ink, #1a1a1a);
+  }
+  .hand-search-input::placeholder {
+    color: #aaa;
+    text-transform: uppercase;
+    font-size: 13px;
+    letter-spacing: 0.15em;
+  }
+  .hand-search-submit {
+    padding: 20px 24px;
+    background: var(--ink, #1a1a1a);
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    font-family: var(--mono, 'Courier New', monospace);
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    font-weight: 700;
+    transition: background 0.2s;
+    white-space: nowrap;
+  }
+  .hand-search-submit:hover { background: #e91e8c; }
+  .hand-search-close {
+    position: absolute;
+    top: 80px;
+    right: calc(50% - 340px - 20px);
+    width: 44px;
+    height: 44px;
+    background: #fff;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--ink, #1a1a1a);
+    transition: background 0.2s, color 0.2s;
+  }
+  .hand-search-close:hover { background: #e91e8c; color: #fff; }
+  .hand-search-hint {
+    padding: 12px 24px;
+    font-family: var(--mono, 'Courier New', monospace);
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #999;
+  }
+  @media (max-width: 720px) {
+    .hand-search-close { right: 8px; top: 70px; }
+  }
+
   /* Responsive */
   @media (max-width: 900px) {
     .hand-nav-inner { grid-template-columns: auto 1fr; gap: 16px; padding: 0 20px; }
@@ -382,6 +479,30 @@
   </div>
 </nav>
 
+<!-- Search Overlay -->
+<div class="hand-search-overlay" id="handSearchOverlay" role="dialog" aria-label="Search" aria-hidden="true">
+  <button class="hand-search-close" id="handSearchClose" aria-label="Close search">&#x2715;</button>
+  <div class="hand-search-box">
+    <form class="hand-search-form" action="{{ routes.search_url }}" method="get" role="search">
+      <input type="hidden" name="type" value="product">
+      <input
+        class="hand-search-input"
+        type="search"
+        name="q"
+        id="handSearchInput"
+        placeholder="Search products..."
+        autocomplete="off"
+        autocorrect="off"
+        autocapitalize="off"
+        spellcheck="false"
+        aria-label="Search"
+      >
+      <button class="hand-search-submit" type="submit">Search &rarr;</button>
+    </form>
+    <p class="hand-search-hint">Try: hoodies, tees, dready, vortex, funky dog&hellip;</p>
+  </div>
+</div>
+
 <!-- Mobile Menu -->
 <div class="hand-mob-menu" id="handMobMenu" aria-hidden="true" role="dialog" aria-label="Mobile navigation">
   <div class="hand-mob-head">
@@ -417,11 +538,16 @@
   var burger = document.getElementById('handBurger');
   var mobMenu = document.getElementById('handMobMenu');
   var mobClose = document.getElementById('handMobClose');
+  var searchOverlay = document.getElementById('handSearchOverlay');
+  var searchClose = document.getElementById('handSearchClose');
+  var searchInput = document.getElementById('handSearchInput');
 
+  // ===== SCROLL =====
   window.addEventListener('scroll', function() {
     if (nav) nav.classList.toggle('scrolled', window.scrollY > 40);
   }, { passive: true });
 
+  // ===== MOBILE MENU =====
   if (burger && mobMenu) {
     burger.addEventListener('click', function() {
       mobMenu.classList.add('open');
@@ -438,10 +564,56 @@
   }
 
   if (mobClose) mobClose.addEventListener('click', closeMob);
-  document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeMob(); });
   document.querySelectorAll('.hand-mob-link').forEach(function(a) {
     a.addEventListener('click', closeMob);
   });
+
+  // ===== SEARCH =====
+  function openSearch() {
+    if (!searchOverlay) return;
+    searchOverlay.classList.add('open');
+    searchOverlay.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    // Focus input after transition
+    setTimeout(function() {
+      if (searchInput) searchInput.focus();
+    }, 100);
+  }
+
+  function closeSearch() {
+    if (!searchOverlay) return;
+    searchOverlay.classList.remove('open');
+    searchOverlay.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+
+  // Open search on all [data-open-search] buttons/links
+  document.querySelectorAll('[data-open-search]').forEach(function(el) {
+    el.addEventListener('click', function(e) {
+      e.preventDefault();
+      closeMob(); // close mobile menu if open
+      openSearch();
+    });
+  });
+
+  // Close search button
+  if (searchClose) searchClose.addEventListener('click', closeSearch);
+
+  // Close on backdrop click (clicking outside the search box)
+  if (searchOverlay) {
+    searchOverlay.addEventListener('click', function(e) {
+      if (e.target === searchOverlay) closeSearch();
+    });
+  }
+
+  // Escape key closes both search and mobile menu
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+      closeSearch();
+      closeMob();
+    }
+  });
+
 })();
 </script>
 
