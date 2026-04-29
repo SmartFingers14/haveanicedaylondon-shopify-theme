@@ -418,112 +418,6 @@
     font-style: normal;
   }
 
-  /* ===== TIMELINE / EXTINCTION SECTION ===== */
-  .dodo-extinction {
-    background: var(--dodo-forest);
-    padding: 120px 40px;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .dodo-extinction::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(ellipse at 80% 50%, rgba(200, 168, 75, 0.06) 0%, transparent 60%);
-  }
-
-  .dodo-extinction-inner {
-    max-width: 1100px;
-    margin: 0 auto;
-    position: relative;
-    z-index: 1;
-  }
-
-  .dodo-extinction-header {
-    margin-bottom: 80px;
-  }
-
-  .dodo-extinction-eyebrow {
-    font-family: var(--dodo-mono);
-    font-size: 10px;
-    letter-spacing: 4px;
-    text-transform: uppercase;
-    color: var(--dodo-gold);
-    margin-bottom: 16px;
-  }
-
-  .dodo-extinction-title {
-    font-family: var(--dodo-serif);
-    font-size: clamp(40px, 6vw, 72px);
-    font-weight: 900;
-    color: var(--dodo-cream);
-    line-height: 1;
-  }
-
-  .dodo-extinction-title em {
-    font-style: italic;
-    color: var(--dodo-gold);
-  }
-
-  /* Timeline */
-  .dodo-timeline {
-    position: relative;
-    padding-left: 60px;
-  }
-
-  .dodo-timeline::before {
-    content: '';
-    position: absolute;
-    left: 20px;
-    top: 0;
-    bottom: 0;
-    width: 1px;
-    background: linear-gradient(to bottom, var(--dodo-gold), transparent);
-  }
-
-  .dodo-timeline-item {
-    position: relative;
-    margin-bottom: 60px;
-    opacity: 0;
-    transform: translateX(-20px);
-  }
-
-  .dodo-timeline-item::before {
-    content: '';
-    position: absolute;
-    left: -48px;
-    top: 8px;
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background: var(--dodo-gold);
-    box-shadow: 0 0 0 4px rgba(200, 168, 75, 0.2);
-  }
-
-  .dodo-timeline-year {
-    font-family: var(--dodo-mono);
-    font-size: 11px;
-    letter-spacing: 3px;
-    color: var(--dodo-gold);
-    margin-bottom: 8px;
-  }
-
-  .dodo-timeline-event {
-    font-family: var(--dodo-serif);
-    font-size: 22px;
-    font-weight: 700;
-    color: var(--dodo-cream);
-    margin-bottom: 8px;
-  }
-
-  .dodo-timeline-desc {
-    font-size: 15px;
-    line-height: 1.7;
-    color: rgba(245, 240, 232, 0.55);
-    max-width: 500px;
-  }
-
   /* ===== PRODUCTS SECTION ===== */
   .dodo-products {
     background: var(--dodo-warm-white);
@@ -744,7 +638,7 @@
     padding: 48px 40px;
     position: relative;
     overflow: hidden;
-    opacity: 0;
+    opacity: 1;
     transform: translateY(20px);
     cursor: default;
     transition: background 0.3s;
@@ -926,7 +820,6 @@
     .dodo-hero-bar { grid-template-columns: 1fr; }
     .dodo-hero-bar-item { border-right: none; border-bottom: 1px solid rgba(200, 168, 75, 0.2); }
     .dodo-manifesto { padding: 80px 24px; }
-    .dodo-extinction { padding: 80px 24px; }
     .dodo-products { padding: 80px 24px; }
     .dodo-cabinet { padding: 80px 24px; }
     .dodo-cta { padding: 100px 24px; }
@@ -1053,38 +946,6 @@
         <p class="dodo-manifesto-text">
           Every piece is printed in the UK on <strong>220gsm organic cotton</strong>, in small batches. Professor Watercooler, the Crest, the archive graphics &mdash; all hand-drawn originals from the 1990 Camden collection, reissued exactly as they were.
         </p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== EXTINCTION TIMELINE ===== -->
-  <section class="dodo-extinction">
-    <div class="dodo-extinction-inner">
-      <div class="dodo-extinction-header">
-        <p class="dodo-extinction-eyebrow">The Timeline</p>
-        <h2 class="dodo-extinction-title">A History of <em>Not Forgetting</em></h2>
-      </div>
-      <div class="dodo-timeline">
-        <div class="dodo-timeline-item" data-timeline>
-          <p class="dodo-timeline-year">1598</p>
-          <p class="dodo-timeline-event">First Contact</p>
-          <p class="dodo-timeline-desc">Dutch sailors encounter the Dodo on Mauritius. Fearless, flightless, and utterly unaware of what was coming.</p>
-        </div>
-        <div class="dodo-timeline-item" data-timeline>
-          <p class="dodo-timeline-year">1681</p>
-          <p class="dodo-timeline-event">Last Sighting</p>
-          <p class="dodo-timeline-desc">The last confirmed Dodo is seen. Within a century, it becomes the defining symbol of human-caused extinction.</p>
-        </div>
-        <div class="dodo-timeline-item" data-timeline>
-          <p class="dodo-timeline-year">1990</p>
-          <p class="dodo-timeline-event">Camden Responds</p>
-          <p class="dodo-timeline-desc">Don't Do The Dodo is born in Camden's underground scene. A brand with a message: protect what matters before it's gone.</p>
-        </div>
-        <div class="dodo-timeline-item" data-timeline>
-          <p class="dodo-timeline-year">2026</p>
-          <p class="dodo-timeline-event">The Reissue</p>
-          <p class="dodo-timeline-desc">The original archive returns. Same graphics. Same message. Printed on organic cotton, in the UK, in small batches. Still urgent.</p>
-        </div>
       </div>
     </div>
   </section>
@@ -1314,15 +1175,7 @@
     }, { margin: '-10% 0px' });
   }
 
-  // ===== TIMELINE ITEMS =====
-  document.querySelectorAll('[data-timeline]').forEach((item, i) => {
-    inView(item, () => {
-      animate(item,
-        { opacity: [0, 1], x: [-30, 0] },
-        { duration: 0.7, delay: i * 0.12, easing: [0.25, 0.46, 0.45, 0.94] }
-      );
-    }, { margin: '-5% 0px' });
-  });
+  // Timeline section removed
 
   // ===== PRODUCTS GRID =====
   document.querySelectorAll('[data-product]').forEach((card, i) => {
@@ -1348,6 +1201,8 @@
 
   // ===== CABINET ITEMS =====
   document.querySelectorAll('[data-cabinet]').forEach((item, i) => {
+    item.style.opacity = '0';
+    item.style.transform = 'translateY(30px)';
     inView(item, () => {
       animate(item,
         { opacity: [0, 1], y: [30, 0] },
@@ -1355,6 +1210,15 @@
       );
     }, { margin: '-10% 0px' });
   });
+  // Safety fallback for cabinet items
+  setTimeout(function() {
+    document.querySelectorAll('[data-cabinet]').forEach(function(item) {
+      if (parseFloat(item.style.opacity || '1') < 0.5) {
+        item.style.opacity = '1';
+        item.style.transform = 'none';
+      }
+    });
+  }, 2000);
 
   // ===== CTA SECTION =====
   const ctaInner = document.getElementById('dodoCtaInner');
