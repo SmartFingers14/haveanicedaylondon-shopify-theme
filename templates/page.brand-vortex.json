@@ -1,0 +1,11 @@
+{
+    "sections": {
+        "brand-vortex": {
+            "type": "brand-vortex",
+            "settings": {}
+        }
+    },
+    "order": [
+        "brand-vortex"
+    ]
+}
