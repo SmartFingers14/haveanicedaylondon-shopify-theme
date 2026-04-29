@@ -601,8 +601,8 @@
     text-decoration: none;
     color: inherit;
     display: block;
-    opacity: 0;
-    transform: translateY(30px);
+    opacity: 1;
+    transform: translateY(0);
   }
 
   .dodo-product-img {
@@ -932,6 +932,19 @@
     .dodo-cta { padding: 100px 24px; }
     .dodo-products-header { flex-direction: column; align-items: flex-start; }
   }
+
+  /* Safety fallback: if JS animations fail, show content after 3s */
+  @keyframes dodo-show-fallback {
+    to { opacity: 1; transform: none; }
+  }
+  .dodo-specimen-label,
+  .dodo-hero-title,
+  .dodo-latin,
+  .dodo-scroll-hint,
+  .dodo-hero-bar {
+    animation: dodo-show-fallback 0.5s ease 3s forwards;
+  }
+
 </style>
 
 <!-- Custom cursor -->
@@ -1313,6 +1326,9 @@
 
   // ===== PRODUCTS GRID =====
   document.querySelectorAll('[data-product]').forEach((card, i) => {
+    // Set initial state for animation
+    card.style.opacity = '0';
+    card.style.transform = 'translateY(30px)';
     inView(card, () => {
       animate(card,
         { opacity: [0, 1], y: [40, 0] },
@@ -1320,6 +1336,15 @@
       );
     }, { margin: '-5% 0px' });
   });
+  // Safety fallback: if Motion.dev inView never fires, show products after 2s
+  setTimeout(function() {
+    document.querySelectorAll('[data-product]').forEach(function(card) {
+      if (parseFloat(card.style.opacity || '1') < 0.5) {
+        card.style.opacity = '1';
+        card.style.transform = 'none';
+      }
+    });
+  }, 2000);
 
   // ===== CABINET ITEMS =====
   document.querySelectorAll('[data-cabinet]').forEach((item, i) => {
