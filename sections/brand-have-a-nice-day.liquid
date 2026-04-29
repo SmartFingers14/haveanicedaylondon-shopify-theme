@@ -1,0 +1,576 @@
+{% comment %}
+  Brand Page: Have A Nice Day
+  Shows all products from the "have-a-nice-day" smart collection
+  Uses Motion.dev for scroll-triggered animations
+{% endcomment %}
+
+{%- assign brand_col = collections['have-a-nice-day'] -%}
+{%- assign sam_col = collections['have-a-nice-day-sam-the-man'] -%}
+{%- assign shurl_col = collections['have-a-nice-day-shurl-the-girl'] -%}
+
+<!-- BRAND HERO -->
+<section class="hand-brand-hero">
+  <div class="hand-brand-hero-bg">
+    <div class="hand-brand-hero-noise"></div>
+  </div>
+  <div class="hand-container">
+    <div class="hand-brand-hero-inner">
+      <div class="hand-brand-eyebrow">
+        <span class="hand-brand-num">01 / Flagship</span>
+        <span class="hand-brand-dot"></span>
+        <span>Est. 1990 · Camden, London</span>
+      </div>
+      <h1 class="hand-brand-h1">
+        <span class="hand-brand-line">Have A</span>
+        <span class="hand-brand-line">Nice Day<span class="hand-brand-reg">®</span></span>
+      </h1>
+      <div class="hand-brand-hero-meta">
+        <p class="hand-brand-tagline">{{ section.settings.tagline | default: 'The original. The flagship. The one that started it all — 30+ years of underground London culture on cotton.' }}</p>
+        <div class="hand-brand-hero-stats">
+          <div class="hand-brand-stat">
+            <span class="hand-brand-stat-num">{{ brand_col.products_count | default: '90+' }}</span>
+            <span class="hand-brand-stat-label">Products</span>
+          </div>
+          <div class="hand-brand-stat">
+            <span class="hand-brand-stat-num">1990</span>
+            <span class="hand-brand-stat-label">Founded</span>
+          </div>
+          <div class="hand-brand-stat">
+            <span class="hand-brand-stat-num">2</span>
+            <span class="hand-brand-stat-label">Characters</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="hand-brand-hero-scroll">
+      <span>Scroll</span>
+      <div class="hand-brand-scroll-line"></div>
+    </div>
+  </div>
+</section>
+
+<!-- BRAND CHARACTERS -->
+<section class="hand-brand-chars">
+  <div class="hand-container">
+    <div class="hand-brand-chars-grid">
+      <a class="hand-brand-char" href="/collections/have-a-nice-day-sam-the-man">
+        <div class="hand-brand-char-img">
+          {%- if sam_col.image -%}
+            <img src="{{ sam_col.image | img_url: '800x' }}" alt="Sam The Man" loading="lazy" />
+          {%- elsif sam_col.products.first.featured_image -%}
+            <img src="{{ sam_col.products.first.featured_image | img_url: '800x' }}" alt="Sam The Man" loading="lazy" />
+          {%- else -%}
+            <div class="hand-brand-char-placeholder" style="background:#111;"></div>
+          {%- endif -%}
+        </div>
+        <div class="hand-brand-char-info">
+          <div class="hand-brand-char-tag">Character 01</div>
+          <h2 class="hand-brand-char-name">Sam The Man</h2>
+          <p class="hand-brand-char-desc">The original Camden face. Bold prints, heavy cotton, no compromises.</p>
+          <span class="hand-brand-char-cta">Shop Sam The Man &#8599;</span>
+        </div>
+      </a>
+      <a class="hand-brand-char" href="/collections/have-a-nice-day-shurl-the-girl">
+        <div class="hand-brand-char-img">
+          {%- if shurl_col.image -%}
+            <img src="{{ shurl_col.image | img_url: '800x' }}" alt="Shurl The Girl" loading="lazy" />
+          {%- elsif shurl_col.products.first.featured_image -%}
+            <img src="{{ shurl_col.products.first.featured_image | img_url: '800x' }}" alt="Shurl The Girl" loading="lazy" />
+          {%- else -%}
+            <div class="hand-brand-char-placeholder" style="background:#e91e8c;"></div>
+          {%- endif -%}
+        </div>
+        <div class="hand-brand-char-info">
+          <div class="hand-brand-char-tag">Character 02</div>
+          <h2 class="hand-brand-char-name">Shurl The Girl</h2>
+          <p class="hand-brand-char-desc">Her world, her rules. Vibrant, fearless, and unmistakably Camden.</p>
+          <span class="hand-brand-char-cta">Shop Shurl The Girl &#8599;</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="hand-brand-ticker">
+  <div class="hand-brand-ticker-track">
+    <span>Have A Nice Day</span><span class="dot">·</span>
+    <span>Est. 1990</span><span class="dot">·</span>
+    <span>Camden London</span><span class="dot">·</span>
+    <span>Sam The Man</span><span class="dot">·</span>
+    <span>Shurl The Girl</span><span class="dot">·</span>
+    <span>Underground Culture</span><span class="dot">·</span>
+    <span>Have A Nice Day</span><span class="dot">·</span>
+    <span>Est. 1990</span><span class="dot">·</span>
+    <span>Camden London</span><span class="dot">·</span>
+    <span>Sam The Man</span><span class="dot">·</span>
+    <span>Shurl The Girl</span><span class="dot">·</span>
+    <span>Underground Culture</span><span class="dot">·</span>
+  </div>
+</div>
+
+<!-- ALL PRODUCTS -->
+<section class="hand-brand-products hand-sec" id="hand-brand-shop">
+  <div class="hand-container">
+    <div class="hand-sec-head">
+      <div class="lhs">
+        <div class="eyebrow">The Full Collection</div>
+        <h2>All Products.</h2>
+      </div>
+      <div class="rhs">
+        <p>Every piece from the Have A Nice Day family — Sam The Man, Shurl The Girl, and the originals that started it all.</p>
+        <div class="hand-brand-filter">
+          <button class="hand-filter-btn active" data-filter="all">All</button>
+          <button class="hand-filter-btn" data-filter="sam">Sam The Man</button>
+          <button class="hand-filter-btn" data-filter="shurl">Shurl The Girl</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="hand-grid hand-brand-grid" id="hand-brand-product-grid">
+      {%- assign all_hand_products = brand_col.products -%}
+      {%- for product in all_hand_products -%}
+        {%- assign is_sam = false -%}
+        {%- assign is_shurl = false -%}
+        {%- if product.title contains 'Sam' or product.title contains 'SAM' or product.handle contains 'sam' -%}
+          {%- assign is_sam = true -%}
+        {%- endif -%}
+        {%- if product.title contains 'Shurl' or product.title contains 'SHURL' or product.handle contains 'shurl' -%}
+          {%- assign is_shurl = true -%}
+        {%- endif -%}
+        {%- assign filter_tag = 'all' -%}
+        {%- if is_sam -%}{%- assign filter_tag = 'sam' -%}{%- endif -%}
+        {%- if is_shurl -%}{%- assign filter_tag = 'shurl' -%}{%- endif -%}
+        <a class="hand-card hand-brand-card" href="{{ product.url }}" data-filter="{{ filter_tag }}">
+          <div class="imgwrap">
+            <span class="tag">{{ product.type | default: 'Have A Nice Day' }}</span>
+            {%- if product.featured_image -%}
+              <img src="{{ product.featured_image | img_url: '600x' }}" alt="{{ product.featured_image.alt | default: product.title }}" loading="lazy" width="600" height="600" />
+            {%- else -%}
+              <div style="width:100%;height:340px;background:#111;display:flex;align-items:center;justify-content:center;">
+                <span style="color:#444;font-family:monospace;font-size:11px;letter-spacing:.1em;">HAVE A NICE DAY</span>
+              </div>
+            {%- endif -%}
+            <span class="quick">Quick Add &#8594;</span>
+          </div>
+          <div class="body">
+            <div class="vendor">{{ product.vendor }}</div>
+            <div class="name">{{ product.title }}</div>
+            <div class="row2">
+              <div class="price">{{ product.price | money }}</div>
+              {%- if product.compare_at_price > product.price -%}
+                <div class="price-was" style="text-decoration:line-through;color:#999;font-size:12px;">{{ product.compare_at_price | money }}</div>
+              {%- endif -%}
+            </div>
+          </div>
+        </a>
+      {%- else -%}
+        <!-- Fallback: show from have-a-nice-day-sam-the-man collection -->
+        {%- for product in sam_col.products -%}
+          <a class="hand-card hand-brand-card" href="{{ product.url }}" data-filter="sam">
+            <div class="imgwrap">
+              <span class="tag">{{ product.type | default: 'Have A Nice Day' }}</span>
+              {%- if product.featured_image -%}
+                <img src="{{ product.featured_image | img_url: '600x' }}" alt="{{ product.featured_image.alt | default: product.title }}" loading="lazy" width="600" height="600" />
+              {%- else -%}
+                <div style="width:100%;height:340px;background:#111;"></div>
+              {%- endif -%}
+              <span class="quick">Quick Add &#8594;</span>
+            </div>
+            <div class="body">
+              <div class="vendor">{{ product.vendor }}</div>
+              <div class="name">{{ product.title }}</div>
+              <div class="row2"><div class="price">{{ product.price | money }}</div></div>
+            </div>
+          </a>
+        {%- endfor -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+<!-- BRAND STORY -->
+<section class="hand-brand-story">
+  <div class="hand-container">
+    <div class="hand-brand-story-inner">
+      <div class="hand-brand-story-lhs">
+        <div class="eyebrow">The Story</div>
+        <h2>Born in Camden.<br>Built on Culture.</h2>
+      </div>
+      <div class="hand-brand-story-rhs">
+        <p>{{ section.settings.story_text | default: "Have A Nice Day started in 1990 on a market stall in Camden. What began as a single character — Sam The Man — grew into a family of sub-brands, each with its own world, its own music, its own scene. Thirty years later, the prints are still made in small UK batches on 220gsm organic cotton. Nothing has changed. Everything has changed." }}</p>
+        <a class="more" href="/pages/about-us">Our Full Story &#8594;</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+/* ============ BRAND HERO ============ */
+.hand-brand-hero {
+  position: relative;
+  min-height: 90vh;
+  display: flex;
+  align-items: center;
+  background: var(--ink);
+  color: #fff;
+  overflow: hidden;
+  padding: 120px 0 80px;
+}
+.hand-brand-hero-bg {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 70% 50%, rgba(233,30,140,.12) 0%, transparent 60%);
+}
+.hand-brand-hero-noise {
+  position: absolute;
+  inset: 0;
+  opacity: .04;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-size: 200px;
+}
+.hand-brand-hero-inner {
+  position: relative;
+  z-index: 1;
+  max-width: 900px;
+}
+.hand-brand-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.5);
+  margin-bottom: 32px;
+}
+.hand-brand-num { color: var(--pink); }
+.hand-brand-dot {
+  width: 4px; height: 4px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.3);
+}
+.hand-brand-h1 {
+  font-family: var(--display);
+  font-size: clamp(72px, 12vw, 160px);
+  font-weight: 900;
+  line-height: .9;
+  letter-spacing: -.03em;
+  text-transform: uppercase;
+  color: #fff;
+  margin: 0 0 48px;
+  display: flex;
+  flex-direction: column;
+}
+.hand-brand-line { display: block; }
+.hand-brand-reg {
+  font-size: .4em;
+  vertical-align: super;
+  color: var(--pink);
+}
+.hand-brand-hero-meta {
+  display: flex;
+  align-items: flex-start;
+  gap: 60px;
+}
+.hand-brand-tagline {
+  font-size: 16px;
+  line-height: 1.6;
+  color: rgba(255,255,255,.7);
+  max-width: 420px;
+  margin: 0;
+}
+.hand-brand-hero-stats {
+  display: flex;
+  gap: 40px;
+  flex-shrink: 0;
+}
+.hand-brand-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.hand-brand-stat-num {
+  font-family: var(--display);
+  font-size: 36px;
+  font-weight: 900;
+  color: #fff;
+  line-height: 1;
+}
+.hand-brand-stat-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.4);
+}
+.hand-brand-hero-scroll {
+  position: absolute;
+  bottom: 40px;
+  right: 0;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.3);
+  writing-mode: vertical-rl;
+}
+.hand-brand-scroll-line {
+  width: 1px;
+  height: 60px;
+  background: rgba(255,255,255,.2);
+  position: relative;
+  overflow: hidden;
+}
+.hand-brand-scroll-line::after {
+  content: '';
+  position: absolute;
+  top: -100%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--pink);
+  animation: hand-scroll-line 2s ease infinite;
+}
+@keyframes hand-scroll-line {
+  0% { top: -100%; }
+  100% { top: 100%; }
+}
+
+/* ============ CHARACTERS ============ */
+.hand-brand-chars { padding: 80px 0; background: var(--paper); }
+.hand-brand-chars-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: var(--ink);
+  border: 1px solid var(--ink);
+}
+.hand-brand-char {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: var(--ink);
+  background: var(--paper);
+  overflow: hidden;
+  transition: background .25s;
+}
+.hand-brand-char:hover { background: #fff; }
+.hand-brand-char-img {
+  aspect-ratio: 4/3;
+  overflow: hidden;
+  background: var(--paper-2);
+}
+.hand-brand-char-img img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform .7s cubic-bezier(.2,.7,.2,1);
+}
+.hand-brand-char:hover .hand-brand-char-img img { transform: scale(1.04); }
+.hand-brand-char-placeholder { width: 100%; height: 100%; }
+.hand-brand-char-info {
+  padding: 32px 40px 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.hand-brand-char-tag {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--pink);
+}
+.hand-brand-char-name {
+  font-family: var(--display);
+  font-size: clamp(32px, 4vw, 56px);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: -.02em;
+  line-height: 1;
+  margin: 0;
+}
+.hand-brand-char-desc {
+  font-size: 15px;
+  line-height: 1.6;
+  color: #666;
+  margin: 0;
+}
+.hand-brand-char-cta {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--ink);
+  padding-bottom: 4px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
+  transition: color .2s, border-color .2s;
+}
+.hand-brand-char:hover .hand-brand-char-cta {
+  color: var(--pink);
+  border-color: var(--pink);
+}
+
+/* ============ TICKER ============ */
+.hand-brand-ticker {
+  background: var(--ink);
+  color: #fff;
+  padding: 18px 0;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.hand-brand-ticker-track {
+  display: inline-flex;
+  gap: 32px;
+  animation: hand-brand-tick 20s linear infinite;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+}
+.hand-brand-ticker-track .dot { color: var(--pink); }
+@keyframes hand-brand-tick {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ============ FILTER BUTTONS ============ */
+.hand-brand-filter {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 16px;
+}
+.hand-filter-btn {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  padding: 8px 16px;
+  border: 1px solid var(--ink);
+  background: transparent;
+  cursor: pointer;
+  transition: background .2s, color .2s;
+}
+.hand-filter-btn:hover,
+.hand-filter-btn.active {
+  background: var(--ink);
+  color: #fff;
+}
+
+/* ============ BRAND GRID ============ */
+.hand-brand-grid .hand-card { opacity: 1; }
+.hand-brand-card[style*="display:none"],
+.hand-brand-card.hidden { display: none !important; }
+
+/* ============ BRAND STORY ============ */
+.hand-brand-story {
+  background: var(--paper-2);
+  padding: 100px 0;
+  border-top: 1px solid rgba(0,0,0,.08);
+}
+.hand-brand-story-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: start;
+}
+.hand-brand-story-lhs h2 {
+  font-family: var(--display);
+  font-size: clamp(36px, 5vw, 64px);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: -.02em;
+  line-height: 1;
+  margin: 16px 0 0;
+}
+.hand-brand-story-rhs p {
+  font-size: 16px;
+  line-height: 1.75;
+  color: #555;
+  margin: 0 0 32px;
+}
+
+/* ============ RESPONSIVE ============ */
+@media (max-width: 768px) {
+  .hand-brand-h1 { font-size: clamp(52px, 14vw, 80px); }
+  .hand-brand-hero-meta { flex-direction: column; gap: 32px; }
+  .hand-brand-chars-grid { grid-template-columns: 1fr; }
+  .hand-brand-story-inner { grid-template-columns: 1fr; gap: 40px; }
+  .hand-brand-hero-stats { gap: 24px; }
+}
+</style>
+
+<script>
+// Filter functionality
+document.addEventListener('DOMContentLoaded', function() {
+  var filterBtns = document.querySelectorAll('.hand-filter-btn');
+  var cards = document.querySelectorAll('.hand-brand-card');
+
+  filterBtns.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var filter = this.dataset.filter;
+
+      // Update active button
+      filterBtns.forEach(function(b) { b.classList.remove('active'); });
+      this.classList.add('active');
+
+      // Filter cards
+      cards.forEach(function(card) {
+        if (filter === 'all' || card.dataset.filter === filter) {
+          card.style.display = '';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    });
+  });
+
+  // Motion.dev animations
+  if (window.Motion) {
+    var { animate, stagger, inView } = window.Motion;
+
+    // Hero entrance
+    animate('.hand-brand-eyebrow', { opacity: [0, 1], y: [20, 0] }, { duration: 0.6, delay: 0.2 });
+    animate('.hand-brand-line', { opacity: [0, 1], y: [60, 0] }, { delay: stagger(0.1, { start: 0.3 }), duration: 0.8, easing: [0.22, 1, 0.36, 1] });
+    animate('.hand-brand-tagline', { opacity: [0, 1], y: [20, 0] }, { duration: 0.6, delay: 0.7 });
+    animate('.hand-brand-hero-stats', { opacity: [0, 1], y: [20, 0] }, { duration: 0.6, delay: 0.9 });
+
+    // Scroll-triggered
+    inView('.hand-brand-char', function(el) {
+      animate(el, { opacity: [0, 1], y: [40, 0] }, { duration: 0.7, easing: [0.22, 1, 0.36, 1] });
+    }, { margin: '-5% 0px' });
+
+    inView('.hand-brand-card', function(el) {
+      animate(el, { opacity: [0, 1], y: [24, 0] }, { duration: 0.55, easing: [0.22, 1, 0.36, 1] });
+    }, { margin: '-5% 0px' });
+
+    inView('.hand-brand-story-inner', function(el) {
+      animate(el.querySelectorAll('.hand-brand-story-lhs, .hand-brand-story-rhs'),
+        { opacity: [0, 1], y: [30, 0] },
+        { delay: stagger(0.15), duration: 0.7, easing: [0.22, 1, 0.36, 1] }
+      );
+    }, { margin: '-10% 0px' });
+  }
+});
+</script>
+
+{% schema %}
+{
+  "name": "Brand: Have A Nice Day",
+  "settings": [
+    { "type": "textarea", "id": "tagline", "label": "Hero tagline", "default": "The original. The flagship. The one that started it all — 30+ years of underground London culture on cotton." },
+    { "type": "textarea", "id": "story_text", "label": "Brand story text", "default": "Have A Nice Day started in 1990 on a market stall in Camden. What began as a single character — Sam The Man — grew into a family of sub-brands, each with its own world, its own music, its own scene. Thirty years later, the prints are still made in small UK batches on 220gsm organic cotton. Nothing has changed. Everything has changed." }
+  ],
+  "presets": [
+    { "name": "Brand: Have A Nice Day" }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,14 @@
+{
+    "sections": {
+        "brand-dready": {
+            "type": "brand-dready",
+            "settings": {
+                "tagline": "Roots. Reggae. Rebellion. Born in Camden, raised on culture — Dready Original has been printing the underground since 1990.",
+                "story_text": "Dready Original was born from the same Camden market stall as Have A Nice Day — but with a different heartbeat. Reggae rhythms, Rastafarian culture, and the underground sound of London's streets. DJ Dready brought the music, the prints brought the message. Over 155 products later, the roots run deeper than ever."
+            }
+        }
+    },
+    "order": [
+        "brand-dready"
+    ]
+}

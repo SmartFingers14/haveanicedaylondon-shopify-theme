@@ -1,0 +1,806 @@
+{% comment %}
+  Brand Page: Dready Original — Redesigned
+  Full-bleed immersive experience with vinyl record motif, reggae culture vibes
+{% endcomment %}
+
+{%- assign brand_col = collections['dready'] -%}
+
+<!-- ============================================================
+     HERO — Full viewport, split layout, animated
+     ============================================================ -->
+<section class="dr-hero">
+  <!-- Animated vinyl record -->
+  <div class="dr-vinyl-wrap" aria-hidden="true">
+    <div class="dr-vinyl">
+      <div class="dr-vinyl-grooves"></div>
+      <div class="dr-vinyl-label">
+        <span class="dr-vinyl-label-text">DREADY</span>
+        <span class="dr-vinyl-label-sub">ORIGINAL</span>
+      </div>
+    </div>
+    <div class="dr-vinyl-shadow"></div>
+  </div>
+
+  <!-- Floating particles -->
+  <div class="dr-particles" aria-hidden="true">
+    <span class="dr-p dr-p1"></span>
+    <span class="dr-p dr-p2"></span>
+    <span class="dr-p dr-p3"></span>
+    <span class="dr-p dr-p4"></span>
+    <span class="dr-p dr-p5"></span>
+  </div>
+
+  <div class="dr-hero-content">
+    <div class="dr-hero-tag">
+      <span class="dr-tag-line"></span>
+      <span>02 / Roots · Reggae · Camden</span>
+    </div>
+
+    <h1 class="dr-hero-h1">
+      <span class="dr-h1-word" data-word="DREADY">DREADY</span>
+      <span class="dr-h1-word dr-h1-accent" data-word="ORIGINAL">ORIGINAL</span>
+      <span class="dr-h1-reg">®</span>
+    </h1>
+
+    <p class="dr-hero-sub">Born underground. Printed on cotton.<br>30+ years of roots, reggae &amp; rebellion from Camden Market.</p>
+
+    <div class="dr-hero-cta-row">
+      <a class="dr-cta-primary" href="#dr-shop">Shop The Collection &#8594;</a>
+      <div class="dr-hero-stats">
+        <div class="dr-stat"><span class="dr-stat-n">{{ brand_col.products_count | default: '155' }}</span><span class="dr-stat-l">Products</span></div>
+        <div class="dr-stat-div"></div>
+        <div class="dr-stat"><span class="dr-stat-n">1990</span><span class="dr-stat-l">Est.</span></div>
+        <div class="dr-stat-div"></div>
+        <div class="dr-stat"><span class="dr-stat-n">30+</span><span class="dr-stat-l">Years</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scroll indicator -->
+  <div class="dr-scroll-hint" aria-hidden="true">
+    <div class="dr-scroll-track"><div class="dr-scroll-thumb"></div></div>
+    <span>Scroll</span>
+  </div>
+</section>
+
+<!-- ============================================================
+     MANIFESTO STRIP — Bold statement
+     ============================================================ -->
+<div class="dr-manifesto">
+  <div class="dr-manifesto-inner">
+    <span class="dr-manifesto-word">ROOTS</span>
+    <span class="dr-manifesto-dot">·</span>
+    <span class="dr-manifesto-word">REGGAE</span>
+    <span class="dr-manifesto-dot">·</span>
+    <span class="dr-manifesto-word dr-manifesto-accent">REBELLION</span>
+    <span class="dr-manifesto-dot">·</span>
+    <span class="dr-manifesto-word">CAMDEN</span>
+    <span class="dr-manifesto-dot">·</span>
+    <span class="dr-manifesto-word">1990</span>
+    <span class="dr-manifesto-dot">·</span>
+    <span class="dr-manifesto-word">ROOTS</span>
+    <span class="dr-manifesto-dot">·</span>
+    <span class="dr-manifesto-word">REGGAE</span>
+    <span class="dr-manifesto-dot">·</span>
+    <span class="dr-manifesto-word dr-manifesto-accent">REBELLION</span>
+    <span class="dr-manifesto-dot">·</span>
+    <span class="dr-manifesto-word">CAMDEN</span>
+    <span class="dr-manifesto-dot">·</span>
+    <span class="dr-manifesto-word">1990</span>
+    <span class="dr-manifesto-dot">·</span>
+  </div>
+</div>
+
+<!-- ============================================================
+     STORY SECTION — Two column, immersive
+     ============================================================ -->
+<section class="dr-story">
+  <div class="dr-story-lhs">
+    <div class="dr-story-year-badge">
+      <span class="dr-year-big">1990</span>
+      <span class="dr-year-label">Camden Market</span>
+    </div>
+    <div class="dr-story-lines" aria-hidden="true">
+      <div class="dr-story-line"></div>
+      <div class="dr-story-line"></div>
+      <div class="dr-story-line"></div>
+    </div>
+  </div>
+  <div class="dr-story-rhs">
+    <div class="dr-story-eyebrow">The Origin</div>
+    <h2 class="dr-story-h2">Where the<br><em>music</em> meets<br>the cotton.</h2>
+    <p class="dr-story-p">{{ section.settings.story_text | default: "Dready Original didn't start in a boardroom. It started on a market stall in Camden, 1990 — where DJ Dready was spinning records and the culture was alive. The prints came from the music: roots reggae, Rastafarian philosophy, the underground sound of London. Every tee, every hoodie, every longsleeve is a piece of that world. Small UK batches. Heavy cotton. No compromises." }}</p>
+    <div class="dr-story-tags">
+      <span class="dr-tag">Roots Reggae</span>
+      <span class="dr-tag">Camden Market</span>
+      <span class="dr-tag">UK Made</span>
+      <span class="dr-tag">Since 1990</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     PRODUCTS — Full grid with filters
+     ============================================================ -->
+<section class="dr-shop hand-sec" id="dr-shop">
+  <div class="hand-container">
+    <div class="dr-shop-head">
+      <div class="dr-shop-head-lhs">
+        <div class="eyebrow">The Full Drop</div>
+        <h2 class="dr-shop-h2">All Products.</h2>
+      </div>
+      <div class="dr-shop-head-rhs">
+        <p>Every piece from Dready Original — classic 90s prints to the latest drops. All small-batch UK production.</p>
+        <div class="dr-filters">
+          <button class="dr-filter active" data-filter="all">All</button>
+          <button class="dr-filter" data-filter="tee">T-Shirts &amp; Longsleeves</button>
+          <button class="dr-filter" data-filter="hood">Hoodies &amp; Sweatshirts</button>
+          <button class="dr-filter" data-filter="dj">DJ Dready</button>
+          <button class="dr-filter" data-filter="other">Accessories</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="hand-grid dr-product-grid" id="dr-product-grid">
+      {%- for product in brand_col.products -%}
+        {%- assign filter_tag = 'other' -%}
+        {%- assign tl = product.title | downcase -%}
+        {%- if tl contains 'dj dready' or tl contains 'dj ' -%}
+          {%- assign filter_tag = 'dj' -%}
+        {%- elsif tl contains 'hoodie' or tl contains 'hood' or tl contains 'sweatshirt' or tl contains 'zip' -%}
+          {%- assign filter_tag = 'hood' -%}
+        {%- elsif tl contains 't-shirt' or tl contains 'tee' or tl contains 'long-sleeve' or tl contains 'longsleeve' or tl contains 'long sleeve' -%}
+          {%- assign filter_tag = 'tee' -%}
+        {%- endif -%}
+        <a class="hand-card dr-card" href="{{ product.url }}" data-filter="{{ filter_tag }}">
+          <div class="imgwrap">
+            <span class="tag">{{ product.type | default: 'Dready Original' }}</span>
+            {%- if product.featured_image -%}
+              <img src="{{ product.featured_image | img_url: '600x' }}" alt="{{ product.featured_image.alt | default: product.title }}" loading="lazy" width="600" height="600" />
+            {%- else -%}
+              <div class="dr-no-img">DREADY<br>ORIGINAL</div>
+            {%- endif -%}
+            <span class="quick">Quick Add &#8594;</span>
+          </div>
+          <div class="body">
+            <div class="vendor">Dready Original</div>
+            <div class="name">{{ product.title }}</div>
+            <div class="row2">
+              <div class="price">{{ product.price | money }}</div>
+              {%- if product.compare_at_price > product.price -%}
+                <span class="dr-sale-badge">SALE</span>
+              {%- endif -%}
+            </div>
+          </div>
+        </a>
+      {%- else -%}
+        <div class="dr-empty">No products found. Check back soon.</div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     CLOSING CTA
+     ============================================================ -->
+<section class="dr-cta-section">
+  <div class="dr-cta-inner">
+    <div class="dr-cta-vinyl" aria-hidden="true">
+      <div class="dr-cta-vinyl-disc"></div>
+    </div>
+    <div class="dr-cta-text">
+      <h2 class="dr-cta-h2">The music never stops.<br>Neither do we.</h2>
+      <p>30+ years of underground culture, printed on cotton. New drops, same roots.</p>
+      <a class="dr-cta-primary" href="#dr-shop">Shop Dready Original &#8594;</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     STYLES
+     ============================================================ -->
+<style>
+/* ---- TOKENS ---- */
+:root {
+  --dr-dark: #080f08;
+  --dr-green: #0d1f0d;
+  --dr-lime: #c8e63c;
+  --dr-lime-dim: rgba(200,230,60,.15);
+  --dr-white: #f5f5f0;
+  --dr-grey: rgba(245,245,240,.5);
+}
+
+/* ---- HERO ---- */
+.dr-hero {
+  position: relative;
+  min-height: 100vh;
+  background: var(--dr-dark);
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  padding: 120px 60px 80px;
+}
+@media (max-width: 768px) { .dr-hero { padding: 100px 24px 60px; } }
+
+/* Vinyl */
+.dr-vinyl-wrap {
+  position: absolute;
+  right: -80px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 600px;
+  height: 600px;
+  pointer-events: none;
+}
+@media (max-width: 1024px) { .dr-vinyl-wrap { width: 400px; height: 400px; right: -120px; } }
+@media (max-width: 768px) { .dr-vinyl-wrap { width: 260px; height: 260px; right: -80px; top: 30%; } }
+
+.dr-vinyl {
+  width: 100%; height: 100%;
+  border-radius: 50%;
+  background: radial-gradient(circle at 50%, #1a1a1a 0%, #0a0a0a 100%);
+  position: relative;
+  animation: dr-spin 18s linear infinite;
+  box-shadow: 0 0 80px rgba(200,230,60,.08), inset 0 0 40px rgba(0,0,0,.8);
+}
+@keyframes dr-spin { to { transform: rotate(360deg); } }
+
+.dr-vinyl-grooves {
+  position: absolute;
+  inset: 8%;
+  border-radius: 50%;
+  background: repeating-radial-gradient(
+    circle at 50%,
+    transparent 0px,
+    transparent 4px,
+    rgba(255,255,255,.03) 4px,
+    rgba(255,255,255,.03) 5px
+  );
+}
+.dr-vinyl-label {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 32%;
+  height: 32%;
+  border-radius: 50%;
+  background: var(--dr-lime);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+}
+.dr-vinyl-label-text {
+  font-family: var(--display);
+  font-size: clamp(10px, 1.5vw, 18px);
+  font-weight: 900;
+  color: var(--dr-dark);
+  letter-spacing: .1em;
+  line-height: 1;
+}
+.dr-vinyl-label-sub {
+  font-family: var(--mono);
+  font-size: clamp(6px, .8vw, 9px);
+  letter-spacing: .2em;
+  color: rgba(8,15,8,.6);
+  text-transform: uppercase;
+}
+.dr-vinyl-shadow {
+  position: absolute;
+  bottom: -40px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  height: 40px;
+  background: radial-gradient(ellipse, rgba(200,230,60,.15) 0%, transparent 70%);
+  filter: blur(10px);
+}
+
+/* Particles */
+.dr-particles { position: absolute; inset: 0; pointer-events: none; }
+.dr-p {
+  position: absolute;
+  border-radius: 50%;
+  background: var(--dr-lime);
+  opacity: 0;
+  animation: dr-float 6s ease-in-out infinite;
+}
+.dr-p1 { width: 4px; height: 4px; left: 15%; top: 20%; animation-delay: 0s; }
+.dr-p2 { width: 6px; height: 6px; left: 30%; top: 70%; animation-delay: 1.2s; }
+.dr-p3 { width: 3px; height: 3px; left: 60%; top: 15%; animation-delay: 2.4s; }
+.dr-p4 { width: 5px; height: 5px; left: 75%; top: 80%; animation-delay: 0.8s; }
+.dr-p5 { width: 4px; height: 4px; left: 45%; top: 45%; animation-delay: 3.6s; }
+@keyframes dr-float {
+  0%, 100% { opacity: 0; transform: translateY(0) scale(1); }
+  50% { opacity: .6; transform: translateY(-30px) scale(1.2); }
+}
+
+/* Hero content */
+.dr-hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 700px;
+}
+.dr-hero-tag {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-family: var(--mono);
+  font-size: 13px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: rgba(245,245,240,.85);
+  margin-bottom: 32px;
+  font-weight: 500;
+}
+.dr-tag-line {
+  display: block;
+  width: 32px;
+  height: 1px;
+  background: var(--dr-lime);
+}
+.dr-hero-h1 {
+  font-family: var(--display);
+  font-size: clamp(64px, 11vw, 148px);
+  font-weight: 900;
+  line-height: .88;
+  letter-spacing: -.04em;
+  text-transform: uppercase;
+  color: var(--dr-white);
+  margin: 0 0 32px;
+  display: flex;
+  flex-direction: column;
+}
+.dr-h1-word { display: block; overflow: hidden; }
+.dr-h1-accent { color: var(--dr-lime); }
+.dr-h1-reg {
+  font-size: .3em;
+  vertical-align: super;
+  color: var(--dr-lime);
+  opacity: .7;
+}
+.dr-hero-sub {
+  font-size: 17px;
+  line-height: 1.65;
+  color: rgba(245,245,240,.9);
+  margin: 0 0 40px;
+  max-width: 440px;
+}
+.dr-hero-cta-row {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+.dr-cta-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--dr-lime);
+  color: var(--dr-dark);
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 16px 28px;
+  font-weight: 700;
+  transition: background .2s, transform .2s;
+}
+.dr-cta-primary:hover { background: #d8f040; transform: translateY(-2px); }
+.dr-hero-stats {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.dr-stat { display: flex; flex-direction: column; gap: 2px; }
+.dr-stat-n {
+  font-family: var(--display);
+  font-size: 28px;
+  font-weight: 900;
+  color: var(--dr-white);
+  line-height: 1;
+}
+.dr-stat-l {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: rgba(245,245,240,.35);
+}
+.dr-stat-div {
+  width: 1px;
+  height: 32px;
+  background: rgba(245,245,240,.1);
+}
+
+/* Scroll hint */
+.dr-scroll-hint {
+  position: absolute;
+  bottom: 36px;
+  left: 60px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: rgba(245,245,240,.25);
+}
+.dr-scroll-track {
+  width: 40px;
+  height: 1px;
+  background: rgba(245,245,240,.15);
+  position: relative;
+  overflow: hidden;
+}
+.dr-scroll-thumb {
+  position: absolute;
+  top: 0; left: -100%;
+  width: 100%; height: 100%;
+  background: var(--dr-lime);
+  animation: dr-scroll-anim 2s ease infinite;
+}
+@keyframes dr-scroll-anim {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+
+/* ---- MANIFESTO ---- */
+.dr-manifesto {
+  background: var(--dr-lime);
+  padding: 20px 0;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.dr-manifesto-inner {
+  display: inline-flex;
+  gap: 28px;
+  animation: dr-tick 22s linear infinite;
+  font-family: var(--display);
+  font-size: 13px;
+  font-weight: 900;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--dr-dark);
+}
+.dr-manifesto-dot { opacity: .3; }
+.dr-manifesto-accent { color: rgba(8,15,8,.5); }
+@keyframes dr-tick {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ---- STORY ---- */
+.dr-story {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  min-height: 600px;
+  background: var(--dr-dark);
+}
+@media (max-width: 768px) { .dr-story { grid-template-columns: 1fr; } }
+
+.dr-story-lhs {
+  background: var(--dr-green);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 40px;
+  position: relative;
+  border-right: 1px solid var(--dr-lime-dim);
+}
+.dr-story-year-badge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  position: relative;
+  z-index: 1;
+}
+.dr-year-big {
+  font-family: var(--display);
+  font-size: clamp(60px, 8vw, 100px);
+  font-weight: 900;
+  color: var(--dr-lime);
+  line-height: 1;
+  letter-spacing: -.04em;
+}
+.dr-year-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: .25em;
+  text-transform: uppercase;
+  color: rgba(200,230,60,.5);
+}
+.dr-story-lines {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  padding: 0 20px;
+  opacity: .06;
+}
+.dr-story-line {
+  height: 1px;
+  background: var(--dr-lime);
+}
+
+.dr-story-rhs {
+  padding: 80px 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 24px;
+}
+@media (max-width: 768px) { .dr-story-rhs { padding: 48px 24px; } }
+
+.dr-story-eyebrow {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: .25em;
+  text-transform: uppercase;
+  color: var(--dr-lime);
+}
+.dr-story-h2 {
+  font-family: var(--display);
+  font-size: clamp(36px, 5vw, 64px);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: -.03em;
+  line-height: 1;
+  color: var(--dr-white);
+  margin: 0;
+}
+.dr-story-h2 em {
+  font-style: normal;
+  color: var(--dr-lime);
+}
+.dr-story-p {
+  font-size: 16px;
+  line-height: 1.75;
+  color: rgba(245,245,240,.55);
+  margin: 0;
+  max-width: 520px;
+}
+.dr-story-tags {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.dr-tag {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  padding: 6px 14px;
+  border: 1px solid var(--dr-lime-dim);
+  color: rgba(200,230,60,.7);
+}
+
+/* ---- SHOP ---- */
+.dr-shop { background: var(--paper); }
+.dr-shop-head {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: start;
+  margin-bottom: 48px;
+}
+@media (max-width: 768px) { .dr-shop-head { grid-template-columns: 1fr; } }
+
+.dr-shop-h2 {
+  font-family: var(--display);
+  font-size: clamp(40px, 6vw, 72px);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: -.03em;
+  line-height: 1;
+  margin: 8px 0 0;
+}
+.dr-filters {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 16px;
+}
+.dr-filter {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  padding: 9px 18px;
+  border: 1px solid var(--ink);
+  background: transparent;
+  cursor: pointer;
+  transition: background .2s, color .2s;
+}
+.dr-filter:hover, .dr-filter.active {
+  background: var(--ink);
+  color: #fff;
+}
+.dr-card[style*="display:none"] { display: none !important; }
+.dr-no-img {
+  width: 100%; height: 340px;
+  background: #111;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: .15em;
+  color: #333;
+  text-align: center;
+  line-height: 1.6;
+}
+.dr-sale-badge {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: .15em;
+  background: var(--dr-lime);
+  color: var(--dr-dark);
+  padding: 3px 8px;
+  font-weight: 700;
+}
+.dr-empty {
+  grid-column: 1/-1;
+  padding: 80px;
+  text-align: center;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: .15em;
+  color: #888;
+  text-transform: uppercase;
+}
+
+/* ---- CLOSING CTA ---- */
+.dr-cta-section {
+  background: var(--dr-dark);
+  padding: 100px 60px;
+  overflow: hidden;
+  position: relative;
+}
+@media (max-width: 768px) { .dr-cta-section { padding: 60px 24px; } }
+
+.dr-cta-inner {
+  display: flex;
+  align-items: center;
+  gap: 80px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+@media (max-width: 768px) { .dr-cta-inner { flex-direction: column; gap: 40px; } }
+
+.dr-cta-vinyl {
+  flex-shrink: 0;
+  width: 200px;
+  height: 200px;
+}
+.dr-cta-vinyl-disc {
+  width: 100%; height: 100%;
+  border-radius: 50%;
+  background: conic-gradient(
+    #111 0deg, #1a1a1a 30deg, #111 60deg, #1a1a1a 90deg,
+    #111 120deg, #1a1a1a 150deg, #111 180deg, #1a1a1a 210deg,
+    #111 240deg, #1a1a1a 270deg, #111 300deg, #1a1a1a 330deg, #111 360deg
+  );
+  animation: dr-spin 12s linear infinite;
+  box-shadow: 0 0 60px rgba(200,230,60,.12);
+  position: relative;
+}
+.dr-cta-vinyl-disc::after {
+  content: '';
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 30%;
+  height: 30%;
+  border-radius: 50%;
+  background: var(--dr-lime);
+}
+
+.dr-cta-text { flex: 1; }
+.dr-cta-h2 {
+  font-family: var(--display);
+  font-size: clamp(32px, 5vw, 60px);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: -.03em;
+  line-height: 1;
+  color: var(--dr-white);
+  margin: 0 0 20px;
+}
+.dr-cta-text p {
+  font-size: 15px;
+  line-height: 1.65;
+  color: rgba(245,245,240,.5);
+  margin: 0 0 32px;
+}
+</style>
+
+<!-- ============================================================
+     SCRIPTS — Motion.dev animations
+     ============================================================ -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Filter
+  var filterBtns = document.querySelectorAll('.dr-filter');
+  var cards = document.querySelectorAll('.dr-card');
+  filterBtns.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var filter = this.dataset.filter;
+      filterBtns.forEach(function(b) { b.classList.remove('active'); });
+      this.classList.add('active');
+      cards.forEach(function(card) {
+        card.style.display = (filter === 'all' || card.dataset.filter === filter) ? '' : 'none';
+      });
+    });
+  });
+
+  // Motion.dev
+  if (window.Motion) {
+    var { animate, stagger, inView, scroll } = window.Motion;
+
+    // Hero — staggered word reveal
+    animate('.dr-hero-tag', { opacity: [0, 1], x: [-20, 0] }, { duration: 0.7, delay: 0.3 });
+    animate('.dr-h1-word', { opacity: [0, 1], y: [80, 0], skewY: [4, 0] },
+      { delay: stagger(0.12, { start: 0.5 }), duration: 0.9, easing: [0.22, 1, 0.36, 1] });
+    animate('.dr-hero-sub', { opacity: [0, 1], y: [20, 0] }, { duration: 0.7, delay: 0.9 });
+    animate('.dr-hero-cta-row', { opacity: [0, 1], y: [20, 0] }, { duration: 0.7, delay: 1.1 });
+
+    // Vinyl entrance
+    animate('.dr-vinyl-wrap', { opacity: [0, 1], scale: [0.8, 1], rotate: [-20, 0] },
+      { duration: 1.2, delay: 0.4, easing: [0.22, 1, 0.36, 1] });
+
+    // Particles
+    document.querySelectorAll('.dr-p').forEach(function(p, i) {
+      animate(p, { opacity: [0, 0.6, 0], y: [0, -40, 0] },
+        { duration: 4 + i, delay: i * 0.8, repeat: Infinity, easing: 'ease-in-out' });
+    });
+
+    // Story section
+    inView('.dr-story-year-badge', function(el) {
+      animate(el, { opacity: [0, 1], scale: [0.85, 1] },
+        { duration: 0.8, easing: [0.22, 1, 0.36, 1] });
+    }, { margin: '-10% 0px' });
+
+    inView('.dr-story-rhs', function(el) {
+      animate(el.querySelectorAll('.dr-story-eyebrow, .dr-story-h2, .dr-story-p, .dr-story-tags'),
+        { opacity: [0, 1], x: [40, 0] },
+        { delay: stagger(0.1), duration: 0.7, easing: [0.22, 1, 0.36, 1] });
+    }, { margin: '-10% 0px' });
+
+    // Product cards
+    inView('.dr-card', function(el) {
+      animate(el, { opacity: [0, 1], y: [32, 0] },
+        { duration: 0.6, easing: [0.22, 1, 0.36, 1] });
+    }, { margin: '-5% 0px' });
+
+    // CTA section
+    inView('.dr-cta-h2', function(el) {
+      animate(el, { opacity: [0, 1], y: [40, 0] },
+        { duration: 0.8, easing: [0.22, 1, 0.36, 1] });
+    }, { margin: '-10% 0px' });
+
+    inView('.dr-cta-vinyl', function(el) {
+      animate(el, { opacity: [0, 1], scale: [0.7, 1] },
+        { duration: 1, easing: [0.22, 1, 0.36, 1] });
+    }, { margin: '-10% 0px' });
+  }
+});
+</script>
+
+{% schema %}
+{
+  "name": "Brand: Dready Original",
+  "settings": [
+    { "type": "textarea", "id": "story_text", "label": "Brand story text", "default": "Dready Original didn't start in a boardroom. It started on a market stall in Camden, 1990 — where DJ Dready was spinning records and the culture was alive. The prints came from the music: roots reggae, Rastafarian philosophy, the underground sound of London. Every tee, every hoodie, every longsleeve is a piece of that world. Small UK batches. Heavy cotton. No compromises." }
+  ],
+  "presets": [
+    { "name": "Brand: Dready Original" }
+  ]
+}
+{% endschema %}

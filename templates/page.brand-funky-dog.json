@@ -1,0 +1,11 @@
+{
+    "sections": {
+        "brand-funky-dog": {
+            "type": "brand-funky-dog",
+            "settings": {}
+        }
+    },
+    "order": [
+        "brand-funky-dog"
+    ]
+}

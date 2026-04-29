@@ -1,0 +1,213 @@
+{% comment %}Help & FAQ Page{% endcomment %}
+<style>
+.hand-info-page {
+  background: var(--paper, #f4f1ea);
+  min-height: 60vh;
+}
+.hand-info-hero {
+  background: var(--ink, #1a1a1a);
+  color: #fff;
+  padding: 80px 32px 60px;
+  text-align: center;
+}
+.hand-info-hero-eyebrow {
+  font-family: var(--mono, monospace);
+  font-size: 10px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: #e91e8c;
+  margin-bottom: 16px;
+}
+.hand-info-hero h1 {
+  font-family: 'Anton', Impact, sans-serif;
+  font-size: clamp(40px, 7vw, 96px);
+  text-transform: uppercase;
+  letter-spacing: -.02em;
+  line-height: .9;
+  margin: 0 0 20px;
+}
+.hand-info-hero p {
+  font-family: var(--mono, monospace);
+  font-size: 13px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.5);
+  margin: 0;
+}
+.hand-info-body {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 72px 32px 80px;
+}
+.hand-faq-item {
+  border-bottom: 1px solid rgba(0,0,0,.1);
+  padding: 28px 0;
+}
+.hand-faq-q {
+  font-family: 'Anton', Impact, sans-serif;
+  font-size: 20px;
+  text-transform: uppercase;
+  letter-spacing: .01em;
+  color: var(--ink, #1a1a1a);
+  margin: 0 0 12px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+.hand-faq-q::after {
+  content: '+';
+  font-size: 24px;
+  font-weight: 300;
+  flex-shrink: 0;
+  transition: transform .3s;
+}
+.hand-faq-item.open .hand-faq-q::after {
+  transform: rotate(45deg);
+}
+.hand-faq-a {
+  font-family: var(--body, sans-serif);
+  font-size: 15px;
+  line-height: 1.75;
+  color: #555;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height .4s ease;
+}
+.hand-faq-item.open .hand-faq-a {
+  max-height: 400px;
+}
+.hand-faq-a p { margin: 0 0 12px; }
+.hand-faq-a a { color: #e91e8c; text-decoration: none; }
+.hand-faq-a a:hover { text-decoration: underline; }
+
+.hand-info-contact-band {
+  background: #e91e8c;
+  padding: 56px 32px;
+  text-align: center;
+}
+.hand-info-contact-band h2 {
+  font-family: 'Anton', Impact, sans-serif;
+  font-size: clamp(28px, 5vw, 56px);
+  text-transform: uppercase;
+  color: #fff;
+  margin: 0 0 16px;
+}
+.hand-info-contact-band p {
+  font-family: var(--mono, monospace);
+  font-size: 12px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.7);
+  margin: 0 0 28px;
+}
+.hand-info-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: #fff;
+  color: #e91e8c;
+  font-family: var(--mono, monospace);
+  font-size: 11px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  font-weight: 700;
+  padding: 16px 32px;
+  text-decoration: none;
+  transition: background .2s, color .2s;
+}
+.hand-info-cta:hover { background: var(--ink, #1a1a1a); color: #fff; }
+</style>
+
+<!-- HERO -->
+<div class="hand-info-hero">
+  <div class="hand-info-hero-eyebrow">Support / Help Centre</div>
+  <h1>Help &amp;<br>FAQ</h1>
+  <p>Everything you need to know about orders, shipping &amp; returns</p>
+</div>
+
+<!-- FAQ BODY -->
+<div class="hand-info-body">
+
+  <div class="hand-faq-item">
+    <div class="hand-faq-q">How long does delivery take?</div>
+    <div class="hand-faq-a">
+      <p>UK Standard: 3–5 working days. UK Express: 1–2 working days. International: 7–14 working days depending on destination. All orders are dispatched from our UK facility.</p>
+    </div>
+  </div>
+
+  <div class="hand-faq-item">
+    <div class="hand-faq-q">Do you offer free shipping?</div>
+    <div class="hand-faq-a">
+      <p>Yes! Free standard UK shipping on all orders over £75. Orders under £75 are charged at a flat rate. See our <a href="/policies/shipping-policy">Shipping Policy</a> for full details.</p>
+    </div>
+  </div>
+
+  <div class="hand-faq-item">
+    <div class="hand-faq-q">What is your returns policy?</div>
+    <div class="hand-faq-a">
+      <p>We offer 30-day hassle-free returns on all unworn, unwashed items with original tags attached. To start a return, email us at <a href="mailto:returns@haveanicedaylondon.com">returns@haveanicedaylondon.com</a> with your order number. See our full <a href="/policies/refund-policy">Returns Policy</a>.</p>
+    </div>
+  </div>
+
+  <div class="hand-faq-item">
+    <div class="hand-faq-q">What sizes do you stock?</div>
+    <div class="hand-faq-a">
+      <p>We stock XS through to 3XL on most styles. Size guides are available on each product page. Our garments are cut for a relaxed, oversized fit — we recommend sizing down if you prefer a closer fit.</p>
+    </div>
+  </div>
+
+  <div class="hand-faq-item">
+    <div class="hand-faq-q">Are your garments organic cotton?</div>
+    <div class="hand-faq-a">
+      <p>Yes. All Have A Nice Day garments are made from 100% certified organic cotton, 220gsm weight. Printed in the UK using water-based inks. No compromises.</p>
+    </div>
+  </div>
+
+  <div class="hand-faq-item">
+    <div class="hand-faq-q">Can I change or cancel my order?</div>
+    <div class="hand-faq-a">
+      <p>Orders can be amended or cancelled within 2 hours of placing. After that, they enter our print queue and cannot be changed. Email <a href="mailto:hello@haveanicedaylondon.com">hello@haveanicedaylondon.com</a> immediately if you need to make changes.</p>
+    </div>
+  </div>
+
+  <div class="hand-faq-item">
+    <div class="hand-faq-q">How do I track my order?</div>
+    <div class="hand-faq-a">
+      <p>You'll receive a tracking email as soon as your order ships. You can also track via your <a href="/account">account page</a> if you have an account with us.</p>
+    </div>
+  </div>
+
+  <div class="hand-faq-item">
+    <div class="hand-faq-q">Do you ship internationally?</div>
+    <div class="hand-faq-a">
+      <p>Yes, we ship worldwide. International shipping rates and estimated delivery times are shown at checkout. Please note that customs duties and import taxes may apply depending on your country — these are the buyer's responsibility.</p>
+    </div>
+  </div>
+
+</div>
+
+<!-- CONTACT BAND -->
+<div class="hand-info-contact-band">
+  <h2>Still Need Help?</h2>
+  <p>Our team is here Monday–Friday, 9am–5pm GMT</p>
+  <a class="hand-info-cta" href="/pages/contact">Contact Us &rarr;</a>
+</div>
+
+<script>
+document.querySelectorAll('.hand-faq-q').forEach(function(q) {
+  q.addEventListener('click', function() {
+    var item = this.closest('.hand-faq-item');
+    item.classList.toggle('open');
+  });
+});
+</script>
+
+{% schema %}
+{
+  "name": "Help & FAQ",
+  "settings": [],
+  "presets": [{ "name": "Help & FAQ" }]
+}
+{% endschema %}

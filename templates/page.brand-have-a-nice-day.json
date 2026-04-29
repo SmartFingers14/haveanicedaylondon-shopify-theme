@@ -1,0 +1,14 @@
+{
+    "sections": {
+        "brand-have-a-nice-day": {
+            "type": "brand-have-a-nice-day",
+            "settings": {
+                "tagline": "The original. The flagship. The one that started it all — 30+ years of underground London culture on cotton.",
+                "story_text": "Have A Nice Day started in 1990 on a market stall in Camden. What began as a single character — Sam The Man — grew into a family of sub-brands, each with its own world, its own music, its own scene. Thirty years later, the prints are still made in small UK batches on 220gsm organic cotton. Nothing has changed. Everything has changed."
+            }
+        }
+    },
+    "order": [
+        "brand-have-a-nice-day"
+    ]
+}

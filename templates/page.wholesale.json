@@ -1,0 +1,11 @@
+{
+    "sections": {
+        "page-wholesale": {
+            "type": "page-wholesale",
+            "settings": {}
+        }
+    },
+    "order": [
+        "page-wholesale"
+    ]
+}

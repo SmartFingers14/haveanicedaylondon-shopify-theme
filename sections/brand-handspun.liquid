@@ -1,0 +1,856 @@
+{% comment %}
+  Brand Page: Handspun Records
+  Vinyl · Sound · Wax — the music label arm of Have A Nice Day
+{% endcomment %}
+
+{%- assign brand_col = collections['handspun-records'] -%}
+
+<!-- ============================================================
+     HERO — Full viewport, turntable / vinyl aesthetic
+     ============================================================ -->
+<section class="hs-hero">
+  <!-- Turntable platter -->
+  <div class="hs-platter-wrap" aria-hidden="true">
+    <div class="hs-platter">
+      <div class="hs-platter-mat"></div>
+      <div class="hs-record">
+        <div class="hs-record-grooves"></div>
+        <div class="hs-record-label">
+          <span class="hs-label-brand">HANDSPUN</span>
+          <span class="hs-label-sub">RECORDS</span>
+          <div class="hs-label-hole"></div>
+        </div>
+      </div>
+    </div>
+    <div class="hs-tonearm">
+      <div class="hs-tonearm-body"></div>
+      <div class="hs-tonearm-head"></div>
+    </div>
+    <div class="hs-platter-glow"></div>
+  </div>
+
+  <!-- Sound wave lines -->
+  <div class="hs-waves" aria-hidden="true">
+    <span class="hs-wave hs-w1"></span>
+    <span class="hs-wave hs-w2"></span>
+    <span class="hs-wave hs-w3"></span>
+    <span class="hs-wave hs-w4"></span>
+    <span class="hs-wave hs-w5"></span>
+  </div>
+
+  <div class="hs-hero-content">
+    <div class="hs-hero-tag">
+      <span class="hs-tag-line"></span>
+      <span>03 / Vinyl · Sound · Wax</span>
+    </div>
+
+    <h1 class="hs-hero-h1">
+      <span class="hs-h1-word">HAND</span>
+      <span class="hs-h1-word hs-h1-accent">SPUN</span>
+      <span class="hs-h1-word hs-h1-sub">RECORDS<span class="hs-h1-reg">®</span></span>
+    </h1>
+
+    <p class="hs-hero-sub">{{ section.settings.tagline | default: 'Where the needle drops and the culture lives. Handspun Records — the sound of Camden on cotton and wax since 1990.' }}</p>
+
+    <div class="hs-hero-cta-row">
+      <a class="hs-cta-primary" href="#hs-shop">Shop The Collection &#8594;</a>
+      <div class="hs-hero-stats">
+        <div class="hs-stat"><span class="hs-stat-n">{{ brand_col.products_count | default: '80+' }}</span><span class="hs-stat-l">Products</span></div>
+        <div class="hs-stat-div"></div>
+        <div class="hs-stat"><span class="hs-stat-n">1990</span><span class="hs-stat-l">Est.</span></div>
+        <div class="hs-stat-div"></div>
+        <div class="hs-stat"><span class="hs-stat-n">Vinyl</span><span class="hs-stat-l">Culture</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hs-scroll-hint" aria-hidden="true">
+    <div class="hs-scroll-track"><div class="hs-scroll-thumb"></div></div>
+    <span>Scroll</span>
+  </div>
+</section>
+
+<!-- ============================================================
+     TICKER
+     ============================================================ -->
+<div class="hs-ticker">
+  <div class="hs-ticker-inner">
+    <span>Handspun Records</span><span class="hs-dot">·</span>
+    <span>Vinyl Culture</span><span class="hs-dot">·</span>
+    <span>Camden Sound</span><span class="hs-dot">·</span>
+    <span>Est. 1990</span><span class="hs-dot">·</span>
+    <span>Wax &amp; Cotton</span><span class="hs-dot">·</span>
+    <span>Underground Music</span><span class="hs-dot">·</span>
+    <span>Slip Mats</span><span class="hs-dot">·</span>
+    <span>Handspun Records</span><span class="hs-dot">·</span>
+    <span>Vinyl Culture</span><span class="hs-dot">·</span>
+    <span>Camden Sound</span><span class="hs-dot">·</span>
+    <span>Est. 1990</span><span class="hs-dot">·</span>
+    <span>Wax &amp; Cotton</span><span class="hs-dot">·</span>
+    <span>Underground Music</span><span class="hs-dot">·</span>
+    <span>Slip Mats</span><span class="hs-dot">·</span>
+  </div>
+</div>
+
+<!-- ============================================================
+     STORY — Two column
+     ============================================================ -->
+<section class="hs-story">
+  <div class="hs-story-lhs">
+    <div class="hs-story-record-art" aria-hidden="true">
+      <div class="hs-art-disc">
+        <div class="hs-art-grooves"></div>
+        <div class="hs-art-label">
+          <span>SIDE A</span>
+          <span class="hs-art-label-title">Camden</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="hs-story-rhs">
+    <div class="hs-story-eyebrow">The Sound</div>
+    <h2 class="hs-story-h2">Music<br>pressed<br>into <em>cotton.</em></h2>
+    <p class="hs-story-p">{{ section.settings.story_text | default: "Handspun Records was born from the same Camden market stall — but this one was always about the music. Slip mats, record bags, tees and hoodies that carry the culture of vinyl. Every piece is a love letter to the underground: the DJs, the crates, the late nights and the wax that holds it all together." }}</p>
+    <div class="hs-story-tags">
+      <span class="hs-tag">Vinyl</span>
+      <span class="hs-tag">Slip Mats</span>
+      <span class="hs-tag">Record Bags</span>
+      <span class="hs-tag">Camden</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     PRODUCTS
+     ============================================================ -->
+<section class="hs-shop hand-sec" id="hs-shop">
+  <div class="hand-container">
+    <div class="hs-shop-head">
+      <div class="hs-shop-head-lhs">
+        <div class="eyebrow">The Full Drop</div>
+        <h2 class="hs-shop-h2">All Products.</h2>
+      </div>
+      <div class="hs-shop-head-rhs">
+        <p>Every piece from Handspun Records — tees, hoodies, slip mats, record bags and more.</p>
+        <div class="hs-filters">
+          <button class="hs-filter active" data-filter="all">All</button>
+          <button class="hs-filter" data-filter="tee">T-Shirts</button>
+          <button class="hs-filter" data-filter="hood">Hoodies</button>
+          <button class="hs-filter" data-filter="acc">Accessories</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="hand-grid hs-product-grid" id="hs-product-grid">
+      {%- for product in brand_col.products -%}
+        {%- assign filter_tag = 'acc' -%}
+        {%- assign tl = product.title | downcase -%}
+        {%- if tl contains 'hoodie' or tl contains 'hood' or tl contains 'sweatshirt' or tl contains 'zip' -%}
+          {%- assign filter_tag = 'hood' -%}
+        {%- elsif tl contains 't-shirt' or tl contains 'tee' or tl contains 'long-sleeve' or tl contains 'longsleeve' or tl contains 'long sleeve' -%}
+          {%- assign filter_tag = 'tee' -%}
+        {%- endif -%}
+        <a class="hand-card hs-card" href="{{ product.url }}" data-filter="{{ filter_tag }}">
+          <div class="imgwrap">
+            <span class="tag">{{ product.type | default: 'Handspun Records' }}</span>
+            {%- if product.featured_image -%}
+              <img src="{{ product.featured_image | img_url: '600x' }}" alt="{{ product.featured_image.alt | default: product.title }}" loading="lazy" width="600" height="600" />
+            {%- else -%}
+              <div class="hs-no-img">HANDSPUN<br>RECORDS</div>
+            {%- endif -%}
+            <span class="quick">Quick Add &#8594;</span>
+          </div>
+          <div class="body">
+            <div class="vendor">Handspun Records</div>
+            <div class="name">{{ product.title }}</div>
+            <div class="row2">
+              <div class="price">{{ product.price | money }}</div>
+              {%- if product.compare_at_price > product.price -%}
+                <span class="hs-sale-badge">SALE</span>
+              {%- endif -%}
+            </div>
+          </div>
+        </a>
+      {%- else -%}
+        <div class="hs-empty">No products found. Check back soon.</div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     CLOSING CTA
+     ============================================================ -->
+<section class="hs-cta-section">
+  <div class="hs-cta-inner">
+    <div class="hs-cta-discs" aria-hidden="true">
+      <div class="hs-cta-disc hs-disc-back"></div>
+      <div class="hs-cta-disc hs-disc-front"></div>
+    </div>
+    <div class="hs-cta-text">
+      <h2 class="hs-cta-h2">The needle<br>never lifts.</h2>
+      <p>Vinyl culture on cotton. New drops, same underground energy.</p>
+      <a class="hs-cta-primary" href="#hs-shop">Shop Handspun Records &#8594;</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     STYLES
+     ============================================================ -->
+<style>
+/* ---- TOKENS ---- */
+:root {
+  --hs-dark: #0a0a12;
+  --hs-navy: #0f0f1e;
+  --hs-accent: #e8c547;
+  --hs-accent-dim: rgba(232,197,71,.15);
+  --hs-pink: #e84b8a;
+  --hs-white: #f5f5f0;
+}
+
+/* ---- HERO ---- */
+.hs-hero {
+  position: relative;
+  min-height: 100vh;
+  background: var(--hs-dark);
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  padding: 120px 60px 80px;
+}
+@media (max-width: 768px) { .hs-hero { padding: 100px 24px 60px; } }
+
+/* Platter */
+.hs-platter-wrap {
+  position: absolute;
+  right: -60px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 560px;
+  height: 560px;
+  pointer-events: none;
+}
+@media (max-width: 1024px) { .hs-platter-wrap { width: 380px; height: 380px; right: -100px; } }
+@media (max-width: 768px) { .hs-platter-wrap { width: 240px; height: 240px; right: -60px; top: 25%; } }
+
+.hs-platter {
+  width: 100%; height: 100%;
+  border-radius: 50%;
+  background: radial-gradient(circle at 50%, #1c1c2e 0%, #0a0a12 100%);
+  position: relative;
+  box-shadow: 0 0 0 8px rgba(232,197,71,.06), 0 0 80px rgba(232,197,71,.06);
+}
+.hs-platter-mat {
+  position: absolute;
+  inset: 3%;
+  border-radius: 50%;
+  background: radial-gradient(circle at 50%, #222235 0%, #111120 100%);
+}
+.hs-record {
+  position: absolute;
+  inset: 5%;
+  border-radius: 50%;
+  background: radial-gradient(circle at 50%, #1a1a1a 0%, #080808 100%);
+  animation: hs-spin 14s linear infinite;
+  box-shadow: inset 0 0 30px rgba(0,0,0,.8);
+}
+@keyframes hs-spin { to { transform: rotate(360deg); } }
+
+.hs-record-grooves {
+  position: absolute;
+  inset: 5%;
+  border-radius: 50%;
+  background: repeating-radial-gradient(
+    circle at 50%,
+    transparent 0px, transparent 3px,
+    rgba(255,255,255,.025) 3px, rgba(255,255,255,.025) 4px
+  );
+}
+.hs-record-label {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 30%;
+  height: 30%;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--hs-accent) 0%, #c9a830 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+}
+.hs-label-brand {
+  font-family: var(--display);
+  font-size: clamp(7px, 1.2vw, 14px);
+  font-weight: 900;
+  color: var(--hs-dark);
+  letter-spacing: .06em;
+  line-height: 1;
+}
+.hs-label-sub {
+  font-family: var(--mono);
+  font-size: clamp(5px, .7vw, 8px);
+  letter-spacing: .15em;
+  color: rgba(10,10,18,.6);
+  text-transform: uppercase;
+}
+.hs-label-hole {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--hs-dark);
+  margin-top: 2px;
+}
+
+/* Tonearm */
+.hs-tonearm {
+  position: absolute;
+  top: 8%;
+  right: 12%;
+  width: 40%;
+  height: 60%;
+  transform-origin: top right;
+  animation: hs-tonearm-sway 8s ease-in-out infinite;
+}
+@keyframes hs-tonearm-sway {
+  0%, 100% { transform: rotate(-5deg); }
+  50% { transform: rotate(-2deg); }
+}
+.hs-tonearm-body {
+  position: absolute;
+  top: 0; right: 0;
+  width: 4px;
+  height: 100%;
+  background: linear-gradient(to bottom, rgba(232,197,71,.6), rgba(232,197,71,.2));
+  border-radius: 2px;
+  transform-origin: top right;
+  transform: rotate(-30deg);
+}
+.hs-tonearm-head {
+  position: absolute;
+  bottom: 0; right: 0;
+  width: 12px; height: 12px;
+  border-radius: 50%;
+  background: var(--hs-accent);
+  box-shadow: 0 0 8px rgba(232,197,71,.5);
+}
+
+.hs-platter-glow {
+  position: absolute;
+  inset: -20px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 50%, rgba(232,197,71,.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* Sound waves */
+.hs-waves {
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 100%;
+  pointer-events: none;
+  overflow: hidden;
+}
+.hs-wave {
+  position: absolute;
+  left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(232,197,71,.08), transparent);
+  animation: hs-wave-anim 4s ease-in-out infinite;
+}
+.hs-w1 { top: 20%; animation-delay: 0s; }
+.hs-w2 { top: 35%; animation-delay: .6s; }
+.hs-w3 { top: 50%; animation-delay: 1.2s; }
+.hs-w4 { top: 65%; animation-delay: 1.8s; }
+.hs-w5 { top: 80%; animation-delay: 2.4s; }
+@keyframes hs-wave-anim {
+  0%, 100% { opacity: 0; transform: scaleX(.3); }
+  50% { opacity: 1; transform: scaleX(1); }
+}
+
+/* Hero content */
+.hs-hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 680px;
+}
+.hs-hero-tag {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-family: var(--mono);
+  font-size: 13px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: rgba(245,245,240,.85);
+  margin-bottom: 32px;
+  font-weight: 500;
+}
+.hs-tag-line {
+  display: block;
+  width: 32px;
+  height: 1px;
+  background: var(--hs-accent);
+}
+.hs-hero-h1 {
+  font-family: var(--display);
+  font-size: clamp(56px, 10vw, 136px);
+  font-weight: 900;
+  line-height: .88;
+  letter-spacing: -.04em;
+  text-transform: uppercase;
+  color: var(--hs-white);
+  margin: 0 0 32px;
+  display: flex;
+  flex-direction: column;
+}
+.hs-h1-word { display: block; overflow: hidden; }
+.hs-h1-accent { color: var(--hs-accent); }
+.hs-h1-sub { font-size: .65em; color: rgba(245,245,240,.6); }
+.hs-h1-reg {
+  font-size: .4em;
+  vertical-align: super;
+  color: var(--hs-accent);
+  opacity: .7;
+}
+.hs-hero-sub {
+  font-size: 17px;
+  line-height: 1.65;
+  color: rgba(245,245,240,.9);
+  margin: 0 0 40px;
+  max-width: 440px;
+}
+.hs-hero-cta-row {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+.hs-cta-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--hs-accent);
+  color: var(--hs-dark);
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 16px 28px;
+  font-weight: 700;
+  transition: background .2s, transform .2s;
+}
+.hs-cta-primary:hover { background: #f0d060; transform: translateY(-2px); }
+.hs-hero-stats {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.hs-stat { display: flex; flex-direction: column; gap: 2px; }
+.hs-stat-n {
+  font-family: var(--display);
+  font-size: 26px;
+  font-weight: 900;
+  color: var(--hs-white);
+  line-height: 1;
+}
+.hs-stat-l {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  color: rgba(245,245,240,.35);
+}
+.hs-stat-div {
+  width: 1px; height: 32px;
+  background: rgba(245,245,240,.1);
+}
+
+/* Scroll hint */
+.hs-scroll-hint {
+  position: absolute;
+  bottom: 36px; left: 60px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  color: rgba(245,245,240,.25);
+}
+.hs-scroll-track {
+  width: 40px; height: 1px;
+  background: rgba(245,245,240,.15);
+  position: relative; overflow: hidden;
+}
+.hs-scroll-thumb {
+  position: absolute;
+  top: 0; left: -100%;
+  width: 100%; height: 100%;
+  background: var(--hs-accent);
+  animation: hs-scroll-anim 2s ease infinite;
+}
+@keyframes hs-scroll-anim {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+
+/* ---- TICKER ---- */
+.hs-ticker {
+  background: var(--hs-accent);
+  padding: 18px 0;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.hs-ticker-inner {
+  display: inline-flex;
+  gap: 24px;
+  animation: hs-tick 20s linear infinite;
+  font-family: var(--display);
+  font-size: 13px;
+  font-weight: 900;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--hs-dark);
+}
+.hs-dot { opacity: .3; }
+@keyframes hs-tick {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ---- STORY ---- */
+.hs-story {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  min-height: 580px;
+  background: var(--hs-dark);
+}
+@media (max-width: 768px) { .hs-story { grid-template-columns: 1fr; } }
+
+.hs-story-lhs {
+  background: var(--hs-navy);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 40px;
+  border-right: 1px solid var(--hs-accent-dim);
+}
+.hs-story-record-art {
+  width: 200px; height: 200px;
+  position: relative;
+}
+.hs-art-disc {
+  width: 100%; height: 100%;
+  border-radius: 50%;
+  background: radial-gradient(circle at 50%, #1a1a1a 0%, #050505 100%);
+  animation: hs-spin 10s linear infinite;
+  box-shadow: 0 0 40px rgba(232,197,71,.1);
+  position: relative;
+}
+.hs-art-grooves {
+  position: absolute;
+  inset: 5%;
+  border-radius: 50%;
+  background: repeating-radial-gradient(
+    circle at 50%,
+    transparent 0px, transparent 4px,
+    rgba(255,255,255,.03) 4px, rgba(255,255,255,.03) 5px
+  );
+}
+.hs-art-label {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 35%; height: 35%;
+  border-radius: 50%;
+  background: var(--hs-accent);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  font-family: var(--mono);
+  font-size: 8px;
+  letter-spacing: .1em;
+  color: var(--hs-dark);
+  font-weight: 700;
+}
+.hs-art-label-title {
+  font-family: var(--display);
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: .05em;
+}
+
+.hs-story-rhs {
+  padding: 80px 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 24px;
+}
+@media (max-width: 768px) { .hs-story-rhs { padding: 48px 24px; } }
+
+.hs-story-eyebrow {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--hs-accent);
+}
+.hs-story-h2 {
+  font-family: var(--display);
+  font-size: clamp(36px, 5vw, 64px);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: -.03em;
+  line-height: 1;
+  color: var(--hs-white);
+  margin: 0;
+}
+.hs-story-h2 em {
+  font-style: normal;
+  color: var(--hs-accent);
+}
+.hs-story-p {
+  font-size: 16px;
+  line-height: 1.75;
+  color: rgba(245,245,240,.75);
+  margin: 0;
+  max-width: 520px;
+}
+.hs-story-tags {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.hs-tag {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  padding: 6px 14px;
+  border: 1px solid var(--hs-accent-dim);
+  color: rgba(232,197,71,.7);
+}
+
+/* ---- SHOP ---- */
+.hs-shop { background: var(--paper); }
+.hs-shop-head {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: start;
+  margin-bottom: 48px;
+}
+@media (max-width: 768px) { .hs-shop-head { grid-template-columns: 1fr; } }
+
+.hs-shop-h2 {
+  font-family: var(--display);
+  font-size: clamp(40px, 6vw, 72px);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: -.03em;
+  line-height: 1;
+  margin: 8px 0 0;
+}
+.hs-filters {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 16px;
+}
+.hs-filter {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  padding: 9px 18px;
+  border: 1px solid var(--ink);
+  background: transparent;
+  cursor: pointer;
+  transition: background .2s, color .2s;
+}
+.hs-filter:hover, .hs-filter.active {
+  background: var(--ink);
+  color: #fff;
+}
+.hs-card[style*="display:none"] { display: none !important; }
+.hs-no-img {
+  width: 100%; height: 340px;
+  background: #111;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: .12em;
+  color: #333;
+  text-align: center;
+  line-height: 1.6;
+}
+.hs-sale-badge {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: .12em;
+  background: var(--hs-accent);
+  color: var(--hs-dark);
+  padding: 3px 8px;
+  font-weight: 700;
+}
+.hs-empty {
+  grid-column: 1/-1;
+  padding: 80px;
+  text-align: center;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: .12em;
+  color: #888;
+  text-transform: uppercase;
+}
+
+/* ---- CLOSING CTA ---- */
+.hs-cta-section {
+  background: var(--hs-dark);
+  padding: 100px 60px;
+  overflow: hidden;
+}
+@media (max-width: 768px) { .hs-cta-section { padding: 60px 24px; } }
+
+.hs-cta-inner {
+  display: flex;
+  align-items: center;
+  gap: 80px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+@media (max-width: 768px) { .hs-cta-inner { flex-direction: column; gap: 40px; } }
+
+.hs-cta-discs {
+  flex-shrink: 0;
+  width: 180px; height: 180px;
+  position: relative;
+}
+.hs-cta-disc {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle at 50%, #1a1a1a 0%, #050505 100%);
+}
+.hs-disc-back {
+  width: 160px; height: 160px;
+  top: 20px; left: 20px;
+  opacity: .5;
+  animation: hs-spin 16s linear infinite reverse;
+}
+.hs-disc-front {
+  width: 160px; height: 160px;
+  top: 0; left: 0;
+  animation: hs-spin 10s linear infinite;
+  box-shadow: 0 0 40px rgba(232,197,71,.1);
+}
+.hs-disc-front::after {
+  content: '';
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 28%;
+  height: 28%;
+  border-radius: 50%;
+  background: var(--hs-accent);
+}
+
+.hs-cta-text { flex: 1; }
+.hs-cta-h2 {
+  font-family: var(--display);
+  font-size: clamp(32px, 5vw, 60px);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: -.03em;
+  line-height: 1;
+  color: var(--hs-white);
+  margin: 0 0 20px;
+}
+.hs-cta-text p {
+  font-size: 15px;
+  line-height: 1.65;
+  color: rgba(245,245,240,.6);
+  margin: 0 0 32px;
+}
+</style>
+
+<!-- ============================================================
+     SCRIPTS
+     ============================================================ -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Filter
+  var filterBtns = document.querySelectorAll('.hs-filter');
+  var cards = document.querySelectorAll('.hs-card');
+  filterBtns.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var filter = this.dataset.filter;
+      filterBtns.forEach(function(b) { b.classList.remove('active'); });
+      this.classList.add('active');
+      cards.forEach(function(card) {
+        card.style.display = (filter === 'all' || card.dataset.filter === filter) ? '' : 'none';
+      });
+    });
+  });
+
+  // Motion.dev
+  if (window.Motion) {
+    var { animate, stagger, inView } = window.Motion;
+
+    animate('.hs-hero-tag', { opacity: [0, 1], x: [-20, 0] }, { duration: 0.7, delay: 0.3 });
+    animate('.hs-h1-word', { opacity: [0, 1], y: [80, 0], skewY: [4, 0] },
+      { delay: stagger(0.1, { start: 0.5 }), duration: 0.9, easing: [0.22, 1, 0.36, 1] });
+    animate('.hs-hero-sub', { opacity: [0, 1], y: [20, 0] }, { duration: 0.7, delay: 0.9 });
+    animate('.hs-hero-cta-row', { opacity: [0, 1], y: [20, 0] }, { duration: 0.7, delay: 1.1 });
+    animate('.hs-platter-wrap', { opacity: [0, 1], scale: [0.85, 1] },
+      { duration: 1.2, delay: 0.4, easing: [0.22, 1, 0.36, 1] });
+
+    inView('.hs-story-record-art', function(el) {
+      animate(el, { opacity: [0, 1], scale: [0.8, 1] },
+        { duration: 0.9, easing: [0.22, 1, 0.36, 1] });
+    }, { margin: '-10% 0px' });
+
+    inView('.hs-story-rhs', function(el) {
+      animate(el.querySelectorAll('.hs-story-eyebrow, .hs-story-h2, .hs-story-p, .hs-story-tags'),
+        { opacity: [0, 1], x: [40, 0] },
+        { delay: stagger(0.1), duration: 0.7, easing: [0.22, 1, 0.36, 1] });
+    }, { margin: '-10% 0px' });
+
+    inView('.hs-card', function(el) {
+      animate(el, { opacity: [0, 1], y: [32, 0] },
+        { duration: 0.6, easing: [0.22, 1, 0.36, 1] });
+    }, { margin: '-5% 0px' });
+
+    inView('.hs-cta-h2', function(el) {
+      animate(el, { opacity: [0, 1], y: [40, 0] },
+        { duration: 0.8, easing: [0.22, 1, 0.36, 1] });
+    }, { margin: '-10% 0px' });
+
+    inView('.hs-cta-discs', function(el) {
+      animate(el, { opacity: [0, 1], scale: [0.7, 1] },
+        { duration: 1, easing: [0.22, 1, 0.36, 1] });
+    }, { margin: '-10% 0px' });
+  }
+});
+</script>
+
+{% schema %}
+{
+  "name": "Brand: Handspun Records",
+  "settings": [
+    { "type": "textarea", "id": "tagline", "label": "Hero tagline", "default": "Where the needle drops and the culture lives. Handspun Records — the sound of Camden on cotton and wax since 1990." },
+    { "type": "textarea", "id": "story_text", "label": "Brand story text", "default": "Handspun Records was born from the same Camden market stall — but this one was always about the music. Slip mats, record bags, tees and hoodies that carry the culture of vinyl. Every piece is a love letter to the underground: the DJs, the crates, the late nights and the wax that holds it all together." }
+  ],
+  "presets": [
+    { "name": "Brand: Handspun Records" }
+  ]
+}
+{% endschema %}

@@ -1,33 +1,544 @@
-<section style="padding:80px 24px">
-  <div class="container">
-    <div class="section-head">
-      <div>
-        <span class="eyebrow">{{ collection.title }}</span>
-        <h2 class="h2 reveal">Shop <em>{{ collection.title }}</em></h2>
-      </div>
-      {%- if collection.description != blank -%}<p class="reveal">{{ collection.description }}</p>{%- endif -%}
-    </div>
+<style>
+  .hand-coll-hero {
+    background: var(--ink);
+    color: #fff;
+    padding: 80px 32px 60px;
+    border-bottom: 1px solid #000;
+    position: relative;
+    overflow: hidden;
+  }
+  .hand-coll-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 30% 50%, rgba(255,46,136,.15), transparent 60%);
+    pointer-events: none;
+  }
+  .hand-coll-hero-inner {
+    max-width: var(--maxw);
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+  .hand-coll-eyebrow {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,.5);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .hand-coll-eyebrow::before {
+    content: '';
+    width: 32px;
+    height: 1px;
+    background: rgba(255,255,255,.3);
+  }
+  .hand-coll-h1 {
+    font-family: 'Anton', Impact, sans-serif;
+    font-size: clamp(48px, 8vw, 110px);
+    text-transform: uppercase;
+    line-height: .92;
+    letter-spacing: -.01em;
+    margin-bottom: 20px;
+  }
+  .hand-coll-desc {
+    font-size: 16px;
+    color: rgba(255,255,255,.7);
+    max-width: 560px;
+    line-height: 1.65;
+  }
+  .hand-coll-meta {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    margin-top: 28px;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,.5);
+  }
+  .hand-coll-meta span { color: rgba(255,255,255,.8); }
 
-    <div class="products">
-      {%- paginate collection.products by 24 -%}
-        {%- for product in collection.products -%}
-          {% render 'product-card', product: product, index: forloop.index0 %}
-        {%- else -%}
-          <div style="grid-column:1/-1;text-align:center;padding:60px;color:var(--ink-soft)">
-            <p>No products yet — check back soon ☻</p>
-          </div>
-        {%- endfor -%}
+  /* Toolbar */
+  .hand-coll-toolbar {
+    background: var(--paper-2);
+    border-bottom: 1px solid rgba(0,0,0,.1);
+    padding: 0 32px;
+    position: sticky;
+    top: 74px;
+    z-index: 40;
+  }
+  .hand-coll-toolbar-inner {
+    max-width: var(--maxw);
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 52px;
+    gap: 20px;
+  }
+  .hand-coll-filter-btns {
+    display: flex;
+    gap: 6px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .hand-coll-filter-btns::-webkit-scrollbar { display: none; }
+  .hand-filter-btn {
+    padding: 7px 14px;
+    font-family: var(--mono);
+    font-size: 10.5px;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    border: 1px solid rgba(0,0,0,.2);
+    background: transparent;
+    color: var(--ink);
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background .2s, border-color .2s, color .2s;
+    text-decoration: none;
+    display: inline-block;
+  }
+  .hand-filter-btn:hover, .hand-filter-btn.active {
+    background: var(--ink);
+    border-color: var(--ink);
+    color: #fff;
+  }
+  .hand-sort-select {
+    font-family: var(--mono);
+    font-size: 10.5px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    border: 1px solid rgba(0,0,0,.2);
+    background: transparent;
+    color: var(--ink);
+    padding: 7px 12px;
+    cursor: pointer;
+    outline: none;
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%230a0a0a'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    padding-right: 28px;
+  }
 
-        {%- if paginate.pages > 1 -%}
-          <div style="grid-column:1/-1;text-align:center;margin-top:30px">
-            {%- if paginate.previous -%}<a href="{{ paginate.previous.url }}" class="btn btn-ghost">← Previous</a>{%- endif -%}
-            {%- if paginate.next -%}<a href="{{ paginate.next.url }}" class="btn btn-primary" style="margin-left:10px">Next →</a>{%- endif -%}
-          </div>
-        {%- endif -%}
-      {%- endpaginate -%}
+  /* Product grid */
+  .hand-coll-section {
+    padding: 48px 32px 80px;
+    max-width: var(--maxw);
+    margin: 0 auto;
+  }
+  .hand-coll-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--ink);
+    border: 1px solid var(--ink);
+  }
+  .hand-coll-card {
+    background: var(--paper);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: background .25s;
+  }
+  .hand-coll-card:hover { background: var(--paper-2); }
+  .hand-coll-card-media {
+    position: relative;
+    aspect-ratio: 3/4;
+    overflow: hidden;
+    background: var(--paper-2);
+  }
+  .hand-coll-card-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform .6s cubic-bezier(.2,.7,.2,1);
+  }
+  .hand-coll-card:hover .hand-coll-card-media img { transform: scale(1.04); }
+  .hand-coll-badge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    background: var(--ink);
+    color: #fff;
+    padding: 4px 8px;
+    z-index: 2;
+  }
+  .hand-coll-badge.sale { background: var(--pink); }
+  .hand-coll-badge.new { background: var(--yellow); color: var(--ink); }
+  .hand-coll-quick {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    transform: translateY(100%);
+    transition: transform .3s cubic-bezier(.22,1,.36,1);
+    z-index: 3;
+  }
+  .hand-coll-card:hover .hand-coll-quick { transform: translateY(0); }
+  .hand-coll-quick-btn {
+    flex: 1;
+    padding: 14px;
+    background: var(--ink);
+    color: #fff;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    border: 0;
+    cursor: pointer;
+    transition: background .2s;
+  }
+  .hand-coll-quick-btn:hover { background: var(--pink); }
+  .hand-coll-quick-link {
+    width: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(10,10,10,.85);
+    color: #fff;
+    font-size: 16px;
+    text-decoration: none;
+    border-left: 1px solid rgba(255,255,255,.15);
+    transition: background .2s;
+  }
+  .hand-coll-quick-link:hover { background: var(--pink); }
+  .hand-coll-card-info {
+    padding: 16px 18px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    flex: 1;
+  }
+  .hand-coll-card-vendor {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: #888;
+  }
+  .hand-coll-card-name {
+    font-family: 'Anton', Impact, sans-serif;
+    font-size: 18px;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: -.01em;
+    color: var(--ink);
+    line-height: 1.1;
+    margin-top: 2px;
+    text-decoration: none;
+    display: block;
+  }
+  .hand-coll-card-price {
+    font-family: var(--mono);
+    font-size: 13px;
+    letter-spacing: .06em;
+    color: var(--ink);
+    margin-top: 6px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .hand-coll-card-price .compare {
+    text-decoration: line-through;
+    color: #aaa;
+    font-size: 11px;
+  }
+  .hand-coll-card-price .sale-price { color: var(--pink); }
+  .hand-coll-card-tag {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: #aaa;
+    margin-top: 4px;
+  }
+
+  /* Empty state */
+  .hand-coll-empty {
+    grid-column: 1/-1;
+    text-align: center;
+    padding: 100px 32px;
+    color: #888;
+  }
+  .hand-coll-empty h3 {
+    font-family: 'Anton', Impact, sans-serif;
+    font-size: 48px;
+    text-transform: uppercase;
+    color: var(--ink);
+    margin-bottom: 16px;
+  }
+
+  /* Pagination */
+  .hand-coll-pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 48px;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+  }
+  .hand-coll-pagination a, .hand-coll-pagination span {
+    padding: 10px 16px;
+    border: 1px solid rgba(0,0,0,.2);
+    color: var(--ink);
+    text-decoration: none;
+    transition: background .2s, border-color .2s, color .2s;
+  }
+  .hand-coll-pagination a:hover {
+    background: var(--ink);
+    border-color: var(--ink);
+    color: #fff;
+  }
+  .hand-coll-pagination .current {
+    background: var(--ink);
+    border-color: var(--ink);
+    color: #fff;
+  }
+
+  /* Sticky CTA */
+  .hand-sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 60;
+    background: var(--ink);
+    color: #fff;
+    display: none;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 22px;
+    border-top: 1px solid #000;
+    text-decoration: none;
+    transform: translateY(100%);
+    transition: transform .35s cubic-bezier(.22,1,.36,1);
+  }
+  .hand-sticky-cta.visible { transform: translateY(0); }
+  .hand-sticky-cta .lhs {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,.6);
+  }
+  .hand-sticky-cta .lhs b {
+    display: block;
+    font-family: 'Anton', Impact, sans-serif;
+    font-size: 16px;
+    letter-spacing: .02em;
+    color: #fff;
+    font-weight: 400;
+    margin-top: 2px;
+  }
+  .hand-sticky-cta span {
+    padding: 12px 22px;
+    background: #fff;
+    color: var(--ink);
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+
+  @media (max-width: 820px) {
+    .hand-sticky-cta { display: flex; }
+    body { padding-bottom: 64px; }
+    .hand-coll-grid { grid-template-columns: repeat(2, 1fr); }
+    .hand-coll-hero { padding: 60px 22px 40px; }
+    .hand-coll-toolbar { padding: 0 22px; }
+    .hand-coll-section { padding: 32px 22px 60px; }
+  }
+  @media (max-width: 520px) {
+    .hand-coll-grid { grid-template-columns: 1fr; }
+  }
+</style>
+
+<!-- Collection Hero -->
+<div class="hand-coll-hero">
+  <div class="hand-coll-hero-inner">
+    <div class="hand-coll-eyebrow">{{ collection.title }}</div>
+    <h1 class="hand-coll-h1">{{ collection.title }}</h1>
+    {%- if collection.description != blank -%}
+      <p class="hand-coll-desc">{{ collection.description }}</p>
+    {%- endif -%}
+    <div class="hand-coll-meta">
+      <div>{{ collection.products_count }} <span>Products</span></div>
+      <div>Organic Cotton · <span>UK Printed</span></div>
     </div>
   </div>
-</section>
+</div>
+
+<!-- Toolbar -->
+<div class="hand-coll-toolbar">
+  <div class="hand-coll-toolbar-inner">
+    <div class="hand-coll-filter-btns">
+      <a class="hand-filter-btn{% if current_tags == blank %} active{% endif %}" href="{{ collection.url }}">All</a>
+      {%- for tag in collection.all_tags -%}
+        {%- if tag != 'new' and tag != 'bestseller' and tag != 'sale' -%}
+          <a class="hand-filter-btn{% if current_tags contains tag %} active{% endif %}"
+             href="{{ collection.url }}/{{ tag | handle }}">{{ tag }}</a>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+    <select class="hand-sort-select" id="handSortBy" onchange="window.location.href=this.value">
+      {%- assign sort_by = collection.sort_by | default: collection.default_sort_by -%}
+      <option value="{{ collection.url }}?sort_by=manual"{% if sort_by == 'manual' %} selected{% endif %}>Featured</option>
+      <option value="{{ collection.url }}?sort_by=best-selling"{% if sort_by == 'best-selling' %} selected{% endif %}>Best Selling</option>
+      <option value="{{ collection.url }}?sort_by=price-ascending"{% if sort_by == 'price-ascending' %} selected{% endif %}>Price: Low → High</option>
+      <option value="{{ collection.url }}?sort_by=price-descending"{% if sort_by == 'price-descending' %} selected{% endif %}>Price: High → Low</option>
+      <option value="{{ collection.url }}?sort_by=created-descending"{% if sort_by == 'created-descending' %} selected{% endif %}>Newest</option>
+    </select>
+  </div>
+</div>
+
+<!-- Products -->
+<div class="hand-coll-section">
+  {%- paginate collection.products by 24 -%}
+    <div class="hand-coll-grid">
+      {%- for product in collection.products -%}
+        {%- liquid
+          assign p = product
+          assign featured = p.featured_image
+        -%}
+        <article class="hand-coll-card" itemscope itemtype="https://schema.org/Product">
+          <meta itemprop="name" content="{{ p.title | escape }}">
+          <meta itemprop="description" content="{{ p.description | strip_html | truncate: 200 | escape }}">
+          <div class="hand-coll-card-media">
+            {%- if p.compare_at_price > p.price -%}
+              <span class="hand-coll-badge sale">Sale</span>
+            {%- elsif p.tags contains 'new' -%}
+              <span class="hand-coll-badge new">New</span>
+            {%- elsif p.tags contains 'bestseller' -%}
+              <span class="hand-coll-badge">Best Seller</span>
+            {%- else -%}
+              <span class="hand-coll-badge">{{ p.type | default: 'Apparel' }}</span>
+            {%- endif -%}
+            {%- if featured -%}
+              <img src="{{ featured | image_url: width: 720 }}"
+                   alt="{{ featured.alt | escape | default: p.title | escape }}"
+                   loading="lazy" width="720" height="960"
+                   itemprop="image">
+            {%- else -%}
+              <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:var(--paper-2);font-family:'Anton',sans-serif;font-size:32px;color:rgba(0,0,0,.15)">☻</div>
+            {%- endif -%}
+            <div class="hand-coll-quick">
+              <button class="hand-coll-quick-btn"
+                      data-variant-id="{{ p.selected_or_first_available_variant.id }}"
+                      data-product-title="{{ p.title | escape }}"
+                      data-product-price="{{ p.price | money }}"
+                      data-quick-add>
+                {%- if p.available -%}Quick Add{%- else -%}Sold Out{%- endif -%}
+              </button>
+              <a class="hand-coll-quick-link" href="{{ p.url }}" aria-label="View {{ p.title | escape }}">↗</a>
+            </div>
+          </div>
+          <div class="hand-coll-card-info">
+            <div class="hand-coll-card-vendor">{{ p.vendor | default: 'Have A Nice Day' }}</div>
+            <a class="hand-coll-card-name" href="{{ p.url }}" itemprop="url">{{ p.title }}</a>
+            <div class="hand-coll-card-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+              <meta itemprop="priceCurrency" content="{{ cart.currency.iso_code }}">
+              <meta itemprop="price" content="{{ p.price | money_without_currency }}">
+              {%- if p.compare_at_price > p.price -%}
+                <span class="compare">{{ p.compare_at_price | money }}</span>
+                <span class="sale-price">{{ p.price | money }}</span>
+              {%- else -%}
+                {%- if p.price_varies -%}<span style="font-size:10px;opacity:.6">From</span>{%- endif -%}
+                {{ p.price | money }}
+              {%- endif -%}
+            </div>
+            <div class="hand-coll-card-tag">Organic cotton · UK printed</div>
+          </div>
+        </article>
+      {%- else -%}
+        <div class="hand-coll-empty">
+          <h3>Nothing here yet ☻</h3>
+          <p>Check back soon — new drops incoming.</p>
+          <a href="{{ routes.all_products_collection_url }}" class="hand-filter-btn" style="margin-top:24px;display:inline-block">Browse All Products →</a>
+        </div>
+      {%- endfor -%}
+    </div>
+
+    {%- if paginate.pages > 1 -%}
+      <div class="hand-coll-pagination">
+        {%- if paginate.previous -%}
+          <a href="{{ paginate.previous.url }}">← Prev</a>
+        {%- endif -%}
+        {%- for part in paginate.parts -%}
+          {%- if part.is_link -%}
+            <a href="{{ part.url }}">{{ part.title }}</a>
+          {%- else -%}
+            <span class="current">{{ part.title }}</span>
+          {%- endif -%}
+        {%- endfor -%}
+        {%- if paginate.next -%}
+          <a href="{{ paginate.next.url }}">Next →</a>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+  {%- endpaginate -%}
+</div>
+
+<script>
+// Quick add to cart
+document.querySelectorAll('[data-quick-add]').forEach(function(btn) {
+  btn.addEventListener('click', function(e) {
+    e.preventDefault();
+    const variantId = btn.dataset.variantId;
+    const title = btn.dataset.productTitle;
+    if (!variantId || btn.textContent.trim() === 'Sold Out') return;
+    btn.textContent = 'Adding...';
+    btn.disabled = true;
+    fetch('/cart/add.js', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({ id: variantId, quantity: 1 })
+    })
+    .then(function(r) { return r.json(); })
+    .then(function() {
+      btn.textContent = 'Added ✓';
+      // Update cart count
+      fetch('/cart.js').then(function(r) { return r.json(); }).then(function(cart) {
+        const el = document.getElementById('handCartCount');
+        if (el) el.textContent = cart.item_count;
+      });
+      // Show toast
+      const wrap = document.getElementById('hand-toast-wrap');
+      if (wrap) {
+        const t = document.createElement('div');
+        t.className = 'hand-toast ok';
+        t.innerHTML = '<span class="ic">☻</span><span>' + title + ' added to bag</span>';
+        wrap.appendChild(t);
+        requestAnimationFrame(function() { t.classList.add('show'); });
+        setTimeout(function() { t.classList.remove('show'); setTimeout(function() { t.remove(); }, 400); }, 3000);
+      }
+      setTimeout(function() { btn.textContent = 'Quick Add'; btn.disabled = false; }, 2000);
+    })
+    .catch(function() {
+      btn.textContent = 'Error';
+      btn.disabled = false;
+    });
+  });
+});
+</script>
 
 {% schema %}
 {

@@ -1,0 +1,11 @@
+{
+    "sections": {
+        "page-press": {
+            "type": "page-press",
+            "settings": {}
+        }
+    },
+    "order": [
+        "page-press"
+    ]
+}

@@ -1,0 +1,884 @@
+{% comment %}
+  Brand Page: BTKA — Punk Rocks · Sleazy Rider
+  Raw, electric, anarchic — distressed textures, neon red, high-voltage energy
+{% endcomment %}
+
+{%- assign btka_col = collections['btka'] -%}
+
+<!-- ============================================================
+     HERO — Full viewport, electric punk aesthetic
+     ============================================================ -->
+<section class="bk-hero">
+
+  <!-- Animated noise/static overlay -->
+  <div class="bk-static" aria-hidden="true"></div>
+
+  <!-- Diagonal slash decoration -->
+  <div class="bk-slash bk-slash1" aria-hidden="true"></div>
+  <div class="bk-slash bk-slash2" aria-hidden="true"></div>
+
+  <!-- Floating sparks -->
+  <div class="bk-sparks" aria-hidden="true">
+    <span class="bk-spark bk-s1"></span>
+    <span class="bk-spark bk-s2"></span>
+    <span class="bk-spark bk-s3"></span>
+    <span class="bk-spark bk-s4"></span>
+    <span class="bk-spark bk-s5"></span>
+    <span class="bk-spark bk-s6"></span>
+  </div>
+
+  <div class="bk-hero-content">
+    <div class="bk-hero-tag">
+      <span class="bk-tag-num">04</span>
+      <span class="bk-tag-sep">/</span>
+      <span>Punk Rocks · Sleazy Rider</span>
+    </div>
+
+    <h1 class="bk-hero-h1">
+      <span class="bk-h1-line bk-h1-outline">BREAK</span>
+      <span class="bk-h1-line bk-h1-solid">THE</span>
+      <span class="bk-h1-line bk-h1-outline bk-h1-red">RULES</span>
+    </h1>
+
+    <div class="bk-brand-name-wrap">
+      <span class="bk-brand-name">BTKA</span>
+      <span class="bk-brand-tm">™</span>
+    </div>
+
+    <p class="bk-hero-sub">No apologies. No compromises.<br>Graphic tees for the ones who ride their own lane.</p>
+
+    <div class="bk-hero-cta-row">
+      <a class="bk-cta-primary" href="#bk-shop">Shop BTKA &#8594;</a>
+      <div class="bk-hero-stats">
+        <div class="bk-stat">
+          <span class="bk-stat-n">{{ collections['btka'].products_count | default: '2' }}</span>
+          <span class="bk-stat-l">Drops</span>
+        </div>
+        <div class="bk-stat-div"></div>
+        <div class="bk-stat">
+          <span class="bk-stat-n">100%</span>
+          <span class="bk-stat-l">Attitude</span>
+        </div>
+        <div class="bk-stat-div"></div>
+        <div class="bk-stat">
+          <span class="bk-stat-n">0</span>
+          <span class="bk-stat-l">F*cks Given</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Glitch logo element -->
+  <div class="bk-glitch-wrap" aria-hidden="true">
+    <div class="bk-glitch-text" data-text="BTKA">BTKA</div>
+  </div>
+
+  <!-- Scroll indicator -->
+  <div class="bk-scroll-hint" aria-hidden="true">
+    <div class="bk-scroll-track"><div class="bk-scroll-thumb"></div></div>
+    <span>Scroll</span>
+  </div>
+</section>
+
+<!-- ============================================================
+     TICKER STRIP — Punk manifesto
+     ============================================================ -->
+<div class="bk-ticker">
+  <div class="bk-ticker-inner">
+    <span class="bk-tw">PUNK ROCKS</span><span class="bk-td">✦</span>
+    <span class="bk-tw">SLEAZY RIDER</span><span class="bk-td">✦</span>
+    <span class="bk-tw bk-tw-red">BTKA</span><span class="bk-td">✦</span>
+    <span class="bk-tw">NO RULES</span><span class="bk-td">✦</span>
+    <span class="bk-tw">GRAPHIC TEES</span><span class="bk-td">✦</span>
+    <span class="bk-tw bk-tw-red">BREAK IT</span><span class="bk-td">✦</span>
+    <span class="bk-tw">PUNK ROCKS</span><span class="bk-td">✦</span>
+    <span class="bk-tw">SLEAZY RIDER</span><span class="bk-td">✦</span>
+    <span class="bk-tw bk-tw-red">BTKA</span><span class="bk-td">✦</span>
+    <span class="bk-tw">NO RULES</span><span class="bk-td">✦</span>
+    <span class="bk-tw">GRAPHIC TEES</span><span class="bk-td">✦</span>
+    <span class="bk-tw bk-tw-red">BREAK IT</span><span class="bk-td">✦</span>
+  </div>
+</div>
+
+<!-- ============================================================
+     STORY SECTION — Raw, editorial
+     ============================================================ -->
+<section class="bk-story">
+  <div class="bk-story-lhs">
+    <div class="bk-story-badge">
+      <div class="bk-badge-inner">
+        <span class="bk-badge-big">BT</span>
+        <span class="bk-badge-big bk-badge-red">KA</span>
+      </div>
+      <div class="bk-badge-sub">PUNK ROCKS</div>
+      <div class="bk-badge-lines" aria-hidden="true">
+        <div class="bk-bl"></div>
+        <div class="bk-bl"></div>
+        <div class="bk-bl"></div>
+        <div class="bk-bl"></div>
+      </div>
+    </div>
+  </div>
+  <div class="bk-story-rhs">
+    <div class="bk-story-eyebrow">The Manifesto</div>
+    <h2 class="bk-story-h2">Born to<br><em>break</em><br>the mould.</h2>
+    <p class="bk-story-p">{{ section.settings.story_text | default: "BTKA doesn't do safe. Every graphic is a statement — raw, unapologetic, and built for the ones who live outside the lines. Sushi Rising. Shotgun bets. Punk energy printed on heavyweight cotton. This is streetwear with a middle finger raised. Wear it loud." }}</p>
+    <div class="bk-story-tags">
+      <span class="bk-stag">Punk Culture</span>
+      <span class="bk-stag">Graphic Tees</span>
+      <span class="bk-stag">Heavyweight Cotton</span>
+      <span class="bk-stag">No Compromises</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     PRODUCTS — Full grid
+     ============================================================ -->
+<section class="bk-shop hand-sec" id="bk-shop">
+  <div class="hand-container">
+    <div class="bk-shop-head">
+      <div class="bk-shop-head-lhs">
+        <div class="eyebrow">The Drop</div>
+        <h2 class="bk-shop-h2">All Products.</h2>
+      </div>
+      <div class="bk-shop-head-rhs">
+        <p>Every piece from BTKA — graphic tees that hit different. Heavy cotton, bold prints, zero apologies.</p>
+      </div>
+    </div>
+
+    <div class="hand-grid bk-product-grid" id="bk-product-grid">
+      {%- for product in btka_col.products -%}
+        <a class="hand-card bk-card" href="{{ product.url }}">
+          <div class="imgwrap">
+            <span class="tag">{{ product.type | default: 'BTKA' }}</span>
+            {%- if product.featured_image -%}
+              <img src="{{ product.featured_image | image_url: width: 600 }}" alt="{{ product.featured_image.alt | default: product.title }}" loading="lazy" width="600" height="600" />
+            {%- else -%}
+              <div class="bk-no-img">BTKA</div>
+            {%- endif -%}
+            <span class="quick">Quick Add &#8594;</span>
+          </div>
+          <div class="body">
+            <div class="vendor">BTKA</div>
+            <div class="name">{{ product.title }}</div>
+            <div class="row2">
+              <div class="price">{{ product.price | money }}</div>
+              {%- if product.compare_at_price > product.price -%}
+                <span class="bk-sale-badge">SALE</span>
+              {%- endif -%}
+            </div>
+          </div>
+        </a>
+      {%- else -%}
+        <!-- Fallback if collection is empty — use real CDN URLs -->
+        <a class="hand-card bk-card" href="/products/btka-sushi-font-front-print-t-shirt">
+          <div class="imgwrap">
+            <span class="tag">T-Shirt</span>
+            <img src="https://cdn.shopify.com/s/files/1/0737/7397/3795/files/E43E1F26-C8CB-4E99-92EC-8F2E8EDE7989.jpg?v=1709665827" alt="BTKA Sushi Rising Run Front Print T-Shirt" loading="lazy" width="600" height="600" />
+            <span class="quick">Quick Add &#8594;</span>
+          </div>
+          <div class="body">
+            <div class="vendor">BTKA</div>
+            <div class="name">BTKA SUSHI RISING RUN FRONT PRINT T-SHIRT</div>
+            <div class="row2"><div class="price">£29.99</div></div>
+          </div>
+        </a>
+        <a class="hand-card bk-card" href="/products/btka-take-all-bets-front-print-t-shirt">
+          <div class="imgwrap">
+            <span class="tag">T-Shirt</span>
+            <img src="https://cdn.shopify.com/s/files/1/0737/7397/3795/files/F04F540C-79FB-486F-8899-39B3EC0A42B2.jpg?v=1752776866" alt="BTKA Take All Bets Shotgun Front Print T-Shirt" loading="lazy" width="600" height="600" />
+            <span class="quick">Quick Add &#8594;</span>
+          </div>
+          <div class="body">
+            <div class="vendor">BTKA</div>
+            <div class="name">BTKA TAKE ALL BETS SHOTGUN FRONT PRINT T-SHIRT</div>
+            <div class="row2"><div class="price">£29.99</div></div>
+          </div>
+        </a>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     CLOSING CTA — Electric
+     ============================================================ -->
+<section class="bk-cta-section">
+  <div class="bk-cta-static" aria-hidden="true"></div>
+  <div class="bk-cta-inner">
+    <div class="bk-cta-symbol" aria-hidden="true">
+      <span class="bk-cta-x">✕</span>
+    </div>
+    <div class="bk-cta-text">
+      <h2 class="bk-cta-h2">Ride your<br><em>own lane.</em></h2>
+      <p>BTKA. Punk Rocks. Sleazy Rider. No apologies, no compromises — just heavy cotton and bold prints.</p>
+      <a class="bk-cta-primary" href="#bk-shop">Shop All BTKA &#8594;</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     STYLES
+     ============================================================ -->
+<style>
+/* ---- TOKENS ---- */
+:root {
+  --bk-dark: #0a0a0a;
+  --bk-darker: #050505;
+  --bk-red: #e8001a;
+  --bk-red-dim: rgba(232,0,26,.15);
+  --bk-red-glow: rgba(232,0,26,.25);
+  --bk-white: #f0f0f0;
+  --bk-grey: rgba(240,240,240,.45);
+  --bk-border: rgba(240,240,240,.08);
+}
+
+/* ---- HERO ---- */
+.bk-hero {
+  position: relative;
+  min-height: 100vh;
+  background: var(--bk-dark);
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  padding: 120px 60px 80px;
+}
+@media (max-width: 768px) { .bk-hero { padding: 100px 24px 60px; } }
+
+/* Static noise overlay */
+.bk-static {
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+  opacity: 0.06;
+  pointer-events: none;
+  animation: bk-static-shift 0.15s steps(1) infinite;
+}
+@keyframes bk-static-shift {
+  0% { transform: translate(0, 0); }
+  25% { transform: translate(-2px, 1px); }
+  50% { transform: translate(1px, -2px); }
+  75% { transform: translate(-1px, 2px); }
+  100% { transform: translate(2px, -1px); }
+}
+
+/* Diagonal slashes */
+.bk-slash {
+  position: absolute;
+  width: 3px;
+  height: 120%;
+  background: linear-gradient(to bottom, transparent, var(--bk-red), transparent);
+  opacity: 0.12;
+  pointer-events: none;
+}
+.bk-slash1 { right: 35%; top: -10%; transform: rotate(15deg); }
+.bk-slash2 { right: 28%; top: -10%; transform: rotate(15deg); opacity: 0.06; }
+
+/* Sparks */
+.bk-sparks { position: absolute; inset: 0; pointer-events: none; }
+.bk-spark {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: var(--bk-red);
+  border-radius: 50%;
+  opacity: 0;
+  animation: bk-spark-anim 3s ease-in-out infinite;
+}
+.bk-s1 { left: 12%; top: 25%; animation-delay: 0s; }
+.bk-s2 { left: 25%; top: 65%; animation-delay: 0.7s; width: 3px; height: 3px; }
+.bk-s3 { left: 55%; top: 18%; animation-delay: 1.4s; }
+.bk-s4 { left: 70%; top: 75%; animation-delay: 0.3s; width: 4px; height: 4px; }
+.bk-s5 { left: 40%; top: 50%; animation-delay: 2.1s; }
+.bk-s6 { left: 80%; top: 35%; animation-delay: 1.8s; width: 3px; height: 3px; }
+@keyframes bk-spark-anim {
+  0%, 100% { opacity: 0; transform: scale(1) translateY(0); }
+  30% { opacity: 1; }
+  60% { opacity: 0.8; transform: scale(2) translateY(-20px); }
+  80% { opacity: 0; transform: scale(0.5) translateY(-40px); }
+}
+
+/* Hero content */
+.bk-hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 720px;
+}
+.bk-hero-tag {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--bk-grey);
+  margin-bottom: 36px;
+}
+.bk-tag-num {
+  font-family: var(--display);
+  font-size: 18px;
+  font-weight: 900;
+  color: var(--bk-red);
+  line-height: 1;
+}
+.bk-tag-sep { color: rgba(240,240,240,.2); }
+
+.bk-hero-h1 {
+  font-family: var(--display);
+  font-size: clamp(72px, 13vw, 180px);
+  font-weight: 900;
+  line-height: .85;
+  letter-spacing: -.05em;
+  text-transform: uppercase;
+  margin: 0 0 24px;
+  display: flex;
+  flex-direction: column;
+}
+.bk-h1-line { display: block; }
+.bk-h1-outline {
+  color: transparent;
+  -webkit-text-stroke: 2px var(--bk-white);
+}
+.bk-h1-solid { color: var(--bk-white); }
+.bk-h1-red {
+  -webkit-text-stroke-color: var(--bk-red);
+  animation: bk-glitch-color 4s steps(1) infinite;
+}
+@keyframes bk-glitch-color {
+  0%, 90%, 100% { -webkit-text-stroke-color: var(--bk-red); }
+  92% { -webkit-text-stroke-color: var(--bk-white); }
+  94% { -webkit-text-stroke-color: var(--bk-red); }
+  96% { -webkit-text-stroke-color: transparent; }
+  98% { -webkit-text-stroke-color: var(--bk-red); }
+}
+
+.bk-brand-name-wrap {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+  margin-bottom: 24px;
+}
+.bk-brand-name {
+  font-family: var(--mono);
+  font-size: 13px;
+  letter-spacing: .4em;
+  text-transform: uppercase;
+  color: var(--bk-red);
+  font-weight: 700;
+}
+.bk-brand-tm {
+  font-size: 10px;
+  color: rgba(232,0,26,.5);
+}
+
+.bk-hero-sub {
+  font-size: 17px;
+  line-height: 1.65;
+  color: rgba(240,240,240,.75);
+  margin: 0 0 40px;
+  max-width: 420px;
+}
+
+.bk-hero-cta-row {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+.bk-cta-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--bk-red);
+  color: var(--bk-white);
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 16px 28px;
+  font-weight: 700;
+  transition: background .2s, transform .2s, box-shadow .2s;
+  position: relative;
+  overflow: hidden;
+}
+.bk-cta-primary::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(255,255,255,.1);
+  transform: translateX(-100%);
+  transition: transform .3s;
+}
+.bk-cta-primary:hover::before { transform: translateX(0); }
+.bk-cta-primary:hover {
+  background: #ff0020;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px var(--bk-red-glow);
+}
+
+.bk-hero-stats {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.bk-stat { display: flex; flex-direction: column; gap: 2px; }
+.bk-stat-n {
+  font-family: var(--display);
+  font-size: 26px;
+  font-weight: 900;
+  color: var(--bk-white);
+  line-height: 1;
+}
+.bk-stat-l {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: rgba(240,240,240,.3);
+}
+.bk-stat-div {
+  width: 1px;
+  height: 32px;
+  background: var(--bk-border);
+}
+
+/* Glitch text element */
+.bk-glitch-wrap {
+  position: absolute;
+  right: -40px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  z-index: 1;
+}
+.bk-glitch-text {
+  font-family: var(--display);
+  font-size: clamp(120px, 18vw, 280px);
+  font-weight: 900;
+  letter-spacing: -.06em;
+  text-transform: uppercase;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(232,0,26,.12);
+  position: relative;
+  animation: bk-glitch-main 5s steps(1) infinite;
+  user-select: none;
+}
+.bk-glitch-text::before,
+.bk-glitch-text::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0; left: 0;
+  color: transparent;
+  -webkit-text-stroke: 1px var(--bk-red);
+  opacity: 0;
+}
+.bk-glitch-text::before {
+  animation: bk-glitch-before 5s steps(1) infinite;
+  clip-path: polygon(0 20%, 100% 20%, 100% 40%, 0 40%);
+}
+.bk-glitch-text::after {
+  animation: bk-glitch-after 5s steps(1) infinite;
+  clip-path: polygon(0 60%, 100% 60%, 100% 80%, 0 80%);
+}
+@keyframes bk-glitch-main {
+  0%, 85%, 100% { transform: translate(0); }
+  87% { transform: translate(-3px, 1px); }
+  89% { transform: translate(3px, -1px); }
+  91% { transform: translate(0); }
+}
+@keyframes bk-glitch-before {
+  0%, 85%, 100% { opacity: 0; transform: translate(0); }
+  87% { opacity: 0.8; transform: translate(-6px, 0); }
+  89% { opacity: 0; }
+}
+@keyframes bk-glitch-after {
+  0%, 85%, 100% { opacity: 0; transform: translate(0); }
+  88% { opacity: 0.6; transform: translate(6px, 0); }
+  90% { opacity: 0; }
+}
+@media (max-width: 1024px) { .bk-glitch-wrap { display: none; } }
+
+/* Scroll hint */
+.bk-scroll-hint {
+  position: absolute;
+  bottom: 36px;
+  left: 60px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: rgba(240,240,240,.2);
+}
+.bk-scroll-track {
+  width: 40px;
+  height: 1px;
+  background: rgba(240,240,240,.1);
+  position: relative;
+  overflow: hidden;
+}
+.bk-scroll-thumb {
+  position: absolute;
+  top: 0; left: -100%;
+  width: 100%; height: 100%;
+  background: var(--bk-red);
+  animation: bk-scroll-anim 2s ease infinite;
+}
+@keyframes bk-scroll-anim {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+
+/* ---- TICKER ---- */
+.bk-ticker {
+  background: var(--bk-red);
+  padding: 18px 0;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.bk-ticker-inner {
+  display: inline-flex;
+  gap: 24px;
+  animation: bk-tick 20s linear infinite;
+  font-family: var(--display);
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--bk-white);
+}
+.bk-td { opacity: .4; }
+.bk-tw-red { color: var(--bk-dark); }
+@keyframes bk-tick {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ---- STORY ---- */
+.bk-story {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  min-height: 580px;
+  background: var(--bk-darker);
+}
+@media (max-width: 768px) { .bk-story { grid-template-columns: 1fr; } }
+
+.bk-story-lhs {
+  background: #0f0f0f;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 40px;
+  position: relative;
+  border-right: 1px solid var(--bk-red-dim);
+  overflow: hidden;
+}
+.bk-story-badge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  position: relative;
+  z-index: 1;
+}
+.bk-badge-inner {
+  display: flex;
+  gap: 0;
+  line-height: 1;
+}
+.bk-badge-big {
+  font-family: var(--display);
+  font-size: clamp(60px, 9vw, 110px);
+  font-weight: 900;
+  letter-spacing: -.04em;
+  color: var(--bk-white);
+}
+.bk-badge-red { color: var(--bk-red); }
+.bk-badge-sub {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: .3em;
+  text-transform: uppercase;
+  color: rgba(232,0,26,.5);
+}
+.bk-badge-lines {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  padding: 0 20px;
+  opacity: .04;
+}
+.bk-bl { height: 1px; background: var(--bk-red); }
+
+.bk-story-rhs {
+  padding: 80px 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 24px;
+}
+@media (max-width: 768px) { .bk-story-rhs { padding: 48px 24px; } }
+
+.bk-story-eyebrow {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: .25em;
+  text-transform: uppercase;
+  color: var(--bk-red);
+}
+.bk-story-h2 {
+  font-family: var(--display);
+  font-size: clamp(36px, 5vw, 64px);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: -.03em;
+  line-height: 1;
+  color: var(--bk-white);
+  margin: 0;
+}
+.bk-story-h2 em {
+  font-style: normal;
+  color: var(--bk-red);
+}
+.bk-story-p {
+  font-size: 16px;
+  line-height: 1.75;
+  color: rgba(240,240,240,.5);
+  margin: 0;
+  max-width: 520px;
+}
+.bk-story-tags {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.bk-stag {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  padding: 6px 14px;
+  border: 1px solid var(--bk-red-dim);
+  color: rgba(232,0,26,.7);
+}
+
+/* ---- SHOP ---- */
+.bk-shop { background: var(--paper); }
+.bk-shop-head {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: start;
+  margin-bottom: 48px;
+}
+@media (max-width: 768px) { .bk-shop-head { grid-template-columns: 1fr; } }
+
+.bk-shop-h2 {
+  font-family: var(--display);
+  font-size: clamp(40px, 6vw, 72px);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: -.03em;
+  line-height: 1;
+  margin: 8px 0 0;
+}
+.bk-no-img {
+  width: 100%; height: 340px;
+  background: #111;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--display);
+  font-size: 32px;
+  font-weight: 900;
+  letter-spacing: .1em;
+  color: var(--bk-red);
+  -webkit-text-stroke: 1px var(--bk-red);
+  color: transparent;
+}
+.bk-sale-badge {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: .15em;
+  background: var(--bk-red);
+  color: var(--bk-white);
+  padding: 3px 8px;
+  font-weight: 700;
+}
+
+/* Card hover — red glow */
+.bk-card {
+  transition: transform .3s, box-shadow .3s;
+}
+.bk-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 48px rgba(232,0,26,.15);
+}
+
+/* ---- CLOSING CTA ---- */
+.bk-cta-section {
+  background: var(--bk-dark);
+  padding: 100px 60px;
+  overflow: hidden;
+  position: relative;
+}
+@media (max-width: 768px) { .bk-cta-section { padding: 60px 24px; } }
+
+.bk-cta-static {
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+  opacity: 0.04;
+  pointer-events: none;
+}
+
+.bk-cta-inner {
+  display: flex;
+  align-items: center;
+  gap: 80px;
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+@media (max-width: 768px) { .bk-cta-inner { flex-direction: column; gap: 40px; } }
+
+.bk-cta-symbol {
+  flex-shrink: 0;
+  width: 160px;
+  height: 160px;
+  border: 2px solid var(--bk-red-dim);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  animation: bk-cta-pulse 3s ease-in-out infinite;
+}
+.bk-cta-symbol::before {
+  content: '';
+  position: absolute;
+  inset: -8px;
+  border: 1px solid rgba(232,0,26,.08);
+}
+.bk-cta-x {
+  font-family: var(--display);
+  font-size: 72px;
+  font-weight: 900;
+  color: var(--bk-red);
+  line-height: 1;
+  animation: bk-x-glitch 4s steps(1) infinite;
+}
+@keyframes bk-cta-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 var(--bk-red-dim); }
+  50% { box-shadow: 0 0 0 12px transparent; }
+}
+@keyframes bk-x-glitch {
+  0%, 90%, 100% { transform: translate(0); color: var(--bk-red); }
+  92% { transform: translate(-3px, 1px); color: var(--bk-white); }
+  94% { transform: translate(3px, -1px); color: var(--bk-red); }
+  96% { transform: translate(0); }
+}
+
+.bk-cta-text { flex: 1; }
+.bk-cta-h2 {
+  font-family: var(--display);
+  font-size: clamp(32px, 5vw, 60px);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: -.03em;
+  line-height: 1;
+  color: var(--bk-white);
+  margin: 0 0 20px;
+}
+.bk-cta-h2 em {
+  font-style: normal;
+  color: var(--bk-red);
+}
+.bk-cta-text p {
+  font-size: 15px;
+  line-height: 1.65;
+  color: rgba(240,240,240,.45);
+  margin: 0 0 32px;
+}
+</style>
+
+<!-- ============================================================
+     SCRIPTS — Motion.dev animations
+     ============================================================ -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  if (window.Motion) {
+    var { animate, stagger, inView } = window.Motion;
+
+    // Hero entrance
+    animate('.bk-hero-tag', { opacity: [0, 1], x: [-20, 0] }, { duration: 0.6, delay: 0.2 });
+
+    animate('.bk-h1-line', { opacity: [0, 1], y: [100, 0], skewY: [6, 0] },
+      { delay: stagger(0.1, { start: 0.4 }), duration: 0.9, easing: [0.22, 1, 0.36, 1] });
+
+    animate('.bk-brand-name-wrap', { opacity: [0, 1], x: [-20, 0] }, { duration: 0.6, delay: 0.8 });
+    animate('.bk-hero-sub', { opacity: [0, 1], y: [20, 0] }, { duration: 0.6, delay: 1.0 });
+    animate('.bk-hero-cta-row', { opacity: [0, 1], y: [20, 0] }, { duration: 0.6, delay: 1.2 });
+
+    // Glitch text entrance
+    animate('.bk-glitch-text', { opacity: [0, 1], x: [60, 0] },
+      { duration: 1.2, delay: 0.6, easing: [0.22, 1, 0.36, 1] });
+
+    // Sparks
+    document.querySelectorAll('.bk-spark').forEach(function(s, i) {
+      animate(s, { opacity: [0, 1, 0], y: [0, -50, -80], scale: [1, 2, 0] },
+        { duration: 2 + i * 0.5, delay: i * 0.4, repeat: Infinity, easing: 'ease-out' });
+    });
+
+    // Story section
+    inView('.bk-story-badge', function(el) {
+      animate(el, { opacity: [0, 1], scale: [0.8, 1] },
+        { duration: 0.8, easing: [0.22, 1, 0.36, 1] });
+    }, { margin: '-10% 0px' });
+
+    inView('.bk-story-rhs', function(el) {
+      animate(el.querySelectorAll('.bk-story-eyebrow, .bk-story-h2, .bk-story-p, .bk-story-tags'),
+        { opacity: [0, 1], x: [40, 0] },
+        { delay: stagger(0.1), duration: 0.7, easing: [0.22, 1, 0.36, 1] });
+    }, { margin: '-10% 0px' });
+
+    // Product cards
+    inView('.bk-card', function(el) {
+      animate(el, { opacity: [0, 1], y: [40, 0] },
+        { duration: 0.6, easing: [0.22, 1, 0.36, 1] });
+    }, { margin: '-5% 0px' });
+
+    // CTA
+    inView('.bk-cta-symbol', function(el) {
+      animate(el, { opacity: [0, 1], scale: [0.6, 1], rotate: [-10, 0] },
+        { duration: 0.9, easing: [0.22, 1, 0.36, 1] });
+    }, { margin: '-10% 0px' });
+
+    inView('.bk-cta-h2', function(el) {
+      animate(el, { opacity: [0, 1], y: [40, 0] },
+        { duration: 0.8, easing: [0.22, 1, 0.36, 1] });
+    }, { margin: '-10% 0px' });
+  }
+});
+</script>
+
+{% schema %}
+{
+  "name": "Brand: BTKA",
+  "settings": [
+    { "type": "textarea", "id": "story_text", "label": "Brand story text", "default": "BTKA doesn't do safe. Every graphic is a statement — raw, unapologetic, and built for the ones who live outside the lines. Sushi Rising. Shotgun bets. Punk energy printed on heavyweight cotton. This is streetwear with a middle finger raised. Wear it loud." }
+  ],
+  "presets": [
+    { "name": "Brand: BTKA" }
+  ]
+}
+{% endschema %}

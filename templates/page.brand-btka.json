@@ -1,0 +1,11 @@
+{
+    "sections": {
+        "brand-btka": {
+            "type": "brand-btka",
+            "settings": {}
+        }
+    },
+    "order": [
+        "brand-btka"
+    ]
+}

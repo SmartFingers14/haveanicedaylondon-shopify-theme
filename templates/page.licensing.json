@@ -1,0 +1,11 @@
+{
+    "sections": {
+        "page-licensing": {
+            "type": "page-licensing",
+            "settings": {}
+        }
+    },
+    "order": [
+        "page-licensing"
+    ]
+}

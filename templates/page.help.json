@@ -1,0 +1,11 @@
+{
+    "sections": {
+        "page-help": {
+            "type": "page-help",
+            "settings": {}
+        }
+    },
+    "order": [
+        "page-help"
+    ]
+}

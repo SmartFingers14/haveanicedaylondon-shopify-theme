@@ -688,11 +688,14 @@
 }
 
 .hand-card .name {
-    font-weight: 600;
-    font-size: 14px;
-    line-height: 1.35;
+    font-family: var(--display);
+    font-size: 18px;
+    font-weight: 400;
+    text-transform: uppercase;
+    line-height: 1.1;
+    letter-spacing: -.01em;
     color: var(--ink);
-    min-height: 2.7em;
+    min-height: 2.2em;
 }
 
 .hand-card .row2 {

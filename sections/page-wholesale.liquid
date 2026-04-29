@@ -1,0 +1,245 @@
+{% comment %}Wholesale Page{% endcomment %}
+<style>
+.hand-ws-hero {
+  background: var(--ink, #1a1a1a);
+  color: #fff;
+  padding: 80px 32px 60px;
+  text-align: center;
+}
+.hand-ws-eyebrow {
+  font-family: var(--mono, monospace);
+  font-size: 10px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: #e91e8c;
+  margin-bottom: 16px;
+}
+.hand-ws-hero h1 {
+  font-family: 'Anton', Impact, sans-serif;
+  font-size: clamp(48px, 8vw, 112px);
+  text-transform: uppercase;
+  letter-spacing: -.02em;
+  line-height: .9;
+  margin: 0 0 20px;
+}
+.hand-ws-hero p {
+  font-family: var(--mono, monospace);
+  font-size: 13px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.5);
+  margin: 0;
+}
+.hand-ws-body {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 72px 32px 80px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: start;
+}
+@media (max-width: 768px) { .hand-ws-body { grid-template-columns: 1fr; gap: 48px; padding: 48px 24px; } }
+
+.hand-ws-info-eyebrow {
+  font-family: var(--mono, monospace);
+  font-size: 9px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: #e91e8c;
+  margin-bottom: 12px;
+}
+.hand-ws-info h2 {
+  font-family: 'Anton', Impact, sans-serif;
+  font-size: clamp(32px, 4vw, 52px);
+  text-transform: uppercase;
+  letter-spacing: -.02em;
+  line-height: 1;
+  margin: 0 0 24px;
+}
+.hand-ws-info p {
+  font-family: var(--body, sans-serif);
+  font-size: 15px;
+  line-height: 1.75;
+  color: #555;
+  margin: 0 0 20px;
+}
+.hand-ws-perks {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 32px;
+}
+.hand-ws-perk {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 20px;
+  border: 1px solid rgba(0,0,0,.08);
+  background: #fff;
+}
+.hand-ws-perk-icon {
+  width: 40px;
+  height: 40px;
+  background: #e91e8c;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 18px;
+}
+.hand-ws-perk-text h3 {
+  font-family: 'Anton', Impact, sans-serif;
+  font-size: 16px;
+  text-transform: uppercase;
+  margin: 0 0 4px;
+}
+.hand-ws-perk-text p {
+  font-family: var(--mono, monospace);
+  font-size: 10px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: #888;
+  margin: 0;
+}
+
+.hand-ws-form-wrap {
+  background: #fff;
+  padding: 40px;
+  border: 1px solid rgba(0,0,0,.08);
+}
+.hand-ws-form-wrap h3 {
+  font-family: 'Anton', Impact, sans-serif;
+  font-size: 28px;
+  text-transform: uppercase;
+  margin: 0 0 28px;
+}
+.hand-ws-field {
+  margin-bottom: 20px;
+}
+.hand-ws-field label {
+  display: block;
+  font-family: var(--mono, monospace);
+  font-size: 9px;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: #888;
+  margin-bottom: 8px;
+}
+.hand-ws-field input,
+.hand-ws-field textarea,
+.hand-ws-field select {
+  width: 100%;
+  padding: 14px 16px;
+  border: 1px solid rgba(0,0,0,.15);
+  background: #f9f9f7;
+  font-family: var(--body, sans-serif);
+  font-size: 14px;
+  color: var(--ink, #1a1a1a);
+  outline: none;
+  transition: border-color .2s;
+  box-sizing: border-box;
+}
+.hand-ws-field input:focus,
+.hand-ws-field textarea:focus { border-color: #e91e8c; }
+.hand-ws-field textarea { height: 120px; resize: vertical; }
+.hand-ws-submit {
+  width: 100%;
+  padding: 18px;
+  background: var(--ink, #1a1a1a);
+  color: #fff;
+  font-family: var(--mono, monospace);
+  font-size: 11px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  transition: background .2s;
+}
+.hand-ws-submit:hover { background: #e91e8c; }
+</style>
+
+<!-- HERO -->
+<div class="hand-ws-hero">
+  <div class="hand-ws-eyebrow">Trade / Wholesale</div>
+  <h1>Stock<br>HAND.</h1>
+  <p>Wholesale enquiries for retailers &amp; stockists</p>
+</div>
+
+<!-- BODY -->
+<div class="hand-ws-body">
+
+  <!-- Left: Info -->
+  <div class="hand-ws-info">
+    <div class="hand-ws-info-eyebrow">Why Stock Us</div>
+    <h2>Camden's Most<br>Recognisable<br>Streetwear.</h2>
+    <p>Have A Nice Day has been a Camden institution since 1990. Our cult characters — Sam The Man, Shurl The Girl, Dready, BTKA and more — have a loyal following built over 30+ years.</p>
+    <p>We work with independent retailers, boutiques, record shops and lifestyle stores across the UK and internationally. Minimum order quantities are flexible for new accounts.</p>
+
+    <div class="hand-ws-perks">
+      <div class="hand-ws-perk">
+        <div class="hand-ws-perk-icon">📦</div>
+        <div class="hand-ws-perk-text">
+          <h3>Low MOQ</h3>
+          <p>Flexible minimum orders for new stockists</p>
+        </div>
+      </div>
+      <div class="hand-ws-perk">
+        <div class="hand-ws-perk-icon">🎨</div>
+        <div class="hand-ws-perk-text">
+          <h3>Exclusive Designs</h3>
+          <p>Wholesale-only colourways available</p>
+        </div>
+      </div>
+      <div class="hand-ws-perk">
+        <div class="hand-ws-perk-icon">🚚</div>
+        <div class="hand-ws-perk-text">
+          <h3>Fast Turnaround</h3>
+          <p>UK dispatch within 5–7 working days</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Right: Form -->
+  <div class="hand-ws-form-wrap">
+    <h3>Get In Touch</h3>
+    {%- form 'contact', id: 'wholesaleForm' -%}
+      <div class="hand-ws-field">
+        <label>Your Name *</label>
+        <input type="text" name="contact[name]" required placeholder="Full name">
+      </div>
+      <div class="hand-ws-field">
+        <label>Business Name *</label>
+        <input type="text" name="contact[body][business]" required placeholder="Store / company name">
+      </div>
+      <div class="hand-ws-field">
+        <label>Email Address *</label>
+        <input type="email" name="contact[email]" required placeholder="your@email.com">
+      </div>
+      <div class="hand-ws-field">
+        <label>Phone</label>
+        <input type="tel" name="contact[body][phone]" placeholder="+44 ...">
+      </div>
+      <div class="hand-ws-field">
+        <label>Website / Social</label>
+        <input type="text" name="contact[body][website]" placeholder="yourstore.com or @handle">
+      </div>
+      <div class="hand-ws-field">
+        <label>Message</label>
+        <textarea name="contact[body][message]" placeholder="Tell us about your store and what you're looking for..."></textarea>
+      </div>
+      <button type="submit" class="hand-ws-submit">Send Enquiry &rarr;</button>
+    {%- endform -%}
+  </div>
+
+</div>
+
+{% schema %}
+{
+  "name": "Wholesale",
+  "settings": [],
+  "presets": [{ "name": "Wholesale" }]
+}
+{% endschema %}

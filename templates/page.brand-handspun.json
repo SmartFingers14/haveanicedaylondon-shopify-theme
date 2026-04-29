@@ -1,0 +1,14 @@
+{
+    "sections": {
+        "brand-handspun": {
+            "type": "brand-handspun",
+            "settings": {
+                "tagline": "Where the needle drops and the culture lives. Handspun Records — the sound of Camden on cotton and wax since 1990.",
+                "story_text": "Handspun Records was born from the same Camden market stall — but this one was always about the music. Slip mats, record bags, tees and hoodies that carry the culture of vinyl. Every piece is a love letter to the underground: the DJs, the crates, the late nights and the wax that holds it all together."
+            }
+        }
+    },
+    "order": [
+        "brand-handspun"
+    ]
+}
