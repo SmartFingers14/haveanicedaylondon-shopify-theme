@@ -1,35 +1,413 @@
-<section style="padding:80px 24px;min-height:60vh">
-  <div class="container">
-    <div class="section-head">
-      <div>
-        <span class="eyebrow">Search</span>
-        <h2 class="h2 reveal">Results for <em>{{ search.terms }}</em></h2>
-      </div>
-      <p class="reveal">{{ search.results_count }} result{% if search.results_count != 1 %}s{% endif %}</p>
-    </div>
+{% comment %} HAVE A NICE DAY — Search Results Page {% endcomment %}
 
-    <form action="{{ routes.search_url }}" method="get" style="margin-bottom:30px">
-      <input type="search" name="q" value="{{ search.terms | escape }}" placeholder="Search..." style="width:100%;padding:18px 24px;border:2px solid var(--ink);border-radius:99px;font-family:'Fjalla One',sans-serif;font-size:18px;letter-spacing:.04em">
-    </form>
+<style>
+  /* ===== SEARCH RESULTS PAGE ===== */
+  .hand-search-page {
+    background: #f4f1ea;
+    min-height: 70vh;
+  }
 
-    <div class="products">
-      {%- for item in search.results -%}
-        {%- if item.object_type == 'product' -%}
-          {% render 'product-card', product: item, index: forloop.index0 %}
-        {%- else -%}
-          <a href="{{ item.url }}" class="card bg-cream reveal" style="padding:22px;display:block">
-            <div class="card-cat">{{ item.object_type }}</div>
-            <div class="card-name" style="font-size:18px;margin-top:8px">{{ item.title }}</div>
-          </a>
-        {%- endif -%}
+  /* Header bar */
+  .hand-search-header {
+    background: var(--ink, #1a1a1a);
+    padding: 60px 40px 50px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+  .hand-search-header-inner {
+    max-width: 1300px;
+    margin: 0 auto;
+  }
+  .hand-search-eyebrow {
+    font-family: var(--mono, 'Courier New', monospace);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #e91e8c;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .hand-search-eyebrow::before {
+    content: '';
+    display: block;
+    width: 30px;
+    height: 1px;
+    background: #e91e8c;
+  }
+  .hand-search-title {
+    font-family: 'Anton', Impact, sans-serif;
+    font-size: clamp(36px, 6vw, 72px);
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    color: #fff;
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+  .hand-search-title em {
+    color: #e91e8c;
+    font-style: normal;
+  }
+  .hand-search-count {
+    font-family: var(--mono, 'Courier New', monospace);
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+    margin-top: 12px;
+  }
+
+  /* Search form on results page */
+  .hand-search-refine {
+    padding: 32px 40px;
+    background: #ede9e0;
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+  }
+  .hand-search-refine-inner {
+    max-width: 1300px;
+    margin: 0 auto;
+  }
+  .hand-search-refine-form {
+    display: flex;
+    align-items: center;
+    max-width: 600px;
+    border: 2px solid var(--ink, #1a1a1a);
+    background: #fff;
+  }
+  .hand-search-refine-input {
+    flex: 1;
+    border: none;
+    outline: none;
+    padding: 14px 20px;
+    font-family: var(--mono, 'Courier New', monospace);
+    font-size: 13px;
+    letter-spacing: 0.05em;
+    background: transparent;
+    color: var(--ink, #1a1a1a);
+  }
+  .hand-search-refine-input::placeholder {
+    color: #aaa;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-size: 11px;
+  }
+  .hand-search-refine-btn {
+    padding: 14px 20px;
+    background: var(--ink, #1a1a1a);
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    font-family: var(--mono, 'Courier New', monospace);
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    font-weight: 700;
+    transition: background 0.2s;
+    white-space: nowrap;
+  }
+  .hand-search-refine-btn:hover { background: #e91e8c; }
+
+  /* Results grid */
+  .hand-search-results {
+    padding: 60px 40px 100px;
+  }
+  .hand-search-results-inner {
+    max-width: 1300px;
+    margin: 0 auto;
+  }
+  .hand-search-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2px;
+  }
+  @media (max-width: 1100px) { .hand-search-grid { grid-template-columns: repeat(3, 1fr); } }
+  @media (max-width: 768px) { .hand-search-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 480px) { .hand-search-grid { grid-template-columns: repeat(2, 1fr); gap: 1px; } }
+
+  /* Product card */
+  .hand-search-card {
+    background: #fff;
+    text-decoration: none;
+    color: var(--ink, #1a1a1a);
+    display: block;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.2s;
+  }
+  .hand-search-card:hover { transform: translateY(-2px); }
+  .hand-search-card-img {
+    aspect-ratio: 3/4;
+    overflow: hidden;
+    background: #ede9e0;
+    position: relative;
+  }
+  .hand-search-card-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease;
+  }
+  .hand-search-card:hover .hand-search-card-img img {
+    transform: scale(1.05);
+  }
+  .hand-search-card-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #ede9e0;
+    font-size: 48px;
+  }
+  .hand-search-card-badge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background: var(--ink, #1a1a1a);
+    color: #fff;
+    font-family: var(--mono, 'Courier New', monospace);
+    font-size: 8px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 4px 8px;
+  }
+  .hand-search-card-overlay {
+    position: absolute;
+    inset: 0;
+    background: var(--ink, #1a1a1a);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.25s;
+  }
+  .hand-search-card:hover .hand-search-card-overlay { opacity: 0.88; }
+  .hand-search-card-overlay span {
+    font-family: var(--mono, 'Courier New', monospace);
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #fff;
+  }
+  .hand-search-card-info {
+    padding: 16px 16px 20px;
+    border-top: 1px solid rgba(0,0,0,0.06);
+  }
+  .hand-search-card-vendor {
+    font-family: var(--mono, 'Courier New', monospace);
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #e91e8c;
+    margin-bottom: 5px;
+  }
+  .hand-search-card-name {
+    font-family: 'Anton', Impact, sans-serif;
+    font-size: 15px;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    color: var(--ink, #1a1a1a);
+    line-height: 1.2;
+    margin-bottom: 8px;
+  }
+  .hand-search-card-price {
+    font-family: var(--mono, 'Courier New', monospace);
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--ink, #1a1a1a);
+  }
+
+  /* Non-product result (page/article) */
+  .hand-search-page-result {
+    background: #fff;
+    padding: 28px 24px;
+    text-decoration: none;
+    color: var(--ink, #1a1a1a);
+    display: block;
+    border-left: 3px solid #e91e8c;
+    transition: background 0.2s, padding-left 0.2s;
+  }
+  .hand-search-page-result:hover {
+    background: #ede9e0;
+    padding-left: 30px;
+  }
+  .hand-search-page-result-type {
+    font-family: var(--mono, 'Courier New', monospace);
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #e91e8c;
+    margin-bottom: 6px;
+  }
+  .hand-search-page-result-title {
+    font-family: 'Anton', Impact, sans-serif;
+    font-size: 18px;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    color: var(--ink, #1a1a1a);
+  }
+
+  /* No results */
+  .hand-search-empty {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 80px 40px;
+  }
+  .hand-search-empty-icon {
+    font-size: 64px;
+    margin-bottom: 24px;
+    display: block;
+  }
+  .hand-search-empty-title {
+    font-family: 'Anton', Impact, sans-serif;
+    font-size: 32px;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    color: var(--ink, #1a1a1a);
+    margin-bottom: 12px;
+  }
+  .hand-search-empty-sub {
+    font-family: var(--mono, 'Courier New', monospace);
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #888;
+    margin-bottom: 32px;
+  }
+  .hand-search-empty-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--ink, #1a1a1a);
+    color: #fff;
+    text-decoration: none;
+    font-family: var(--mono, 'Courier New', monospace);
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 16px 36px;
+    transition: background 0.2s;
+  }
+  .hand-search-empty-link:hover { background: #e91e8c; }
+
+  @media (max-width: 600px) {
+    .hand-search-header { padding: 40px 20px 36px; }
+    .hand-search-refine { padding: 20px; }
+    .hand-search-results { padding: 40px 20px 80px; }
+  }
+</style>
+
+<div class="hand-search-page">
+
+  <!-- Header -->
+  <div class="hand-search-header">
+    <div class="hand-search-header-inner">
+      <p class="hand-search-eyebrow">Search Results</p>
+      {%- if search.performed -%}
+        <h1 class="hand-search-title">
+          Results for <em>&ldquo;{{ search.terms | escape }}&rdquo;</em>
+        </h1>
+        <p class="hand-search-count">
+          {{ search.results_count }} result{% if search.results_count != 1 %}s{% endif %} found
+        </p>
       {%- else -%}
-        <div style="grid-column:1/-1;text-align:center;padding:60px">
-          <p>{{ 'general.search.no_results' | t: terms: search.terms }}</p>
-        </div>
-      {%- endfor -%}
+        <h1 class="hand-search-title">Search</h1>
+        <p class="hand-search-count">Enter a term to search our store</p>
+      {%- endif -%}
     </div>
   </div>
-</section>
+
+  <!-- Refine search bar -->
+  <div class="hand-search-refine">
+    <div class="hand-search-refine-inner">
+      <form class="hand-search-refine-form" action="{{ routes.search_url }}" method="get" role="search">
+        <input type="hidden" name="type" value="product">
+        <input
+          class="hand-search-refine-input"
+          type="search"
+          name="q"
+          value="{{ search.terms | escape }}"
+          placeholder="Search again..."
+          autocomplete="off"
+          aria-label="Search"
+        >
+        <button class="hand-search-refine-btn" type="submit">Search &rarr;</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Results -->
+  <div class="hand-search-results">
+    <div class="hand-search-results-inner">
+      {%- if search.performed -%}
+        {%- if search.results_count > 0 -%}
+          <div class="hand-search-grid">
+            {%- for item in search.results -%}
+              {%- if item.object_type == 'product' -%}
+                <a href="{{ item.url }}" class="hand-search-card">
+                  <div class="hand-search-card-img">
+                    {%- if item.featured_image -%}
+                      <img
+                        src="{{ item.featured_image | image_url: width: 600 }}"
+                        alt="{{ item.title | escape }}"
+                        loading="lazy"
+                        width="600"
+                        height="800"
+                      >
+                    {%- else -%}
+                      <div class="hand-search-card-placeholder">👕</div>
+                    {%- endif -%}
+                    <span class="hand-search-card-badge">{{ item.type | default: 'Product' }}</span>
+                    <div class="hand-search-card-overlay">
+                      <span>View Product &rarr;</span>
+                    </div>
+                  </div>
+                  <div class="hand-search-card-info">
+                    <p class="hand-search-card-vendor">{{ item.vendor }}</p>
+                    <p class="hand-search-card-name">{{ item.title }}</p>
+                    <p class="hand-search-card-price">
+                      {%- if item.compare_at_price > item.price -%}
+                        <s style="color:#aaa;font-weight:400">&pound;{{ item.compare_at_price | money_without_currency }}</s>&nbsp;
+                      {%- endif -%}
+                      &pound;{{ item.price | money_without_currency }}
+                    </p>
+                  </div>
+                </a>
+              {%- else -%}
+                <a href="{{ item.url }}" class="hand-search-page-result">
+                  <p class="hand-search-page-result-type">{{ item.object_type }}</p>
+                  <p class="hand-search-page-result-title">{{ item.title }}</p>
+                </a>
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
+        {%- else -%}
+          <div class="hand-search-empty">
+            <span class="hand-search-empty-icon">🔍</span>
+            <p class="hand-search-empty-title">No results found</p>
+            <p class="hand-search-empty-sub">
+              No products matched &ldquo;{{ search.terms | escape }}&rdquo; &mdash; try a different search
+            </p>
+            <a href="/collections/all" class="hand-search-empty-link">
+              Browse All Products &rarr;
+            </a>
+          </div>
+        {%- endif -%}
+      {%- else -%}
+        <div class="hand-search-empty">
+          <span class="hand-search-empty-icon">🔍</span>
+          <p class="hand-search-empty-title">What are you looking for?</p>
+          <p class="hand-search-empty-sub">Search for hoodies, tees, brands, and more</p>
+          <a href="/collections/all" class="hand-search-empty-link">
+            Browse All Products &rarr;
+          </a>
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+
+</div>
 
 {% schema %}
 { "name": "Search", "settings": [] }
