@@ -1,0 +1,957 @@
+{% comment %} HAVE A NICE DAY — Brands Directory Page {% endcomment %}
+
+<!-- Motion.dev CDN -->
+<script src="https://cdn.jsdelivr.net/npm/motion@11.11.13/dist/motion.js"></script>
+
+<style>
+  /* ===================================================
+     BRANDS PAGE — Premium Editorial Directory
+     All 7 brands with their own vibe, colour, story
+     =================================================== */
+
+  /* ===== HERO ===== */
+  .pb-hero {
+    background: var(--ink, #1a1a1a);
+    min-height: 520px;
+    display: flex;
+    align-items: flex-end;
+    padding: 120px 40px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .pb-hero-bg-text {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Anton', Impact, sans-serif;
+    font-size: clamp(120px, 20vw, 280px);
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.025);
+    letter-spacing: -0.02em;
+    pointer-events: none;
+    user-select: none;
+    white-space: nowrap;
+    z-index: 0;
+  }
+
+  .pb-hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 15% 70%, rgba(233,30,140,0.2) 0%, transparent 50%),
+                radial-gradient(ellipse at 85% 30%, rgba(233,30,140,0.08) 0%, transparent 40%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .pb-hero-inner {
+    max-width: 1300px;
+    margin: 0 auto;
+    width: 100%;
+    position: relative;
+    z-index: 1;
+  }
+
+  .pb-hero-eyebrow {
+    font-family: var(--mono, 'Courier New', monospace);
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: #e91e8c;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    opacity: 0;
+  }
+  .pb-hero-eyebrow::before {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 1px;
+    background: #e91e8c;
+  }
+
+  .pb-hero-title {
+    font-family: 'Anton', Impact, sans-serif;
+    font-size: clamp(60px, 10vw, 140px);
+    text-transform: uppercase;
+    line-height: 0.88;
+    letter-spacing: -0.01em;
+    color: #fff;
+    margin-bottom: 28px;
+    opacity: 0;
+  }
+
+  .pb-hero-sub {
+    font-size: 16px;
+    color: rgba(255,255,255,0.5);
+    max-width: 560px;
+    line-height: 1.7;
+    opacity: 0;
+  }
+
+  .pb-hero-count {
+    margin-top: 32px;
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    opacity: 0;
+  }
+
+  .pb-hero-count-item {
+    text-align: left;
+  }
+
+  .pb-hero-count-num {
+    font-family: 'Anton', Impact, sans-serif;
+    font-size: 40px;
+    color: #fff;
+    line-height: 1;
+  }
+
+  .pb-hero-count-label {
+    font-family: var(--mono, 'Courier New', monospace);
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.35);
+    margin-top: 3px;
+  }
+
+  .pb-hero-count-sep {
+    width: 1px;
+    height: 40px;
+    background: rgba(255,255,255,0.1);
+  }
+
+  /* ===== MARQUEE ===== */
+  .pb-marquee {
+    background: #e91e8c;
+    padding: 14px 0;
+    overflow: hidden;
+  }
+
+  .pb-marquee-track {
+    display: flex;
+    animation: pb-scroll 25s linear infinite;
+    white-space: nowrap;
+  }
+
+  @keyframes pb-scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  .pb-marquee-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 24px;
+    padding: 0 36px;
+    font-family: 'Anton', Impact, sans-serif;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: #fff;
+  }
+
+  .pb-marquee-star {
+    font-size: 10px;
+    opacity: 0.6;
+  }
+
+  /* ===== INTRO STRIP ===== */
+  .pb-intro {
+    background: #f4f1ea;
+    padding: 60px 40px;
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+  }
+
+  .pb-intro-inner {
+    max-width: 1300px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+  }
+
+  .pb-intro-title {
+    font-family: 'Anton', Impact, sans-serif;
+    font-size: clamp(32px, 4vw, 52px);
+    text-transform: uppercase;
+    line-height: 0.95;
+    color: var(--ink, #1a1a1a);
+    opacity: 0;
+  }
+
+  .pb-intro-title em {
+    color: #e91e8c;
+    font-style: normal;
+  }
+
+  .pb-intro-body {
+    font-size: 15px;
+    color: #555;
+    line-height: 1.75;
+    opacity: 0;
+  }
+
+  .pb-intro-body p + p { margin-top: 16px; }
+
+  /* ===== BRANDS GRID ===== */
+  .pb-brands {
+    padding: 80px 40px 120px;
+    max-width: 1300px;
+    margin: 0 auto;
+  }
+
+  .pb-brands-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    background: rgba(0,0,0,0.08);
+  }
+
+  /* Featured brand — spans full width */
+  .pb-brand-card.featured {
+    grid-column: 1 / -1;
+  }
+
+  .pb-brand-card {
+    position: relative;
+    overflow: hidden;
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    opacity: 0;
+    transform: translateY(30px);
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  /* Brand image area */
+  .pb-brand-img {
+    position: relative;
+    overflow: hidden;
+    background: #1a1a1a;
+  }
+
+  .pb-brand-card.featured .pb-brand-img {
+    height: 480px;
+  }
+
+  .pb-brand-card:not(.featured) .pb-brand-img {
+    height: 320px;
+  }
+
+  .pb-brand-img-bg {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .pb-brand-card:hover .pb-brand-img-bg {
+    transform: scale(1.06);
+  }
+
+  /* Colour overlays per brand */
+  .pb-brand-card[data-brand="have-a-nice-day"] .pb-brand-img-bg {
+    background-color: #1a1a1a;
+    background-image: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+  }
+  .pb-brand-card[data-brand="dready"] .pb-brand-img-bg {
+    background-color: #1a3a1a;
+    background-image: linear-gradient(135deg, #0d2b0d 0%, #1a4a1a 100%);
+  }
+  .pb-brand-card[data-brand="btka"] .pb-brand-img-bg {
+    background-color: #1a0a2e;
+    background-image: linear-gradient(135deg, #0d0520 0%, #2a1050 100%);
+  }
+  .pb-brand-card[data-brand="vortex"] .pb-brand-img-bg {
+    background-color: #0a1a2e;
+    background-image: linear-gradient(135deg, #050d1a 0%, #0f2a4a 100%);
+  }
+  .pb-brand-card[data-brand="funky-dog"] .pb-brand-img-bg {
+    background-color: #2e1a0a;
+    background-image: linear-gradient(135deg, #1a0d05 0%, #4a2a0f 100%);
+  }
+  .pb-brand-card[data-brand="handspun"] .pb-brand-img-bg {
+    background-color: #2e2a1a;
+    background-image: linear-gradient(135deg, #1a1805 0%, #3a3010 100%);
+  }
+  .pb-brand-card[data-brand="dodo"] .pb-brand-img-bg {
+    background-color: #1a2a2e;
+    background-image: linear-gradient(135deg, #0d1a1e 0%, #1a3a40 100%);
+  }
+
+  /* Brand pattern overlay */
+  .pb-brand-pattern {
+    position: absolute;
+    inset: 0;
+    opacity: 0.06;
+    background-image: repeating-linear-gradient(
+      45deg,
+      rgba(255,255,255,0.5) 0px,
+      rgba(255,255,255,0.5) 1px,
+      transparent 1px,
+      transparent 20px
+    );
+    pointer-events: none;
+  }
+
+  /* Brand number */
+  .pb-brand-num {
+    position: absolute;
+    top: 20px;
+    left: 24px;
+    font-family: var(--mono, 'Courier New', monospace);
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+    z-index: 2;
+  }
+
+  /* Brand name overlay on image */
+  .pb-brand-name-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 60px 32px 32px;
+    background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 100%);
+    z-index: 2;
+  }
+
+  .pb-brand-name-overlay h2 {
+    font-family: 'Anton', Impact, sans-serif;
+    font-size: clamp(32px, 5vw, 72px);
+    text-transform: uppercase;
+    color: #fff;
+    line-height: 0.9;
+    letter-spacing: -0.01em;
+    margin-bottom: 8px;
+  }
+
+  .pb-brand-card.featured .pb-brand-name-overlay h2 {
+    font-size: clamp(48px, 8vw, 110px);
+  }
+
+  .pb-brand-tagline {
+    font-family: var(--mono, 'Courier New', monospace);
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.55);
+  }
+
+  /* Hover reveal */
+  .pb-brand-hover {
+    position: absolute;
+    inset: 0;
+    background: rgba(233,30,140,0.9);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    opacity: 0;
+    transition: opacity 0.35s ease;
+    z-index: 4;
+  }
+
+  .pb-brand-card:hover .pb-brand-hover {
+    opacity: 1;
+  }
+
+  .pb-brand-hover-title {
+    font-family: 'Anton', Impact, sans-serif;
+    font-size: clamp(28px, 4vw, 56px);
+    text-transform: uppercase;
+    color: #fff;
+    letter-spacing: -0.01em;
+    text-align: center;
+    transform: translateY(20px);
+    transition: transform 0.35s ease;
+  }
+
+  .pb-brand-card:hover .pb-brand-hover-title {
+    transform: translateY(0);
+  }
+
+  .pb-brand-hover-cta {
+    font-family: var(--mono, 'Courier New', monospace);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.8);
+    border-bottom: 1px solid rgba(255,255,255,0.4);
+    padding-bottom: 3px;
+    transform: translateY(20px);
+    transition: transform 0.35s ease 0.05s, color 0.2s;
+  }
+
+  .pb-brand-card:hover .pb-brand-hover-cta {
+    transform: translateY(0);
+    color: #fff;
+  }
+
+  /* Brand info below image */
+  .pb-brand-info {
+    padding: 24px 28px 28px;
+    border-top: 1px solid rgba(0,0,0,0.06);
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 20px;
+  }
+
+  .pb-brand-info-left {}
+
+  .pb-brand-info-label {
+    font-family: var(--mono, 'Courier New', monospace);
+    font-size: 9px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #e91e8c;
+    margin-bottom: 6px;
+  }
+
+  .pb-brand-info-name {
+    font-family: 'Anton', Impact, sans-serif;
+    font-size: 22px;
+    text-transform: uppercase;
+    color: var(--ink, #1a1a1a);
+    letter-spacing: -0.01em;
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  .pb-brand-info-desc {
+    font-size: 13px;
+    color: #666;
+    line-height: 1.6;
+    max-width: 380px;
+  }
+
+  .pb-brand-info-right {
+    flex-shrink: 0;
+    text-align: right;
+  }
+
+  .pb-brand-info-count {
+    font-family: 'Anton', Impact, sans-serif;
+    font-size: 32px;
+    color: var(--ink, #1a1a1a);
+    line-height: 1;
+  }
+
+  .pb-brand-info-count-label {
+    font-family: var(--mono, 'Courier New', monospace);
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #aaa;
+    margin-top: 3px;
+  }
+
+  .pb-brand-info-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 16px;
+    font-family: var(--mono, 'Courier New', monospace);
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink, #1a1a1a);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(0,0,0,0.2);
+    padding-bottom: 2px;
+    transition: color 0.2s, border-color 0.2s;
+  }
+
+  .pb-brand-info-link:hover {
+    color: #e91e8c;
+    border-color: #e91e8c;
+  }
+
+  /* ===== MANIFESTO STRIP ===== */
+  .pb-manifesto {
+    background: var(--ink, #1a1a1a);
+    padding: 80px 40px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .pb-manifesto::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 50%, rgba(233,30,140,0.12) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  .pb-manifesto-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+
+  .pb-manifesto-eyebrow {
+    font-family: var(--mono, 'Courier New', monospace);
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: #e91e8c;
+    margin-bottom: 24px;
+    opacity: 0;
+  }
+
+  .pb-manifesto-quote {
+    font-family: 'Anton', Impact, sans-serif;
+    font-size: clamp(28px, 5vw, 60px);
+    text-transform: uppercase;
+    color: #fff;
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    margin-bottom: 32px;
+    opacity: 0;
+  }
+
+  .pb-manifesto-quote em {
+    color: #e91e8c;
+    font-style: normal;
+  }
+
+  .pb-manifesto-body {
+    font-size: 15px;
+    color: rgba(255,255,255,0.5);
+    line-height: 1.75;
+    max-width: 600px;
+    margin: 0 auto 40px;
+    opacity: 0;
+  }
+
+  .pb-manifesto-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: #e91e8c;
+    color: #fff;
+    text-decoration: none;
+    font-family: var(--mono, 'Courier New', monospace);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 18px 40px;
+    transition: background 0.2s;
+    opacity: 0;
+  }
+
+  .pb-manifesto-cta:hover { background: #fff; color: var(--ink, #1a1a1a); }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 1024px) {
+    .pb-brands-grid { grid-template-columns: repeat(2, 1fr); }
+    .pb-brand-card.featured { grid-column: 1 / -1; }
+  }
+
+  @media (max-width: 768px) {
+    .pb-hero { padding: 100px 24px 60px; min-height: auto; }
+    .pb-intro { padding: 40px 24px; }
+    .pb-intro-inner { grid-template-columns: 1fr; gap: 24px; }
+    .pb-brands { padding: 40px 20px 80px; }
+    .pb-brands-grid { grid-template-columns: 1fr; }
+    .pb-brand-card.featured { grid-column: 1; }
+    .pb-brand-card.featured .pb-brand-img { height: 360px; }
+    .pb-brand-card:not(.featured) .pb-brand-img { height: 260px; }
+    .pb-manifesto { padding: 60px 24px; }
+    .pb-brand-info { flex-direction: column; gap: 12px; }
+    .pb-brand-info-right { text-align: left; }
+  }
+</style>
+
+<!-- ===== HERO ===== -->
+<section class="pb-hero">
+  <div class="pb-hero-bg-text">Brands</div>
+  <div class="pb-hero-inner">
+    <p class="pb-hero-eyebrow" id="pbEyebrow">Our Brands</p>
+    <h1 class="pb-hero-title" id="pbTitle">The<br>Collective</h1>
+    <p class="pb-hero-sub" id="pbSub">Seven distinct brands. One shared soul. Born in Camden, printed in the UK, worn by those who refuse to blend in.</p>
+    <div class="pb-hero-count" id="pbCount">
+      <div class="pb-hero-count-item">
+        <div class="pb-hero-count-num">7</div>
+        <div class="pb-hero-count-label">Brands</div>
+      </div>
+      <div class="pb-hero-count-sep"></div>
+      <div class="pb-hero-count-item">
+        <div class="pb-hero-count-num">30+</div>
+        <div class="pb-hero-count-label">Years</div>
+      </div>
+      <div class="pb-hero-count-sep"></div>
+      <div class="pb-hero-count-item">
+        <div class="pb-hero-count-num">100%</div>
+        <div class="pb-hero-count-label">Organic</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== MARQUEE ===== -->
+<div class="pb-marquee">
+  <div class="pb-marquee-track">
+    {%- assign brands_list = "Have A Nice Day,Dready,BTKA,Vortex,Funky Dog,Handspun,Don't Do The Dodo,Have A Nice Day,Dready,BTKA,Vortex,Funky Dog,Handspun,Don't Do The Dodo" | split: "," -%}
+    {%- for b in brands_list -%}
+      <span class="pb-marquee-item">{{ b }}<span class="pb-marquee-star">★</span></span>
+    {%- endfor -%}
+  </div>
+</div>
+
+<!-- ===== INTRO ===== -->
+<div class="pb-intro">
+  <div class="pb-intro-inner">
+    <h2 class="pb-intro-title" data-reveal-left>
+      Underground<br>London<br><em>Since 1990</em>
+    </h2>
+    <div class="pb-intro-body" data-reveal-right>
+      <p>Have A Nice Day London is more than a store — it's a collective of independent artists, designers, and storytellers who found their home in Camden's underground scene.</p>
+      <p>Each brand in our family has its own identity, its own story, its own tribe. From the flagship Have A Nice Day to the psychedelic world of Dready, the cosmic energy of BTKA, and the raw street spirit of Vortex — every label is a universe unto itself.</p>
+      <p>All printed on organic cotton. All made with intention. All very much alive.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ===== BRANDS GRID ===== -->
+<div class="pb-brands">
+  <div class="pb-brands-grid">
+
+    <!-- 01 — HAVE A NICE DAY (Featured) -->
+    {%- assign hand_col = collections['have-a-nice-day'] -%}
+    <a href="/pages/brand-have-a-nice-day" class="pb-brand-card featured" data-brand="have-a-nice-day" data-card>
+      <div class="pb-brand-img">
+        <div class="pb-brand-img-bg"></div>
+        <div class="pb-brand-pattern"></div>
+        <span class="pb-brand-num">01 / Flagship</span>
+        {%- if hand_col.image -%}
+          <img src="{{ hand_col.image | image_url: width: 1400 }}" alt="Have A Nice Day" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.5">
+        {%- endif -%}
+        <div class="pb-brand-name-overlay">
+          <h2>Have A<br>Nice Day<sup style="font-size:0.35em;vertical-align:super">®</sup></h2>
+          <p class="pb-brand-tagline">Est. 1990 · Camden, London · The Original</p>
+        </div>
+        <div class="pb-brand-hover">
+          <div class="pb-brand-hover-title">Have A Nice Day</div>
+          <div class="pb-brand-hover-cta">Explore Brand →</div>
+        </div>
+      </div>
+      <div class="pb-brand-info">
+        <div class="pb-brand-info-left">
+          <div class="pb-brand-info-label">01 — Flagship Brand</div>
+          <div class="pb-brand-info-name">Have A Nice Day</div>
+          <p class="pb-brand-info-desc">The original. The one that started it all. 30+ years of underground London culture on cotton — Sam the Man, Shurl the Girl, and the iconic smiley that defined a generation.</p>
+          <a href="/pages/brand-have-a-nice-day" class="pb-brand-info-link">Explore Brand →</a>
+        </div>
+        <div class="pb-brand-info-right">
+          <div class="pb-brand-info-count">{{ hand_col.products_count | default: '—' }}</div>
+          <div class="pb-brand-info-count-label">Products</div>
+        </div>
+      </div>
+    </a>
+
+    <!-- 02 — DREADY -->
+    {%- assign dready_col = collections['dready'] -%}
+    <a href="/pages/brand-dready" class="pb-brand-card" data-brand="dready" data-card>
+      <div class="pb-brand-img">
+        <div class="pb-brand-img-bg"></div>
+        <div class="pb-brand-pattern"></div>
+        <span class="pb-brand-num">02</span>
+        {%- if dready_col.image -%}
+          <img src="{{ dready_col.image | image_url: width: 800 }}" alt="Dready" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.45">
+        {%- endif -%}
+        <div class="pb-brand-name-overlay">
+          <h2>Dready</h2>
+          <p class="pb-brand-tagline">Psychedelic · Reggae · Roots</p>
+        </div>
+        <div class="pb-brand-hover">
+          <div class="pb-brand-hover-title">Dready</div>
+          <div class="pb-brand-hover-cta">Explore Brand →</div>
+        </div>
+      </div>
+      <div class="pb-brand-info">
+        <div class="pb-brand-info-left">
+          <div class="pb-brand-info-label">02 — Psychedelic Roots</div>
+          <div class="pb-brand-info-name">Dready</div>
+          <p class="pb-brand-info-desc">Vibrant, psychedelic artwork rooted in reggae culture and Rastafarian spirituality. Bold colours, bold statements.</p>
+          <a href="/pages/brand-dready" class="pb-brand-info-link">Explore Brand →</a>
+        </div>
+        <div class="pb-brand-info-right">
+          <div class="pb-brand-info-count">{{ dready_col.products_count | default: '—' }}</div>
+          <div class="pb-brand-info-count-label">Products</div>
+        </div>
+      </div>
+    </a>
+
+    <!-- 03 — BTKA -->
+    {%- assign btka_col = collections['btka'] -%}
+    <a href="/pages/brand-btka" class="pb-brand-card" data-brand="btka" data-card>
+      <div class="pb-brand-img">
+        <div class="pb-brand-img-bg"></div>
+        <div class="pb-brand-pattern"></div>
+        <span class="pb-brand-num">03</span>
+        {%- if btka_col.image -%}
+          <img src="{{ btka_col.image | image_url: width: 800 }}" alt="BTKA" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.45">
+        {%- endif -%}
+        <div class="pb-brand-name-overlay">
+          <h2>BTKA</h2>
+          <p class="pb-brand-tagline">Cosmic · Spiritual · Electric</p>
+        </div>
+        <div class="pb-brand-hover">
+          <div class="pb-brand-hover-title">BTKA</div>
+          <div class="pb-brand-hover-cta">Explore Brand →</div>
+        </div>
+      </div>
+      <div class="pb-brand-info">
+        <div class="pb-brand-info-left">
+          <div class="pb-brand-info-label">03 — Cosmic Energy</div>
+          <div class="pb-brand-info-name">BTKA</div>
+          <p class="pb-brand-info-desc">Born To Keep Alive. Cosmic, spiritual artwork that channels the universe's energy into wearable art. Deep purple nights and electric visions.</p>
+          <a href="/pages/brand-btka" class="pb-brand-info-link">Explore Brand →</a>
+        </div>
+        <div class="pb-brand-info-right">
+          <div class="pb-brand-info-count">{{ btka_col.products_count | default: '—' }}</div>
+          <div class="pb-brand-info-count-label">Products</div>
+        </div>
+      </div>
+    </a>
+
+    <!-- 04 — VORTEX -->
+    {%- assign vortex_col = collections['vortex'] -%}
+    <a href="/pages/brand-vortex" class="pb-brand-card" data-brand="vortex" data-card>
+      <div class="pb-brand-img">
+        <div class="pb-brand-img-bg"></div>
+        <div class="pb-brand-pattern"></div>
+        <span class="pb-brand-num">04</span>
+        {%- if vortex_col.image -%}
+          <img src="{{ vortex_col.image | image_url: width: 800 }}" alt="Vortex" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.45">
+        {%- endif -%}
+        <div class="pb-brand-name-overlay">
+          <h2>Vortex</h2>
+          <p class="pb-brand-tagline">Raw · Street · Underground</p>
+        </div>
+        <div class="pb-brand-hover">
+          <div class="pb-brand-hover-title">Vortex</div>
+          <div class="pb-brand-hover-cta">Explore Brand →</div>
+        </div>
+      </div>
+      <div class="pb-brand-info">
+        <div class="pb-brand-info-left">
+          <div class="pb-brand-info-label">04 — Street Underground</div>
+          <div class="pb-brand-info-name">Vortex</div>
+          <p class="pb-brand-info-desc">Raw street energy meets underground culture. Vortex pulls you in with its dark, hypnotic aesthetic and uncompromising attitude.</p>
+          <a href="/pages/brand-vortex" class="pb-brand-info-link">Explore Brand →</a>
+        </div>
+        <div class="pb-brand-info-right">
+          <div class="pb-brand-info-count">{{ vortex_col.products_count | default: '—' }}</div>
+          <div class="pb-brand-info-count-label">Products</div>
+        </div>
+      </div>
+    </a>
+
+    <!-- 05 — FUNKY DOG -->
+    {%- assign funkydog_col = collections['funky-dog'] -%}
+    <a href="/pages/brand-funky-dog" class="pb-brand-card" data-brand="funky-dog" data-card>
+      <div class="pb-brand-img">
+        <div class="pb-brand-img-bg"></div>
+        <div class="pb-brand-pattern"></div>
+        <span class="pb-brand-num">05</span>
+        {%- if funkydog_col.image -%}
+          <img src="{{ funkydog_col.image | image_url: width: 800 }}" alt="Funky Dog" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.45">
+        {%- endif -%}
+        <div class="pb-brand-name-overlay">
+          <h2>Funky Dog</h2>
+          <p class="pb-brand-tagline">Playful · Irreverent · Fun</p>
+        </div>
+        <div class="pb-brand-hover">
+          <div class="pb-brand-hover-title">Funky Dog</div>
+          <div class="pb-brand-hover-cta">Explore Brand →</div>
+        </div>
+      </div>
+      <div class="pb-brand-info">
+        <div class="pb-brand-info-left">
+          <div class="pb-brand-info-label">05 — Playful Spirit</div>
+          <div class="pb-brand-info-name">Funky Dog</div>
+          <p class="pb-brand-info-desc">Life's too short to be serious. Funky Dog brings playful, irreverent energy to streetwear — bold characters, bright colours, big smiles.</p>
+          <a href="/pages/brand-funky-dog" class="pb-brand-info-link">Explore Brand →</a>
+        </div>
+        <div class="pb-brand-info-right">
+          <div class="pb-brand-info-count">{{ funkydog_col.products_count | default: '—' }}</div>
+          <div class="pb-brand-info-count-label">Products</div>
+        </div>
+      </div>
+    </a>
+
+    <!-- 06 — HANDSPUN -->
+    {%- assign handspun_col = collections['handspun'] -%}
+    <a href="/pages/brand-handspun" class="pb-brand-card" data-brand="handspun" data-card>
+      <div class="pb-brand-img">
+        <div class="pb-brand-img-bg"></div>
+        <div class="pb-brand-pattern"></div>
+        <span class="pb-brand-num">06</span>
+        {%- if handspun_col.image -%}
+          <img src="{{ handspun_col.image | image_url: width: 800 }}" alt="Handspun" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.45">
+        {%- endif -%}
+        <div class="pb-brand-name-overlay">
+          <h2>Handspun</h2>
+          <p class="pb-brand-tagline">Artisan · Craft · Conscious</p>
+        </div>
+        <div class="pb-brand-hover">
+          <div class="pb-brand-hover-title">Handspun</div>
+          <div class="pb-brand-hover-cta">Explore Brand →</div>
+        </div>
+      </div>
+      <div class="pb-brand-info">
+        <div class="pb-brand-info-left">
+          <div class="pb-brand-info-label">06 — Artisan Craft</div>
+          <div class="pb-brand-info-name">Handspun</div>
+          <p class="pb-brand-info-desc">Slow fashion with soul. Handspun celebrates artisan craft and conscious creation — every piece feels like it was made just for you.</p>
+          <a href="/pages/brand-handspun" class="pb-brand-info-link">Explore Brand →</a>
+        </div>
+        <div class="pb-brand-info-right">
+          <div class="pb-brand-info-count">{{ handspun_col.products_count | default: '—' }}</div>
+          <div class="pb-brand-info-count-label">Products</div>
+        </div>
+      </div>
+    </a>
+
+    <!-- 07 — DON'T DO THE DODO -->
+    {%- assign dodo_col = collections['dont-do-the-dodo'] -%}
+    <a href="/pages/brand-dodo" class="pb-brand-card" data-brand="dodo" data-card>
+      <div class="pb-brand-img">
+        <div class="pb-brand-img-bg"></div>
+        <div class="pb-brand-pattern"></div>
+        <span class="pb-brand-num">07</span>
+        {%- if dodo_col.image -%}
+          <img src="{{ dodo_col.image | image_url: width: 800 }}" alt="Don't Do The Dodo" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.45">
+        {%- endif -%}
+        <div class="pb-brand-name-overlay">
+          <h2>Don't Do<br>The Dodo</h2>
+          <p class="pb-brand-tagline">Eco · Conservation · Awareness</p>
+        </div>
+        <div class="pb-brand-hover">
+          <div class="pb-brand-hover-title">Don't Do The Dodo</div>
+          <div class="pb-brand-hover-cta">Explore Brand →</div>
+        </div>
+      </div>
+      <div class="pb-brand-info">
+        <div class="pb-brand-info-left">
+          <div class="pb-brand-info-label">07 — Eco Conscious</div>
+          <div class="pb-brand-info-name">Don't Do The Dodo</div>
+          <p class="pb-brand-info-desc">Fashion with a conscience. Don't Do The Dodo raises awareness for endangered species and environmental causes through bold, beautiful design.</p>
+          <a href="/pages/brand-dodo" class="pb-brand-info-link">Explore Brand →</a>
+        </div>
+        <div class="pb-brand-info-right">
+          <div class="pb-brand-info-count">{{ dodo_col.products_count | default: '—' }}</div>
+          <div class="pb-brand-info-count-label">Products</div>
+        </div>
+      </div>
+    </a>
+
+  </div>
+</div>
+
+<!-- ===== MANIFESTO ===== -->
+<div class="pb-manifesto">
+  <div class="pb-manifesto-inner">
+    <p class="pb-manifesto-eyebrow" data-reveal>The Have A Nice Day Manifesto</p>
+    <h2 class="pb-manifesto-quote" data-reveal>
+      "We don't follow trends.<br>We <em>set the vibe.</em>"
+    </h2>
+    <p class="pb-manifesto-body" data-reveal>
+      Since 1990, Have A Nice Day London has been the home of independent artists who refuse to compromise. Every brand in our collective was born from a genuine creative vision — not a marketing brief. This is underground culture, printed on organic cotton, worn by people who know the difference.
+    </p>
+    <a href="/collections/all" class="pb-manifesto-cta" data-reveal>
+      Shop All Brands →
+    </a>
+  </div>
+</div>
+
+<script>
+(function() {
+  const { animate, inView } = Motion;
+
+  // ===== HERO ENTRANCE =====
+  const eyebrow = document.getElementById('pbEyebrow');
+  const title = document.getElementById('pbTitle');
+  const sub = document.getElementById('pbSub');
+  const count = document.getElementById('pbCount');
+
+  if (eyebrow) animate(eyebrow, { opacity: [0,1], x: [-20,0] }, { duration: 0.6, delay: 0.1, easing: 'ease-out' });
+  if (title) animate(title, { opacity: [0,1], y: [50,0] }, { duration: 0.9, delay: 0.2, easing: [0.25,0.46,0.45,0.94] });
+  if (sub) animate(sub, { opacity: [0,1], y: [20,0] }, { duration: 0.7, delay: 0.45, easing: 'ease-out' });
+  if (count) animate(count, { opacity: [0,1], y: [20,0] }, { duration: 0.7, delay: 0.6, easing: 'ease-out' });
+
+  // ===== INTRO REVEALS =====
+  const revealLeft = document.querySelector('[data-reveal-left]');
+  const revealRight = document.querySelector('[data-reveal-right]');
+  if (revealLeft) {
+    inView(revealLeft, function() {
+      animate(revealLeft, { opacity: [0,1], x: [-40,0] }, { duration: 0.7, easing: [0.25,0.46,0.45,0.94] });
+    }, { margin: '-10% 0px' });
+  }
+  if (revealRight) {
+    inView(revealRight, function() {
+      animate(revealRight, { opacity: [0,1], x: [40,0] }, { duration: 0.7, delay: 0.1, easing: [0.25,0.46,0.45,0.94] });
+    }, { margin: '-10% 0px' });
+  }
+
+  // ===== BRAND CARDS — STAGGERED =====
+  const cards = document.querySelectorAll('[data-card]');
+  cards.forEach(function(card, i) {
+    inView(card, function() {
+      animate(card,
+        { opacity: [0,1], y: [40,0] },
+        { duration: 0.65, delay: (i % 3) * 0.1, easing: [0.25,0.46,0.45,0.94] }
+      );
+    }, { margin: '-5% 0px' });
+  });
+
+  // ===== MANIFESTO REVEALS =====
+  document.querySelectorAll('[data-reveal]').forEach(function(el, i) {
+    inView(el, function() {
+      animate(el, { opacity: [0,1], y: [24,0] }, { duration: 0.6, delay: i * 0.12, easing: 'ease-out' });
+    }, { margin: '-10% 0px' });
+  });
+
+  // ===== CARD HOVER TILT =====
+  cards.forEach(function(card) {
+    if (card.classList.contains('featured')) return; // skip featured
+    card.addEventListener('mousemove', function(e) {
+      const rect = card.getBoundingClientRect();
+      const x = (e.clientX - rect.left) / rect.width - 0.5;
+      const y = (e.clientY - rect.top) / rect.height - 0.5;
+      animate(card, { rotateX: -y * 4, rotateY: x * 4 }, { duration: 0.15, easing: 'ease-out' });
+    });
+    card.addEventListener('mouseleave', function() {
+      animate(card, { rotateX: 0, rotateY: 0 }, { duration: 0.5, easing: [0.25,0.46,0.45,0.94] });
+    });
+  });
+
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Brands Directory",
+  "settings": []
+}
+{% endschema %}
