@@ -1,484 +1,831 @@
+{% comment %} HAVE A NICE DAY — Premium Collection Page with Motion.dev {% endcomment %}
+
+<!-- Motion.dev CDN -->
+<script src="https://cdn.jsdelivr.net/npm/motion@11.11.13/dist/motion.js"></script>
+
 <style>
-  .hand-coll-hero {
-    background: var(--ink);
+  /* ===================================================
+     COLLECTION PAGE — PREMIUM REDESIGN
+     Inspired by: editorial fashion, Camden underground
+     Animations: Motion.dev (scroll-driven + entrance)
+     =================================================== */
+
+  /* ===== HERO ===== */
+  .hc-hero {
+    background: var(--ink, #1a1a1a);
     color: #fff;
-    padding: 80px 32px 60px;
-    border-bottom: 1px solid #000;
+    padding: 100px 40px 80px;
     position: relative;
     overflow: hidden;
+    min-height: 380px;
+    display: flex;
+    align-items: flex-end;
   }
-  .hand-coll-hero::before {
+
+  /* Animated grain texture */
+  .hc-hero::before {
     content: '';
     position: absolute;
     inset: 0;
-    background: radial-gradient(ellipse at 30% 50%, rgba(255,46,136,.15), transparent 60%);
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    opacity: 0.5;
     pointer-events: none;
+    z-index: 0;
   }
-  .hand-coll-hero-inner {
-    max-width: var(--maxw);
+
+  /* Pink radial glow */
+  .hc-hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 20% 60%, rgba(233,30,140,0.18) 0%, transparent 55%),
+                radial-gradient(ellipse at 80% 20%, rgba(233,30,140,0.08) 0%, transparent 45%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .hc-hero-inner {
+    max-width: 1300px;
     margin: 0 auto;
+    width: 100%;
     position: relative;
     z-index: 1;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: flex-end;
+    gap: 40px;
   }
-  .hand-coll-eyebrow {
-    font-family: var(--mono);
-    font-size: 11px;
-    letter-spacing: .22em;
+
+  .hc-hero-eyebrow {
+    font-family: var(--mono, 'Courier New', monospace);
+    font-size: 10px;
+    letter-spacing: 0.25em;
     text-transform: uppercase;
-    color: rgba(255,255,255,.5);
-    margin-bottom: 16px;
+    color: #e91e8c;
+    margin-bottom: 20px;
     display: flex;
     align-items: center;
     gap: 12px;
+    opacity: 0;
   }
-  .hand-coll-eyebrow::before {
+  .hc-hero-eyebrow::before {
     content: '';
-    width: 32px;
+    display: block;
+    width: 40px;
     height: 1px;
-    background: rgba(255,255,255,.3);
+    background: #e91e8c;
   }
-  .hand-coll-h1 {
-    font-family: 'Anton', Impact, sans-serif;
-    font-size: clamp(48px, 8vw, 110px);
-    text-transform: uppercase;
-    line-height: .92;
-    letter-spacing: -.01em;
-    margin-bottom: 20px;
-  }
-  .hand-coll-desc {
-    font-size: 16px;
-    color: rgba(255,255,255,.7);
-    max-width: 560px;
-    line-height: 1.65;
-  }
-  .hand-coll-meta {
-    display: flex;
-    align-items: center;
-    gap: 24px;
-    margin-top: 28px;
-    font-family: var(--mono);
-    font-size: 11px;
-    letter-spacing: .18em;
-    text-transform: uppercase;
-    color: rgba(255,255,255,.5);
-  }
-  .hand-coll-meta span { color: rgba(255,255,255,.8); }
 
-  /* Toolbar */
-  .hand-coll-toolbar {
-    background: var(--paper-2);
-    border-bottom: 1px solid rgba(0,0,0,.1);
-    padding: 0 32px;
-    position: sticky;
-    top: 74px;
-    z-index: 40;
+  .hc-hero-title {
+    font-family: 'Anton', Impact, sans-serif;
+    font-size: clamp(52px, 9vw, 120px);
+    text-transform: uppercase;
+    line-height: 0.88;
+    letter-spacing: -0.01em;
+    color: #fff;
+    margin-bottom: 24px;
+    opacity: 0;
   }
-  .hand-coll-toolbar-inner {
-    max-width: var(--maxw);
+
+  .hc-hero-desc {
+    font-size: 15px;
+    color: rgba(255,255,255,0.55);
+    max-width: 480px;
+    line-height: 1.7;
+    opacity: 0;
+  }
+
+  .hc-hero-stats {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 16px;
+    opacity: 0;
+  }
+
+  .hc-hero-stat {
+    text-align: right;
+  }
+
+  .hc-hero-stat-num {
+    font-family: 'Anton', Impact, sans-serif;
+    font-size: 48px;
+    line-height: 1;
+    color: #fff;
+    letter-spacing: -0.02em;
+  }
+
+  .hc-hero-stat-label {
+    font-family: var(--mono, 'Courier New', monospace);
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.35);
+    margin-top: 2px;
+  }
+
+  .hc-hero-divider {
+    width: 1px;
+    height: 60px;
+    background: rgba(255,255,255,0.1);
+    align-self: center;
+  }
+
+  /* ===== MARQUEE STRIP ===== */
+  .hc-marquee {
+    background: #e91e8c;
+    padding: 12px 0;
+    overflow: hidden;
+  }
+
+  .hc-marquee-track {
+    display: flex;
+    animation: hc-marquee 30s linear infinite;
+    white-space: nowrap;
+  }
+
+  @keyframes hc-marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  .hc-marquee-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 20px;
+    padding: 0 32px;
+    font-family: 'Anton', Impact, sans-serif;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #fff;
+  }
+
+  .hc-marquee-dot {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.5);
+    flex-shrink: 0;
+  }
+
+  /* ===== TOOLBAR ===== */
+  .hc-toolbar {
+    background: #f4f1ea;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+    padding: 0 40px;
+    position: sticky;
+    top: 80px;
+    z-index: 40;
+    transition: box-shadow 0.3s;
+  }
+
+  .hc-toolbar.scrolled {
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  }
+
+  .hc-toolbar-inner {
+    max-width: 1300px;
     margin: 0 auto;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: 52px;
+    height: 56px;
     gap: 20px;
   }
-  .hand-coll-filter-btns {
+
+  .hc-filter-scroll {
     display: flex;
     gap: 6px;
     overflow-x: auto;
     scrollbar-width: none;
     -ms-overflow-style: none;
+    flex: 1;
   }
-  .hand-coll-filter-btns::-webkit-scrollbar { display: none; }
-  .hand-filter-btn {
-    padding: 7px 14px;
-    font-family: var(--mono);
-    font-size: 10.5px;
-    letter-spacing: .16em;
+  .hc-filter-scroll::-webkit-scrollbar { display: none; }
+
+  .hc-filter-btn {
+    padding: 7px 16px;
+    font-family: var(--mono, 'Courier New', monospace);
+    font-size: 10px;
+    letter-spacing: 0.18em;
     text-transform: uppercase;
-    border: 1px solid rgba(0,0,0,.2);
+    border: 1px solid rgba(0,0,0,0.18);
     background: transparent;
-    color: var(--ink);
+    color: var(--ink, #1a1a1a);
     cursor: pointer;
     white-space: nowrap;
-    transition: background .2s, border-color .2s, color .2s;
+    transition: all 0.2s;
     text-decoration: none;
     display: inline-block;
   }
-  .hand-filter-btn:hover, .hand-filter-btn.active {
-    background: var(--ink);
-    border-color: var(--ink);
+
+  .hc-filter-btn:hover,
+  .hc-filter-btn.active {
+    background: var(--ink, #1a1a1a);
+    border-color: var(--ink, #1a1a1a);
     color: #fff;
   }
-  .hand-sort-select {
-    font-family: var(--mono);
-    font-size: 10.5px;
-    letter-spacing: .14em;
+
+  .hc-toolbar-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-shrink: 0;
+  }
+
+  .hc-count {
+    font-family: var(--mono, 'Courier New', monospace);
+    font-size: 10px;
+    letter-spacing: 0.15em;
     text-transform: uppercase;
-    border: 1px solid rgba(0,0,0,.2);
+    color: #888;
+    white-space: nowrap;
+  }
+
+  .hc-sort-select {
+    font-family: var(--mono, 'Courier New', monospace);
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    border: 1px solid rgba(0,0,0,0.18);
     background: transparent;
-    color: var(--ink);
-    padding: 7px 12px;
+    color: var(--ink, #1a1a1a);
+    padding: 7px 28px 7px 12px;
     cursor: pointer;
     outline: none;
     appearance: none;
     -webkit-appearance: none;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%230a0a0a'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%231a1a1a'/%3E%3C/svg%3E");
     background-repeat: no-repeat;
     background-position: right 10px center;
-    padding-right: 28px;
   }
 
-  /* Product grid */
-  .hand-coll-section {
-    padding: 48px 32px 80px;
-    max-width: var(--maxw);
+  /* ===== PRODUCT GRID ===== */
+  .hc-grid-wrap {
+    padding: 40px 40px 100px;
+    max-width: 1300px;
     margin: 0 auto;
   }
-  .hand-coll-grid {
+
+  .hc-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 1px;
-    background: var(--ink);
-    border: 1px solid var(--ink);
+    gap: 2px;
+    background: rgba(0,0,0,0.08);
   }
-  .hand-coll-card {
-    background: var(--paper);
+
+  /* Featured first product — spans 2 cols */
+  .hc-card:first-child {
+    grid-column: span 2;
+    grid-row: span 2;
+  }
+
+  .hc-card:first-child .hc-card-img {
+    aspect-ratio: 2/2.5;
+  }
+
+  .hc-card:first-child .hc-card-name {
+    font-size: 26px;
+  }
+
+  .hc-card {
+    background: #fff;
     position: relative;
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    transition: background .25s;
+    opacity: 0;
+    transform: translateY(24px);
   }
-  .hand-coll-card:hover { background: var(--paper-2); }
-  .hand-coll-card-media {
+
+  .hc-card-img {
     position: relative;
     aspect-ratio: 3/4;
     overflow: hidden;
-    background: var(--paper-2);
+    background: #ede9e0;
+    flex-shrink: 0;
   }
-  .hand-coll-card-media img {
+
+  .hc-card-img img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform .6s cubic-bezier(.2,.7,.2,1);
+    display: block;
+    transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   }
-  .hand-coll-card:hover .hand-coll-card-media img { transform: scale(1.04); }
-  .hand-coll-badge {
+
+  .hc-card:hover .hc-card-img img {
+    transform: scale(1.06);
+  }
+
+  /* Badge */
+  .hc-badge {
     position: absolute;
-    top: 12px;
-    left: 12px;
-    font-family: var(--mono);
-    font-size: 9px;
-    letter-spacing: .2em;
+    top: 14px;
+    left: 14px;
+    font-family: var(--mono, 'Courier New', monospace);
+    font-size: 8px;
+    letter-spacing: 0.2em;
     text-transform: uppercase;
-    background: var(--ink);
+    background: var(--ink, #1a1a1a);
     color: #fff;
-    padding: 4px 8px;
+    padding: 5px 10px;
     z-index: 2;
   }
-  .hand-coll-badge.sale { background: var(--pink); }
-  .hand-coll-badge.new { background: var(--yellow); color: var(--ink); }
-  .hand-coll-quick {
+  .hc-badge.sale { background: #e91e8c; }
+  .hc-badge.new-in { background: #1a1a1a; }
+  .hc-badge.best { background: #c8a84b; color: #1a1a1a; }
+
+  /* Hover overlay with quick-add */
+  .hc-card-overlay {
     position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
+    inset: 0;
+    background: rgba(26,26,26,0.88);
     display: flex;
-    transform: translateY(100%);
-    transition: transform .3s cubic-bezier(.22,1,.36,1);
-    z-index: 3;
-  }
-  .hand-coll-card:hover .hand-coll-quick { transform: translateY(0); }
-  .hand-coll-quick-btn {
-    flex: 1;
-    padding: 14px;
-    background: var(--ink);
-    color: #fff;
-    font-family: var(--mono);
-    font-size: 10px;
-    letter-spacing: .2em;
-    text-transform: uppercase;
-    border: 0;
-    cursor: pointer;
-    transition: background .2s;
-  }
-  .hand-coll-quick-btn:hover { background: var(--pink); }
-  .hand-coll-quick-link {
-    width: 48px;
-    display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    background: rgba(10,10,10,.85);
-    color: #fff;
-    font-size: 16px;
-    text-decoration: none;
-    border-left: 1px solid rgba(255,255,255,.15);
-    transition: background .2s;
+    gap: 12px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 3;
   }
-  .hand-coll-quick-link:hover { background: var(--pink); }
-  .hand-coll-card-info {
-    padding: 16px 18px 20px;
+
+  .hc-card:hover .hc-card-overlay {
+    opacity: 1;
+  }
+
+  .hc-overlay-add {
+    padding: 14px 36px;
+    background: #fff;
+    color: var(--ink, #1a1a1a);
+    font-family: var(--mono, 'Courier New', monospace);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+    transform: translateY(10px);
+    transition: transform 0.3s ease, background 0.2s, color 0.2s;
+  }
+
+  .hc-card:hover .hc-overlay-add {
+    transform: translateY(0);
+  }
+
+  .hc-overlay-add:hover {
+    background: #e91e8c;
+    color: #fff;
+  }
+
+  .hc-overlay-view {
+    font-family: var(--mono, 'Courier New', monospace);
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+    text-decoration: none;
+    transition: color 0.2s;
+    transform: translateY(10px);
+    transition: transform 0.3s ease 0.05s, color 0.2s;
+  }
+
+  .hc-card:hover .hc-overlay-view {
+    transform: translateY(0);
+  }
+
+  .hc-overlay-view:hover { color: #fff; }
+
+  /* Card info */
+  .hc-card-info {
+    padding: 16px 18px 22px;
+    flex: 1;
     display: flex;
     flex-direction: column;
     gap: 4px;
-    flex: 1;
+    border-top: 1px solid rgba(0,0,0,0.05);
   }
-  .hand-coll-card-vendor {
-    font-family: var(--mono);
-    font-size: 10px;
-    letter-spacing: .18em;
+
+  .hc-card-vendor {
+    font-family: var(--mono, 'Courier New', monospace);
+    font-size: 9px;
+    letter-spacing: 0.22em;
     text-transform: uppercase;
-    color: #888;
+    color: #e91e8c;
   }
-  .hand-coll-card-name {
+
+  .hc-card-name {
     font-family: 'Anton', Impact, sans-serif;
-    font-size: 18px;
-    font-weight: 400;
+    font-size: 17px;
     text-transform: uppercase;
-    letter-spacing: -.01em;
-    color: var(--ink);
+    letter-spacing: -0.01em;
+    color: var(--ink, #1a1a1a);
     line-height: 1.1;
-    margin-top: 2px;
     text-decoration: none;
     display: block;
+    margin-top: 2px;
+    transition: color 0.2s;
   }
-  .hand-coll-card-price {
-    font-family: var(--mono);
+
+  .hc-card-name:hover { color: #e91e8c; }
+
+  .hc-card-price {
+    font-family: var(--mono, 'Courier New', monospace);
     font-size: 13px;
-    letter-spacing: .06em;
-    color: var(--ink);
+    color: var(--ink, #1a1a1a);
     margin-top: 6px;
     display: flex;
     align-items: center;
     gap: 8px;
   }
-  .hand-coll-card-price .compare {
+
+  .hc-card-price .was {
     text-decoration: line-through;
-    color: #aaa;
+    color: #bbb;
     font-size: 11px;
   }
-  .hand-coll-card-price .sale-price { color: var(--pink); }
-  .hand-coll-card-tag {
-    font-family: var(--mono);
+
+  .hc-card-price .now { color: #e91e8c; }
+
+  .hc-card-tag {
+    font-family: var(--mono, 'Courier New', monospace);
     font-size: 9px;
-    letter-spacing: .16em;
+    letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: #aaa;
+    color: #bbb;
     margin-top: 4px;
   }
 
-  /* Empty state */
-  .hand-coll-empty {
-    grid-column: 1/-1;
-    text-align: center;
-    padding: 100px 32px;
-    color: #888;
+  /* ===== BRAND DIVIDER ===== */
+  .hc-brand-divider {
+    grid-column: 1 / -1;
+    background: var(--ink, #1a1a1a);
+    padding: 32px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    opacity: 0;
   }
-  .hand-coll-empty h3 {
+
+  .hc-brand-divider-label {
+    font-family: var(--mono, 'Courier New', monospace);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+  }
+
+  .hc-brand-divider-title {
+    font-family: 'Anton', Impact, sans-serif;
+    font-size: 28px;
+    text-transform: uppercase;
+    color: #fff;
+    letter-spacing: 0.02em;
+  }
+
+  .hc-brand-divider-link {
+    font-family: var(--mono, 'Courier New', monospace);
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #e91e8c;
+    text-decoration: none;
+    border-bottom: 1px solid #e91e8c;
+    padding-bottom: 2px;
+    white-space: nowrap;
+    transition: color 0.2s;
+  }
+
+  .hc-brand-divider-link:hover { color: #fff; border-color: #fff; }
+
+  /* ===== EMPTY STATE ===== */
+  .hc-empty {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 120px 40px;
+  }
+
+  .hc-empty-icon {
+    font-size: 72px;
+    display: block;
+    margin-bottom: 24px;
+    opacity: 0.4;
+  }
+
+  .hc-empty-title {
     font-family: 'Anton', Impact, sans-serif;
     font-size: 48px;
     text-transform: uppercase;
-    color: var(--ink);
-    margin-bottom: 16px;
+    color: var(--ink, #1a1a1a);
+    margin-bottom: 12px;
   }
 
-  /* Pagination */
-  .hand-coll-pagination {
+  .hc-empty-sub {
+    font-family: var(--mono, 'Courier New', monospace);
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #888;
+    margin-bottom: 32px;
+  }
+
+  .hc-empty-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--ink, #1a1a1a);
+    color: #fff;
+    text-decoration: none;
+    font-family: var(--mono, 'Courier New', monospace);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    padding: 16px 36px;
+    transition: background 0.2s;
+  }
+
+  .hc-empty-btn:hover { background: #e91e8c; }
+
+  /* ===== PAGINATION ===== */
+  .hc-pagination {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
-    margin-top: 48px;
-    font-family: var(--mono);
+    gap: 6px;
+    margin-top: 60px;
+    font-family: var(--mono, 'Courier New', monospace);
     font-size: 11px;
-    letter-spacing: .16em;
+    letter-spacing: 0.16em;
     text-transform: uppercase;
   }
-  .hand-coll-pagination a, .hand-coll-pagination span {
-    padding: 10px 16px;
-    border: 1px solid rgba(0,0,0,.2);
-    color: var(--ink);
+
+  .hc-pagination a,
+  .hc-pagination span {
+    padding: 12px 18px;
+    border: 1px solid rgba(0,0,0,0.15);
+    color: var(--ink, #1a1a1a);
     text-decoration: none;
-    transition: background .2s, border-color .2s, color .2s;
+    transition: all 0.2s;
   }
-  .hand-coll-pagination a:hover {
-    background: var(--ink);
-    border-color: var(--ink);
-    color: #fff;
-  }
-  .hand-coll-pagination .current {
-    background: var(--ink);
-    border-color: var(--ink);
+
+  .hc-pagination a:hover {
+    background: var(--ink, #1a1a1a);
+    border-color: var(--ink, #1a1a1a);
     color: #fff;
   }
 
-  /* Sticky CTA */
-  .hand-sticky-cta {
+  .hc-pagination .current {
+    background: var(--ink, #1a1a1a);
+    border-color: var(--ink, #1a1a1a);
+    color: #fff;
+  }
+
+  /* ===== STICKY MOBILE BAG ===== */
+  .hc-sticky-bag {
+    display: none;
     position: fixed;
     bottom: 0;
     left: 0;
     right: 0;
     z-index: 60;
-    background: var(--ink);
+    background: var(--ink, #1a1a1a);
     color: #fff;
-    display: none;
     align-items: center;
     justify-content: space-between;
     padding: 14px 22px;
-    border-top: 1px solid #000;
-    text-decoration: none;
     transform: translateY(100%);
-    transition: transform .35s cubic-bezier(.22,1,.36,1);
+    transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+    text-decoration: none;
   }
-  .hand-sticky-cta.visible { transform: translateY(0); }
-  .hand-sticky-cta .lhs {
-    font-family: var(--mono);
+
+  .hc-sticky-bag.visible { transform: translateY(0); }
+
+  .hc-sticky-bag-lhs {
+    font-family: var(--mono, 'Courier New', monospace);
     font-size: 10px;
-    letter-spacing: .18em;
+    letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: rgba(255,255,255,.6);
+    color: rgba(255,255,255,0.5);
   }
-  .hand-sticky-cta .lhs b {
+
+  .hc-sticky-bag-lhs strong {
     display: block;
     font-family: 'Anton', Impact, sans-serif;
     font-size: 16px;
-    letter-spacing: .02em;
+    letter-spacing: 0.02em;
     color: #fff;
     font-weight: 400;
     margin-top: 2px;
   }
-  .hand-sticky-cta span {
-    padding: 12px 22px;
-    background: #fff;
-    color: var(--ink);
-    font-family: var(--mono);
+
+  .hc-sticky-bag-btn {
+    padding: 12px 24px;
+    background: #e91e8c;
+    color: #fff;
+    font-family: var(--mono, 'Courier New', monospace);
     font-size: 11px;
-    letter-spacing: .2em;
+    letter-spacing: 0.2em;
     text-transform: uppercase;
-    font-weight: 600;
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.2s;
   }
 
-  @media (max-width: 820px) {
-    .hand-sticky-cta { display: flex; }
-    body { padding-bottom: 64px; }
-    .hand-coll-grid { grid-template-columns: repeat(2, 1fr); }
-    .hand-coll-hero { padding: 60px 22px 40px; }
-    .hand-coll-toolbar { padding: 0 22px; }
-    .hand-coll-section { padding: 32px 22px 60px; }
+  .hc-sticky-bag-btn:hover { background: #fff; color: var(--ink, #1a1a1a); }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 1024px) {
+    .hc-grid { grid-template-columns: repeat(3, 1fr); }
+    .hc-card:first-child { grid-column: span 2; }
   }
-  @media (max-width: 520px) {
-    .hand-coll-grid { grid-template-columns: 1fr; }
+
+  @media (max-width: 768px) {
+    .hc-hero { padding: 80px 24px 60px; min-height: auto; }
+    .hc-hero-inner { grid-template-columns: 1fr; }
+    .hc-hero-stats { display: none; }
+    .hc-toolbar { padding: 0 20px; top: 70px; }
+    .hc-grid-wrap { padding: 24px 20px 80px; }
+    .hc-grid { grid-template-columns: repeat(2, 1fr); }
+    .hc-card:first-child { grid-column: span 2; }
+    .hc-sticky-bag { display: flex; }
+    body { padding-bottom: 64px; }
+  }
+
+  @media (max-width: 480px) {
+    .hc-grid { grid-template-columns: repeat(2, 1fr); gap: 1px; }
+    .hc-card:first-child { grid-column: span 2; }
+    .hc-card:first-child .hc-card-img { aspect-ratio: 3/4; }
   }
 </style>
 
-<!-- Collection Hero -->
-<div class="hand-coll-hero">
-  <div class="hand-coll-hero-inner">
-    <div class="hand-coll-eyebrow">{{ collection.title }}</div>
-    <h1 class="hand-coll-h1">{{ collection.title }}</h1>
-    {%- if collection.description != blank -%}
-      <p class="hand-coll-desc">{{ collection.description }}</p>
-    {%- endif -%}
-    <div class="hand-coll-meta">
-      <div>{{ collection.products_count }} <span>Products</span></div>
-      <div>Organic Cotton · <span>UK Printed</span></div>
+<!-- ===== HERO ===== -->
+<section class="hc-hero" id="hcHero">
+  <div class="hc-hero-inner">
+    <div>
+      <p class="hc-hero-eyebrow" id="hcEyebrow">{{ collection.title }}</p>
+      <h1 class="hc-hero-title" id="hcTitle">
+        {%- if collection.handle == 'all' -%}
+          All<br>Products
+        {%- else -%}
+          {{ collection.title }}
+        {%- endif -%}
+      </h1>
+      {%- if collection.description != blank -%}
+        <p class="hc-hero-desc" id="hcDesc">{{ collection.description }}</p>
+      {%- else -%}
+        <p class="hc-hero-desc" id="hcDesc">Camden-born streetwear. Organic cotton. UK printed. Every piece tells a story.</p>
+      {%- endif -%}
     </div>
+    <div class="hc-hero-stats" id="hcStats">
+      <div class="hc-hero-stat">
+        <div class="hc-hero-stat-num">{{ collection.products_count }}</div>
+        <div class="hc-hero-stat-label">Products</div>
+      </div>
+      <div class="hc-hero-divider"></div>
+      <div class="hc-hero-stat">
+        <div class="hc-hero-stat-num">100%</div>
+        <div class="hc-hero-stat-label">Organic</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== MARQUEE ===== -->
+<div class="hc-marquee">
+  <div class="hc-marquee-track">
+    {%- assign marquee_items = "Have A Nice Day,Organic Cotton,UK Printed,Camden 1990,Dready,BTKA,Vortex,Funky Dog,Handspun,Don't Do The Dodo,Have A Nice Day,Organic Cotton,UK Printed,Camden 1990,Dready,BTKA,Vortex,Funky Dog,Handspun,Don't Do The Dodo" | split: "," -%}
+    {%- for item in marquee_items -%}
+      <span class="hc-marquee-item">{{ item }}<span class="hc-marquee-dot"></span></span>
+    {%- endfor -%}
   </div>
 </div>
 
-<!-- Toolbar -->
-<div class="hand-coll-toolbar">
-  <div class="hand-coll-toolbar-inner">
-    <div class="hand-coll-filter-btns">
-      <a class="hand-filter-btn{% if current_tags == blank %} active{% endif %}" href="{{ collection.url }}">All</a>
+<!-- ===== TOOLBAR ===== -->
+<div class="hc-toolbar" id="hcToolbar">
+  <div class="hc-toolbar-inner">
+    <div class="hc-filter-scroll">
+      <a class="hc-filter-btn{% if current_tags == blank %} active{% endif %}" href="{{ collection.url }}">All</a>
       {%- for tag in collection.all_tags -%}
-        {%- if tag != 'new' and tag != 'bestseller' and tag != 'sale' -%}
-          <a class="hand-filter-btn{% if current_tags contains tag %} active{% endif %}"
+        {%- unless tag == 'new' or tag == 'bestseller' or tag == 'sale' -%}
+          <a class="hc-filter-btn{% if current_tags contains tag %} active{% endif %}"
              href="{{ collection.url }}/{{ tag | handle }}">{{ tag }}</a>
-        {%- endif -%}
+        {%- endunless -%}
       {%- endfor -%}
     </div>
-    <select class="hand-sort-select" id="handSortBy" onchange="window.location.href=this.value">
-      {%- assign sort_by = collection.sort_by | default: collection.default_sort_by -%}
-      <option value="{{ collection.url }}?sort_by=manual"{% if sort_by == 'manual' %} selected{% endif %}>Featured</option>
-      <option value="{{ collection.url }}?sort_by=best-selling"{% if sort_by == 'best-selling' %} selected{% endif %}>Best Selling</option>
-      <option value="{{ collection.url }}?sort_by=price-ascending"{% if sort_by == 'price-ascending' %} selected{% endif %}>Price: Low → High</option>
-      <option value="{{ collection.url }}?sort_by=price-descending"{% if sort_by == 'price-descending' %} selected{% endif %}>Price: High → Low</option>
-      <option value="{{ collection.url }}?sort_by=created-descending"{% if sort_by == 'created-descending' %} selected{% endif %}>Newest</option>
-    </select>
+    <div class="hc-toolbar-right">
+      <span class="hc-count">{{ collection.products_count }} items</span>
+      <select class="hc-sort-select" onchange="window.location.href=this.value">
+        {%- assign sort_by = collection.sort_by | default: collection.default_sort_by -%}
+        <option value="{{ collection.url }}?sort_by=manual"{% if sort_by == 'manual' %} selected{% endif %}>Featured</option>
+        <option value="{{ collection.url }}?sort_by=best-selling"{% if sort_by == 'best-selling' %} selected{% endif %}>Best Selling</option>
+        <option value="{{ collection.url }}?sort_by=price-ascending"{% if sort_by == 'price-ascending' %} selected{% endif %}>Price: Low → High</option>
+        <option value="{{ collection.url }}?sort_by=price-descending"{% if sort_by == 'price-descending' %} selected{% endif %}>Price: High → Low</option>
+        <option value="{{ collection.url }}?sort_by=created-descending"{% if sort_by == 'created-descending' %} selected{% endif %}>Newest</option>
+      </select>
+    </div>
   </div>
 </div>
 
-<!-- Products -->
-<div class="hand-coll-section">
+<!-- ===== PRODUCTS ===== -->
+<div class="hc-grid-wrap">
   {%- paginate collection.products by 24 -%}
-    <div class="hand-coll-grid">
+    <div class="hc-grid" id="hcGrid">
       {%- for product in collection.products -%}
         {%- liquid
           assign p = product
-          assign featured = p.featured_image
+          assign img = p.featured_image
+          assign is_sale = false
+          if p.compare_at_price > p.price
+            assign is_sale = true
+          endif
         -%}
-        <article class="hand-coll-card" itemscope itemtype="https://schema.org/Product">
+
+        {%- comment -%} Insert brand divider every 8 products {%- endcomment -%}
+        {%- if forloop.index == 9 and collection.handle == 'all' -%}
+          <div class="hc-brand-divider" data-reveal>
+            <div>
+              <div class="hc-brand-divider-label">Featured Brand</div>
+              <div class="hc-brand-divider-title">Have A Nice Day London</div>
+            </div>
+            <a href="/pages/brands" class="hc-brand-divider-link">Explore All Brands →</a>
+          </div>
+        {%- endif -%}
+
+        <article class="hc-card" data-card itemscope itemtype="https://schema.org/Product">
           <meta itemprop="name" content="{{ p.title | escape }}">
           <meta itemprop="description" content="{{ p.description | strip_html | truncate: 200 | escape }}">
-          <div class="hand-coll-card-media">
-            {%- if p.compare_at_price > p.price -%}
-              <span class="hand-coll-badge sale">Sale</span>
-            {%- elsif p.tags contains 'new' -%}
-              <span class="hand-coll-badge new">New</span>
+
+          <div class="hc-card-img">
+            {%- if is_sale -%}
+              <span class="hc-badge sale">Sale</span>
+            {%- elsif p.tags contains 'new' or p.tags contains 'new-in' -%}
+              <span class="hc-badge new-in">New In</span>
             {%- elsif p.tags contains 'bestseller' -%}
-              <span class="hand-coll-badge">Best Seller</span>
+              <span class="hc-badge best">Best Seller</span>
             {%- else -%}
-              <span class="hand-coll-badge">{{ p.type | default: 'Apparel' }}</span>
+              <span class="hc-badge">{{ p.type | default: 'Apparel' }}</span>
             {%- endif -%}
-            {%- if featured -%}
-              <img src="{{ featured | image_url: width: 720 }}"
-                   alt="{{ featured.alt | escape | default: p.title | escape }}"
-                   loading="lazy" width="720" height="960"
-                   itemprop="image">
+
+            {%- if img -%}
+              <img
+                src="{{ img | image_url: width: 720 }}"
+                alt="{{ img.alt | escape | default: p.title | escape }}"
+                loading="lazy"
+                width="720"
+                height="960"
+                itemprop="image"
+              >
             {%- else -%}
-              <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:var(--paper-2);font-family:'Anton',sans-serif;font-size:32px;color:rgba(0,0,0,.15)">☻</div>
+              <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:#ede9e0;font-size:48px">☻</div>
             {%- endif -%}
-            <div class="hand-coll-quick">
-              <button class="hand-coll-quick-btn"
+
+            <div class="hc-card-overlay">
+              <button class="hc-overlay-add"
                       data-variant-id="{{ p.selected_or_first_available_variant.id }}"
                       data-product-title="{{ p.title | escape }}"
-                      data-product-price="{{ p.price | money }}"
                       data-quick-add>
                 {%- if p.available -%}Quick Add{%- else -%}Sold Out{%- endif -%}
               </button>
-              <a class="hand-coll-quick-link" href="{{ p.url }}" aria-label="View {{ p.title | escape }}">↗</a>
+              <a class="hc-overlay-view" href="{{ p.url }}">View Product →</a>
             </div>
           </div>
-          <div class="hand-coll-card-info">
-            <div class="hand-coll-card-vendor">{{ p.vendor | default: 'Have A Nice Day' }}</div>
-            <a class="hand-coll-card-name" href="{{ p.url }}" itemprop="url">{{ p.title }}</a>
-            <div class="hand-coll-card-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+
+          <div class="hc-card-info">
+            <div class="hc-card-vendor">{{ p.vendor | default: 'Have A Nice Day' }}</div>
+            <a class="hc-card-name" href="{{ p.url }}" itemprop="url">{{ p.title }}</a>
+            <div class="hc-card-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
               <meta itemprop="priceCurrency" content="{{ cart.currency.iso_code }}">
               <meta itemprop="price" content="{{ p.price | money_without_currency }}">
-              {%- if p.compare_at_price > p.price -%}
-                <span class="compare">{{ p.compare_at_price | money }}</span>
-                <span class="sale-price">{{ p.price | money }}</span>
+              {%- if is_sale -%}
+                <span class="was">{{ p.compare_at_price | money }}</span>
+                <span class="now">{{ p.price | money }}</span>
               {%- else -%}
-                {%- if p.price_varies -%}<span style="font-size:10px;opacity:.6">From</span>{%- endif -%}
+                {%- if p.price_varies -%}<span style="font-size:9px;opacity:0.5;letter-spacing:0.1em">From</span>{%- endif -%}
                 {{ p.price | money }}
               {%- endif -%}
             </div>
-            <div class="hand-coll-card-tag">Organic cotton · UK printed</div>
+            <div class="hc-card-tag">Organic cotton &middot; UK printed</div>
           </div>
         </article>
+
       {%- else -%}
-        <div class="hand-coll-empty">
-          <h3>Nothing here yet ☻</h3>
-          <p>Check back soon — new drops incoming.</p>
-          <a href="{{ routes.all_products_collection_url }}" class="hand-filter-btn" style="margin-top:24px;display:inline-block">Browse All Products →</a>
+        <div class="hc-empty">
+          <span class="hc-empty-icon">☻</span>
+          <h3 class="hc-empty-title">Nothing here yet</h3>
+          <p class="hc-empty-sub">New drops incoming — check back soon</p>
+          <a href="{{ routes.all_products_collection_url }}" class="hc-empty-btn">Browse All Products →</a>
         </div>
       {%- endfor -%}
     </div>
 
     {%- if paginate.pages > 1 -%}
-      <div class="hand-coll-pagination">
+      <div class="hc-pagination">
         {%- if paginate.previous -%}
           <a href="{{ paginate.previous.url }}">← Prev</a>
         {%- endif -%}
@@ -497,47 +844,118 @@
   {%- endpaginate -%}
 </div>
 
+<!-- Sticky mobile bag -->
+<a class="hc-sticky-bag" id="hcStickyBag" href="{{ routes.cart_url }}">
+  <div class="hc-sticky-bag-lhs">
+    Your Bag
+    <strong>{{ cart.item_count }} item{% if cart.item_count != 1 %}s{% endif %}</strong>
+  </div>
+  <span class="hc-sticky-bag-btn">View Bag →</span>
+</a>
+
 <script>
-// Quick add to cart
-document.querySelectorAll('[data-quick-add]').forEach(function(btn) {
-  btn.addEventListener('click', function(e) {
-    e.preventDefault();
-    const variantId = btn.dataset.variantId;
-    const title = btn.dataset.productTitle;
-    if (!variantId || btn.textContent.trim() === 'Sold Out') return;
-    btn.textContent = 'Adding...';
-    btn.disabled = true;
-    fetch('/cart/add.js', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-      body: JSON.stringify({ id: variantId, quantity: 1 })
-    })
-    .then(function(r) { return r.json(); })
-    .then(function() {
-      btn.textContent = 'Added ✓';
-      // Update cart count
-      fetch('/cart.js').then(function(r) { return r.json(); }).then(function(cart) {
-        const el = document.getElementById('handCartCount');
-        if (el) el.textContent = cart.item_count;
-      });
-      // Show toast
-      const wrap = document.getElementById('hand-toast-wrap');
-      if (wrap) {
-        const t = document.createElement('div');
-        t.className = 'hand-toast ok';
-        t.innerHTML = '<span class="ic">☻</span><span>' + title + ' added to bag</span>';
-        wrap.appendChild(t);
-        requestAnimationFrame(function() { t.classList.add('show'); });
-        setTimeout(function() { t.classList.remove('show'); setTimeout(function() { t.remove(); }, 400); }, 3000);
-      }
-      setTimeout(function() { btn.textContent = 'Quick Add'; btn.disabled = false; }, 2000);
-    })
-    .catch(function() {
-      btn.textContent = 'Error';
-      btn.disabled = false;
+(function() {
+  const { animate, inView, stagger, scroll } = Motion;
+
+  // ===== HERO ENTRANCE =====
+  const eyebrow = document.getElementById('hcEyebrow');
+  const title = document.getElementById('hcTitle');
+  const desc = document.getElementById('hcDesc');
+  const stats = document.getElementById('hcStats');
+
+  if (eyebrow) animate(eyebrow, { opacity: [0,1], x: [-20,0] }, { duration: 0.6, delay: 0.1, easing: 'ease-out' });
+  if (title) animate(title, { opacity: [0,1], y: [40,0] }, { duration: 0.8, delay: 0.25, easing: [0.25,0.46,0.45,0.94] });
+  if (desc) animate(desc, { opacity: [0,1], y: [20,0] }, { duration: 0.7, delay: 0.45, easing: 'ease-out' });
+  if (stats) animate(stats, { opacity: [0,1], x: [30,0] }, { duration: 0.7, delay: 0.5, easing: 'ease-out' });
+
+  // ===== TOOLBAR SCROLL SHADOW =====
+  const toolbar = document.getElementById('hcToolbar');
+  window.addEventListener('scroll', function() {
+    if (toolbar) toolbar.classList.toggle('scrolled', window.scrollY > 300);
+  }, { passive: true });
+
+  // ===== PRODUCT CARDS — STAGGERED ENTRANCE =====
+  const cards = document.querySelectorAll('[data-card]');
+  cards.forEach(function(card, i) {
+    inView(card, function() {
+      animate(card,
+        { opacity: [0, 1], y: [32, 0] },
+        { duration: 0.55, delay: (i % 4) * 0.07, easing: [0.25, 0.46, 0.45, 0.94] }
+      );
+    }, { margin: '-5% 0px' });
+  });
+
+  // ===== BRAND DIVIDERS =====
+  document.querySelectorAll('[data-reveal]').forEach(function(el) {
+    inView(el, function() {
+      animate(el, { opacity: [0,1], y: [20,0] }, { duration: 0.6, easing: 'ease-out' });
+    }, { margin: '-10% 0px' });
+  });
+
+  // ===== QUICK ADD TO CART =====
+  document.querySelectorAll('[data-quick-add]').forEach(function(btn) {
+    btn.addEventListener('click', function(e) {
+      e.preventDefault();
+      const variantId = btn.dataset.variantId;
+      const title = btn.dataset.productTitle;
+      if (!variantId || btn.textContent.trim() === 'Sold Out') return;
+      const orig = btn.textContent;
+      btn.textContent = 'Adding...';
+      btn.disabled = true;
+      fetch('/cart/add.js', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({ id: variantId, quantity: 1 })
+      })
+      .then(function(r) { return r.json(); })
+      .then(function() {
+        btn.textContent = 'Added ✓';
+        // Update cart count
+        fetch('/cart.js').then(function(r) { return r.json(); }).then(function(cart) {
+          const el = document.getElementById('handCartCount');
+          if (el) el.textContent = cart.item_count;
+          // Update sticky bag
+          const bagLhs = document.querySelector('.hc-sticky-bag-lhs strong');
+          if (bagLhs) bagLhs.textContent = cart.item_count + ' item' + (cart.item_count !== 1 ? 's' : '');
+        });
+        // Toast
+        const wrap = document.getElementById('hand-toast-wrap');
+        if (wrap) {
+          const t = document.createElement('div');
+          t.className = 'hand-toast ok';
+          t.innerHTML = '<span class="ic">☻</span><span>' + title + ' added to bag</span>';
+          wrap.appendChild(t);
+          requestAnimationFrame(function() { t.classList.add('show'); });
+          setTimeout(function() { t.classList.remove('show'); setTimeout(function() { t.remove(); }, 400); }, 3000);
+        }
+        setTimeout(function() { btn.textContent = orig; btn.disabled = false; }, 2000);
+      })
+      .catch(function() { btn.textContent = 'Error'; btn.disabled = false; });
     });
   });
-});
+
+  // ===== STICKY BAG (mobile) =====
+  const stickyBag = document.getElementById('hcStickyBag');
+  if (stickyBag) {
+    window.addEventListener('scroll', function() {
+      stickyBag.classList.toggle('visible', window.scrollY > 400);
+    }, { passive: true });
+  }
+
+  // ===== CARD HOVER TILT =====
+  document.querySelectorAll('[data-card]').forEach(function(card) {
+    card.addEventListener('mousemove', function(e) {
+      const rect = card.getBoundingClientRect();
+      const x = (e.clientX - rect.left) / rect.width - 0.5;
+      const y = (e.clientY - rect.top) / rect.height - 0.5;
+      animate(card, { rotateX: -y * 3, rotateY: x * 3 }, { duration: 0.15, easing: 'ease-out' });
+    });
+    card.addEventListener('mouseleave', function() {
+      animate(card, { rotateX: 0, rotateY: 0 }, { duration: 0.4, easing: [0.25, 0.46, 0.45, 0.94] });
+    });
+  });
+
+})();
 </script>
 
 {% schema %}
